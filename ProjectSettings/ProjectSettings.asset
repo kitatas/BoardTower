@@ -143,7 +143,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 346a0a34e1048427da6b77a1f2b33e09, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -822,7 +823,26 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: DOTWEEN;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;ES3_TMPRO;ES3_UGUI
+    EmbeddedLinux: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: DOTWEEN
+    Kepler: DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Nintendo Switch: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS4: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS5: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    QNX: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    ReservedCFE: DOTWEEN
+    Server: ES3_TMPRO;ES3_UGUI
+    Standalone: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    VisionOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    WebGL: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Windows Store Apps: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    XboxOne: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    iPhone: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    tvOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
