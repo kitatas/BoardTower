@@ -1,14 +1,32 @@
 {
   "dependencies": {
-    "com.unity.ai.navigation": "2.0.9",
+    "com.annulusgames.alchemy": "https://github.com/AnnulusGames/Alchemy.git?path=/Alchemy/Assets/Alchemy",
+    "com.coffee.ui-effect": "5.10.8",
+    "com.cysharp.messagepipe": "1.8.1",
+    "com.cysharp.messagepipe.vcontainer": "1.8.1",
+    "com.cysharp.r3": "1.3.0",
+    "com.cysharp.ulid": "1.4.1",
+    "com.cysharp.unitask": "2.5.10",
+    "com.kitatas.uniex": "https://github.com/kitatas/UniEx.git?path=/Assets/UniEx",
+    "com.unity.addressables": "2.7.4",
+    "com.unity.ai.navigation": "2.0.10",
     "com.unity.collab-proxy": "2.11.3",
     "com.unity.ide.rider": "3.0.39",
     "com.unity.inputsystem": "1.14.2",
-    "com.unity.multiplayer.center": "1.0.0",
+    "com.unity.recorder": "5.1.3",
     "com.unity.render-pipelines.universal": "17.2.0",
     "com.unity.test-framework": "1.6.0",
     "com.unity.timeline": "1.8.10",
     "com.unity.ugui": "2.0.0",
+    "jp.hadashikick.vcontainer": "1.17.0",
+    "net.gree.unity-webview": "https://github.com/gree/unity-webview.git?path=/dist/package",
+    "org.nuget.fastenum": "1.8.0",
+    "org.nuget.mastermemory": "3.0.4",
+    "org.nuget.microsoft.net.stringtools": "1.0.0",
+    "org.nuget.observablecollections": "3.3.4",
+    "org.nuget.observablecollections.r3": "3.3.4",
+    "org.nuget.r3": "1.3.0",
+    "org.nuget.zstring": "2.6.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -41,5 +59,24 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Unity NuGet",
+      "url": "https://unitynuget-registry.openupm.com",
+      "scopes": [
+        "org.nuget"
+      ]
+    },
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.coffee",
+        "com.cysharp",
+        "jp.hadashikick",
+        "jp.setchi"
+      ]
+    }
+  ]
 }
