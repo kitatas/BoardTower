@@ -9,5 +9,10 @@ namespace BoardTower.Game.Domain.UseCase
         public GameStateUseCase(GameStateEntity stateEntity) : base(stateEntity)
         {
         }
+
+        public override void Init()
+        {
+            Set(GameState.Init);
+        }
     }
 }

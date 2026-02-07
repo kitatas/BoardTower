@@ -8,5 +8,7 @@ namespace BoardTower.Base.Domain.UseCase
         protected BaseStateUseCase(BaseStateEntity<T> stateEntity) : base(stateEntity)
         {
         }
+
+        public abstract void Init();
     }
 }
