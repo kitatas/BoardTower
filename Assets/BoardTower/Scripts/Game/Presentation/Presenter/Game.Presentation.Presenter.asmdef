@@ -1,0 +1,21 @@
+{
+    "name": "Game.Presentation.Presenter",
+    "rootNamespace": "",
+    "references": [
+        "GUID:60a32df2df6e4fba84746a9fb6809836",
+        "GUID:04dd9f2405764994a33dd9b9863d28f5",
+        "GUID:03928b7def14427aa76f40e82e67ba19",
+        "GUID:725cff7a166d4166b801a958b7af9f4f",
+        "GUID:c4098301454c4c19ad96251933aa82b6",
+        "GUID:7daa4e11992845b19ffb7db59b1c1e61"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
