@@ -1,0 +1,19 @@
+{
+    "name": "Game.Domain.UseCase",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d9d126aaa5f94212a7a94b569aee4651",
+        "GUID:60a32df2df6e4fba84746a9fb6809836",
+        "GUID:725cff7a166d4166b801a958b7af9f4f",
+        "GUID:f766f8c41a56427db999611bf2b2707b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
