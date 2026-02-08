@@ -15,7 +15,7 @@ namespace BoardTower.Base.Domain.UseCase
             _subject = new BehaviorSubject<T>(_entity.value);
         }
 
-        public Observable<T> subject => _subject;
+        public virtual Observable<T> subject => _subject;
 
         public virtual void Set(T t)
         {
