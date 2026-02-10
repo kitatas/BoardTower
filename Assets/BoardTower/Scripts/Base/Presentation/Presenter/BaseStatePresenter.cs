@@ -12,17 +12,18 @@ namespace BoardTower.Base.Presentation.Presenter
     public abstract class BaseStatePresenter<T> : IAsyncStartable where T : Enum
     {
         protected readonly BaseStateUseCase<T> _stateUseCase;
-        protected readonly List<BaseState<T>> _states;
+        protected readonly Dictionary<T, BaseState<T>> _stateMap;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
             _stateUseCase = stateUseCase;
-            _states = new List<BaseState<T>>(states);
+            _stateMap = new Dictionary<T, BaseState<T>>();
+            foreach (var s in states) _stateMap.TryAdd(s.state, s);
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken token)
         {
-            await UniTask.WhenAll(_states
+            await UniTask.WhenAll(_stateMap.Values
                 .Select(x => x.InitAsync(token)));
 
             _stateUseCase.subject
@@ -36,8 +37,7 @@ namespace BoardTower.Base.Presentation.Presenter
         {
             try
             {
-                var currentState = _states.Find(x => x.state.Equals(state));
-                if (currentState == null)
+                if (!_stateMap.TryGetValue(state, out var currentState))
                 {
                     // TODO: exception
                     throw new Exception();
