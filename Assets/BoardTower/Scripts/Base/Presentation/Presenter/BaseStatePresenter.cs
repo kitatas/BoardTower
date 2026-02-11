@@ -51,7 +51,7 @@ namespace BoardTower.Base.Presentation.Presenter
                 while (nextState.Equals(state))
                 {
                     nextState = await currentState.TickAsync(token);
-                    await UniTask.Yield(token);
+                    await UniTask.Yield(PlayerLoopTiming.Update, token);
                 }
 
                 return nextState;

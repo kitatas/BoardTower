@@ -15,13 +15,13 @@ namespace BoardTower.Base.Presentation.State
 
         public virtual async UniTask<T> EnterAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            await UniTask.Yield(PlayerLoopTiming.Update, token);
             return state;
         }
 
         public virtual async UniTask<T> TickAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            await UniTask.Yield(PlayerLoopTiming.Update, token);
             return state;
         }
     }
