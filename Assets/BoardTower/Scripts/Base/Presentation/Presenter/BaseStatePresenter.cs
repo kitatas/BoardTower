@@ -48,7 +48,7 @@ namespace BoardTower.Base.Presentation.Presenter
                 }
 
                 var nextState = await currentState.EnterAsync(token);
-                while (nextState.Equals(state))
+                while (EqualityComparer<T>.Default.Equals(nextState, state))
                 {
                     nextState = await currentState.TickAsync(token);
                     await UniTask.Yield(PlayerLoopTiming.Update, token);
