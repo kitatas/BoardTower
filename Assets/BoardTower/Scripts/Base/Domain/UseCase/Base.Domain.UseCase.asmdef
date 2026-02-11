@@ -2,7 +2,9 @@
     "name": "Base.Domain.UseCase",
     "rootNamespace": "",
     "references": [
-        "Base.Data.Entity"
+        "Base.Data.Entity",
+        "MessagePipe",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
