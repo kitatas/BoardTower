@@ -4,15 +4,16 @@ using System.Threading;
 using BoardTower.Base.Domain.UseCase;
 using BoardTower.Base.Presentation.State;
 using Cysharp.Threading.Tasks;
-using R3;
+using MessagePipe;
 using VContainer.Unity;
 
 namespace BoardTower.Base.Presentation.Presenter
 {
-    public abstract class BaseStatePresenter<T> : IAsyncStartable where T : Enum
+    public abstract class BaseStatePresenter<T> : IAsyncStartable, IDisposable where T : Enum
     {
         protected readonly BaseStateUseCase<T> _stateUseCase;
         protected readonly Dictionary<T, BaseState<T>> _stateMap;
+        private IDisposable _disposable;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
@@ -26,14 +27,17 @@ namespace BoardTower.Base.Presentation.Presenter
             await UniTask.WhenAll(_stateMap.Values
                 .Select(x => x.InitAsync(token)));
 
-            _stateUseCase.subject
-                .Subscribe(x => ExecAsync(x, token).Forget())
-                .AddTo(token);
+            _disposable = _stateUseCase.subscriber
+                .Subscribe(async (s, ct) =>
+                {
+                    var state = await ExecAsync(s, ct);
+                    await _stateUseCase.PublishAsync(state, ct);
+                });
 
-            _stateUseCase.Init();
+            await _stateUseCase.InitAsync(token);
         }
 
-        private async UniTask ExecAsync(T state, CancellationToken token)
+        private async UniTask<T> ExecAsync(T state, CancellationToken token)
         {
             try
             {
@@ -50,12 +54,18 @@ namespace BoardTower.Base.Presentation.Presenter
                     await UniTask.Yield(token);
                 }
 
-                _stateUseCase.Set(nextState);
+                return nextState;
             }
             catch (Exception e)
             {
                 // TODO: catch exception
+                throw;
             }
+        }
+
+        void IDisposable.Dispose()
+        {
+            _disposable?.Dispose();
         }
     }
 }
