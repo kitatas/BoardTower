@@ -13,6 +13,7 @@ namespace BoardTower.Base.Presentation.Presenter
     {
         protected readonly BaseStateUseCase<T> _stateUseCase;
         protected readonly Dictionary<T, BaseState<T>> _stateMap;
+        private readonly SemaphoreSlim _gate;
         private IDisposable _disposable;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
@@ -20,6 +21,7 @@ namespace BoardTower.Base.Presentation.Presenter
             _stateUseCase = stateUseCase;
             _stateMap = new Dictionary<T, BaseState<T>>();
             foreach (var s in states) _stateMap.TryAdd(s.state, s);
+            _gate = new SemaphoreSlim(1, 1);
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken token)
@@ -30,8 +32,19 @@ namespace BoardTower.Base.Presentation.Presenter
             _disposable = _stateUseCase.subscriber
                 .Subscribe(async (s, ct) =>
                 {
-                    var state = await ExecAsync(s, ct);
-                    await _stateUseCase.PublishAsync(state, ct);
+                    T nextState;
+
+                    await _gate.WaitAsync(ct).ConfigureAwait(false);
+                    try
+                    {
+                        nextState = await ExecAsync(s, ct);
+                    }
+                    finally
+                    {
+                        _gate.Release();
+                    }
+
+                    await _stateUseCase.PublishAsync(nextState, ct);
                 });
 
             await _stateUseCase.InitAsync(token);
@@ -66,6 +79,7 @@ namespace BoardTower.Base.Presentation.Presenter
         void IDisposable.Dispose()
         {
             _disposable?.Dispose();
+            _gate?.Dispose();
         }
     }
 }
