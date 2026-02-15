@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using BoardTower.Base.Domain.UseCase;
 using BoardTower.Base.Presentation.State;
+using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 using VContainer.Unity;
@@ -13,7 +14,7 @@ namespace BoardTower.Base.Presentation.Presenter
     {
         protected readonly BaseStateUseCase<T> _stateUseCase;
         protected readonly Dictionary<T, BaseState<T>> _stateMap;
-        private readonly SemaphoreSlim _gate;
+        private readonly AsyncLockLite _locker;
         private IDisposable _disposable;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
@@ -21,7 +22,7 @@ namespace BoardTower.Base.Presentation.Presenter
             _stateUseCase = stateUseCase;
             _stateMap = new Dictionary<T, BaseState<T>>();
             foreach (var s in states) _stateMap.TryAdd(s.state, s);
-            _gate = new SemaphoreSlim(1, 1);
+            _locker = new AsyncLockLite();
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken token)
@@ -33,15 +34,9 @@ namespace BoardTower.Base.Presentation.Presenter
                 .Subscribe(async (s, ct) =>
                 {
                     T nextState;
-
-                    await _gate.WaitAsync(ct).ConfigureAwait(false);
-                    try
                     {
+                        using var _ = await _locker.LockAsync(ct);
                         nextState = await ExecAsync(s, ct);
-                    }
-                    finally
-                    {
-                        _gate.Release();
                     }
 
                     await _stateUseCase.PublishAsync(nextState, ct);
@@ -81,7 +76,6 @@ namespace BoardTower.Base.Presentation.Presenter
         void IDisposable.Dispose()
         {
             _disposable?.Dispose();
-            _gate?.Dispose();
         }
     }
 }
