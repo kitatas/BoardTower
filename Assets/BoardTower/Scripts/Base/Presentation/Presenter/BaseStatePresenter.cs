@@ -60,12 +60,14 @@ namespace BoardTower.Base.Presentation.Presenter
                     throw new Exception();
                 }
 
-                var nextState = await currentState.EnterAsync(token);
+                var nextState = state;
+
+                await currentState.EnterAsync(token);
                 while (EqualityComparer<T>.Default.Equals(nextState, state))
                 {
                     nextState = await currentState.TickAsync(token);
-                    await UniTask.Yield(PlayerLoopTiming.Update, token);
                 }
+                await currentState.ExitAsync(token);
 
                 return nextState;
             }

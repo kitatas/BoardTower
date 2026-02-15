@@ -13,16 +13,20 @@ namespace BoardTower.Base.Presentation.State
             await UniTask.Yield(token);
         }
 
-        public virtual async UniTask<T> EnterAsync(CancellationToken token)
+        public virtual async UniTask EnterAsync(CancellationToken token)
         {
             await UniTask.Yield(PlayerLoopTiming.Update, token);
-            return state;
         }
 
         public virtual async UniTask<T> TickAsync(CancellationToken token)
         {
             await UniTask.Yield(PlayerLoopTiming.Update, token);
             return state;
+        }
+
+        public virtual async UniTask ExitAsync(CancellationToken token)
+        {
+            await UniTask.Yield(PlayerLoopTiming.Update, token);
         }
     }
 }
