@@ -12,10 +12,10 @@ namespace BoardTower.Base.Presentation.Presenter
 {
     public abstract class BaseStatePresenter<T> : IAsyncStartable, IDisposable where T : Enum
     {
-        protected readonly BaseStateUseCase<T> _stateUseCase;
-        protected readonly Dictionary<T, BaseState<T>> _stateMap;
+        private readonly BaseStateUseCase<T> _stateUseCase;
+        private readonly Dictionary<T, BaseState<T>> _stateMap;
         private readonly AsyncLockLite _locker;
-        private IDisposable _disposable;
+        private IDisposable _subscription;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
@@ -30,13 +30,13 @@ namespace BoardTower.Base.Presentation.Presenter
             await UniTask.WhenAll(_stateMap.Values
                 .Select(x => x.InitAsync(token)));
 
-            _disposable = _stateUseCase.subscriber
+            _subscription = _stateUseCase.subscriber
                 .Subscribe(async (s, ct) =>
                 {
                     T nextState;
                     {
                         using var _ = await _locker.LockAsync(ct);
-                        nextState = await ExecAsync(s, ct);
+                        nextState = await RunAsync(s, ct);
                     }
 
                     await _stateUseCase.PublishAsync(nextState, ct);
@@ -45,7 +45,7 @@ namespace BoardTower.Base.Presentation.Presenter
             await _stateUseCase.InitAsync(token);
         }
 
-        private async UniTask<T> ExecAsync(T state, CancellationToken token)
+        private async UniTask<T> RunAsync(T state, CancellationToken token)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace BoardTower.Base.Presentation.Presenter
 
         void IDisposable.Dispose()
         {
-            _disposable?.Dispose();
+            _subscription?.Dispose();
         }
     }
 }
