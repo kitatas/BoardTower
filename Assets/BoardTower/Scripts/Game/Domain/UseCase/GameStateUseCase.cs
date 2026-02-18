@@ -18,5 +18,11 @@ namespace BoardTower.Game.Domain.UseCase
         {
             await PublishAsync(GameState.Init, token);
         }
+
+        public override async UniTask PublishAsync(GameState value, CancellationToken token)
+        {
+            if (value is GameState.None) return;
+            await base.PublishAsync(value, token);
+        }
     }
 }
