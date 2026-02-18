@@ -1,6 +1,6 @@
 namespace BoardTower.Common.Application
 {
-    public sealed class TransitionVO
+    public abstract class TransitionVO
     {
         public readonly Fade fade;
         public readonly float duration;
