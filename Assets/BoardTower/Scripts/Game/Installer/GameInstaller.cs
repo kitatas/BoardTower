@@ -24,6 +24,7 @@ namespace BoardTower.Game.Installer
 
             // State
             builder.Register<BaseGameState, GameInitState>(Lifetime.Scoped);
+            builder.Register<BaseGameState, GameSetUpState>(Lifetime.Scoped);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

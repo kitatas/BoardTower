@@ -4,5 +4,6 @@ namespace BoardTower.Game.Application
     {
         None = 0,
         Init = 1,
+        SetUp = 2,
     }
 }
