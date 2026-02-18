@@ -1,9 +1,18 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace BoardTower.Common.Utility
 {
+    public static class UniTaskHelper
+    {
+        public static CancellationTokenSource BuildLinkedTokenSource(this MonoBehaviour self, CancellationToken token)
+        {
+            return CancellationTokenSource.CreateLinkedTokenSource(self.GetCancellationTokenOnDestroy(), token);
+        }
+    }
+
     public sealed class AsyncLockLite : IDisposable
     {
         private readonly SemaphoreSlim _sem = new(1, 1);
