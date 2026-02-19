@@ -12,14 +12,14 @@ namespace BoardTower.Game.Presentation.View
 
         public async UniTask FadeInAsync(float duration, CancellationToken token)
         {
-            using var tokenSource = this.BuildLinkedTokenSource(token);
-
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                sequence.Join(squareViews[i].FadeIn(duration, i * 0.01f));
+                // NOTE: warning CS4014 の解消
+                var _ = sequence.Join(squareViews[i].FadeIn(duration, i * GetDelay(duration)));
             }
 
+            using var tokenSource = this.BuildLinkedTokenSource(token);
             await sequence
                 .SetLink(gameObject)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, tokenSource.Token);
@@ -27,17 +27,19 @@ namespace BoardTower.Game.Presentation.View
 
         public async UniTask FadeOutAsync(float duration, CancellationToken token)
         {
-            using var tokenSource = this.BuildLinkedTokenSource(token);
-
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                sequence.Join(squareViews[i].FadeOut(duration, i * 0.01f));
+                // NOTE: warning CS4014 の解消
+                var _ = sequence.Join(squareViews[i].FadeOut(duration, i * GetDelay(duration)));
             }
 
+            using var tokenSource = this.BuildLinkedTokenSource(token);
             await sequence
                 .SetLink(gameObject)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, tokenSource.Token);
         }
+
+        private static float GetDelay(float duration) => duration / 50.0f;
     }
 }
