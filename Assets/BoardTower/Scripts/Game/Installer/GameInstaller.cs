@@ -20,6 +20,7 @@ namespace BoardTower.Game.Installer
 
             // UseCase
             builder.Register<BoardUseCase>(Lifetime.Scoped);
+            builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
 
             // State
@@ -30,11 +31,13 @@ namespace BoardTower.Game.Installer
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
                 entryPoints.Add<BoardPresenter>();
+                entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<GameStatePresenter>();
             });
 
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
+            builder.RegisterComponentInHierarchy<ChessmenView>();
         }
     }
 }

@@ -8,4 +8,11 @@ namespace BoardTower.Game.Application
         {
         }
     }
+
+    public sealed class ChessmenTransitionVO : TransitionVO
+    {
+        public ChessmenTransitionVO(Fade fade, float duration = 0) : base(fade, duration)
+        {
+        }
+    }
 }
