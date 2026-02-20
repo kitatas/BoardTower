@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using BoardTower.Base.Domain.UseCase;
 using BoardTower.Base.Presentation.State;
+using BoardTower.Common.Application;
 using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
@@ -51,8 +52,7 @@ namespace BoardTower.Base.Presentation.Presenter
             {
                 if (!_stateMap.TryGetValue(state, out var currentState))
                 {
-                    // TODO: exception
-                    throw new Exception();
+                    throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_STATE);
                 }
 
                 var nextState = state;

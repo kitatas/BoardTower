@@ -27,7 +27,6 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            if (fade is Fade.None) return;
             await _publisher.PublishAsync(new BoardTransitionVO(fade, BoardConfig.FADE_DURATION), token);
         }
     }

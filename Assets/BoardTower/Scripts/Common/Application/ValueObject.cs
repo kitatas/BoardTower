@@ -45,6 +45,9 @@ namespace BoardTower.Common.Application
 
         public TransitionVO(Fade fade, float duration = 0.0f)
         {
+            if (fade is Fade.None)  throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE);
+            if (duration < 0.0f) throw new QuitExceptionVO(ExceptionConfig.INVALID_DURATION);
+
             this.fade = fade;
             this.duration = duration;
         }

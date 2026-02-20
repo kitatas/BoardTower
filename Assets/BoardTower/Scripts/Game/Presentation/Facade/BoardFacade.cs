@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
@@ -22,7 +21,7 @@ namespace BoardTower.Game.Presentation.Facade
             {
                 Fade.In => _boardView.FadeInAsync(transition.duration, token),
                 Fade.Out => _boardView.FadeOutAsync(transition.duration, token),
-                _ => throw new Exception(), // TODO: Exception
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
         }
     }
