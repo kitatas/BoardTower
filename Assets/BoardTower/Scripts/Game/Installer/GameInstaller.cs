@@ -37,6 +37,7 @@ namespace BoardTower.Game.Installer
             });
 
             // Facade
+            builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
 
             // View
