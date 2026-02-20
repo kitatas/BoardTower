@@ -8,16 +8,17 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class BoardUseCase
     {
-        private readonly IAsyncSubscriber<TransitionVO> _subscriber;
-        private readonly IAsyncPublisher<TransitionVO> _publisher;
+        private readonly IAsyncSubscriber<BoardTransitionVO> _subscriber;
+        private readonly IAsyncPublisher<BoardTransitionVO> _publisher;
 
-        public BoardUseCase(IAsyncSubscriber<TransitionVO> subscriber, IAsyncPublisher<TransitionVO> publisher)
+        public BoardUseCase(IAsyncSubscriber<BoardTransitionVO> subscriber,
+            IAsyncPublisher<BoardTransitionVO> publisher)
         {
             _subscriber = subscriber;
             _publisher = publisher;
         }
 
-        public IAsyncSubscriber<TransitionVO> subscriber => _subscriber;
+        public IAsyncSubscriber<BoardTransitionVO> subscriber => _subscriber;
 
         public async UniTask InitAsync(CancellationToken token)
         {
