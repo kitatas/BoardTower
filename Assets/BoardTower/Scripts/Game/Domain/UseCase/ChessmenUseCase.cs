@@ -1,4 +1,7 @@
+using System.Threading;
+using BoardTower.Common.Application;
 using BoardTower.Game.Application;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 
 namespace BoardTower.Game.Domain.UseCase
@@ -16,5 +19,16 @@ namespace BoardTower.Game.Domain.UseCase
         }
 
         public IAsyncSubscriber<ChessmenTransitionVO> subscriber => _subscriber;
+
+        public async UniTask InitAsync(CancellationToken token)
+        {
+            await _publisher.PublishAsync(new ChessmenTransitionVO(Fade.Out), token);
+        }
+
+        public async UniTask FadeAsync(Fade fade, CancellationToken token)
+        {
+            if (fade is Fade.None) return;
+            await _publisher.PublishAsync(new ChessmenTransitionVO(fade, ChessmenConfig.FADE_DURATION), token);
+        }
     }
 }
