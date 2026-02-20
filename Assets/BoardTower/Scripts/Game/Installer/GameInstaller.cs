@@ -1,5 +1,6 @@
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.UseCase;
+using BoardTower.Game.Presentation.Facade;
 using BoardTower.Game.Presentation.Presenter;
 using BoardTower.Game.Presentation.State;
 using BoardTower.Game.Presentation.View;
@@ -34,6 +35,9 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<GameStatePresenter>();
             });
+
+            // Facade
+            builder.Register<ChessmenFacade>(Lifetime.Scoped);
 
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
