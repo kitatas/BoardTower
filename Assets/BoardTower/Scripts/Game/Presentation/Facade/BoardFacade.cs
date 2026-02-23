@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
@@ -25,6 +26,17 @@ namespace BoardTower.Game.Presentation.Facade
             };
 
             return tween
+                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+        }
+
+        public UniTask ShowHighlightAsync(HighlightSquareVO[] squares, CancellationToken token)
+        {
+            var indices = squares
+                .Select(x => (x.x - 1) * 8 + (x.y - 1))
+                .Distinct()
+                .ToArray();
+
+            return _boardView.ShowHighlightSquare(indices, BoardConfig.HIGHLIGHT_DURATION)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
     }

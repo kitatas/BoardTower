@@ -7,6 +7,7 @@ namespace BoardTower.Game.Application
         public const int MIN_RANK = 1;
         public const int MAX_RANK = 8;
         public const float FADE_DURATION = 0.5f;
+        public const float HIGHLIGHT_DURATION = 0.5f;
     }
 
     public sealed class ChessmenConfig

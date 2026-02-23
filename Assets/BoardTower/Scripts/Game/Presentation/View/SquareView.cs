@@ -5,6 +5,8 @@ namespace BoardTower.Game.Presentation.View
 {
     public sealed class SquareView : MonoBehaviour
     {
+        [SerializeField] private Transform highlight = default;
+
         public Tween FadeIn(float duration, float delay)
         {
             return DOTween.Sequence()
@@ -22,6 +24,15 @@ namespace BoardTower.Game.Presentation.View
                     .DOLocalMoveY(-2.5f, duration)
                     .SetEase(Ease.OutQuart))
                 .SetDelay(delay)
+                .SetLink(gameObject);
+        }
+
+        public Tween ShowHighlight(float duration)
+        {
+            return DOTween.Sequence()
+                .Append(highlight
+                    .DOLocalMoveY(0.05f, duration)
+                    .SetEase(Ease.Linear))
                 .SetLink(gameObject);
         }
     }

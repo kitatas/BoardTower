@@ -30,5 +30,16 @@ namespace BoardTower.Game.Presentation.View
         }
 
         private static float GetDelay(float duration) => duration / 50.0f;
+
+        public Tween ShowHighlightSquare(int[] indices, float duration)
+        {
+            var sequence = DOTween.Sequence();
+            foreach (var i in indices)
+            {
+                sequence.Join(squareViews[i].ShowHighlight(duration));
+            }
+
+            return sequence;
+        }
     }
 }
