@@ -1,10 +1,13 @@
+using BoardTower.Game.Data.DataStore;
 using BoardTower.Game.Data.Entity;
+using BoardTower.Game.Domain.Repository;
 using BoardTower.Game.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
 using BoardTower.Game.Presentation.Presenter;
 using BoardTower.Game.Presentation.State;
 using BoardTower.Game.Presentation.View;
 using MessagePipe;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -12,21 +15,31 @@ namespace BoardTower.Game.Installer
 {
     public sealed class GameInstaller : LifetimeScope
     {
+        [SerializeField] private TextAsset memoryFile = default;
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterMessagePipe();
+
+            // DataStore
+            builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
 
             // Entity
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
 
+            // Repository
+            builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
+
             // UseCase
             builder.Register<BoardUseCase>(Lifetime.Scoped);
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
+            builder.Register<MovementUseCase>(Lifetime.Scoped);
 
             // State
             builder.Register<BaseGameState, GameInitState>(Lifetime.Scoped);
+            builder.Register<BaseGameState, GameInputState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameSetUpState>(Lifetime.Scoped);
 
             // Presenter

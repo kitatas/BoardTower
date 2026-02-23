@@ -36,8 +36,7 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             await UniTask.Yield(PlayerLoopTiming.Update, token);
-            // TODO: next state
-            return GameState.None;
+            return GameState.Input;
         }
     }
 }

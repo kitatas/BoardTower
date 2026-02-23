@@ -5,6 +5,7 @@ namespace BoardTower.Game.Application
         None = 0,
         Init = 1,
         SetUp = 2,
+        Input = 3,
     }
 
     public enum ChessmenType
