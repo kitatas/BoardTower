@@ -1,6 +1,7 @@
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
+using BoardTower.Game.Data.Entity;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 
@@ -8,12 +9,14 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class ChessmenUseCase
     {
+        private readonly ChessmenEntity _chessmenEntity;
         private readonly IAsyncSubscriber<ChessmenTransitionVO> _subscriber;
         private readonly IAsyncPublisher<ChessmenTransitionVO> _publisher;
 
-        public ChessmenUseCase(IAsyncSubscriber<ChessmenTransitionVO> subscriber,
+        public ChessmenUseCase(ChessmenEntity chessmenEntity, IAsyncSubscriber<ChessmenTransitionVO> subscriber,
             IAsyncPublisher<ChessmenTransitionVO> publisher)
         {
+            _chessmenEntity = chessmenEntity;
             _subscriber = subscriber;
             _publisher = publisher;
         }
@@ -22,6 +25,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask InitAsync(CancellationToken token)
         {
+            _chessmenEntity.Set(ChessmenType.Knight);
             await _publisher.PublishAsync(new ChessmenTransitionVO(Fade.Out), token);
         }
 

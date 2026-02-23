@@ -17,6 +17,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterMessagePipe();
 
             // Entity
+            builder.Register<ChessmenEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
 
             // UseCase
