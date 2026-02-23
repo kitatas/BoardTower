@@ -25,7 +25,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask InitAsync(CancellationToken token)
         {
-            _chessmenEntity.Set(ChessmenType.Knight);
+            _chessmenEntity.Init();
             await _publisher.PublishAsync(new ChessmenTransitionVO(Fade.Out), token);
         }
 
