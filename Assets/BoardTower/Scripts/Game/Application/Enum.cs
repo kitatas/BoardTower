@@ -23,4 +23,10 @@ namespace BoardTower.Game.Application
         Leaper = 1,
         Slider = 2,
     }
+
+    public enum HighlightSquareType
+    {
+        None = 0,
+        Movable = 1,
+    }
 }

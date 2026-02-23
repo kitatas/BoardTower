@@ -1,0 +1,17 @@
+{
+    "name": "Game.Utility",
+    "rootNamespace": "",
+    "references": [
+        "GUID:725cff7a166d4166b801a958b7af9f4f",
+        "GUID:827f47054e407413e9663c748e13f0a6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
