@@ -3,6 +3,7 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Presentation.View;
+using BoardTower.Game.Utility;
 using Cysharp.Threading.Tasks;
 
 namespace BoardTower.Game.Presentation.Facade
@@ -32,7 +33,7 @@ namespace BoardTower.Game.Presentation.Facade
         public UniTask ShowHighlightAsync(HighlightSquareVO[] squares, CancellationToken token)
         {
             var indices = squares
-                .Select(x => (x.x - 1) * 8 + (x.y - 1))
+                .Select(x => BoardHelper.ToIndex(x.file, x.rank))
                 .Distinct()
                 .ToArray();
 

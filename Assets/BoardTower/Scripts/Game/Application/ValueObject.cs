@@ -55,17 +55,17 @@ namespace BoardTower.Game.Application
 
     public sealed class HighlightSquareVO
     {
-        public readonly int x;
-        public readonly int y;
+        public readonly int file;
+        public readonly int rank;
         public readonly HighlightSquareType highlight;
 
-        public HighlightSquareVO(int x, int y, HighlightSquareType highlight)
+        public HighlightSquareVO(int file, int rank, HighlightSquareType highlight)
         {
             if (highlight is HighlightSquareType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_HIGHLIGHT);
 
-            this.x = x;
-            this.y = y;
+            this.file = file;
+            this.rank = rank;
             this.highlight = highlight;
         }
     }
