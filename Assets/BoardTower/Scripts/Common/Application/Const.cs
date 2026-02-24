@@ -12,5 +12,6 @@ namespace BoardTower.Common.Application
         public const string INVALID_DURATION = "INVALID_DURATION";
         public const string INVALID_FADE = "INVALID_FADE";
         public const string INVALID_HIGHLIGHT = "INVALID_HIGHLIGHT";
+        public const string INVALID_SQUARE_INDEX = "INVALID_SQUARE_INDEX";
     }
 }

@@ -5,6 +5,7 @@ using BoardTower.Game.Application;
 using BoardTower.Game.Presentation.View;
 using BoardTower.Game.Utility;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -39,6 +40,16 @@ namespace BoardTower.Game.Presentation.Facade
 
             return _boardView.ShowHighlightSquare(indices, BoardConfig.HIGHLIGHT_DURATION)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+        }
+
+        public Observable<ClickSquareVO> OnClickAnySquareAsObservable()
+        {
+            return _boardView.OnClickAnySquareAsObservable()
+                .Select(x =>
+                {
+                    var (file, rank) = BoardHelper.ToFileRank(x);
+                    return new ClickSquareVO(file, rank);
+                });
         }
     }
 }

@@ -69,4 +69,18 @@ namespace BoardTower.Game.Application
             this.highlight = highlight;
         }
     }
+
+    public sealed class ClickSquareVO
+    {
+        public readonly int file;
+        public readonly int rank;
+
+        public ClickSquareVO(int file, int rank)
+        {
+            this.file = file;
+            this.rank = rank;
+        }
+
+        public override string ToString() => $"file: {file}, rank: {rank}";
+    }
 }
