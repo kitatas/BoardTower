@@ -25,17 +25,11 @@ namespace BoardTower.Game.Presentation.Presenter
         void IStartable.Start()
         {
             _boardUseCase.subscriber
-                .Subscribe(async (t, ct) =>
-                {
-                    await _boardFacade.FadeAsync(t, ct);
-                })
+                .Subscribe((t, ct) => _boardFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
 
             _movementUseCase.subscriber
-                .Subscribe(async (hs, ct) =>
-                {
-                    await _boardFacade.ShowHighlightAsync(hs, ct);
-                })
+                .Subscribe((hs, ct) => _boardFacade.ShowHighlightAsync(hs, ct))
                 .AddTo(_disposable);
         }
 

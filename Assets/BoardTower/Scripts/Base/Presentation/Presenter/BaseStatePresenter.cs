@@ -7,6 +7,7 @@ using BoardTower.Common.Application;
 using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using R3;
 using VContainer.Unity;
 
 namespace BoardTower.Base.Presentation.Presenter
@@ -16,7 +17,7 @@ namespace BoardTower.Base.Presentation.Presenter
         private readonly BaseStateUseCase<T> _stateUseCase;
         private readonly Dictionary<T, BaseState<T>> _stateMap;
         private readonly AsyncLockLite _locker;
-        private IDisposable _subscription;
+        private readonly CompositeDisposable _disposable;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
@@ -24,6 +25,7 @@ namespace BoardTower.Base.Presentation.Presenter
             _stateMap = new Dictionary<T, BaseState<T>>();
             foreach (var s in states) _stateMap.TryAdd(s.state, s);
             _locker = new AsyncLockLite();
+            _disposable = new CompositeDisposable();
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken token)
@@ -31,7 +33,7 @@ namespace BoardTower.Base.Presentation.Presenter
             await UniTask.WhenAll(_stateMap.Values
                 .Select(x => x.InitAsync(token)));
 
-            _subscription = _stateUseCase.subscriber
+            _stateUseCase.subscriber
                 .Subscribe(async (s, ct) =>
                 {
                     T nextState;
@@ -41,7 +43,8 @@ namespace BoardTower.Base.Presentation.Presenter
                     }
 
                     await _stateUseCase.PublishAsync(nextState, ct);
-                });
+                })
+                .AddTo(_disposable);
 
             await _stateUseCase.InitAsync(token);
         }
@@ -75,7 +78,7 @@ namespace BoardTower.Base.Presentation.Presenter
 
         void IDisposable.Dispose()
         {
-            _subscription?.Dispose();
+            _disposable?.Dispose();
         }
     }
 }
