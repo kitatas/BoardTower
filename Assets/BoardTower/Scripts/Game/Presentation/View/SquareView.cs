@@ -1,11 +1,14 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BoardTower.Game.Presentation.View
 {
-    public sealed class SquareView : MonoBehaviour
+    public sealed class SquareView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Transform highlight = default;
+        public event Action click;
 
         public Tween FadeIn(float duration, float delay)
         {
@@ -34,6 +37,11 @@ namespace BoardTower.Game.Presentation.View
                     .DOLocalMoveY(0.05f, duration)
                     .SetEase(Ease.Linear))
                 .SetLink(gameObject);
+        }
+
+        void IPointerClickHandler.OnPointerClick(PointerEventData _)
+        {
+            click?.Invoke();
         }
     }
 }

@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using DG.Tweening;
+using R3;
 using UnityEngine;
 
 namespace BoardTower.Game.Presentation.View
@@ -40,6 +43,19 @@ namespace BoardTower.Game.Presentation.View
             }
 
             return sequence;
+        }
+
+        public Observable<int> OnClickAnySquareAsObservable()
+        {
+            return squareViews
+                .Select((sv, i) =>
+                    Observable.FromEvent<Action, Unit>(
+                        x => () => x(Unit.Default),
+                        x => sv.click += x,
+                        x => sv.click -= x
+                    ).Select(_ => i))
+                .Merge()
+                .Share();
         }
     }
 }
