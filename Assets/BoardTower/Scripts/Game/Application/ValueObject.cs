@@ -53,19 +53,29 @@ namespace BoardTower.Game.Application
         }
     }
 
-    public sealed class HighlightSquareVO
+    public sealed class SquareVO
     {
         public readonly int file;
         public readonly int rank;
+
+        public SquareVO(int file, int rank)
+        {
+            this.file = file;
+            this.rank = rank;
+        }
+    }
+
+    public sealed class HighlightSquareVO
+    {
+        public readonly SquareVO square;
         public readonly HighlightSquareType highlight;
 
-        public HighlightSquareVO(int file, int rank, HighlightSquareType highlight)
+        public HighlightSquareVO(SquareVO square, HighlightSquareType highlight)
         {
             if (highlight is HighlightSquareType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_HIGHLIGHT);
 
-            this.file = file;
-            this.rank = rank;
+            this.square = square;
             this.highlight = highlight;
         }
     }
