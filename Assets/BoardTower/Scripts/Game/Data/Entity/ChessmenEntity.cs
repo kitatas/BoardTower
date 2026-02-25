@@ -5,13 +5,12 @@ namespace BoardTower.Game.Data.Entity
     public sealed class ChessmenEntity
     {
         public ChessmenType chessmenType { get; private set; }
-        public int file { get; private set; }
-        public int rank { get; private set; }
+        public SquareVO square { get; private set; }
 
         public void Init()
         {
             Set(ChessmenType.Knight);
-            Set(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK);
+            Set(new SquareVO(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK));
         }
 
         public void Set(ChessmenType type)
@@ -19,10 +18,9 @@ namespace BoardTower.Game.Data.Entity
             chessmenType = type;
         }
 
-        public void Set(int x, int y)
+        public void Set(SquareVO vo)
         {
-            file = x;
-            rank = y;
+            square = vo;
         }
     }
 }

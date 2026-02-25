@@ -45,8 +45,8 @@ namespace BoardTower.Game.Domain.UseCase
             {
                 for (int step = 1;; step++)
                 {
-                    var file = _chessmenEntity.file + offset.dx * step;
-                    var rank = _chessmenEntity.rank + offset.dy * step;
+                    var file = _chessmenEntity.square.file + offset.dx * step;
+                    var rank = _chessmenEntity.square.rank + offset.dy * step;
                     if (BoardHelper.IsOutOfBoard(file, rank)) break;
 
                     squares.Add(new SquareVO(file, rank));
