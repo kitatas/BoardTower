@@ -106,4 +106,14 @@ namespace BoardTower.Game.Application
             this.square = new SquareVO(file, rank);
         }
     }
+
+    public sealed class ChessmenMovementVO
+    {
+        public readonly SquareVO square;
+
+        public ChessmenMovementVO(SquareVO square)
+        {
+            this.square = square;
+        }
+    }
 }

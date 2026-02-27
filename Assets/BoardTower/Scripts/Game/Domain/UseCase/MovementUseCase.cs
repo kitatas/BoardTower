@@ -55,7 +55,8 @@ namespace BoardTower.Game.Domain.UseCase
             await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
 
             _chessmenEntity.Set(clickSquare.square);
-            // TODO: 更新したマス目への移動通知
+            await _movementPorts.chessmenMovementPublisher
+                .PublishAsync(new ChessmenMovementVO(_chessmenEntity.square), token);
         }
     }
 }
