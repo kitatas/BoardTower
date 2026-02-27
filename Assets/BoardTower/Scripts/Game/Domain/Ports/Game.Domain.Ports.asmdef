@@ -2,6 +2,7 @@
     "name": "Game.Domain.Ports",
     "rootNamespace": "",
     "references": [
+        "GUID:22c2aa7bab014292bb5a96d316cd5fcf",
         "GUID:725cff7a166d4166b801a958b7af9f4f",
         "GUID:08b38f39e2d9e594389b7a4cf4c2c338"
     ],
