@@ -1,5 +1,6 @@
 using BoardTower.Game.Data.DataStore;
 using BoardTower.Game.Data.Entity;
+using BoardTower.Game.Domain.Ports;
 using BoardTower.Game.Domain.Repository;
 using BoardTower.Game.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
@@ -27,6 +28,12 @@ namespace BoardTower.Game.Installer
             // Entity
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
+
+            // Ports
+            builder.Register<BoardPorts>(Lifetime.Scoped);
+            builder.Register<ChessmenPorts>(Lifetime.Scoped);
+            builder.Register<GameStatePorts>(Lifetime.Scoped);
+            builder.Register<MovementPorts>(Lifetime.Scoped);
 
             // Repository
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
