@@ -63,6 +63,8 @@ namespace BoardTower.Game.Application
             this.file = file;
             this.rank = rank;
         }
+
+        public bool IsEqual(SquareVO square) => file == square.file && rank == square.rank;
     }
 
     public sealed class HighlightSquareVO
@@ -82,15 +84,11 @@ namespace BoardTower.Game.Application
 
     public sealed class ClickSquareVO
     {
-        public readonly int file;
-        public readonly int rank;
+        public readonly SquareVO square;
 
         public ClickSquareVO(int file, int rank)
         {
-            this.file = file;
-            this.rank = rank;
+            this.square = new SquareVO(file, rank);
         }
-
-        public override string ToString() => $"file: {file}, rank: {rank}";
     }
 }

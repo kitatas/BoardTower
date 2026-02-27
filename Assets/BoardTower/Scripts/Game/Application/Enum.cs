@@ -29,5 +29,6 @@ namespace BoardTower.Game.Application
     {
         None = 0,
         Movable = 1,
+        Default = 2,
     }
 }
