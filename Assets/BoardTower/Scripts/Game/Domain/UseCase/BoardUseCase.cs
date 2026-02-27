@@ -1,6 +1,7 @@
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
+using BoardTower.Game.Domain.Ports;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 
@@ -8,26 +9,25 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class BoardUseCase
     {
-        private readonly IAsyncSubscriber<BoardTransitionVO> _subscriber;
-        private readonly IAsyncPublisher<BoardTransitionVO> _publisher;
+        private readonly BoardPorts _boardPorts;
 
-        public BoardUseCase(IAsyncSubscriber<BoardTransitionVO> subscriber,
-            IAsyncPublisher<BoardTransitionVO> publisher)
+        public BoardUseCase(BoardPorts boardPorts)
         {
-            _subscriber = subscriber;
-            _publisher = publisher;
+            _boardPorts = boardPorts;
         }
 
-        public IAsyncSubscriber<BoardTransitionVO> subscriber => _subscriber;
+        public IAsyncSubscriber<BoardTransitionVO> transition => _boardPorts.boardTransitionSubscriber;
 
         public async UniTask InitAsync(CancellationToken token)
         {
-            await _publisher.PublishAsync(new BoardTransitionVO(Fade.Out), token);
+            await _boardPorts.boardTransitionPublisher
+                .PublishAsync(new BoardTransitionVO(Fade.Out), token);
         }
 
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            await _publisher.PublishAsync(new BoardTransitionVO(fade, BoardConfig.FADE_DURATION), token);
+            await _boardPorts.boardTransitionPublisher
+                .PublishAsync(new BoardTransitionVO(fade, BoardConfig.FADE_DURATION), token);
         }
     }
 }

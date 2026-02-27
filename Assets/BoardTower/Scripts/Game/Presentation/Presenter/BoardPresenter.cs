@@ -24,7 +24,7 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IStartable.Start()
         {
-            _boardUseCase.subscriber
+            _boardUseCase.transition
                 .Subscribe((t, ct) => _boardFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
 
