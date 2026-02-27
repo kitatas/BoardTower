@@ -1,11 +1,8 @@
 {
-    "name": "Base.Domain.UseCase",
+    "name": "Base.Domain.Ports",
     "rootNamespace": "",
     "references": [
-        "Base.Data.Entity",
-        "Base.Domain.Ports",
-        "MessagePipe",
-        "UniTask"
+        "GUID:08b38f39e2d9e594389b7a4cf4c2c338"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
