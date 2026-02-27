@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using BoardTower.Game.Application;
@@ -31,32 +30,11 @@ namespace BoardTower.Game.Domain.UseCase
         public async UniTask PublishMovableSquaresAsync(CancellationToken token)
         {
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
-            var highlights = GetMovableSquares(rule)
+            var highlights = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 
             await _publisher.PublishAsync(highlights, token);
-        }
-
-        private List<SquareVO> GetMovableSquares(ChessmenMovementRuleVO rule)
-        {
-            var squares = new List<SquareVO>(16);
-            foreach (var offset in rule.offsets)
-            {
-                for (int step = 1;; step++)
-                {
-                    var file = _chessmenEntity.square.file + offset.dx * step;
-                    var rank = _chessmenEntity.square.rank + offset.dy * step;
-                    if (BoardHelper.IsOutOfBoard(file, rank)) break;
-
-                    squares.Add(new SquareVO(file, rank));
-
-                    // Slider 以外は1手のみ
-                    if (rule.movement is not ChessmenMovementType.Slider) break;
-                }
-            }
-
-            return squares;
         }
     }
 }

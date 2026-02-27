@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using UniEx;
@@ -10,6 +11,27 @@ namespace BoardTower.Game.Utility
         {
             return !file.IsBetween(BoardConfig.MIN_FILE, BoardConfig.MAX_FILE) ||
                    !rank.IsBetween(BoardConfig.MIN_RANK, BoardConfig.MAX_RANK);
+        }
+
+        public static List<SquareVO> GetMovableSquares(SquareVO origin, ChessmenMovementRuleVO rule)
+        {
+            var squares = new List<SquareVO>(16);
+            foreach (var offset in rule.offsets)
+            {
+                for (int step = 1;; step++)
+                {
+                    var file = origin.file + offset.dx * step;
+                    var rank = origin.rank + offset.dy * step;
+                    if (IsOutOfBoard(file, rank)) break;
+
+                    squares.Add(new SquareVO(file, rank));
+
+                    // Slider 以外は1手のみ
+                    if (rule.movement is not ChessmenMovementType.Slider) break;
+                }
+            }
+
+            return squares;
         }
 
         public static int ToIndex(int file, int rank)
