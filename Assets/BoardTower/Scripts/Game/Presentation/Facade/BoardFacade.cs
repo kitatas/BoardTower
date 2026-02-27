@@ -33,12 +33,12 @@ namespace BoardTower.Game.Presentation.Facade
 
         public UniTask ShowHighlightAsync(HighlightSquareVO[] squares, CancellationToken token)
         {
-            var indices = squares
-                .Select(x => BoardHelper.ToIndex(x.square.file, x.square.rank))
+            var highlights = squares
+                .Select(x => new HighlightVO(BoardHelper.ToIndex(x.square.file, x.square.rank), x.highlight))
                 .Distinct()
                 .ToArray();
 
-            return _boardView.ShowHighlightSquare(indices, BoardConfig.HIGHLIGHT_DURATION)
+            return _boardView.ShowHighlightSquare(highlights, BoardConfig.HIGHLIGHT_DURATION)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
 

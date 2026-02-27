@@ -39,6 +39,15 @@ namespace BoardTower.Game.Presentation.View
                 .SetLink(gameObject);
         }
 
+        public Tween HideHighlight(float duration)
+        {
+            return DOTween.Sequence()
+                .Append(highlight
+                    .DOLocalMoveY(0.0f, duration)
+                    .SetEase(Ease.Linear))
+                .SetLink(gameObject);
+        }
+
         void IPointerClickHandler.OnPointerClick(PointerEventData _)
         {
             click?.Invoke();

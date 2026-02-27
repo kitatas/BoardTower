@@ -82,6 +82,21 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class HighlightVO
+    {
+        public readonly int index;
+        public readonly HighlightSquareType highlight;
+
+        public HighlightVO(int index, HighlightSquareType highlight)
+        {
+            if (highlight is HighlightSquareType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_HIGHLIGHT);
+
+            this.index = index;
+            this.highlight = highlight;
+        }
+    }
+
     public sealed class ClickSquareVO
     {
         public readonly SquareVO square;

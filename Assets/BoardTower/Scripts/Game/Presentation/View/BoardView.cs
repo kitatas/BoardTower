@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using BoardTower.Common.Application;
+using BoardTower.Game.Application;
 using DG.Tweening;
 using R3;
 using UnityEngine;
@@ -34,12 +36,18 @@ namespace BoardTower.Game.Presentation.View
 
         private static float GetDelay(float duration) => duration / 50.0f;
 
-        public Tween ShowHighlightSquare(int[] indices, float duration)
+        public Tween ShowHighlightSquare(HighlightVO[] highlights, float duration)
         {
             var sequence = DOTween.Sequence();
-            foreach (var i in indices)
+            foreach (var highlight in highlights)
             {
-                sequence.Join(squareViews[i].ShowHighlight(duration));
+                var tween = highlight.highlight switch
+                {
+                    HighlightSquareType.Movable => squareViews[highlight.index].ShowHighlight(duration),
+                    HighlightSquareType.Default => squareViews[highlight.index].HideHighlight(duration),
+                    _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_HIGHLIGHT),
+                };
+                sequence.Join(tween);
             }
 
             return sequence;
