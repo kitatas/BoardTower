@@ -25,6 +25,10 @@ namespace BoardTower.Game.Presentation.Presenter
             _chessmenUseCase.transition
                 .Subscribe((t, ct) => _chessmenFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
+
+            _chessmenUseCase.movement
+                .Subscribe((m, ct) => _chessmenFacade.MoveAsync(m, ct))
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

@@ -64,6 +64,9 @@ namespace BoardTower.Game.Application
             this.rank = rank;
         }
 
+        public float localX => file - BoardConfig.MIN_FILE - 3.5f;
+        public float localZ => rank - BoardConfig.MIN_RANK - 3.5f;
+
         public bool IsEqual(SquareVO square) => file == square.file && rank == square.rank;
     }
 

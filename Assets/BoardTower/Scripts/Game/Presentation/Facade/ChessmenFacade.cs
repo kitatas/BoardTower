@@ -27,5 +27,12 @@ namespace BoardTower.Game.Presentation.Facade
             return tween
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
+
+        public UniTask MoveAsync(ChessmenMovementVO movement, CancellationToken token)
+        {
+            return _chessmenView
+                .Move(movement.square, ChessmenConfig.MOVE_DURATION)
+                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+        }
     }
 }

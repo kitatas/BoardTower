@@ -20,6 +20,7 @@ namespace BoardTower.Game.Domain.UseCase
         }
 
         public IAsyncSubscriber<ChessmenTransitionVO> transition => _chessmenPorts.chessmenTransitionSubscriber;
+        public IAsyncSubscriber<ChessmenMovementVO> movement => _chessmenPorts.chessmenMovementSubscriber;
 
         public async UniTask InitAsync(CancellationToken token)
         {
