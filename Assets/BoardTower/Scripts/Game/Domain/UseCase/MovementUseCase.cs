@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
+using BoardTower.Game.Domain.Ports;
 using BoardTower.Game.Domain.Repository;
 using BoardTower.Game.Utility;
 using Cysharp.Threading.Tasks;
@@ -12,29 +13,27 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class MovementUseCase
     {
         private readonly ChessmenEntity _chessmenEntity;
+        private readonly MovementPorts _movementPorts;
         private readonly ChessmenMovementRepository _chessmenMovementRepository;
-        private readonly IAsyncSubscriber<HighlightSquareVO[]> _subscriber;
-        private readonly IAsyncPublisher<HighlightSquareVO[]> _publisher;
 
-        public MovementUseCase(ChessmenEntity chessmenEntity, ChessmenMovementRepository chessmenMovementRepository,
-            IAsyncSubscriber<HighlightSquareVO[]> subscriber, IAsyncPublisher<HighlightSquareVO[]> publisher)
+        public MovementUseCase(ChessmenEntity chessmenEntity, MovementPorts movementPorts,
+            ChessmenMovementRepository chessmenMovementRepository)
         {
             _chessmenEntity = chessmenEntity;
+            _movementPorts = movementPorts;
             _chessmenMovementRepository = chessmenMovementRepository;
-            _subscriber = subscriber;
-            _publisher = publisher;
         }
 
-        public IAsyncSubscriber<HighlightSquareVO[]> subscriber => _subscriber;
+        public IAsyncSubscriber<HighlightSquareVO[]> highlights => _movementPorts.highlightsSubscriber;
 
         public async UniTask PublishMovableSquaresAsync(CancellationToken token)
         {
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
-            var highlights = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
+            var highlightVos = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 
-            await _publisher.PublishAsync(highlights, token);
+            await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
         }
     }
 }

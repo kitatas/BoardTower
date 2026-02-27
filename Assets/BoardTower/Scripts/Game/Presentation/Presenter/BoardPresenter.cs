@@ -28,7 +28,7 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe((t, ct) => _boardFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
 
-            _movementUseCase.subscriber
+            _movementUseCase.highlights
                 .Subscribe((hs, ct) => _boardFacade.ShowHighlightAsync(hs, ct))
                 .AddTo(_disposable);
         }
