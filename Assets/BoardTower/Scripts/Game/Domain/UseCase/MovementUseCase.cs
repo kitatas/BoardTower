@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using BoardTower.Game.Application;
@@ -7,15 +8,17 @@ using BoardTower.Game.Domain.Repository;
 using BoardTower.Game.Utility;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using R3;
 
 namespace BoardTower.Game.Domain.UseCase
 {
-    public sealed class MovementUseCase
+    public sealed class MovementUseCase : IDisposable
     {
         private readonly ChessmenEntity _chessmenEntity;
         private readonly GameStateEntity _gameStateEntity;
         private readonly MovementPorts _movementPorts;
         private readonly ChessmenMovementRepository _chessmenMovementRepository;
+        private readonly Subject<ClickSquareVO> _movement;
 
         public MovementUseCase(ChessmenEntity chessmenEntity, GameStateEntity gameStateEntity,
             MovementPorts movementPorts, ChessmenMovementRepository chessmenMovementRepository)
@@ -24,6 +27,7 @@ namespace BoardTower.Game.Domain.UseCase
             _gameStateEntity = gameStateEntity;
             _movementPorts = movementPorts;
             _chessmenMovementRepository = chessmenMovementRepository;
+            _movement = new Subject<ClickSquareVO>();
         }
 
         public IAsyncSubscriber<HighlightSquareVO[]> highlights => _movementPorts.highlightsSubscriber;
@@ -48,15 +52,27 @@ namespace BoardTower.Game.Domain.UseCase
             var squares = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule);
             if (!squares.Any(x => x.IsEqual(clickSquare.square))) return;
 
+            _movement?.OnNext(clickSquare);
+
             var highlightVos = squares
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Default))
                 .ToArray();
 
             await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
+        }
 
+        public async UniTask MoveAsync(CancellationToken token)
+        {
+            var clickSquare = await _movement.FirstAsync(cancellationToken: token);
             _chessmenEntity.Set(clickSquare.square);
-            await _movementPorts.chessmenMovementPublisher
-                .PublishAsync(new ChessmenMovementVO(_chessmenEntity.square), token);
+
+            var movementVo = new ChessmenMovementVO(_chessmenEntity.square);
+            await _movementPorts.chessmenMovementPublisher.PublishAsync(movementVo, token);
+        }
+
+        void IDisposable.Dispose()
+        {
+            _movement?.Dispose();
         }
     }
 }

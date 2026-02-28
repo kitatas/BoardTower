@@ -20,5 +20,11 @@ namespace BoardTower.Game.Presentation.State
         {
             await _movementUseCase.PublishMovableSquaresAsync(token);
         }
+
+        public override async UniTask<GameState> TickAsync(CancellationToken token)
+        {
+            await _movementUseCase.MoveAsync(token);
+            return GameState.Event;
+        }
     }
 }
