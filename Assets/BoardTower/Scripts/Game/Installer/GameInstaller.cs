@@ -28,6 +28,7 @@ namespace BoardTower.Game.Installer
             // Entity
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
+            builder.Register<PlyEntity>(Lifetime.Scoped);
 
             // Ports
             builder.Register<BoardPorts>(Lifetime.Scoped);
@@ -43,6 +44,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
+            builder.Register<PlyUseCase>(Lifetime.Scoped);
 
             // State
             builder.Register<BaseGameState, GameInitState>(Lifetime.Scoped);
@@ -55,15 +57,18 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<GameStatePresenter>();
+                entryPoints.Add<PlyPresenter>();
             });
 
             // Facade
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
+            builder.Register<PlyFacade>(Lifetime.Scoped);
 
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
+            builder.RegisterComponentInHierarchy<PlyView>();
         }
     }
 }

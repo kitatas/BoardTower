@@ -8,10 +8,12 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GameInputState : BaseGameState
     {
         private readonly MovementUseCase _movementUseCase;
+        private readonly PlyUseCase _plyUseCase;
 
-        public GameInputState(MovementUseCase movementUseCase)
+        public GameInputState(MovementUseCase movementUseCase, PlyUseCase plyUseCase)
         {
             _movementUseCase = movementUseCase;
+            _plyUseCase = plyUseCase;
         }
 
         public override GameState state => GameState.Input;
@@ -24,6 +26,8 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             await _movementUseCase.MoveAsync(token);
+            _plyUseCase.Decrease();
+
             return GameState.Event;
         }
     }
