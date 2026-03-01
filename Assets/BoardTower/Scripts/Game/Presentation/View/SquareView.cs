@@ -8,6 +8,8 @@ namespace BoardTower.Game.Presentation.View
     public sealed class SquareView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Transform highlight = default;
+        [SerializeField] private SpriteRenderer squareEvent = default;
+
         public event Action click;
 
         public Tween FadeIn(float duration, float delay)
@@ -51,6 +53,18 @@ namespace BoardTower.Game.Presentation.View
         void IPointerClickHandler.OnPointerClick(PointerEventData _)
         {
             click?.Invoke();
+        }
+
+        public Tween RenderEvent(Sprite sprite, float duration, float delay)
+        {
+            return DOTween.Sequence()
+                .Append(squareEvent.transform
+                    .DOLocalMoveY(0.49f, 0.0f))
+                .AppendCallback(() => squareEvent.sprite = sprite)
+                .Append(squareEvent.transform
+                    .DOLocalMoveY(0.51f, duration))
+                .SetDelay(delay)
+                .SetLink(gameObject);
         }
     }
 }

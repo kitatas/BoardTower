@@ -123,6 +123,18 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class EventVO
+    {
+        public readonly int index;
+        public readonly Sprite sprite;
+
+        public EventVO(int index, Sprite sprite)
+        {
+            this.index = index;
+            this.sprite = sprite;
+        }
+    }
+
     public sealed class ChessmenMovementVO
     {
         public readonly SquareVO square;

@@ -34,6 +34,17 @@ namespace BoardTower.Game.Presentation.View
             return sequence;
         }
 
+        public Tween RenderEventSquareAll(EventVO[] events, float duration)
+        {
+            var sequence = DOTween.Sequence();
+            for (int i = 0; i < squareViews.Length; i++)
+            {
+                sequence.Join(squareViews[i].RenderEvent(events[i].sprite, duration, i * GetDelay(duration)));
+            }
+
+            return sequence;
+        }
+
         private static float GetDelay(float duration) => duration / 50.0f;
 
         public Tween ShowHighlightSquare(HighlightVO[] highlights, float duration)
