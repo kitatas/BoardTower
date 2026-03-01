@@ -28,6 +28,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterInstance<SquareEventTable>(squareEventTable);
 
             // Entity
+            builder.Register<BoardEntity>(Lifetime.Scoped);
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
             builder.Register<PlyEntity>(Lifetime.Scoped);
@@ -40,6 +41,7 @@ namespace BoardTower.Game.Installer
 
             // Repository
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
+            builder.Register<SquareEventRepository>(Lifetime.Scoped);
 
             // UseCase
             builder.Register<BoardUseCase>(Lifetime.Scoped);

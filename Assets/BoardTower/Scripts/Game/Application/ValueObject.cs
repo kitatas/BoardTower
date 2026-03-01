@@ -111,6 +111,18 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class EventSquareVO
+    {
+        public readonly SquareVO square;
+        public readonly SquareEventVO squareEvent;
+
+        public EventSquareVO(SquareVO square, SquareEventVO squareEvent)
+        {
+            this.square = square;
+            this.squareEvent = squareEvent;
+        }
+    }
+
     public sealed class ChessmenMovementVO
     {
         public readonly SquareVO square;
