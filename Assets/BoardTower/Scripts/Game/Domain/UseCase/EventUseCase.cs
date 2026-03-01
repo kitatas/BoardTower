@@ -37,8 +37,7 @@ namespace BoardTower.Game.Domain.UseCase
             var square = new SquareVO(_chessmenEntity.square.file + dFile, _chessmenEntity.square.rank + dRank);
             _chessmenEntity.Set(square);
 
-            var movementVo = new ChessmenMovementVO(_chessmenEntity.square);
-            return _eventPorts.movementPublisher.PublishAsync(movementVo, token);
+            return _eventPorts.movementPublisher.PublishAsync(_chessmenEntity.movement, token);
         }
     }
 }

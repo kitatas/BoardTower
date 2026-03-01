@@ -65,9 +65,7 @@ namespace BoardTower.Game.Domain.UseCase
         {
             var clickSquare = await _movement.FirstAsync(cancellationToken: token);
             _chessmenEntity.Set(clickSquare.square);
-
-            var movementVo = new ChessmenMovementVO(_chessmenEntity.square);
-            await _movementPorts.chessmenMovementPublisher.PublishAsync(movementVo, token);
+            await _movementPorts.chessmenMovementPublisher.PublishAsync(_chessmenEntity.movement, token);
         }
 
         void IDisposable.Dispose()

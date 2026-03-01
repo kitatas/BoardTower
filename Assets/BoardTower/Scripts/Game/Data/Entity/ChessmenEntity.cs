@@ -22,5 +22,7 @@ namespace BoardTower.Game.Data.Entity
         {
             square = vo;
         }
+
+        public ChessmenMovementVO movement => new(square);
     }
 }
