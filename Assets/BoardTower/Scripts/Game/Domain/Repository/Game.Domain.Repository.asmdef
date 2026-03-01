@@ -2,6 +2,7 @@
     "name": "Game.Domain.Repository",
     "rootNamespace": "",
     "references": [
+        "GUID:7aa364571c32414589df097445f1b89c",
         "GUID:193efd1822ac4de5ae719bcf6d254d69",
         "GUID:725cff7a166d4166b801a958b7af9f4f",
         "GUID:95eaee7b2b3b49b28d552bb36d514147",

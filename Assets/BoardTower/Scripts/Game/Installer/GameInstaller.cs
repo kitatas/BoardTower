@@ -17,6 +17,7 @@ namespace BoardTower.Game.Installer
     public sealed class GameInstaller : LifetimeScope
     {
         [SerializeField] private TextAsset memoryFile = default;
+        [SerializeField] private SquareEventTable squareEventTable = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -24,6 +25,7 @@ namespace BoardTower.Game.Installer
 
             // DataStore
             builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
+            builder.RegisterInstance<SquareEventTable>(squareEventTable);
 
             // Entity
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
