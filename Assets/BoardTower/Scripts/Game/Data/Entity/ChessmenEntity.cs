@@ -23,6 +23,11 @@ namespace BoardTower.Game.Data.Entity
             square = vo;
         }
 
+        public void MoveBy(ChessmenMovementOffsetVO offset)
+        {
+            Set(new SquareVO(square.file + offset.dx, square.rank + offset.dy));
+        }
+
         public ChessmenMovementVO movement => new(square);
     }
 }

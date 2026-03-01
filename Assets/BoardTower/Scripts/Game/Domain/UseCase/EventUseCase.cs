@@ -33,10 +33,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)
         {
-            var (dFile, dRank) = type.ToBeltFileRank();
-            var square = new SquareVO(_chessmenEntity.square.file + dFile, _chessmenEntity.square.rank + dRank);
-            _chessmenEntity.Set(square);
-
+            _chessmenEntity.MoveBy(type.ToBeltOffset());
             return _eventPorts.movementPublisher.PublishAsync(_chessmenEntity.movement, token);
         }
     }

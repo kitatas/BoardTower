@@ -27,14 +27,14 @@ namespace BoardTower.Game.Application
                 SquareEventType.BeltRight;
         }
 
-        public static (int dFile, int dRank) ToBeltFileRank(this SquareEventType self)
+        public static ChessmenMovementOffsetVO ToBeltOffset(this SquareEventType self)
         {
             return self switch
             {
-                SquareEventType.BeltUp => (0, 1),
-                SquareEventType.BeltDown => (0, -1),
-                SquareEventType.BeltLeft => (-1, 0),
-                SquareEventType.BeltRight => (1, 0),
+                SquareEventType.BeltUp => new ChessmenMovementOffsetVO(0, 1),
+                SquareEventType.BeltDown => new ChessmenMovementOffsetVO(0, -1),
+                SquareEventType.BeltLeft => new ChessmenMovementOffsetVO(-1, 0),
+                SquareEventType.BeltRight => new ChessmenMovementOffsetVO(1, 0),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             };
         }
