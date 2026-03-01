@@ -47,11 +47,13 @@ namespace BoardTower.Game.Installer
             // UseCase
             builder.Register<BoardUseCase>(Lifetime.Scoped);
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
+            builder.Register<EventUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
             builder.Register<PlyUseCase>(Lifetime.Scoped);
 
             // State
+            builder.Register<BaseGameState, GameEventState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameInitState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameInputState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameSetUpState>(Lifetime.Scoped);

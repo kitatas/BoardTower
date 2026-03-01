@@ -19,13 +19,16 @@ namespace BoardTower.Game.Domain.UseCase
             _eventPorts = eventPorts;
         }
 
-        public async UniTask ApplyEventAsync(CancellationToken token)
+        public async UniTask<bool> ApplyEventAsync(CancellationToken token)
         {
             var squareEvent = _boardEntity.FindEvent(_chessmenEntity.square);
             if (squareEvent.type.IsBeltEvent())
             {
                 await BeltAsync(squareEvent.type, token);
+                return true; // 移動後の SquareEvent 実行
             }
+
+            return false;
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)
