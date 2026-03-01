@@ -36,6 +36,7 @@ namespace BoardTower.Game.Installer
             // Ports
             builder.Register<BoardPorts>(Lifetime.Scoped);
             builder.Register<ChessmenPorts>(Lifetime.Scoped);
+            builder.Register<EventPorts>(Lifetime.Scoped);
             builder.Register<GameStatePorts>(Lifetime.Scoped);
             builder.Register<MovementPorts>(Lifetime.Scoped);
 

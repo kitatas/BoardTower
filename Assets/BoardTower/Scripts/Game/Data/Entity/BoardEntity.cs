@@ -23,5 +23,10 @@ namespace BoardTower.Game.Data.Entity
         }
 
         public EventSquareVO[] events => _events.ToArray();
+
+        public SquareEventVO FindEvent(SquareVO square)
+        {
+            return _events.Find(x => x.square.IsEqual(square)).squareEvent;
+        }
     }
 }
