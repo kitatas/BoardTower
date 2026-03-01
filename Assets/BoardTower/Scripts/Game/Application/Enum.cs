@@ -32,4 +32,13 @@ namespace BoardTower.Game.Application
         Movable = 1,
         Default = 2,
     }
+
+    public enum SquareEventType
+    {
+        None = 0,
+        BeltUp = 1,
+        BeltDown = 2,
+        BeltLeft = 3,
+        BeltRight = 4,
+    }
 }

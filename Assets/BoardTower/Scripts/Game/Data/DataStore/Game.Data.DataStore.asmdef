@@ -2,6 +2,7 @@
     "name": "Game.Data.DataStore",
     "rootNamespace": "",
     "references": [
+        "GUID:7aa364571c32414589df097445f1b89c",
         "GUID:725cff7a166d4166b801a958b7af9f4f",
         "GUID:0632cc6b22db61d41898dfef78dc32f5"
     ],

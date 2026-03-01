@@ -1,5 +1,6 @@
 using System.Linq;
 using BoardTower.Common.Application;
+using UnityEngine;
 
 namespace BoardTower.Game.Application
 {
@@ -117,6 +118,18 @@ namespace BoardTower.Game.Application
         public ChessmenMovementVO(SquareVO square)
         {
             this.square = square;
+        }
+    }
+
+    public sealed class SquareEventVO
+    {
+        public readonly SquareEventType type;
+        public readonly Sprite sprite;
+
+        public SquareEventVO(SquareEventType type, Sprite sprite)
+        {
+            this.type = type;
+            this.sprite = sprite;
         }
     }
 }
