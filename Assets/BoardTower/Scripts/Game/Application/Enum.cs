@@ -36,9 +36,10 @@ namespace BoardTower.Game.Application
     public enum SquareEventType
     {
         None = 0,
-        BeltUp = 1,
-        BeltDown = 2,
-        BeltLeft = 3,
-        BeltRight = 4,
+        Empty = 1,
+        BeltUp = 2,
+        BeltDown = 3,
+        BeltLeft = 4,
+        BeltRight = 5,
     }
 }

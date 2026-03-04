@@ -41,11 +41,11 @@ namespace BoardTower.Game.Domain.UseCase
             {
                 Fade.In => new[]
                 {
-                    SquareEventType.None, SquareEventType.None, SquareEventType.None, SquareEventType.None,
+                    SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty,
                     SquareEventType.BeltUp, SquareEventType.BeltDown,
                     SquareEventType.BeltLeft, SquareEventType.BeltRight
                 },
-                Fade.Out => new[] { SquareEventType.None },
+                Fade.Out => new[] { SquareEventType.Empty },
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
             for (int i = BoardConfig.MIN_FILE; i <= BoardConfig.MAX_FILE; i++)

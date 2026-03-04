@@ -152,6 +152,9 @@ namespace BoardTower.Game.Application
 
         public SquareEventVO(SquareEventType type, Sprite sprite)
         {
+            if (type is SquareEventType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
+
             this.type = type;
             this.sprite = sprite;
         }
