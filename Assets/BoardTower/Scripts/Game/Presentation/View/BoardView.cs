@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
+using BoardTower.Game.Utility;
 using DG.Tweening;
 using R3;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace BoardTower.Game.Presentation.View
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                sequence.Join(squareViews[i].FadeIn(duration, i * GetDelay(duration)));
+                sequence.Join(squareViews[i].FadeIn(duration, BoardHelper.GetDelay(i)));
             }
 
             return sequence;
@@ -28,7 +29,7 @@ namespace BoardTower.Game.Presentation.View
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                sequence.Join(squareViews[i].FadeOut(duration, i * GetDelay(duration)));
+                sequence.Join(squareViews[i].FadeOut(duration, BoardHelper.GetDelay(i)));
             }
 
             return sequence;
@@ -39,13 +40,11 @@ namespace BoardTower.Game.Presentation.View
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                sequence.Join(squareViews[i].RenderEvent(events[i].sprite, duration, i * GetDelay(duration)));
+                sequence.Join(squareViews[i].RenderEvent(events[i].sprite, duration, BoardHelper.GetDelay(i)));
             }
 
             return sequence;
         }
-
-        private static float GetDelay(float duration) => duration / 50.0f;
 
         public Tween ShowHighlightSquare(HighlightVO[] highlights, float duration)
         {

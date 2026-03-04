@@ -6,6 +6,7 @@ namespace BoardTower.Game.Application
         public const int MAX_FILE = 8;
         public const int MIN_RANK = 1;
         public const int MAX_RANK = 8;
+        public const float DELAY_RATE = 0.1f;
         public const float FADE_DURATION = 0.5f;
         public const float HIGHLIGHT_DURATION = 0.5f;
         public const float EVENT_DURATION = 0.5f;

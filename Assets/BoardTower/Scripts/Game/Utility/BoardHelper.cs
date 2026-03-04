@@ -52,5 +52,11 @@ namespace BoardTower.Game.Utility
             var rank = (index % ranks) + BoardConfig.MIN_RANK;
             return (file, rank);
         }
+
+        public static float GetDelay(int index)
+        {
+            var (file, rank) = ToFileRank(index);
+            return (file + rank - 1) * BoardConfig.DELAY_RATE;
+        }
     }
 }
