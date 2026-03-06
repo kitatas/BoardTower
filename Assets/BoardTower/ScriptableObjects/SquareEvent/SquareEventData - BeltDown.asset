@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3ec55905c94dc68c80f0ab45889767, type: 3}
   m_Name: SquareEventData - BeltDown
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
-  squareEventType: 2
+  squareEventType: 3
   sprite: {fileID: -407859999, guid: a2b72c4d322fe4198951254e45355156, type: 3}
