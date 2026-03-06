@@ -43,7 +43,8 @@ namespace BoardTower.Game.Domain.UseCase
                 {
                     SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty,
                     SquareEventType.BeltUp, SquareEventType.BeltDown,
-                    SquareEventType.BeltLeft, SquareEventType.BeltRight
+                    SquareEventType.BeltLeft, SquareEventType.BeltRight,
+                    SquareEventType.Block, SquareEventType.Block,
                 },
                 Fade.Out => new[] { SquareEventType.Empty },
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),

@@ -14,15 +14,17 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class MovementUseCase : IDisposable
     {
+        private readonly BoardEntity _boardEntity;
         private readonly ChessmenEntity _chessmenEntity;
         private readonly GameStateEntity _gameStateEntity;
         private readonly MovementPorts _movementPorts;
         private readonly ChessmenMovementRepository _chessmenMovementRepository;
         private readonly Subject<ClickSquareVO> _movement;
 
-        public MovementUseCase(ChessmenEntity chessmenEntity, GameStateEntity gameStateEntity,
+        public MovementUseCase(BoardEntity boardEntity, ChessmenEntity chessmenEntity, GameStateEntity gameStateEntity,
             MovementPorts movementPorts, ChessmenMovementRepository chessmenMovementRepository)
         {
+            _boardEntity = boardEntity;
             _chessmenEntity = chessmenEntity;
             _gameStateEntity = gameStateEntity;
             _movementPorts = movementPorts;
@@ -36,6 +38,7 @@ namespace BoardTower.Game.Domain.UseCase
         {
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
             var highlightVos = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
+                .Where(x => _boardEntity.IsMovable(x))
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 
@@ -49,7 +52,9 @@ namespace BoardTower.Game.Domain.UseCase
 
             // 移動可能範囲外であれば処理させない
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
-            var squares = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule);
+            var squares = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
+                .Where(x => _boardEntity.IsMovable(x))
+                .ToList();
             if (!squares.Any(x => x.IsEqual(clickSquare.square))) return;
 
             _movement?.OnNext(clickSquare);

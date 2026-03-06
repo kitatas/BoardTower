@@ -41,5 +41,6 @@ namespace BoardTower.Game.Application
         BeltDown = 3,
         BeltLeft = 4,
         BeltRight = 5,
+        Block = 6,
     }
 }

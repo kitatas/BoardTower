@@ -28,5 +28,14 @@ namespace BoardTower.Game.Data.Entity
         {
             return _events.Find(x => x.square.IsEqual(square)).squareEvent;
         }
+
+        public bool IsMovable(SquareVO square)
+        {
+            var squareEvent = FindEvent(square);
+            if (squareEvent == null) return true;
+            if (squareEvent.type == SquareEventType.Block) return false;
+
+            return true;
+        }
     }
 }
