@@ -41,6 +41,7 @@ namespace BoardTower.Game.Installer
             builder.Register<MovementPorts>(Lifetime.Scoped);
 
             // Repository
+            builder.Register<BoardPatternRepository>(Lifetime.Scoped);
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
             builder.Register<SquareEventRepository>(Lifetime.Scoped);
 

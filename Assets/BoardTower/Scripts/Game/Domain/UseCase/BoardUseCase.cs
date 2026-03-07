@@ -13,12 +13,15 @@ namespace BoardTower.Game.Domain.UseCase
     {
         private readonly BoardEntity _boardEntity;
         private readonly BoardPorts _boardPorts;
+        private readonly BoardPatternRepository _boardPatternRepository;
         private readonly SquareEventRepository _squareEventRepository;
 
-        public BoardUseCase(BoardEntity boardEntity, BoardPorts boardPorts, SquareEventRepository squareEventRepository)
+        public BoardUseCase(BoardEntity boardEntity, BoardPorts boardPorts,
+            BoardPatternRepository boardPatternRepository, SquareEventRepository squareEventRepository)
         {
             _boardEntity = boardEntity;
             _boardPorts = boardPorts;
+            _boardPatternRepository = boardPatternRepository;
             _squareEventRepository = squareEventRepository;
         }
 
@@ -35,27 +38,30 @@ namespace BoardTower.Game.Domain.UseCase
         {
             await _boardPorts.boardTransitionPublisher
                 .PublishAsync(new BoardTransitionVO(fade, BoardConfig.FADE_DURATION), token);
+        }
 
-            // TODO: 仮
-            var types = fade switch
+        public async UniTask BuildSquaresAsync(CancellationToken token)
+        {
+            _boardEntity.Clear();
+
+            // 4x4 pattern から board 生成
+            // TODO: pattern 回転
+            var patterns = _boardPatternRepository.GetRandomPatterns();
+            for (int file = 0; file < BoardConfig.MAX_FILE; file++)
             {
-                Fade.In => new[]
+                var patternOffset = (file / BoardConfig.HALF_FILE) * (BoardConfig.MAX_FILE / BoardConfig.HALF_FILE);
+                var typeOffset = (file % BoardConfig.HALF_FILE) * BoardConfig.HALF_FILE;
+
+                for (int rank = 0; rank < BoardConfig.MAX_RANK; rank++)
                 {
-                    SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty, SquareEventType.Empty,
-                    SquareEventType.BeltUp, SquareEventType.BeltDown,
-                    SquareEventType.BeltLeft, SquareEventType.BeltRight,
-                    SquareEventType.Block, SquareEventType.Block,
-                },
-                Fade.Out => new[] { SquareEventType.Empty },
-                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
-            };
-            for (int i = BoardConfig.MIN_FILE; i <= BoardConfig.MAX_FILE; i++)
-            {
-                for (int j = BoardConfig.MIN_RANK; j <= BoardConfig.MAX_RANK; j++)
-                {
-                    var type = types[UnityEngine.Random.Range(0, types.Length)];
+                    var patternIndex = (rank / BoardConfig.HALF_RANK) + patternOffset;
+                    var pattern = patterns[patternIndex];
+
+                    var typeIndex = (rank % BoardConfig.HALF_RANK) + typeOffset;
+                    var type = pattern.types[typeIndex];
+
                     var squareEvent = _squareEventRepository.Find(type);
-                    _boardEntity.Add(new EventSquareVO(new SquareVO(i, j), squareEvent));
+                    _boardEntity.Add(new EventSquareVO(new SquareVO(file + 1, rank + 1), squareEvent));
                 }
             }
 
