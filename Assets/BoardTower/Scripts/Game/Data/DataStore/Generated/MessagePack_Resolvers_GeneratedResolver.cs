@@ -47,11 +47,12 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(3)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(4)
             {
                 { typeof((int, int)), 0 },
                 { typeof((int, int)[]), 1 },
-                { typeof(global::BoardTower.Game.Data.DataStore.ChessmenMovementRuleMaster), 2 },
+                { typeof(global::BoardTower.Game.Data.DataStore.BoardPatternMaster), 2 },
+                { typeof(global::BoardTower.Game.Data.DataStore.ChessmenMovementRuleMaster), 3 },
             };
         }
 
@@ -67,7 +68,8 @@ namespace MessagePack.Resolvers
             {
                 case 0: return new global::MessagePack.Formatters.ValueTupleFormatter<int, int>();
                 case 1: return new global::MessagePack.Formatters.ArrayFormatter<(int, int)>();
-                case 2: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ChessmenMovementRuleMasterFormatter();
+                case 2: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.BoardPatternMasterFormatter();
+                case 3: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ChessmenMovementRuleMasterFormatter();
                 default: return null;
             }
         }

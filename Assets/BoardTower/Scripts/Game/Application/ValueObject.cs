@@ -159,4 +159,19 @@ namespace BoardTower.Game.Application
             this.sprite = sprite;
         }
     }
+
+    public sealed class BoardPatternVO
+    {
+        public readonly SquareEventType[] types;
+
+        public BoardPatternVO(int[] types)
+        {
+            if (types.Length != 16)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_PATTERN_LENGTH);
+
+            this.types = types
+                .Select(x => x.ToSquareEventType())
+                .ToArray();
+        }
+    }
 }

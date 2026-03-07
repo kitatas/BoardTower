@@ -25,11 +25,47 @@ namespace BoardTower.Game.Data.DataStore
             return memory;
         }
 
+        public void ReplaceAll(System.Collections.Generic.IList<BoardPatternMaster> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new BoardPatternMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.ChessmenMovementRuleMasterTable
+            
+            );
+        }
+
+        public void RemoveBoardPatternMaster(int[] keys)
+        {
+            var data = RemoveCore(memory.BoardPatternMasterTable.GetRawDataUnsafe(), keys, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new BoardPatternMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.ChessmenMovementRuleMasterTable
+            
+            );
+        }
+
+        public void Diff(BoardPatternMaster[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.BoardPatternMasterTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new BoardPatternMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.ChessmenMovementRuleMasterTable
+            
+            );
+        }
+
         public void ReplaceAll(System.Collections.Generic.IList<ChessmenMovementRuleMaster> data)
         {
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
                 table
             
             );
@@ -41,6 +77,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
                 table
             
             );
@@ -52,6 +89,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
                 table
             
             );

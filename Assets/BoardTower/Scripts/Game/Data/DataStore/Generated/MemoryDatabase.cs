@@ -13,12 +13,15 @@ namespace BoardTower.Game.Data.DataStore
 {
    public sealed class MemoryDatabase : MemoryDatabaseBase
    {
+        public BoardPatternMasterTable BoardPatternMasterTable { get; private set; }
         public ChessmenMovementRuleMasterTable ChessmenMovementRuleMasterTable { get; private set; }
 
         public MemoryDatabase(
+            BoardPatternMasterTable BoardPatternMasterTable,
             ChessmenMovementRuleMasterTable ChessmenMovementRuleMasterTable
         )
         {
+            this.BoardPatternMasterTable = BoardPatternMasterTable;
             this.ChessmenMovementRuleMasterTable = ChessmenMovementRuleMasterTable;
         }
 
@@ -41,6 +44,7 @@ namespace BoardTower.Game.Data.DataStore
 
         void InitSequential(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
         {
+            this.BoardPatternMasterTable = ExtractTableData<BoardPatternMaster, BoardPatternMasterTable>(header, databaseBinary, options, xs => new BoardPatternMasterTable(xs));
             this.ChessmenMovementRuleMasterTable = ExtractTableData<ChessmenMovementRuleMaster, ChessmenMovementRuleMasterTable>(header, databaseBinary, options, xs => new ChessmenMovementRuleMasterTable(xs));
         }
 
@@ -48,6 +52,7 @@ namespace BoardTower.Game.Data.DataStore
         {
             var extracts = new Action[]
             {
+                () => this.BoardPatternMasterTable = ExtractTableData<BoardPatternMaster, BoardPatternMasterTable>(header, databaseBinary, options, xs => new BoardPatternMasterTable(xs)),
                 () => this.ChessmenMovementRuleMasterTable = ExtractTableData<ChessmenMovementRuleMaster, ChessmenMovementRuleMasterTable>(header, databaseBinary, options, xs => new ChessmenMovementRuleMasterTable(xs)),
             };
             
@@ -65,6 +70,7 @@ namespace BoardTower.Game.Data.DataStore
         public DatabaseBuilder ToDatabaseBuilder()
         {
             var builder = new DatabaseBuilder();
+            builder.Append(this.BoardPatternMasterTable.GetRawDataUnsafe());
             builder.Append(this.ChessmenMovementRuleMasterTable.GetRawDataUnsafe());
             return builder;
         }
@@ -72,6 +78,7 @@ namespace BoardTower.Game.Data.DataStore
         public DatabaseBuilder ToDatabaseBuilder(MessagePack.IFormatterResolver resolver)
         {
             var builder = new DatabaseBuilder(resolver);
+            builder.Append(this.BoardPatternMasterTable.GetRawDataUnsafe());
             builder.Append(this.ChessmenMovementRuleMasterTable.GetRawDataUnsafe());
             return builder;
         }
@@ -83,9 +90,12 @@ namespace BoardTower.Game.Data.DataStore
             var result = new ValidateResult();
             var database = new ValidationDatabase(new object[]
             {
+                BoardPatternMasterTable,
                 ChessmenMovementRuleMasterTable,
             });
 
+            ((ITableUniqueValidate)BoardPatternMasterTable).ValidateUnique(result);
+            ValidateTable(BoardPatternMasterTable.All, database, "Id", BoardPatternMasterTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)ChessmenMovementRuleMasterTable).ValidateUnique(result);
             ValidateTable(ChessmenMovementRuleMasterTable.All, database, "Type", ChessmenMovementRuleMasterTable.PrimaryKeySelector, result);
 
@@ -100,6 +110,8 @@ namespace BoardTower.Game.Data.DataStore
         {
             switch (tableName)
             {
+                case "BoardPatternMaster":
+                    return db.BoardPatternMasterTable;
                 case "ChessmenMovementRuleMaster":
                     return db.ChessmenMovementRuleMasterTable;
                 
@@ -115,6 +127,7 @@ namespace BoardTower.Game.Data.DataStore
             if (metaTable != null) return metaTable;
 
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
+            dict.Add("BoardPatternMaster", BoardTower.Game.Data.DataStore.Tables.BoardPatternMasterTable.CreateMetaTable());
             dict.Add("ChessmenMovementRuleMaster", BoardTower.Game.Data.DataStore.Tables.ChessmenMovementRuleMasterTable.CreateMetaTable());
 
             metaTable = new MasterMemory.Meta.MetaDatabase(dict);

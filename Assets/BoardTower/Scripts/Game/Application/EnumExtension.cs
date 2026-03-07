@@ -19,6 +19,13 @@ namespace BoardTower.Game.Application
                 : throw new QuitExceptionVO(ExceptionConfig.INVALID_CHESSMEN_MOVEMENT);
         }
 
+        public static SquareEventType ToSquareEventType(this int self)
+        {
+            return FastEnum.IsDefined<SquareEventType>(self)
+                ? (SquareEventType)self
+                : throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
+        }
+
         public static bool IsBeltEvent(this SquareEventType self)
         {
             return self is SquareEventType.BeltUp or
