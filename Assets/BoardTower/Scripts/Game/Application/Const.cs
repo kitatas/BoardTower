@@ -12,6 +12,13 @@ namespace BoardTower.Game.Application
         public const float FADE_DURATION = 0.5f;
         public const float HIGHLIGHT_DURATION = 0.5f;
         public const float EVENT_DURATION = 0.5f;
+
+        public static readonly RotateType[] ROTATES = {
+            RotateType.Angle0,
+            RotateType.Angle90,
+            RotateType.Angle180,
+            RotateType.Angle270,
+        };
     }
 
     public sealed class ChessmenConfig

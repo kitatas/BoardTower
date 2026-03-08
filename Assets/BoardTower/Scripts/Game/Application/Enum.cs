@@ -43,4 +43,13 @@ namespace BoardTower.Game.Application
         BeltRight = 5,
         Block = 6,
     }
+
+    public enum RotateType
+    {
+        None = 0,
+        Angle0 = 1,
+        Angle90 = 2,
+        Angle180 = 3,
+        Angle270 = 4,
+    }
 }

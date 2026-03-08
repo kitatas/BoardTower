@@ -1,5 +1,6 @@
 using System.Linq;
 using BoardTower.Common.Application;
+using UniEx;
 using UnityEngine;
 
 namespace BoardTower.Game.Application
@@ -162,6 +163,7 @@ namespace BoardTower.Game.Application
 
     public sealed class BoardPatternVO
     {
+        public readonly RotateType rotate;
         public readonly SquareEventType[] types;
 
         public BoardPatternVO(int[] types)
@@ -169,9 +171,19 @@ namespace BoardTower.Game.Application
             if (types.Length != 16)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_PATTERN_LENGTH);
 
-            this.types = types
-                .Select(x => x.ToSquareEventType())
-                .ToArray();
+            this.rotate = BoardConfig.ROTATES.GetRandom();
+
+            this.types = new SquareEventType[BoardConfig.HALF_FILE * BoardConfig.HALF_RANK];
+            for (int file = 0; file < BoardConfig.HALF_FILE; file++)
+            {
+                for (int rank = 0; rank < BoardConfig.HALF_RANK; rank++)
+                {
+                    var (nx, ny) = rotate.RotateFileRank(file, rank);
+                    var srcIndex = file * BoardConfig.HALF_FILE + rank;
+                    var dstIndex = ny * BoardConfig.HALF_RANK + nx;
+                    this.types[dstIndex] = types[srcIndex].ToSquareEventType();
+                }
+            }
         }
     }
 }

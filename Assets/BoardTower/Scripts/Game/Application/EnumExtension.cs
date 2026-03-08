@@ -45,5 +45,17 @@ namespace BoardTower.Game.Application
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             };
         }
+
+        public static (int file, int rank) RotateFileRank(this RotateType self, int file, int rank)
+        {
+            return self switch
+            {
+                RotateType.Angle0 => (rank, file),
+                RotateType.Angle90 => (3 - file, rank),
+                RotateType.Angle180 => (3 - rank, 3 - file),
+                RotateType.Angle270 => (file, 3 - rank),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_ROTATE),
+            };
+        }
     }
 }

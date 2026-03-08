@@ -45,7 +45,6 @@ namespace BoardTower.Game.Domain.UseCase
             _boardEntity.Clear();
 
             // 4x4 pattern から board 生成
-            // TODO: pattern 回転
             var patterns = _boardPatternRepository.GetRandomPatterns();
             for (int file = 0; file < BoardConfig.MAX_FILE; file++)
             {
