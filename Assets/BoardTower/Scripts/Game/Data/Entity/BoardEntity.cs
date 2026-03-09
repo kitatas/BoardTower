@@ -24,14 +24,17 @@ namespace BoardTower.Game.Data.Entity
 
         public EventSquareVO[] events => _events.ToArray();
 
-        public SquareEventVO FindEvent(SquareVO square)
+        public (SquareEventVO squareEvent, int index) FindEvent(SquareVO square)
         {
-            return _events.Find(x => x.square.IsEqual(square)).squareEvent;
+            var index = _events.FindIndex(x => x.square.IsEqual(square));
+            return index == -1
+                ? (null, index)
+                : (_events[index].squareEvent, index);
         }
 
         public bool IsMovable(SquareVO square)
         {
-            var squareEvent = FindEvent(square);
+            var (squareEvent, _) = FindEvent(square);
             if (squareEvent == null) return true;
             if (squareEvent.type == SquareEventType.Block) return false;
 

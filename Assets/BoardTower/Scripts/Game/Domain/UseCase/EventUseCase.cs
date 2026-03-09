@@ -21,7 +21,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask<bool> ApplyEventAsync(CancellationToken token)
         {
-            var squareEvent = _boardEntity.FindEvent(_chessmenEntity.square);
+            var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             if (squareEvent.type.IsBeltEvent())
             {
                 await BeltAsync(squareEvent.type, token);
