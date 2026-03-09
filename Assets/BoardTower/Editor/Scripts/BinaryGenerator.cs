@@ -24,6 +24,7 @@ namespace BoardTower.Editor
             MessagePackSerializer.DefaultOptions = options;
 
             var databaseBuilder = new DatabaseBuilder();
+            databaseBuilder.Append(GetBoardPatternMaster());
             databaseBuilder.Append(GetChessmenMovementRuleMaster());
 
             var path = "Assets/Externals/Binary/MasterMemory.bytes";
@@ -35,6 +36,48 @@ namespace BoardTower.Editor
 
             File.WriteAllBytes(path, databaseBuilder.Build());
             AssetDatabase.Refresh();
+        }
+
+        private static IEnumerable<BoardPatternMaster> GetBoardPatternMaster()
+        {
+            return new[]
+            {
+                new BoardPatternMaster(1, new[]
+                {
+                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                }),
+                new BoardPatternMaster(2,new[]
+                {
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(),
+                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
+                }),
+                new BoardPatternMaster(3, new[]
+                {
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                }),
+                new BoardPatternMaster(4, new[]
+                {
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                }),
+                // new BoardPatternMaster(5, new[]
+                // {
+                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
+                // }),
+            };
         }
 
         private static IEnumerable<ChessmenMovementRuleMaster> GetChessmenMovementRuleMaster()
