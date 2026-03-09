@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using BoardTower.Common.Application;
 using BoardTower.Game.Application;
+using UniEx;
 
 namespace BoardTower.Game.Data.Entity
 {
@@ -15,6 +17,18 @@ namespace BoardTower.Game.Data.Entity
         public void Clear()
         {
             _events.Clear();
+        }
+
+        public void Set(int index, SquareEventVO squareEvent)
+        {
+            if (_events.TryGetValue(index, out _))
+            {
+                _events[index] = new EventSquareVO(_events[index].square, squareEvent);
+            }
+            else
+            {
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_INDEX);
+            }
         }
 
         public void Add(EventSquareVO square)

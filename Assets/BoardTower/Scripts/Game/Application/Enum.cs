@@ -42,6 +42,7 @@ namespace BoardTower.Game.Application
         BeltLeft = 4,
         BeltRight = 5,
         Block = 6,
+        Gem = 7,
     }
 
     public enum RotateType

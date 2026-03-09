@@ -34,6 +34,11 @@ namespace BoardTower.Game.Application
                 SquareEventType.BeltRight;
         }
 
+        public static bool IsOverrideEmptyEvent(this SquareEventType self)
+        {
+            return self is SquareEventType.Gem;
+        }
+
         public static ChessmenMovementOffsetVO ToBeltOffset(this SquareEventType self)
         {
             return self switch
