@@ -57,6 +57,8 @@ namespace BoardTower.Game.Presentation.View
 
         public Tween RenderEvent(Sprite sprite, float duration, float delay)
         {
+            if (squareEvent.sprite == sprite) return null;
+
             return DOTween.Sequence()
                 .Append(squareEvent.transform
                     .DOLocalMoveY(0.49f, 0.0f))

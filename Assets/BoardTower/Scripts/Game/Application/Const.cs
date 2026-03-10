@@ -11,7 +11,7 @@ namespace BoardTower.Game.Application
         public const float DELAY_RATE = 0.1f;
         public const float FADE_DURATION = 0.5f;
         public const float HIGHLIGHT_DURATION = 0.5f;
-        public const float EVENT_DURATION = 0.5f;
+        public const float EVENT_DURATION = 0.0f;
 
         public static readonly RotateType[] ROTATES = {
             RotateType.Angle0,
