@@ -8,10 +8,12 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GameEventState : BaseGameState
     {
         private readonly EventUseCase _eventUseCase;
+        private readonly GemUseCase _gemUseCase;
 
-        public GameEventState(EventUseCase eventUseCase)
+        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase)
         {
             _eventUseCase = eventUseCase;
+            _gemUseCase = gemUseCase;
         }
 
         public override GameState state => GameState.Event;
@@ -22,6 +24,9 @@ namespace BoardTower.Game.Presentation.State
 
             // Belt 系であれば、移動後の SquareEvent 実行
             if (result.isBelt) return state;
+
+            // TODO: 獲得数の算出
+            if (result.gemNum > 0) _gemUseCase.Add(result.gemNum);
 
             return GameState.Input;
         }

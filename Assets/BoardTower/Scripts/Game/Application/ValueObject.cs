@@ -190,10 +190,12 @@ namespace BoardTower.Game.Application
     public sealed class EventResultVO
     {
         public readonly bool isBelt;
+        public readonly int gemNum;
 
-        public EventResultVO(bool isBelt)
+        public EventResultVO(bool isBelt, int gemNum)
         {
             this.isBelt = isBelt;
+            this.gemNum = gemNum;
         }
     }
 }

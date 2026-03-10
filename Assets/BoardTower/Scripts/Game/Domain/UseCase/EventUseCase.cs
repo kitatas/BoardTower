@@ -36,7 +36,8 @@ namespace BoardTower.Game.Domain.UseCase
             });
 
             return new EventResultVO(
-                squareEvent.type.IsBeltEvent()
+                squareEvent.type.IsBeltEvent(),
+                squareEvent.type == SquareEventType.Gem ? 1 : 0
             );
         }
 
