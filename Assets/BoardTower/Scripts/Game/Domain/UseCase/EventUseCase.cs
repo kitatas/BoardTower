@@ -1,4 +1,5 @@
 using System.Threading;
+using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Ports;
@@ -23,22 +24,20 @@ namespace BoardTower.Game.Domain.UseCase
             _squareEventRepository = squareEventRepository;
         }
 
-        public async UniTask<bool> ApplyEventAsync(CancellationToken token)
+        public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
-            if (squareEvent.type.IsBeltEvent())
+            await (squareEvent.type switch
             {
-                await BeltAsync(squareEvent.type, token);
-                return true; // 移動後の SquareEvent 実行
-            }
+                SquareEventType.Empty => UniTask.Yield(token),
+                SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
+                var type when type.IsBeltEvent() => BeltAsync(squareEvent.type, token),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
+            });
 
-            if (squareEvent.type.IsOverrideEmptyEvent())
-            {
-                await OverrideSquareEventAsync(index, SquareEventType.Empty, token);
-                return false;
-            }
-
-            return false;
+            return new EventResultVO(
+                squareEvent.type.IsBeltEvent()
+            );
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)

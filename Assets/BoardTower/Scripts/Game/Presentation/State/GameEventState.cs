@@ -18,8 +18,12 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            var isRetry = await _eventUseCase.ApplyEventAsync(token);
-            return isRetry ? state : GameState.Input;
+            var result = await _eventUseCase.ApplyEventAsync(token);
+
+            // Belt 系であれば、移動後の SquareEvent 実行
+            if (result.isBelt) return state;
+
+            return GameState.Input;
         }
     }
 }

@@ -186,4 +186,14 @@ namespace BoardTower.Game.Application
             }
         }
     }
+
+    public sealed class EventResultVO
+    {
+        public readonly bool isBelt;
+
+        public EventResultVO(bool isBelt)
+        {
+            this.isBelt = isBelt;
+        }
+    }
 }
