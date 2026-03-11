@@ -29,8 +29,8 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask EnterAsync(CancellationToken token)
         {
-            await _boardUseCase.FadeAsync(Fade.In, token);
             await _boardUseCase.BuildSquaresAsync(token);
+            await _boardUseCase.FadeAsync(Fade.In, token);
             await _chessmenUseCase.FadeAsync(Fade.In, token);
         }
 
