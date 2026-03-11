@@ -66,10 +66,14 @@ namespace BoardTower.Game.Domain.UseCase
             await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
         }
 
-        public async UniTask MoveAsync(CancellationToken token)
+        public async UniTask InputAsync(CancellationToken token)
         {
             var clickSquare = await _movement.FirstAsync(cancellationToken: token);
             _chessmenEntity.Set(clickSquare.square);
+        }
+
+        public async UniTask MoveAsync(CancellationToken token)
+        {
             await _movementPorts.chessmenMovementPublisher.PublishAsync(_chessmenEntity.movement, token);
         }
 
