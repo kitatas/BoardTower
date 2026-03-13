@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.DataStore;
+using Cysharp.Text;
 using FastEnumUtility;
 using MessagePack;
 using MessagePack.Resolvers;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 
 namespace BoardTower.Editor
@@ -24,7 +26,7 @@ namespace BoardTower.Editor
             MessagePackSerializer.DefaultOptions = options;
 
             var databaseBuilder = new DatabaseBuilder();
-            databaseBuilder.Append(GetBoardPatternMaster());
+            databaseBuilder.Append(DeserializeJson<BoardPatternMaster>("board_pattern"));
             databaseBuilder.Append(GetChessmenMovementRuleMaster());
 
             var path = "Assets/Externals/Binary/MasterMemory.bytes";
@@ -38,46 +40,10 @@ namespace BoardTower.Editor
             AssetDatabase.Refresh();
         }
 
-        private static IEnumerable<BoardPatternMaster> GetBoardPatternMaster()
+        private static List<T> DeserializeJson<T>(string fileName)
         {
-            return new[]
-            {
-                new BoardPatternMaster(1, new[]
-                {
-                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                }),
-                new BoardPatternMaster(2,new[]
-                {
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(),
-                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
-                }),
-                new BoardPatternMaster(3, new[]
-                {
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                }),
-                new BoardPatternMaster(4, new[]
-                {
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                    SquareEventType.Empty.ToInt32(), SquareEventType.Block.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                }),
-                // new BoardPatternMaster(5, new[]
-                // {
-                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                //     SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(), SquareEventType.Empty.ToInt32(),
-                // }),
-            };
+            var json = File.ReadAllText(ZString.Format("Master/Jsons/{0}.json", fileName));
+            return JsonConvert.DeserializeObject<List<T>>(json);
         }
 
         private static IEnumerable<ChessmenMovementRuleMaster> GetChessmenMovementRuleMaster()
