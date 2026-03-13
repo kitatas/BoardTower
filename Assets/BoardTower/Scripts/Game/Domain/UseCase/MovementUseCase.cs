@@ -21,6 +21,8 @@ namespace BoardTower.Game.Domain.UseCase
         private readonly ChessmenMovementRepository _chessmenMovementRepository;
         private readonly Subject<ClickSquareVO> _movement;
 
+        private HighlightSquareVO[] _lastHighlights;
+
         public MovementUseCase(BoardEntity boardEntity, ChessmenEntity chessmenEntity, GameStateEntity gameStateEntity,
             MovementPorts movementPorts, ChessmenMovementRepository chessmenMovementRepository)
         {
@@ -30,6 +32,7 @@ namespace BoardTower.Game.Domain.UseCase
             _movementPorts = movementPorts;
             _chessmenMovementRepository = chessmenMovementRepository;
             _movement = new Subject<ClickSquareVO>();
+            _lastHighlights = Array.Empty<HighlightSquareVO>();
         }
 
         public IAsyncSubscriber<HighlightSquareVO[]> highlights => _movementPorts.highlightsSubscriber;
@@ -43,6 +46,7 @@ namespace BoardTower.Game.Domain.UseCase
                 .ToArray();
 
             await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
+            _lastHighlights = highlightVos;
         }
 
         public async UniTask HandleClickAsync(ClickSquareVO clickSquare, CancellationToken token)
@@ -50,19 +54,19 @@ namespace BoardTower.Game.Domain.UseCase
             // GameState.Input 以外は処理させない
             if (!_gameStateEntity.IsEqual(GameState.Input)) return;
 
+            // 移動可能なマスが更新されていない場合は処理させない
+            if (_lastHighlights.Length == 0) return;
+
             // 移動可能範囲外であれば処理させない
-            var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
-            var squares = BoardHelper.GetMovableSquares(_chessmenEntity.square, rule)
-                .Where(x => _boardEntity.IsMovable(x))
-                .ToList();
-            if (!squares.Any(x => x.IsEqual(clickSquare.square))) return;
+            if (!_lastHighlights.Any(x => x.square.IsEqual(clickSquare.square))) return;
 
             _movement?.OnNext(clickSquare);
 
-            var highlightVos = squares
-                .Select(x => new HighlightSquareVO(x, HighlightSquareType.Default))
+            var highlightVos = _lastHighlights
+                .Select(x => new HighlightSquareVO(x.square, HighlightSquareType.Default))
                 .ToArray();
 
+            _lastHighlights = Array.Empty<HighlightSquareVO>();
             await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
         }
 
