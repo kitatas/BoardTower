@@ -31,13 +31,15 @@ namespace BoardTower.Game.Domain.UseCase
             {
                 SquareEventType.Empty => UniTask.Yield(token),
                 SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
+                SquareEventType.Ply => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 var type when type.IsBeltEvent() => BeltAsync(squareEvent.type, token),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
 
             return new EventResultVO(
                 squareEvent.type.IsBeltEvent(),
-                squareEvent.type == SquareEventType.Gem ? 1 : 0
+                squareEvent.type == SquareEventType.Gem ? 1 : 0,
+                squareEvent.type == SquareEventType.Ply ? 1 : 0
             );
         }
 

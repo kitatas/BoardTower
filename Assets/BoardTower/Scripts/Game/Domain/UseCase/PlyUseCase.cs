@@ -24,9 +24,9 @@ namespace BoardTower.Game.Domain.UseCase
             _ply.Value = _plyEntity.value;
         }
 
-        public void Increase()
+        public void Add(int value)
         {
-            _plyEntity.Add(1);
+            _plyEntity.Add(value);
             _ply.Value = _plyEntity.value;
         }
 

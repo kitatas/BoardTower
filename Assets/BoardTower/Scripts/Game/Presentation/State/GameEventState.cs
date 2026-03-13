@@ -9,11 +9,13 @@ namespace BoardTower.Game.Presentation.State
     {
         private readonly EventUseCase _eventUseCase;
         private readonly GemUseCase _gemUseCase;
+        private readonly PlyUseCase _plyUseCase;
 
-        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase)
+        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, PlyUseCase plyUseCase)
         {
             _eventUseCase = eventUseCase;
             _gemUseCase = gemUseCase;
+            _plyUseCase = plyUseCase;
         }
 
         public override GameState state => GameState.Event;
@@ -27,6 +29,7 @@ namespace BoardTower.Game.Presentation.State
 
             // TODO: 獲得数の算出
             if (result.gemNum > 0) _gemUseCase.Add(result.gemNum);
+            if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);
 
             return GameState.Input;
         }

@@ -191,11 +191,13 @@ namespace BoardTower.Game.Application
     {
         public readonly bool isBelt;
         public readonly int gemNum;
+        public readonly int plyNum;
 
-        public EventResultVO(bool isBelt, int gemNum)
+        public EventResultVO(bool isBelt, int gemNum, int plyNum)
         {
             this.isBelt = isBelt;
             this.gemNum = gemNum;
+            this.plyNum = plyNum;
         }
     }
 }
