@@ -31,7 +31,7 @@ namespace BoardTower.Game.Presentation.State
             if (result.gemNum > 0) _gemUseCase.Add(result.gemNum);
             if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);
 
-            return GameState.Input;
+            return _plyUseCase.IsZero() ? GameState.Judge : GameState.Input;
         }
     }
 }

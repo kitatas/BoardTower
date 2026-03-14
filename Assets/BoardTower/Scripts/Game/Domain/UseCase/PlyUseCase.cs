@@ -36,6 +36,8 @@ namespace BoardTower.Game.Domain.UseCase
             _ply.Value = _plyEntity.value;
         }
 
+        public bool IsZero() => _plyEntity.value == 0;
+
         void IDisposable.Dispose()
         {
             _ply?.Dispose();
