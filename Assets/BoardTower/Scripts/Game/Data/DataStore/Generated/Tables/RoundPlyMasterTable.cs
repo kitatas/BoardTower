@@ -10,16 +10,16 @@ using System;
 
 namespace BoardTower.Game.Data.DataStore.Tables
 {
-   public sealed partial class BoardPatternMasterTable : TableBase<BoardPatternMaster>, ITableUniqueValidate
+   public sealed partial class RoundPlyMasterTable : TableBase<RoundPlyMaster>, ITableUniqueValidate
    {
-        public Func<BoardPatternMaster, int> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<BoardPatternMaster, int> primaryIndexSelector;
+        public Func<RoundPlyMaster, int> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<RoundPlyMaster, int> primaryIndexSelector;
 
 
-        public BoardPatternMasterTable(BoardPatternMaster[] sortedData)
+        public RoundPlyMasterTable(RoundPlyMaster[] sortedData)
             : base(sortedData)
         {
-            this.primaryIndexSelector = x => x.Id;
+            this.primaryIndexSelector = x => x.Round;
             OnAfterConstruct();
         }
 
@@ -27,14 +27,14 @@ namespace BoardTower.Game.Data.DataStore.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public BoardPatternMaster FindById(int key)
+        public RoundPlyMaster FindByRound(int key)
         {
             var lo = 0;
             var hi = data.Length - 1;
             while (lo <= hi)
             {
                 var mid = (int)(((uint)hi + (uint)lo) >> 1);
-                var selected = data[mid].Id;
+                var selected = data[mid].Round;
                 var found = (selected < key) ? -1 : (selected > key) ? 1 : 0;
                 if (found == 0) { return data[mid]; }
                 if (found < 0) { lo = mid + 1; }
@@ -44,14 +44,14 @@ namespace BoardTower.Game.Data.DataStore.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindById(int key, out BoardPatternMaster result)
+        public bool TryFindByRound(int key, out RoundPlyMaster result)
         {
             var lo = 0;
             var hi = data.Length - 1;
             while (lo <= hi)
             {
                 var mid = (int)(((uint)hi + (uint)lo) >> 1);
-                var selected = data[mid].Id;
+                var selected = data[mid].Round;
                 var found = (selected < key) ? -1 : (selected > key) ? 1 : 0;
                 if (found == 0) { result = data[mid]; return true; }
                 if (found < 0) { lo = mid + 1; }
@@ -61,12 +61,12 @@ namespace BoardTower.Game.Data.DataStore.Tables
             return false;
         }
 
-        public BoardPatternMaster FindClosestById(int key, bool selectLower = true)
+        public RoundPlyMaster FindClosestByRound(int key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, key, selectLower);
         }
 
-        public RangeView<BoardPatternMaster> FindRangeById(int min, int max, bool ascendant = true)
+        public RangeView<RoundPlyMaster> FindRangeByRound(int min, int max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, min, max, ascendant);
         }
@@ -76,7 +76,7 @@ namespace BoardTower.Game.Data.DataStore.Tables
         {
 #if !DISABLE_MASTERMEMORY_VALIDATOR
 
-            ValidateUniqueCore(data, primaryIndexSelector, "Id", resultSet);       
+            ValidateUniqueCore(data, primaryIndexSelector, "Round", resultSet);       
 
 #endif
         }
@@ -85,15 +85,15 @@ namespace BoardTower.Game.Data.DataStore.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(BoardPatternMaster), typeof(BoardPatternMasterTable), "BoardPatternMaster",
+            return new MasterMemory.Meta.MetaTable(typeof(RoundPlyMaster), typeof(RoundPlyMasterTable), "RoundPlyMaster",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(BoardPatternMaster).GetProperty("Id")),
-                    new MasterMemory.Meta.MetaProperty(typeof(BoardPatternMaster).GetProperty("Types")),
+                    new MasterMemory.Meta.MetaProperty(typeof(RoundPlyMaster).GetProperty("Round")),
+                    new MasterMemory.Meta.MetaProperty(typeof(RoundPlyMaster).GetProperty("PlyCount")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(BoardPatternMaster).GetProperty("Id"),
+                        typeof(RoundPlyMaster).GetProperty("Round"),
                     }, true, true, System.Collections.Generic.Comparer<int>.Default),
                 });
         }

@@ -15,14 +15,17 @@ namespace BoardTower.Game.Data.DataStore
    {
         public BoardPatternMasterTable BoardPatternMasterTable { get; private set; }
         public ChessmenMovementRuleMasterTable ChessmenMovementRuleMasterTable { get; private set; }
+        public RoundPlyMasterTable RoundPlyMasterTable { get; private set; }
 
         public MemoryDatabase(
             BoardPatternMasterTable BoardPatternMasterTable,
-            ChessmenMovementRuleMasterTable ChessmenMovementRuleMasterTable
+            ChessmenMovementRuleMasterTable ChessmenMovementRuleMasterTable,
+            RoundPlyMasterTable RoundPlyMasterTable
         )
         {
             this.BoardPatternMasterTable = BoardPatternMasterTable;
             this.ChessmenMovementRuleMasterTable = ChessmenMovementRuleMasterTable;
+            this.RoundPlyMasterTable = RoundPlyMasterTable;
         }
 
         public MemoryDatabase(byte[] databaseBinary, bool internString = true, MessagePack.IFormatterResolver formatterResolver = null, int maxDegreeOfParallelism = 1)
@@ -46,6 +49,7 @@ namespace BoardTower.Game.Data.DataStore
         {
             this.BoardPatternMasterTable = ExtractTableData<BoardPatternMaster, BoardPatternMasterTable>(header, databaseBinary, options, xs => new BoardPatternMasterTable(xs));
             this.ChessmenMovementRuleMasterTable = ExtractTableData<ChessmenMovementRuleMaster, ChessmenMovementRuleMasterTable>(header, databaseBinary, options, xs => new ChessmenMovementRuleMasterTable(xs));
+            this.RoundPlyMasterTable = ExtractTableData<RoundPlyMaster, RoundPlyMasterTable>(header, databaseBinary, options, xs => new RoundPlyMasterTable(xs));
         }
 
         void InitParallel(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
@@ -54,6 +58,7 @@ namespace BoardTower.Game.Data.DataStore
             {
                 () => this.BoardPatternMasterTable = ExtractTableData<BoardPatternMaster, BoardPatternMasterTable>(header, databaseBinary, options, xs => new BoardPatternMasterTable(xs)),
                 () => this.ChessmenMovementRuleMasterTable = ExtractTableData<ChessmenMovementRuleMaster, ChessmenMovementRuleMasterTable>(header, databaseBinary, options, xs => new ChessmenMovementRuleMasterTable(xs)),
+                () => this.RoundPlyMasterTable = ExtractTableData<RoundPlyMaster, RoundPlyMasterTable>(header, databaseBinary, options, xs => new RoundPlyMasterTable(xs)),
             };
             
             System.Threading.Tasks.Parallel.Invoke(new System.Threading.Tasks.ParallelOptions
@@ -72,6 +77,7 @@ namespace BoardTower.Game.Data.DataStore
             var builder = new DatabaseBuilder();
             builder.Append(this.BoardPatternMasterTable.GetRawDataUnsafe());
             builder.Append(this.ChessmenMovementRuleMasterTable.GetRawDataUnsafe());
+            builder.Append(this.RoundPlyMasterTable.GetRawDataUnsafe());
             return builder;
         }
 
@@ -80,6 +86,7 @@ namespace BoardTower.Game.Data.DataStore
             var builder = new DatabaseBuilder(resolver);
             builder.Append(this.BoardPatternMasterTable.GetRawDataUnsafe());
             builder.Append(this.ChessmenMovementRuleMasterTable.GetRawDataUnsafe());
+            builder.Append(this.RoundPlyMasterTable.GetRawDataUnsafe());
             return builder;
         }
 
@@ -92,12 +99,15 @@ namespace BoardTower.Game.Data.DataStore
             {
                 BoardPatternMasterTable,
                 ChessmenMovementRuleMasterTable,
+                RoundPlyMasterTable,
             });
 
             ((ITableUniqueValidate)BoardPatternMasterTable).ValidateUnique(result);
             ValidateTable(BoardPatternMasterTable.All, database, "Id", BoardPatternMasterTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)ChessmenMovementRuleMasterTable).ValidateUnique(result);
             ValidateTable(ChessmenMovementRuleMasterTable.All, database, "Type", ChessmenMovementRuleMasterTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)RoundPlyMasterTable).ValidateUnique(result);
+            ValidateTable(RoundPlyMasterTable.All, database, "Round", RoundPlyMasterTable.PrimaryKeySelector, result);
 
             return result;
         }
@@ -114,6 +124,8 @@ namespace BoardTower.Game.Data.DataStore
                     return db.BoardPatternMasterTable;
                 case "ChessmenMovementRuleMaster":
                     return db.ChessmenMovementRuleMasterTable;
+                case "RoundPlyMaster":
+                    return db.RoundPlyMasterTable;
                 
                 default:
                     return null;
@@ -129,6 +141,7 @@ namespace BoardTower.Game.Data.DataStore
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
             dict.Add("BoardPatternMaster", BoardTower.Game.Data.DataStore.Tables.BoardPatternMasterTable.CreateMetaTable());
             dict.Add("ChessmenMovementRuleMaster", BoardTower.Game.Data.DataStore.Tables.ChessmenMovementRuleMasterTable.CreateMetaTable());
+            dict.Add("RoundPlyMaster", BoardTower.Game.Data.DataStore.Tables.RoundPlyMasterTable.CreateMetaTable());
 
             metaTable = new MasterMemory.Meta.MetaDatabase(dict);
             return metaTable;
