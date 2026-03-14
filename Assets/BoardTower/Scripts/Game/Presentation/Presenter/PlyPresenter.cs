@@ -26,8 +26,6 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Pairwise()
                 .Subscribe(_plyFacade.Render)
                 .AddTo(_disposable);
-
-            _plyUseCase.Init();
         }
 
         void IDisposable.Dispose()

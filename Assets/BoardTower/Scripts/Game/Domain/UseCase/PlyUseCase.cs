@@ -1,5 +1,6 @@
 using System;
 using BoardTower.Game.Data.Entity;
+using BoardTower.Game.Domain.Repository;
 using R3;
 
 namespace BoardTower.Game.Domain.UseCase
@@ -7,20 +8,24 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class PlyUseCase : IDisposable
     {
         private readonly PlyEntity _plyEntity;
+        private readonly RoundEntity _roundEntity;
+        private readonly RoundPlyRepository _roundPlyRepository;
         private readonly ReactiveProperty<int> _ply;
 
-        public PlyUseCase(PlyEntity plyEntity)
+        public PlyUseCase(PlyEntity plyEntity, RoundEntity roundEntity, RoundPlyRepository roundPlyRepository)
         {
             _plyEntity = plyEntity;
+            _roundEntity = roundEntity;
+            _roundPlyRepository = roundPlyRepository;
             _ply = new ReactiveProperty<int>(0);
         }
 
         public Observable<int> ply => _ply;
 
-        public void Init()
+        public void SetUp()
         {
-            // TODO: 仮初期値
-            _plyEntity.Set(10);
+            var roundPly = _roundPlyRepository.Find(_roundEntity.value);
+            _plyEntity.Set(roundPly.plyCount);
             _ply.Value = _plyEntity.value;
         }
 

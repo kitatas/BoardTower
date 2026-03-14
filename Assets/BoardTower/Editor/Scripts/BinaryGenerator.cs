@@ -27,6 +27,7 @@ namespace BoardTower.Editor
 
             var databaseBuilder = new DatabaseBuilder();
             databaseBuilder.Append(DeserializeJson<BoardPatternMaster>("board_pattern"));
+            databaseBuilder.Append(DeserializeJson<RoundPlyMaster>("round_ply"));
             databaseBuilder.Append(GetChessmenMovementRuleMaster());
 
             var path = "Assets/Externals/Binary/MasterMemory.bytes";
