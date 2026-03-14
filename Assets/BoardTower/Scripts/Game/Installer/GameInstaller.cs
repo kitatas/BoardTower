@@ -45,6 +45,7 @@ namespace BoardTower.Game.Installer
             // Repository
             builder.Register<BoardPatternRepository>(Lifetime.Scoped);
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
+            builder.Register<RoundPlyRepository>(Lifetime.Scoped);
             builder.Register<SquareEventRepository>(Lifetime.Scoped);
 
             // UseCase

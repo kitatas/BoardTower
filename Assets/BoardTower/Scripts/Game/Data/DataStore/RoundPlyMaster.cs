@@ -1,3 +1,4 @@
+using BoardTower.Game.Application;
 using MasterMemory;
 using MessagePack;
 
@@ -14,5 +15,7 @@ namespace BoardTower.Game.Data.DataStore
 
         [PrimaryKey(keyOrder: 0)] public int Round { get; }
         public int PlyCount { get; }
+
+        public RoundPlyVO ToVO() => new(Round, PlyCount);
     }
 }

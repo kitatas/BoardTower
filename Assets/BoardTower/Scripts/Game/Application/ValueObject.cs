@@ -200,4 +200,16 @@ namespace BoardTower.Game.Application
             this.plyNum = plyNum;
         }
     }
+
+    public sealed class RoundPlyVO
+    {
+        public readonly int round;
+        public readonly int plyCount;
+
+        public RoundPlyVO(int round, int plyCount)
+        {
+            this.round = round;
+            this.plyCount = plyCount;
+        }
+    }
 }
