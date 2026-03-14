@@ -10,11 +10,13 @@ namespace BoardTower.Game.Presentation.State
     {
         private readonly BoardUseCase _boardUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
+        private readonly RoundUseCase _roundUseCase;
 
-        public GameSetUpState(BoardUseCase boardUseCase, ChessmenUseCase chessmenUseCase)
+        public GameSetUpState(BoardUseCase boardUseCase, ChessmenUseCase chessmenUseCase, RoundUseCase roundUseCase)
         {
             _boardUseCase = boardUseCase;
             _chessmenUseCase = chessmenUseCase;
+            _roundUseCase = roundUseCase;
         }
 
         public override GameState state => GameState.SetUp;
@@ -32,6 +34,7 @@ namespace BoardTower.Game.Presentation.State
             await _boardUseCase.BuildSquaresAsync(token);
             await _boardUseCase.FadeAsync(Fade.In, token);
             await _chessmenUseCase.FadeAsync(Fade.In, token);
+            _roundUseCase.Increment();
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
