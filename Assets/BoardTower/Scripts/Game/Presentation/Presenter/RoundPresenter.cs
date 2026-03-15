@@ -9,12 +9,14 @@ namespace BoardTower.Game.Presentation.Presenter
     public sealed class RoundPresenter : IStartable, IDisposable
     {
         private readonly RoundUseCase _roundUseCase;
+        private readonly RoundClearUseCase _roundClearUseCase;
         private readonly RoundFacade _roundFacade;
         private readonly CompositeDisposable _disposable;
 
-        public RoundPresenter(RoundUseCase roundUseCase, RoundFacade roundFacade)
+        public RoundPresenter(RoundUseCase roundUseCase, RoundClearUseCase roundClearUseCase, RoundFacade roundFacade)
         {
             _roundUseCase = roundUseCase;
+            _roundClearUseCase = roundClearUseCase;
             _roundFacade = roundFacade;
             _disposable = new CompositeDisposable();
         }
@@ -25,6 +27,12 @@ namespace BoardTower.Game.Presentation.Presenter
                 .DistinctUntilChanged()
                 .Pairwise()
                 .Subscribe(_roundFacade.Render)
+                .AddTo(_disposable);
+
+            _roundUseCase.round
+                .Skip(1)
+                .DistinctUntilChanged()
+                .Subscribe(_roundClearUseCase.SetUp)
                 .AddTo(_disposable);
 
             _roundUseCase.Init();
