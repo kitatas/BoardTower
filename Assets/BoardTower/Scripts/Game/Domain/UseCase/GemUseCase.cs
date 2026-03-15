@@ -17,9 +17,9 @@ namespace BoardTower.Game.Domain.UseCase
 
         public Observable<int> gem => _gem;
 
-        public void Init()
+        public void SetUp()
         {
-            _gemEntity.Set(0);
+            _gemEntity.Reset();
             _gem.Value = _gemEntity.value;
         }
 

@@ -26,8 +26,6 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Pairwise()
                 .Subscribe(_gemFacade.Render)
                 .AddTo(_disposable);
-
-            _gemUseCase.Init();
         }
 
         void IDisposable.Dispose()
