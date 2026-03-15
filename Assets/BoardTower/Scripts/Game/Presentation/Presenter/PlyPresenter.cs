@@ -26,6 +26,12 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Pairwise()
                 .Subscribe(_plyFacade.Render)
                 .AddTo(_disposable);
+
+            _plyUseCase.plyMax
+                .DistinctUntilChanged()
+                .Pairwise()
+                .Subscribe(_plyFacade.RenderMax)
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

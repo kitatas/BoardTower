@@ -16,5 +16,10 @@ namespace BoardTower.Game.Presentation.Facade
         {
             _plyView.Render(pair.prev, pair.current, UiConfig.DURATION);
         }
+
+        public void RenderMax((int prev, int current) pair)
+        {
+            _plyView.RenderMax(pair.prev, pair.current, UiConfig.DURATION);
+        }
     }
 }
