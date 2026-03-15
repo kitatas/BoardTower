@@ -8,16 +8,14 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class RoundClearUseCase : IDisposable
     {
         private readonly GemEntity _gemEntity;
-        private readonly RoundEntity _roundEntity;
         private readonly RoundClearGemEntity  _roundClearGemEntity;
         private readonly RoundClearRepository _roundClearRepository;
         private readonly ReactiveProperty<int> _roundClear;
 
-        public RoundClearUseCase(GemEntity gemEntity, RoundEntity roundEntity, RoundClearGemEntity roundClearGemEntity,
+        public RoundClearUseCase(GemEntity gemEntity, RoundClearGemEntity roundClearGemEntity,
             RoundClearRepository roundClearRepository)
         {
             _gemEntity = gemEntity;
-            _roundEntity = roundEntity;
             _roundClearGemEntity = roundClearGemEntity;
             _roundClearRepository = roundClearRepository;
             _roundClear = new ReactiveProperty<int>(0);
@@ -34,8 +32,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public bool IsClear()
         {
-            var vo = _roundClearRepository.Find(_roundEntity.value);
-            return vo.gemCount <= _gemEntity.value;
+            return _roundClearGemEntity.value <= _gemEntity.value;
         }
 
         void IDisposable.Dispose()
