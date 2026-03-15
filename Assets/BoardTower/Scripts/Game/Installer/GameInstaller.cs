@@ -34,6 +34,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GemEntity>(Lifetime.Scoped);
             builder.Register<PlyEntity>(Lifetime.Scoped);
             builder.Register<RoundEntity>(Lifetime.Scoped);
+            builder.Register<RoundClearGemEntity>(Lifetime.Scoped);
 
             // Ports
             builder.Register<BoardPorts>(Lifetime.Scoped);
@@ -76,6 +77,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<GemPresenter>();
                 entryPoints.Add<PlyPresenter>();
                 entryPoints.Add<RoundPresenter>();
+                entryPoints.Add<RoundClearPresenter>();
             });
 
             // Facade
@@ -84,6 +86,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
+            builder.Register<RoundClearFacade>(Lifetime.Scoped);
 
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
@@ -91,6 +94,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<GemView>();
             builder.RegisterComponentInHierarchy<PlyView>();
             builder.RegisterComponentInHierarchy<RoundView>();
+            builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
         }
     }
 }
