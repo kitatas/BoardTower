@@ -7,9 +7,9 @@ namespace BoardTower.Game.Data.DataStore
     public sealed class SquareEventData : ScriptableObject
     {
         [SerializeField] private SquareEventType squareEventType = default;
-        [SerializeField] private Sprite sprite = default;
+        [SerializeField] private GameObject eventObject = default;
 
         public SquareEventType type => squareEventType;
-        public SquareEventVO ToVO() => new(type, sprite);
+        public SquareEventVO ToVO() => new(type, eventObject);
     }
 }

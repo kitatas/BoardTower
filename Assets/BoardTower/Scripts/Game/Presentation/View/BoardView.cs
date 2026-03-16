@@ -40,7 +40,7 @@ namespace BoardTower.Game.Presentation.View
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                var tween = squareViews[i].RenderEvent(events[i].sprite, duration, 0.0f);
+                var tween = squareViews[i].RenderEvent(events[i].eventObject, duration, 0.0f);
                 if (tween != null) sequence.Join(tween);
             }
 

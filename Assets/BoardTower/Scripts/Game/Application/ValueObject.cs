@@ -127,12 +127,12 @@ namespace BoardTower.Game.Application
     public sealed class EventVO
     {
         public readonly int index;
-        public readonly Sprite sprite;
+        public readonly GameObject eventObject;
 
-        public EventVO(int index, Sprite sprite)
+        public EventVO(int index, GameObject eventObject)
         {
             this.index = index;
-            this.sprite = sprite;
+            this.eventObject = eventObject;
         }
     }
 
@@ -149,15 +149,15 @@ namespace BoardTower.Game.Application
     public sealed class SquareEventVO
     {
         public readonly SquareEventType type;
-        public readonly Sprite sprite;
+        public readonly GameObject eventObject;
 
-        public SquareEventVO(SquareEventType type, Sprite sprite)
+        public SquareEventVO(SquareEventType type, GameObject eventObject)
         {
             if (type is SquareEventType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
 
             this.type = type;
-            this.sprite = sprite;
+            this.eventObject = eventObject;
         }
     }
 
