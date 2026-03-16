@@ -12,16 +12,11 @@ namespace BoardTower.Game.Domain.UseCase
         public RoundUseCase(RoundEntity roundEntity)
         {
             _roundEntity = roundEntity;
-            _round = new ReactiveProperty<int>(0);
+            _roundEntity.Set(0);
+            _round = new ReactiveProperty<int>(_roundEntity.value);
         }
 
         public Observable<int> round => _round;
-
-        public void Init()
-        {
-            _roundEntity.Set(0);
-            _round.Value = _roundEntity.value;
-        }
 
         public void Increment()
         {

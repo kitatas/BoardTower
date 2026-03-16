@@ -46,8 +46,6 @@ namespace BoardTower.Game.Presentation.Presenter
                     if (x == 1) _roundFacade.RenderMax((0, RoundConfig.MAX_NUM));
                 })
                 .AddTo(_disposable);
-
-            _roundUseCase.Init();
         }
 
         void IDisposable.Dispose()
