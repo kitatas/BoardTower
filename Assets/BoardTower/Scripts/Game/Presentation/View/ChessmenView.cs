@@ -25,10 +25,32 @@ namespace BoardTower.Game.Presentation.View
         public Tween Move(SquareVO square, float duration)
         {
             return DOTween.Sequence()
+                .Append(MoveXZ(square, duration))
+                .Join(MoveY(duration))
+                .SetLink(gameObject);
+        }
+
+        private Tween MoveXZ(SquareVO square, float duration)
+        {
+            return DOTween.Sequence()
                 .Append(transform
-                    .DOLocalMoveX(square.localX, duration))
+                    .DOLocalMoveX(square.localX, duration)
+                    .SetEase(Ease.Linear))
                 .Join(transform
-                    .DOLocalMoveZ(square.localZ, duration))
+                    .DOLocalMoveZ(square.localZ, duration)
+                    .SetEase(Ease.Linear))
+                .SetLink(gameObject);
+        }
+
+        private Tween MoveY(float duration)
+        {
+            return DOTween.Sequence()
+                .Append(transform
+                    .DOLocalMoveY(4.5f, duration / 2.0f)
+                    .SetEase(Ease.OutQuart))
+                .Append(transform
+                    .DOLocalMoveY(3.0f, duration / 2.0f)
+                    .SetEase(Ease.InQuart))
                 .SetLink(gameObject);
         }
     }
