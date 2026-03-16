@@ -124,18 +124,6 @@ namespace BoardTower.Game.Application
         }
     }
 
-    public sealed class EventVO
-    {
-        public readonly int index;
-        public readonly GameObject eventObject;
-
-        public EventVO(int index, GameObject eventObject)
-        {
-            this.index = index;
-            this.eventObject = eventObject;
-        }
-    }
-
     public sealed class ChessmenMovementVO
     {
         public readonly SquareVO square;
@@ -150,14 +138,16 @@ namespace BoardTower.Game.Application
     {
         public readonly SquareEventType type;
         public readonly GameObject eventObject;
+        public readonly bool isRotate;
 
-        public SquareEventVO(SquareEventType type, GameObject eventObject)
+        public SquareEventVO(SquareEventType type, GameObject eventObject, bool isRotate)
         {
             if (type is SquareEventType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
 
             this.type = type;
             this.eventObject = eventObject;
+            this.isRotate = isRotate;
         }
     }
 

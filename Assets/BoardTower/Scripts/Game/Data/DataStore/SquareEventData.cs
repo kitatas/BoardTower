@@ -8,8 +8,9 @@ namespace BoardTower.Game.Data.DataStore
     {
         [SerializeField] private SquareEventType squareEventType = default;
         [SerializeField] private GameObject eventObject = default;
+        [SerializeField] private bool isRotate = default;
 
         public SquareEventType type => squareEventType;
-        public SquareEventVO ToVO() => new(type, eventObject);
+        public SquareEventVO ToVO() => new(type, eventObject, isRotate);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using BoardTower.Game.Application;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -55,10 +56,10 @@ namespace BoardTower.Game.Presentation.View
             click?.Invoke();
         }
 
-        public Tween RenderEvent(GameObject eventObject, float duration, float delay)
+        public Tween RenderEvent(SquareEventVO squareEvent, float duration, float delay)
         {
             return squareEventObjectView
-                .Render(eventObject, duration, delay);
+                .Render(squareEvent, duration, delay);
         }
     }
 }

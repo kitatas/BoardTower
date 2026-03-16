@@ -34,8 +34,7 @@ namespace BoardTower.Game.Presentation.Facade
         public UniTask RenderEventAsync(EventSquareVO[] squares, CancellationToken token)
         {
             var events = squares
-                .Select(x => new EventVO(BoardHelper.ToIndex(x.square.file, x.square.rank), x.squareEvent.eventObject))
-                .Distinct()
+                .Select(x => x.squareEvent)
                 .ToArray();
 
             return _boardView.RenderEventSquareAll(events, BoardConfig.EVENT_DURATION)
