@@ -28,12 +28,6 @@ namespace BoardTower.Game.Domain.UseCase
         public IAsyncSubscriber<BoardTransitionVO> transition => _boardPorts.boardTransitionSubscriber;
         public IAsyncSubscriber<EventSquareVO[]> eventSquares => _boardPorts.eventSquaresSubscriber;
 
-        public async UniTask InitAsync(CancellationToken token)
-        {
-            await _boardPorts.boardTransitionPublisher
-                .PublishAsync(new BoardTransitionVO(Fade.Out), token);
-        }
-
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
             await _boardPorts.boardTransitionPublisher

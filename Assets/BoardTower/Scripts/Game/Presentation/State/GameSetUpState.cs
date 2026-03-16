@@ -23,18 +23,21 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            await (
-                _boardUseCase.InitAsync(token),
-                _chessmenUseCase.InitAsync(token)
-            );
+            _chessmenUseCase.Init();
+            await UniTask.Yield(token);
         }
 
         public override async UniTask EnterAsync(CancellationToken token)
         {
+            await (
+                _boardUseCase.FadeAsync(Fade.Out, token),
+                _chessmenUseCase.FadeAsync(Fade.Out, token)
+            );
+            _roundUseCase.Increment();
+
             await _boardUseCase.BuildSquaresAsync(token);
             await _boardUseCase.FadeAsync(Fade.In, token);
             await _chessmenUseCase.FadeAsync(Fade.In, token);
-            _roundUseCase.Increment();
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
