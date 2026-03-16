@@ -95,6 +95,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<PlyView>();
             builder.RegisterComponentInHierarchy<RoundView>();
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
+            builder.RegisterComponentInHierarchy<RoundMaxNumView>();
         }
     }
 }

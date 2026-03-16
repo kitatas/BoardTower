@@ -1,4 +1,5 @@
 using System;
+using BoardTower.Game.Application;
 using BoardTower.Game.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
 using R3;
@@ -42,6 +43,7 @@ namespace BoardTower.Game.Presentation.Presenter
                     _gemUseCase.SetUp();
                     _plyUseCase.SetUp(x);
                     _roundClearUseCase.SetUp(x);
+                    if (x == 1) _roundFacade.RenderMax((0, RoundConfig.MAX_NUM));
                 })
                 .AddTo(_disposable);
 

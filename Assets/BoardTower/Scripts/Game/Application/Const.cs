@@ -26,4 +26,9 @@ namespace BoardTower.Game.Application
         public const float FADE_DURATION = 0.5f;
         public const float MOVE_DURATION = 0.5f;
     }
+
+    public sealed class RoundConfig
+    {
+        public const int MAX_NUM = 7;
+    }
 }
