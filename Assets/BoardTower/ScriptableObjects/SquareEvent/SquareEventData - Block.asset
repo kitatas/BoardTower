@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SquareEventData - Block
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
   squareEventType: 6
-  sprite: {fileID: 1421941539, guid: a2b72c4d322fe4198951254e45355156, type: 3}
+  eventObject: {fileID: 4464428028628588283, guid: 7c6217b0fc1444bd3ab1c0f257608f2c, type: 3}
