@@ -9,7 +9,7 @@ namespace BoardTower.Game.Application
         public const int MAX_RANK = 8;
         public const int HALF_RANK = MAX_RANK / 2;
         public const float DELAY_RATE = 0.1f;
-        public const float FADE_DURATION = 0.5f;
+        public const float FADE_DURATION = 0.25f;
         public const float HIGHLIGHT_DURATION = 0.5f;
         public const float EVENT_DURATION = 0.0f;
         public const float EVENT_OBJECT_DURATION = 3.0f;
@@ -24,8 +24,8 @@ namespace BoardTower.Game.Application
 
     public sealed class ChessmenConfig
     {
-        public const float FADE_DURATION = 0.5f;
-        public const float MOVE_DURATION = 0.5f;
+        public const float FADE_DURATION = 0.25f;
+        public const float MOVE_DURATION = 0.25f;
     }
 
     public sealed class RoundConfig

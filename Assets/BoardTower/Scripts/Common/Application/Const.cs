@@ -22,6 +22,6 @@ namespace BoardTower.Common.Application
 
     public sealed class UiConfig
     {
-        public const float DURATION = 0.5f;
+        public const float DURATION = 0.25f;
     }
 }
