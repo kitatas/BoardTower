@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SquareEventData - BeltDown
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
   squareEventType: 3
-  sprite: {fileID: -407859999, guid: a2b72c4d322fe4198951254e45355156, type: 3}
+  eventObject: {fileID: 2000524449271152294, guid: f6ae50bb36fd549d4a3c7ed8dd212c7e, type: 3}
+  isRotate: 0
