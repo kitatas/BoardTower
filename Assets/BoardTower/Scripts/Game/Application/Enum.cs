@@ -45,6 +45,7 @@ namespace BoardTower.Game.Application
         Block = 6,
         Gem = 7,
         Ply = 8,
+        Collapse = 9,
     }
 
     public enum RotateType
