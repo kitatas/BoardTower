@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
   squareEventType: 5
   eventObject: {fileID: 2000524449271152294, guid: b965870337b3b40e298eca30212d4266, type: 3}
-  isRotate: 0
