@@ -38,10 +38,10 @@ namespace BoardTower.Game.Application
     {
         None = 0,
         Empty = 1,
-        BeltUp = 2,
+        BeltRight = 2,
         BeltDown = 3,
         BeltLeft = 4,
-        BeltRight = 5,
+        BeltUp = 5,
         Block = 6,
         Gem = 7,
         Ply = 8,

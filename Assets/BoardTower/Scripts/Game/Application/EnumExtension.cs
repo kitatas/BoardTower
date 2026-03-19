@@ -1,5 +1,6 @@
 using BoardTower.Common.Application;
 using FastEnumUtility;
+using UniEx;
 
 namespace BoardTower.Game.Application
 {
@@ -61,6 +62,19 @@ namespace BoardTower.Game.Application
                 RotateType.Angle270 => (file, 3 - rank),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_ROTATE),
             };
+        }
+
+        public static SquareEventType RotateBelt(this RotateType self, SquareEventType type)
+        {
+            if (!type.IsBeltEvent()) return type;
+
+            var t = type.ToInt32();
+            for (int i = 0; i < self.ToInt32() - 1; i++)
+            {
+                t.RepeatIncrement(SquareEventType.BeltRight.ToInt32(), SquareEventType.BeltUp.ToInt32());
+            }
+
+            return t.ToSquareEventType();
         }
     }
 }

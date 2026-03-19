@@ -171,7 +171,7 @@ namespace BoardTower.Game.Application
                     var (nx, ny) = rotate.RotateFileRank(file, rank);
                     var srcIndex = file * BoardConfig.HALF_FILE + rank;
                     var dstIndex = ny * BoardConfig.HALF_RANK + nx;
-                    this.types[dstIndex] = types[srcIndex].ToSquareEventType();
+                    this.types[dstIndex] = rotate.RotateBelt(types[srcIndex].ToSquareEventType());
                 }
             }
         }
