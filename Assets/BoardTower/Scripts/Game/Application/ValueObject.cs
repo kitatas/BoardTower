@@ -138,16 +138,14 @@ namespace BoardTower.Game.Application
     {
         public readonly SquareEventType type;
         public readonly GameObject eventObject;
-        public readonly bool isRotate;
 
-        public SquareEventVO(SquareEventType type, GameObject eventObject, bool isRotate)
+        public SquareEventVO(SquareEventType type, GameObject eventObject)
         {
             if (type is SquareEventType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
 
             this.type = type;
             this.eventObject = eventObject;
-            this.isRotate = isRotate;
         }
     }
 
