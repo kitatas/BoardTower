@@ -3,6 +3,21 @@ using Cysharp.Text;
 
 namespace BoardTower.Common.Application
 {
+    public sealed class LoadVO
+    {
+        public readonly SceneName sceneName;
+        public readonly LoadType loadType;
+
+        public LoadVO(SceneName sceneName, LoadType loadType)
+        {
+            if (sceneName is SceneName.None) throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_SCENE);
+            if (loadType is LoadType.None) throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_LOAD);
+
+            this.sceneName = sceneName;
+            this.loadType = loadType;
+        }
+    }
+
     public abstract class ExceptionVO : Exception
     {
         public ExceptionVO(string message) : base(message)

@@ -1,0 +1,19 @@
+{
+    "name": "Common.Presentation.Facade",
+    "rootNamespace": "",
+    "references": [
+        "GUID:193efd1822ac4de5ae719bcf6d254d69",
+        "GUID:824c6d93d7ea4ebbaa9f0bca87c573a2",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

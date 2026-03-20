@@ -6,6 +6,8 @@ namespace BoardTower.Common.Application
         public const string RETRY_MESSAGE = "Retry.";
         public const string QUIT_MESSAGE = "Exit this app.";
 
+        public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
+        public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
         public const string INVALID_CHESSMEN_MOVEMENT = "INVALID_CHESSMEN_MOVEMENT";
