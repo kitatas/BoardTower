@@ -21,7 +21,7 @@ namespace BoardTower.Game.Domain.UseCase
         public async UniTask FadeAsync(Fade fade, FinishType type, CancellationToken token)
         {
             await _finishPorts.finishPublisher
-                .PublishAsync(new FinishVO(fade, type), token);
+                .PublishAsync(new FinishVO(type, new TransitionVO(fade, UiConfig.DURATION)), token);
         }
     }
 }

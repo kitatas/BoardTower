@@ -241,19 +241,16 @@ namespace BoardTower.Game.Application
 
     public sealed class FinishVO
     {
-        public readonly Fade fade;
         public readonly FinishType type;
+        public readonly TransitionVO transition;
 
-        public FinishVO(Fade fade, FinishType type)
+        public FinishVO(FinishType type, TransitionVO transition)
         {
-            if (fade is Fade.None)
-                throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE);
-
             if (type is FinishType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_FINISH);
 
-            this.fade = fade;
             this.type = type;
+            this.transition = transition;
         }
     }
 }
