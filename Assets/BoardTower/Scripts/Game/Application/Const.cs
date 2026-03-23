@@ -24,6 +24,7 @@ namespace BoardTower.Game.Application
 
     public sealed class ChessmenConfig
     {
+        public static readonly ChessmenType DEFAULT_TYPE = ChessmenType.Knight;
         public const float FADE_DURATION = 0.25f;
         public const float MOVE_DURATION = 0.25f;
     }

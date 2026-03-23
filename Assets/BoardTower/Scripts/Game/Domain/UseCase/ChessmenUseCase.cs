@@ -22,11 +22,6 @@ namespace BoardTower.Game.Domain.UseCase
         public IAsyncSubscriber<ChessmenTransitionVO> transition => _chessmenPorts.chessmenTransitionSubscriber;
         public IAsyncSubscriber<ChessmenMovementVO> movement => _chessmenPorts.chessmenMovementSubscriber;
 
-        public void Init()
-        {
-            _chessmenEntity.Init();
-        }
-
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
             await _chessmenPorts.chessmenTransitionPublisher

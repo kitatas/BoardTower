@@ -23,7 +23,6 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _chessmenUseCase.Init();
             await UniTask.Yield(token);
         }
 

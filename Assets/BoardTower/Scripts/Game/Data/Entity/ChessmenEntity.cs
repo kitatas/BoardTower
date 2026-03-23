@@ -4,23 +4,27 @@ namespace BoardTower.Game.Data.Entity
 {
     public sealed class ChessmenEntity
     {
-        public ChessmenType chessmenType { get; private set; }
-        public SquareVO square { get; private set; }
+        private ChessmenVO _chessmen;
 
-        public void Init()
+        public ChessmenEntity()
         {
-            Set(ChessmenType.Knight);
-            Set(new SquareVO(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK));
+            _chessmen = Create();
         }
 
-        public void Set(ChessmenType type)
+        public ChessmenType chessmenType => _chessmen.type;
+        public SquareVO square => _chessmen.square;
+
+        private static ChessmenVO Create()
         {
-            chessmenType = type;
+            return new ChessmenVO(
+                ChessmenConfig.DEFAULT_TYPE,
+                new SquareVO(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK)
+            );
         }
 
         public void Set(SquareVO vo)
         {
-            square = vo;
+            _chessmen = new ChessmenVO(_chessmen, vo);
         }
 
         public void MoveBy(ChessmenMovementOffsetVO offset)

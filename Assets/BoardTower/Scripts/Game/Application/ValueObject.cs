@@ -19,6 +19,24 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class ChessmenVO
+    {
+        public readonly ChessmenType type;
+        public readonly SquareVO square;
+
+        public ChessmenVO(ChessmenType type, SquareVO square)
+        {
+            this.type = type;
+            this.square = square;
+        }
+
+        public ChessmenVO(ChessmenVO chessmen, SquareVO square)
+        {
+            this.type = chessmen.type;
+            this.square = square;
+        }
+    }
+
     public sealed class ChessmenMovementRuleVO
     {
         public readonly ChessmenType type;
