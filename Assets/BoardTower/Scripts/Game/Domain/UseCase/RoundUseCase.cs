@@ -19,6 +19,12 @@ namespace BoardTower.Game.Domain.UseCase
 
         public Observable<int> round => _round;
 
+        public void Init()
+        {
+            _roundEntity.Reset();
+            _round.Value = _roundEntity.value;
+        }
+
         public void Increment()
         {
             _roundEntity.Add(1);

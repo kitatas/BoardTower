@@ -36,7 +36,7 @@ namespace BoardTower.Game.Presentation.Presenter
                 .AddTo(_disposable);
 
             _roundUseCase.round
-                .Skip(1)
+                .Where(x => x != 0)
                 .DistinctUntilChanged()
                 .Subscribe(x =>
                 {
