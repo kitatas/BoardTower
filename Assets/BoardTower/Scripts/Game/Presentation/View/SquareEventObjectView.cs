@@ -8,9 +8,13 @@ namespace BoardTower.Game.Presentation.View
     public sealed class SquareEventObjectView : MonoBehaviour
     {
         [SerializeField] private Transform eventObjectTransform = default;
+        private SquareEventType _currentType = SquareEventType.None;
 
         public Tween Render(SquareEventVO squareEvent, float duration, float delay)
         {
+            if (_currentType == squareEvent.type) return null;
+            _currentType = squareEvent.type;
+
             eventObjectTransform.gameObject.DestroyChildren();
             if (squareEvent.eventObject == null) return null;
 
