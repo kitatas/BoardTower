@@ -1,4 +1,5 @@
 using BoardTower.Game.Application;
+using BoardTower.Game.Utility;
 
 namespace BoardTower.Game.Data.Entity
 {
@@ -29,7 +30,7 @@ namespace BoardTower.Game.Data.Entity
 
         public void MoveBy(ChessmenMovementOffsetVO offset)
         {
-            Set(new SquareVO(square.file + offset.dx, square.rank + offset.dy));
+            Set(ChessmenHelper.CalcSquare(square, offset));
         }
 
         public ChessmenMovementVO movement => new(square);
