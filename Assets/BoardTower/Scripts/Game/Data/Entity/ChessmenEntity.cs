@@ -9,11 +9,16 @@ namespace BoardTower.Game.Data.Entity
 
         public ChessmenEntity()
         {
-            _chessmen = Create();
+            Reset();
         }
 
         public ChessmenType chessmenType => _chessmen.type;
         public SquareVO square => _chessmen.square;
+
+        public void Reset()
+        {
+            _chessmen = Create();
+        }
 
         private static ChessmenVO Create()
         {
