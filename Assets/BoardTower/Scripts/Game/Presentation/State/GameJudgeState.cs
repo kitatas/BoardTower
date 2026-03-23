@@ -7,10 +7,12 @@ namespace BoardTower.Game.Presentation.State
 {
     public sealed class GameJudgeState : BaseGameState
     {
+        private readonly RoundUseCase _roundUseCase;
         private readonly RoundClearUseCase _roundClearUseCase;
 
-        public GameJudgeState(RoundClearUseCase roundClearUseCase)
+        public GameJudgeState(RoundUseCase roundUseCase, RoundClearUseCase roundClearUseCase)
         {
+            _roundUseCase = roundUseCase;
             _roundClearUseCase = roundClearUseCase;
         }
 
@@ -20,12 +22,11 @@ namespace BoardTower.Game.Presentation.State
         {
             if (_roundClearUseCase.IsClear())
             {
-                return GameState.SetUp;
+                return _roundUseCase.IsMaxRound() ? GameState.Clear : GameState.SetUp;
             }
             else
             {
-                // TODO: 失敗
-                return GameState.None;
+                return GameState.Fail;
             }
         }
     }

@@ -8,6 +8,8 @@ namespace BoardTower.Game.Application
         Input = 3,
         Event = 4,
         Judge = 5,
+        Clear = 6,
+        Fail = 7,
     }
 
     public enum ChessmenType

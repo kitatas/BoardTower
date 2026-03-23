@@ -1,4 +1,5 @@
 using System;
+using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using R3;
 
@@ -22,6 +23,11 @@ namespace BoardTower.Game.Domain.UseCase
         {
             _roundEntity.Add(1);
             _round.Value = _roundEntity.value;
+        }
+
+        public bool IsMaxRound()
+        {
+            return _roundEntity.value == RoundConfig.MAX_NUM;
         }
 
         void IDisposable.Dispose()
