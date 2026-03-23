@@ -40,6 +40,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardPorts>(Lifetime.Scoped);
             builder.Register<ChessmenPorts>(Lifetime.Scoped);
             builder.Register<EventPorts>(Lifetime.Scoped);
+            builder.Register<FinishPorts>(Lifetime.Scoped);
             builder.Register<GameStatePorts>(Lifetime.Scoped);
             builder.Register<MovementPorts>(Lifetime.Scoped);
 
@@ -54,6 +55,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardUseCase>(Lifetime.Scoped);
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<EventUseCase>(Lifetime.Scoped);
+            builder.Register<FinishUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<GemUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);

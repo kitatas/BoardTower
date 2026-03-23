@@ -58,4 +58,11 @@ namespace BoardTower.Game.Application
         Angle180 = 3,
         Angle270 = 4,
     }
+
+    public enum FinishType
+    {
+        None = 0,
+        Clear = 1,
+        Fail = 2,
+    }
 }
