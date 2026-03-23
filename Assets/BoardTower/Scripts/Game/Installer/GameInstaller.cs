@@ -75,6 +75,7 @@ namespace BoardTower.Game.Installer
             {
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
+                entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
                 entryPoints.Add<PlyPresenter>();
@@ -85,6 +86,7 @@ namespace BoardTower.Game.Installer
             // Facade
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
+            builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
@@ -93,6 +95,7 @@ namespace BoardTower.Game.Installer
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
+            builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<GemView>();
             builder.RegisterComponentInHierarchy<PlyView>();
             builder.RegisterComponentInHierarchy<RoundView>();
