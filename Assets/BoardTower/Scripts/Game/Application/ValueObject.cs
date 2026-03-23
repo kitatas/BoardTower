@@ -12,10 +12,18 @@ namespace BoardTower.Game.Application
         }
     }
 
-    public sealed class ChessmenTransitionVO : TransitionVO
+    public sealed class ChessmenTransitionVO
     {
-        public ChessmenTransitionVO(Fade fade, float duration = 0) : base(fade, duration)
+        public readonly Fade fade;
+        public readonly SquareVO square;
+
+        public ChessmenTransitionVO(Fade fade, SquareVO square)
         {
+            if (fade is Fade.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE);
+
+            this.fade = fade;
+            this.square = square;
         }
     }
 

@@ -19,8 +19,8 @@ namespace BoardTower.Game.Presentation.Facade
         {
             var tween = transition.fade switch
             {
-                Fade.In => _chessmenView.FadeIn(transition.duration),
-                Fade.Out => _chessmenView.FadeOut(transition.duration),
+                Fade.In => _chessmenView.FadeIn(transition.square, ChessmenConfig.FADE_DURATION),
+                Fade.Out => _chessmenView.FadeOut(ChessmenConfig.FADE_DURATION),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 

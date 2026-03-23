@@ -6,11 +6,13 @@ namespace BoardTower.Game.Presentation.View
 {
     public sealed class ChessmenView : MonoBehaviour
     {
-        public Tween FadeIn(float duration)
+        public Tween FadeIn(SquareVO square, float duration)
         {
-            return transform
-                .DOLocalMoveY(3.0f, duration)
-                .SetEase(Ease.Linear)
+            return DOTween.Sequence()
+                .Append(MoveXZ(square, 0.0f))
+                .Append(transform
+                    .DOLocalMoveY(3.0f, duration)
+                    .SetEase(Ease.Linear))
                 .SetLink(gameObject);
         }
 
