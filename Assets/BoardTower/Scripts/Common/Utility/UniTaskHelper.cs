@@ -11,6 +11,11 @@ namespace BoardTower.Common.Utility
         {
             return CancellationTokenSource.CreateLinkedTokenSource(self.GetCancellationTokenOnDestroy(), token);
         }
+
+        public static UniTask DelayAsync(float duration, CancellationToken token)
+        {
+            return UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+        }
     }
 
     public sealed class AsyncLockLite : IDisposable
