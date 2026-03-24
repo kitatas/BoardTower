@@ -66,6 +66,7 @@ namespace BoardTower.Game.Installer
             // State
             builder.Register<BaseGameState, GameClearState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameEventState>(Lifetime.Scoped);
+            builder.Register<BaseGameState, GameFailState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameInitState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameInputState>(Lifetime.Scoped);
             builder.Register<BaseGameState, GameJudgeState>(Lifetime.Scoped);
