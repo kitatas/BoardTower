@@ -17,15 +17,12 @@ namespace BoardTower.Game.Application
 
     public sealed class ChessmenTransitionVO
     {
-        public readonly Fade fade;
+        public readonly TransitionVO transition;
         public readonly SquareVO square;
 
-        public ChessmenTransitionVO(Fade fade, SquareVO square)
+        public ChessmenTransitionVO(TransitionVO transition, SquareVO square)
         {
-            if (fade is Fade.None)
-                throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE);
-
-            this.fade = fade;
+            this.transition = transition;
             this.square = square;
         }
     }

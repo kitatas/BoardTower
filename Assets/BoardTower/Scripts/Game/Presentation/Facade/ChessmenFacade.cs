@@ -15,12 +15,12 @@ namespace BoardTower.Game.Presentation.Facade
             _chessmenView = chessmenView;
         }
 
-        public UniTask FadeAsync(ChessmenTransitionVO transition, CancellationToken token)
+        public UniTask FadeAsync(ChessmenTransitionVO chessmen, CancellationToken token)
         {
-            var tween = transition.fade switch
+            var tween = chessmen.transition.fade switch
             {
-                Fade.In => _chessmenView.FadeIn(transition.square, ChessmenConfig.FADE_DURATION),
-                Fade.Out => _chessmenView.FadeOut(ChessmenConfig.FADE_DURATION),
+                Fade.In => _chessmenView.FadeIn(chessmen.square, chessmen.transition.duration),
+                Fade.Out => _chessmenView.FadeOut(chessmen.transition.duration),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 

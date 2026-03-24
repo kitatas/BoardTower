@@ -26,11 +26,11 @@ namespace BoardTower.Game.Domain.UseCase
         {
             _chessmenEntity.Reset();
         }
-        
+
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
             await _chessmenPorts.chessmenTransitionPublisher
-                .PublishAsync(new ChessmenTransitionVO(fade, _chessmenEntity.square), token);
+                .PublishAsync(new ChessmenTransitionVO(new TransitionVO(fade, ChessmenConfig.FADE_DURATION), _chessmenEntity.square), token);
         }
     }
 }
