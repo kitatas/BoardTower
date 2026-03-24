@@ -31,7 +31,7 @@ namespace BoardTower.Game.Domain.UseCase
         public async UniTask FadeAsync(Fade fade, CancellationToken token)
         {
             await _boardPorts.boardTransitionPublisher
-                .PublishAsync(new BoardTransitionVO(fade, BoardConfig.FADE_DURATION), token);
+                .PublishAsync(new BoardTransitionVO(new TransitionVO(fade, BoardConfig.FADE_DURATION)), token);
         }
 
         public async UniTask BuildSquaresAsync(CancellationToken token)

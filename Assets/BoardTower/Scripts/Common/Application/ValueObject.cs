@@ -53,7 +53,7 @@ namespace BoardTower.Common.Application
         }
     }
 
-    public class TransitionVO
+    public sealed class TransitionVO
     {
         public readonly Fade fade;
         public readonly float duration;

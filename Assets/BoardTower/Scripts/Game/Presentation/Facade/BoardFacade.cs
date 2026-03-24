@@ -18,12 +18,12 @@ namespace BoardTower.Game.Presentation.Facade
             _boardView = boardView;
         }
 
-        public UniTask FadeAsync(BoardTransitionVO transition, CancellationToken token)
+        public UniTask FadeAsync(BoardTransitionVO board, CancellationToken token)
         {
-            var tween = transition.fade switch
+            var tween = board.transition.fade switch
             {
-                Fade.In => _boardView.FadeInSquareAll(transition.duration),
-                Fade.Out => _boardView.FadeOutSquareAll(transition.duration),
+                Fade.In => _boardView.FadeInSquareAll(board.transition.duration),
+                Fade.Out => _boardView.FadeOutSquareAll(board.transition.duration),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 

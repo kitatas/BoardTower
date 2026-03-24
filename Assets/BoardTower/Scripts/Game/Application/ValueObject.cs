@@ -5,10 +5,13 @@ using UnityEngine;
 
 namespace BoardTower.Game.Application
 {
-    public sealed class BoardTransitionVO : TransitionVO
+    public sealed class BoardTransitionVO
     {
-        public BoardTransitionVO(Fade fade, float duration = 0) : base(fade, duration)
+        public readonly TransitionVO transition;
+
+        public BoardTransitionVO(TransitionVO transition)
         {
+            this.transition = transition;
         }
     }
 
