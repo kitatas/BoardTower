@@ -1,18 +1,30 @@
+using System.Threading;
 using BoardTower.Game.Application;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 
 namespace BoardTower.Game.Domain.Ports
 {
     public sealed class EventPorts
     {
-        public readonly IAsyncPublisher<ChessmenMovementVO> movementPublisher;
-        public readonly IAsyncPublisher<EventSquareVO[]> eventSquaresPublisher;
+        private readonly IAsyncPublisher<ChessmenMovementVO> _movementPublisher;
+        private readonly IAsyncPublisher<EventSquareVO[]> _eventSquaresPublisher;
 
         public EventPorts(IAsyncPublisher<ChessmenMovementVO> movementPublisher,
             IAsyncPublisher<EventSquareVO[]> eventSquaresPublisher)
         {
-            this.movementPublisher = movementPublisher;
-            this.eventSquaresPublisher = eventSquaresPublisher;
+            _movementPublisher = movementPublisher;
+            _eventSquaresPublisher = eventSquaresPublisher;
+        }
+
+        public UniTask PublishChessmenMovementAsync(ChessmenMovementVO movement, CancellationToken token)
+        {
+            return _movementPublisher.PublishAsync(movement, token);
+        }
+
+        public UniTask PublishEventSquaresAsync(EventSquareVO[] eventSquares, CancellationToken token)
+        {
+            return _eventSquaresPublisher.PublishAsync(eventSquares, token);
         }
     }
 }

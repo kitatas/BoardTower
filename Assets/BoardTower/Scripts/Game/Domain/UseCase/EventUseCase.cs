@@ -47,13 +47,13 @@ namespace BoardTower.Game.Domain.UseCase
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)
         {
             _chessmenEntity.MoveBy(type.ToBeltOffset());
-            return _eventPorts.movementPublisher.PublishAsync(_chessmenEntity.movement, token);
+            return _eventPorts.PublishChessmenMovementAsync(_chessmenEntity.movement, token);
         }
 
         private UniTask OverrideSquareEventAsync(int index, SquareEventType type, CancellationToken token)
         {
             _boardEntity.Set(index, _squareEventRepository.Find(type));
-            return _eventPorts.eventSquaresPublisher.PublishAsync(_boardEntity.events, token);
+            return _eventPorts.PublishEventSquaresAsync(_boardEntity.events, token);
         }
     }
 }
