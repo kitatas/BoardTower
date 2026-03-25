@@ -45,20 +45,20 @@ namespace BoardTower.Game.Domain.UseCase
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 
-            await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
+            await _movementPorts.PublishHighlightSquaresAsync(highlightVos, token);
             _lastHighlights = highlightVos;
         }
 
-        public async UniTask HandleClickAsync(ClickSquareVO clickSquare, CancellationToken token)
+        public UniTask HandleClickAsync(ClickSquareVO clickSquare, CancellationToken token)
         {
             // GameState.Input 以外は処理させない
-            if (!_gameStateEntity.IsEqual(GameState.Input)) return;
+            if (!_gameStateEntity.IsEqual(GameState.Input)) return UniTask.Yield(token);
 
             // 移動可能なマスが更新されていない場合は処理させない
-            if (_lastHighlights.Length == 0) return;
+            if (_lastHighlights.Length == 0) return UniTask.Yield(token);
 
             // 移動可能範囲外であれば処理させない
-            if (!_lastHighlights.Any(x => x.square.IsEqual(clickSquare.square))) return;
+            if (!_lastHighlights.Any(x => x.square.IsEqual(clickSquare.square))) return UniTask.Yield(token);
 
             _movement?.OnNext(clickSquare);
 
@@ -67,7 +67,7 @@ namespace BoardTower.Game.Domain.UseCase
                 .ToArray();
 
             _lastHighlights = Array.Empty<HighlightSquareVO>();
-            await _movementPorts.highlightsPublisher.PublishAsync(highlightVos, token);
+            return _movementPorts.PublishHighlightSquaresAsync(highlightVos, token);
         }
 
         public async UniTask InputAsync(CancellationToken token)
@@ -76,9 +76,9 @@ namespace BoardTower.Game.Domain.UseCase
             _chessmenEntity.Set(clickSquare.square);
         }
 
-        public async UniTask MoveAsync(CancellationToken token)
+        public UniTask MoveAsync(CancellationToken token)
         {
-            await _movementPorts.chessmenMovementPublisher.PublishAsync(_chessmenEntity.movement, token);
+            return _movementPorts.PublishChessmenMovementAsync(_chessmenEntity.movement, token);
         }
 
         void IDisposable.Dispose()
