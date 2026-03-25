@@ -1,4 +1,6 @@
+using System.Threading;
 using BoardTower.Game.Application;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 
 namespace BoardTower.Game.Domain.Ports
@@ -7,8 +9,8 @@ namespace BoardTower.Game.Domain.Ports
     {
         public readonly IAsyncSubscriber<BoardTransitionVO> boardTransitionSubscriber;
         public readonly IAsyncSubscriber<EventSquareVO[]> eventSquaresSubscriber;
-        public readonly IAsyncPublisher<BoardTransitionVO> boardTransitionPublisher;
-        public readonly IAsyncPublisher<EventSquareVO[]> eventSquaresPublisher;
+        private readonly IAsyncPublisher<BoardTransitionVO> _boardTransitionPublisher;
+        private readonly IAsyncPublisher<EventSquareVO[]> _eventSquaresPublisher;
 
         public BoardPorts(IAsyncSubscriber<BoardTransitionVO> boardTransitionSubscriber,
             IAsyncSubscriber<EventSquareVO[]> eventSquaresSubscriber,
@@ -17,8 +19,18 @@ namespace BoardTower.Game.Domain.Ports
         {
             this.boardTransitionSubscriber = boardTransitionSubscriber;
             this.eventSquaresSubscriber = eventSquaresSubscriber;
-            this.boardTransitionPublisher = boardTransitionPublisher;
-            this.eventSquaresPublisher = eventSquaresPublisher;
+            _boardTransitionPublisher = boardTransitionPublisher;
+            _eventSquaresPublisher = eventSquaresPublisher;
+        }
+
+        public UniTask PublishBoardTransitionAsync(BoardTransitionVO boardTransition, CancellationToken token)
+        {
+            return _boardTransitionPublisher.PublishAsync(boardTransition, token);
+        }
+
+        public UniTask PublishEventSquaresAsync(EventSquareVO[] eventSquares, CancellationToken token)
+        {
+            return _eventSquaresPublisher.PublishAsync(eventSquares, token);
         }
     }
 }

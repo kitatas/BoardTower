@@ -28,13 +28,12 @@ namespace BoardTower.Game.Domain.UseCase
         public IAsyncSubscriber<BoardTransitionVO> transition => _boardPorts.boardTransitionSubscriber;
         public IAsyncSubscriber<EventSquareVO[]> eventSquares => _boardPorts.eventSquaresSubscriber;
 
-        public async UniTask FadeAsync(Fade fade, CancellationToken token)
+        public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            await _boardPorts.boardTransitionPublisher
-                .PublishAsync(new BoardTransitionVO(new TransitionVO(fade, BoardConfig.FADE_DURATION)), token);
+            return _boardPorts.PublishBoardTransitionAsync(new BoardTransitionVO(new TransitionVO(fade, BoardConfig.FADE_DURATION)), token);
         }
 
-        public async UniTask BuildSquaresAsync(CancellationToken token)
+        public UniTask BuildSquaresAsync(CancellationToken token)
         {
             _boardEntity.Clear();
 
@@ -58,8 +57,7 @@ namespace BoardTower.Game.Domain.UseCase
                 }
             }
 
-            await _boardPorts.eventSquaresPublisher
-                .PublishAsync(_boardEntity.events, token);
+            return _boardPorts.PublishEventSquaresAsync(_boardEntity.events, token);
         }
     }
 }
