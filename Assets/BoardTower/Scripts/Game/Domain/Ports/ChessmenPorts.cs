@@ -1,4 +1,6 @@
+using System.Threading;
 using BoardTower.Game.Application;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 
 namespace BoardTower.Game.Domain.Ports
@@ -7,7 +9,7 @@ namespace BoardTower.Game.Domain.Ports
     {
         public readonly IAsyncSubscriber<ChessmenTransitionVO> chessmenTransitionSubscriber;
         public readonly IAsyncSubscriber<ChessmenMovementVO> chessmenMovementSubscriber;
-        public readonly IAsyncPublisher<ChessmenTransitionVO> chessmenTransitionPublisher;
+        private readonly IAsyncPublisher<ChessmenTransitionVO> _chessmenTransitionPublisher;
 
         public ChessmenPorts(IAsyncSubscriber<ChessmenTransitionVO> chessmenTransitionSubscriber,
             IAsyncSubscriber<ChessmenMovementVO> chessmenMovementSubscriber,
@@ -15,7 +17,12 @@ namespace BoardTower.Game.Domain.Ports
         {
             this.chessmenTransitionSubscriber = chessmenTransitionSubscriber;
             this.chessmenMovementSubscriber = chessmenMovementSubscriber;
-            this.chessmenTransitionPublisher = chessmenTransitionPublisher;
+            _chessmenTransitionPublisher = chessmenTransitionPublisher;
+        }
+
+        public UniTask PublishChessmenTransitionAsync(ChessmenTransitionVO chessmenTransition, CancellationToken token)
+        {
+            return _chessmenTransitionPublisher.PublishAsync(chessmenTransition, token);
         }
     }
 }
