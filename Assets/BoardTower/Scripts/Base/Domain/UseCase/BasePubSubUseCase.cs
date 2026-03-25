@@ -22,7 +22,7 @@ namespace BoardTower.Base.Domain.UseCase
         public virtual async UniTask PublishAsync(T value, CancellationToken token)
         {
             _entity.Set(value);
-            await _ports.publisher.PublishAsync(_entity.value, token);
+            await _ports.PublishAsync(_entity.value, token);
         }
     }
 }

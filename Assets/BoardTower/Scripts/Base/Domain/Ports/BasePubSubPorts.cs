@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using MessagePipe;
 
 namespace BoardTower.Base.Domain.Ports
@@ -5,12 +7,17 @@ namespace BoardTower.Base.Domain.Ports
     public abstract class BasePubSubPorts<T>
     {
         public readonly IAsyncSubscriber<T> subscriber;
-        public readonly IAsyncPublisher<T> publisher;
+        private readonly IAsyncPublisher<T> _publisher;
 
         protected BasePubSubPorts(IAsyncSubscriber<T> subscriber, IAsyncPublisher<T> publisher)
         {
             this.subscriber = subscriber;
-            this.publisher = publisher;
+            _publisher = publisher;
+        }
+
+        public virtual UniTask PublishAsync(T message, CancellationToken token)
+        {
+            return _publisher.PublishAsync(message, token);
         }
     }
 }
