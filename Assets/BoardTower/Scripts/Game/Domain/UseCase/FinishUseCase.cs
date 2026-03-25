@@ -18,20 +18,19 @@ namespace BoardTower.Game.Domain.UseCase
 
         public IAsyncSubscriber<FinishVO> finish => _finishPorts.finishSubscriber;
 
-        public async UniTask InitAsync(FinishType type, CancellationToken token)
+        public UniTask InitAsync(FinishType type, CancellationToken token)
         {
-            await FadeAsync(type, Fade.Out, 0.0f, token);
+            return FadeAsync(type, Fade.Out, 0.0f, token);
         }
 
-        public async UniTask FadeAsync(FinishType type, Fade fade, CancellationToken token)
+        public UniTask FadeAsync(FinishType type, Fade fade, CancellationToken token)
         {
-            await FadeAsync(type, fade, UiConfig.DURATION, token);
+            return FadeAsync(type, fade, UiConfig.DURATION, token);
         }
 
-        private async UniTask FadeAsync(FinishType type, Fade fade, float duration, CancellationToken token)
+        private UniTask FadeAsync(FinishType type, Fade fade, float duration, CancellationToken token)
         {
-            await _finishPorts.finishPublisher
-                .PublishAsync(new FinishVO(type, new TransitionVO(fade, duration)), token);
+            return _finishPorts.PublishFinishAsync(new FinishVO(type, new TransitionVO(fade, duration)), token);
         }
     }
 }
