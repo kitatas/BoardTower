@@ -29,6 +29,14 @@ namespace BoardTower.Game.Application
         public const float MOVE_DURATION = 0.25f;
     }
 
+    public sealed class MovementOffsetConfig
+    {
+        public static readonly ChessmenMovementOffsetVO UP = new(0, 1);
+        public static readonly ChessmenMovementOffsetVO DOWN = new(0, -1);
+        public static readonly ChessmenMovementOffsetVO LEFT = new(-1, 0);
+        public static readonly ChessmenMovementOffsetVO RIGHT = new(1, 0);
+    }
+
     public sealed class RoundConfig
     {
         public const int MAX_NUM = 7;

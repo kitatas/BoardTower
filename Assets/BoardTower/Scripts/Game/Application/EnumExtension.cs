@@ -44,10 +44,10 @@ namespace BoardTower.Game.Application
         {
             return self switch
             {
-                SquareEventType.BeltUp => new ChessmenMovementOffsetVO(0, 1),
-                SquareEventType.BeltDown => new ChessmenMovementOffsetVO(0, -1),
-                SquareEventType.BeltLeft => new ChessmenMovementOffsetVO(-1, 0),
-                SquareEventType.BeltRight => new ChessmenMovementOffsetVO(1, 0),
+                SquareEventType.BeltUp => MovementOffsetConfig.UP,
+                SquareEventType.BeltDown => MovementOffsetConfig.DOWN,
+                SquareEventType.BeltLeft => MovementOffsetConfig.LEFT,
+                SquareEventType.BeltRight => MovementOffsetConfig.RIGHT,
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             };
         }
