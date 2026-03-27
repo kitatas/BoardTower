@@ -21,11 +21,6 @@ namespace BoardTower.Game.Presentation.State
 
         public override GameState state => GameState.SetUp;
 
-        public override async UniTask InitAsync(CancellationToken token)
-        {
-            await UniTask.Yield(token);
-        }
-
         public override async UniTask EnterAsync(CancellationToken token)
         {
             await (

@@ -19,10 +19,10 @@ namespace BoardTower.Base.Domain.UseCase
 
         public virtual IAsyncSubscriber<T> subscriber => _ports.subscriber;
 
-        public virtual async UniTask PublishAsync(T value, CancellationToken token)
+        public virtual UniTask PublishAsync(T value, CancellationToken token)
         {
             _entity.Set(value);
-            await _ports.PublishAsync(_entity.value, token);
+            return _ports.PublishAsync(_entity.value, token);
         }
     }
 }

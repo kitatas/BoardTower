@@ -13,15 +13,15 @@ namespace BoardTower.Game.Domain.UseCase
         {
         }
 
-        public override async UniTask InitAsync(CancellationToken token)
+        public override UniTask InitAsync(CancellationToken token)
         {
-            await PublishAsync(GameState.Init, token);
+            return PublishAsync(GameState.Init, token);
         }
 
-        public override async UniTask PublishAsync(GameState value, CancellationToken token)
+        public override UniTask PublishAsync(GameState value, CancellationToken token)
         {
-            if (value is GameState.None) return;
-            await base.PublishAsync(value, token);
+            if (value is GameState.None) return UniTask.Yield(token);
+            return base.PublishAsync(value, token);
         }
     }
 }

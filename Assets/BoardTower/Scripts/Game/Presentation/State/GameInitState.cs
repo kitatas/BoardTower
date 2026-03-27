@@ -18,11 +18,11 @@ namespace BoardTower.Game.Presentation.State
 
         public override GameState state => GameState.Init;
 
-        public override async UniTask EnterAsync(CancellationToken token)
+        public override UniTask EnterAsync(CancellationToken token)
         {
             _chessmenUseCase.Init();
             _roundUseCase.Init();
-            await UniTask.Yield(PlayerLoopTiming.Update, token);
+            return UniTask.Yield(PlayerLoopTiming.Update, token);
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)

@@ -18,9 +18,9 @@ namespace BoardTower.Game.Presentation.State
 
         public override GameState state => GameState.Input;
 
-        public override async UniTask EnterAsync(CancellationToken token)
+        public override UniTask EnterAsync(CancellationToken token)
         {
-            await _movementUseCase.PublishMovableSquaresAsync(token);
+            return _movementUseCase.PublishMovableSquaresAsync(token);
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)

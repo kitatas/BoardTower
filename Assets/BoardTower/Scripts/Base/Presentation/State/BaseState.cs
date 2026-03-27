@@ -8,14 +8,14 @@ namespace BoardTower.Base.Presentation.State
     {
         public abstract T state { get; }
 
-        public virtual async UniTask InitAsync(CancellationToken token)
+        public virtual UniTask InitAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            return UniTask.Yield(token);
         }
 
-        public virtual async UniTask EnterAsync(CancellationToken token)
+        public virtual UniTask EnterAsync(CancellationToken token)
         {
-            await UniTask.Yield(PlayerLoopTiming.Update, token);
+            return UniTask.Yield(PlayerLoopTiming.Update, token);
         }
 
         public virtual async UniTask<T> TickAsync(CancellationToken token)
@@ -24,9 +24,9 @@ namespace BoardTower.Base.Presentation.State
             return state;
         }
 
-        public virtual async UniTask ExitAsync(CancellationToken token)
+        public virtual UniTask ExitAsync(CancellationToken token)
         {
-            await UniTask.Yield(PlayerLoopTiming.Update, token);
+            return UniTask.Yield(PlayerLoopTiming.Update, token);
         }
     }
 }
