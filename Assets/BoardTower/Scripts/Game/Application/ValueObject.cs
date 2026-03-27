@@ -13,6 +13,12 @@ namespace BoardTower.Game.Application
         {
             this.transition = transition;
         }
+
+        public static BoardTransitionVO Create(Fade fade)
+        {
+            var transition = new TransitionVO(fade, BoardConfig.FADE_DURATION);
+            return new BoardTransitionVO(transition);
+        }
     }
 
     public sealed class ChessmenTransitionVO
@@ -24,6 +30,12 @@ namespace BoardTower.Game.Application
         {
             this.transition = transition;
             this.square = square;
+        }
+
+        public static ChessmenTransitionVO Create(Fade fade, SquareVO square)
+        {
+            var transition = new TransitionVO(fade, ChessmenConfig.FADE_DURATION);
+            return new ChessmenTransitionVO(transition, square);
         }
     }
 
@@ -148,6 +160,12 @@ namespace BoardTower.Game.Application
             this.square = square;
             this.squareEvent = squareEvent;
         }
+
+        public static EventSquareVO Create(int file, int rank, SquareEventVO squareEvent)
+        {
+            var square = new SquareVO(file, rank);
+            return new EventSquareVO(square, squareEvent);
+        }
     }
 
     public sealed class ChessmenMovementVO
@@ -213,6 +231,15 @@ namespace BoardTower.Game.Application
             this.gemNum = gemNum;
             this.plyNum = plyNum;
         }
+
+        public static EventResultVO Create(SquareEventType type)
+        {
+            return new EventResultVO(
+                type.IsBeltEvent(),
+                type == SquareEventType.Gem ? 1 : 0,
+                type == SquareEventType.Ply ? 1 : 0
+            );
+        }
     }
 
     public sealed class RoundPlyVO
@@ -251,6 +278,12 @@ namespace BoardTower.Game.Application
 
             this.type = type;
             this.transition = transition;
+        }
+
+        public static FinishVO Create(FinishType type, Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new FinishVO(type, transition);
         }
     }
 }

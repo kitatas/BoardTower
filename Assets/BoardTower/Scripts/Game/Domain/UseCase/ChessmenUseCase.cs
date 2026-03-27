@@ -29,7 +29,8 @@ namespace BoardTower.Game.Domain.UseCase
 
         public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            return _chessmenPorts.PublishChessmenTransitionAsync(new ChessmenTransitionVO(new TransitionVO(fade, ChessmenConfig.FADE_DURATION), _chessmenEntity.square), token);
+            var chessmenTransition = ChessmenTransitionVO.Create(fade, _chessmenEntity.square);
+            return _chessmenPorts.PublishChessmenTransitionAsync(chessmenTransition, token);
         }
     }
 }

@@ -37,11 +37,7 @@ namespace BoardTower.Game.Domain.UseCase
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
 
-            return new EventResultVO(
-                squareEvent.type.IsBeltEvent(),
-                squareEvent.type == SquareEventType.Gem ? 1 : 0,
-                squareEvent.type == SquareEventType.Ply ? 1 : 0
-            );
+            return EventResultVO.Create(squareEvent.type);
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)

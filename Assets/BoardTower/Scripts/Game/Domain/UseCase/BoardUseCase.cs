@@ -30,7 +30,8 @@ namespace BoardTower.Game.Domain.UseCase
 
         public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            return _boardPorts.PublishBoardTransitionAsync(new BoardTransitionVO(new TransitionVO(fade, BoardConfig.FADE_DURATION)), token);
+            var boardTransition = BoardTransitionVO.Create(fade);
+            return _boardPorts.PublishBoardTransitionAsync(boardTransition, token);
         }
 
         public UniTask BuildSquaresAsync(CancellationToken token)
@@ -53,7 +54,8 @@ namespace BoardTower.Game.Domain.UseCase
                     var type = pattern.types[typeIndex];
 
                     var squareEvent = _squareEventRepository.Find(type);
-                    _boardEntity.Add(new EventSquareVO(new SquareVO(file + 1, rank + 1), squareEvent));
+                    var eventSquare = EventSquareVO.Create(file + 1, rank + 1, squareEvent);
+                    _boardEntity.Add(eventSquare);
                 }
             }
 
