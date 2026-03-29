@@ -1,9 +1,10 @@
 {
-    "name": "Common.Presentation.View",
+    "name": "Common.Domain.Ports",
     "rootNamespace": "",
     "references": [
-        "GUID:971e8a35ba8d54e6cb9b25d1ee54d5e4",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+        "GUID:193efd1822ac4de5ae719bcf6d254d69",
+        "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
