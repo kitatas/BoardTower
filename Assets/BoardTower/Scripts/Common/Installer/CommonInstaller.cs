@@ -3,6 +3,7 @@ using BoardTower.Common.Domain.UseCase;
 using BoardTower.Common.Presentation.Facade;
 using BoardTower.Common.Presentation.Presenter;
 using BoardTower.Common.Presentation.View;
+using BoardTower.Common.Utility;
 using MessagePipe;
 using VContainer;
 using VContainer.Unity;
@@ -34,8 +35,8 @@ namespace BoardTower.Common.Installer
             builder.Register<SceneFacade>(Lifetime.Singleton);
 
             // View
-            builder.RegisterComponentInHierarchy<ExceptionView>();
-            builder.RegisterComponentInHierarchy<TransitionView>();
+            builder.RegisterFindFirstObjectByType<ExceptionView>();
+            builder.RegisterFindFirstObjectByType<TransitionView>();
         }
     }
 }
