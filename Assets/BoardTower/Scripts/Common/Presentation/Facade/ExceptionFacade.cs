@@ -14,9 +14,16 @@ namespace BoardTower.Common.Presentation.Facade
             _exceptionView = exceptionView;
         }
 
-        public UniTask RenderAsync(ExceptionVO exception, CancellationToken token)
+        public UniTask FadeAsync(ExceptionNotifyVO notify, CancellationToken token)
         {
-            return _exceptionView.Render(exception.message, ExceptionConfig.FADE_DURATION)
+            var tween = notify.transition.fade switch
+            {
+                Fade.In => _exceptionView.FadeIn(notify.exception?.message ?? ExceptionConfig.UNKNOWN_ERROR, notify.transition.duration),
+                Fade.Out => _exceptionView.FadeOut(notify.transition.duration),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
+            };
+
+            return tween
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
     }

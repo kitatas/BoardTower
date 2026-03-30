@@ -15,11 +15,12 @@ namespace BoardTower.Common.Domain.UseCase
             _exceptionPorts = exceptionPorts;
         }
 
-        public IAsyncSubscriber<ExceptionVO> exception => _exceptionPorts.exceptionSubscriber;
+        public IAsyncSubscriber<ExceptionNotifyVO> exception => _exceptionPorts.exceptionSubscriber;
 
         public UniTask ThrowAsync(ExceptionVO ex, CancellationToken token)
         {
-            return _exceptionPorts.PublishExceptionAsync(ex, token);
+            var notify = ExceptionNotifyVO.Create(ex, Fade.In, ExceptionConfig.FADE_DURATION);
+            return _exceptionPorts.PublishExceptionAsync(notify, token);
         }
 
         public UniTask ThrowRebootAsync(string message, CancellationToken token)

@@ -53,6 +53,24 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class ExceptionNotifyVO
+    {
+        public readonly ExceptionVO? exception;
+        public readonly TransitionVO transition;
+
+        public ExceptionNotifyVO(ExceptionVO? exception, TransitionVO transition)
+        {
+            this.exception = exception;
+            this.transition = transition;
+        }
+
+        public static ExceptionNotifyVO Create(ExceptionVO exception, Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new ExceptionNotifyVO(exception, transition);
+        }
+    }
+
     public sealed class TransitionVO
     {
         public readonly Fade fade;

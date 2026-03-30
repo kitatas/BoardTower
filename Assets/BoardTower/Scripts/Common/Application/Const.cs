@@ -8,6 +8,7 @@ namespace BoardTower.Common.Application
         public const string RETRY_MESSAGE = "Retry.";
         public const string QUIT_MESSAGE = "Exit this app.";
 
+        public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";

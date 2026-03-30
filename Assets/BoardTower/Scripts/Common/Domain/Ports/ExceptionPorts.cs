@@ -7,17 +7,17 @@ namespace BoardTower.Common.Domain.Ports
 {
     public sealed class ExceptionPorts
     {
-        public readonly IAsyncSubscriber<ExceptionVO> exceptionSubscriber;
-        private readonly IAsyncPublisher<ExceptionVO> _exceptionPublisher;
+        public readonly IAsyncSubscriber<ExceptionNotifyVO> exceptionSubscriber;
+        private readonly IAsyncPublisher<ExceptionNotifyVO> _exceptionPublisher;
 
-        public ExceptionPorts(IAsyncSubscriber<ExceptionVO> exceptionSubscriber,
-            IAsyncPublisher<ExceptionVO> exceptionPublisher)
+        public ExceptionPorts(IAsyncSubscriber<ExceptionNotifyVO> exceptionSubscriber,
+            IAsyncPublisher<ExceptionNotifyVO> exceptionPublisher)
         {
             this.exceptionSubscriber = exceptionSubscriber;
             _exceptionPublisher = exceptionPublisher;
         }
 
-        public UniTask PublishExceptionAsync(ExceptionVO exception, CancellationToken token)
+        public UniTask PublishExceptionAsync(ExceptionNotifyVO exception, CancellationToken token)
         {
             return _exceptionPublisher.PublishAsync(exception, token);
         }

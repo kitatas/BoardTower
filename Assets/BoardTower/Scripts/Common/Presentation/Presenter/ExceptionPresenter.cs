@@ -23,7 +23,7 @@ namespace BoardTower.Common.Presentation.Presenter
         void IInitializable.Initialize()
         {
             _exceptionUseCase.exception
-                .Subscribe((e, ct) => _exceptionFacade.RenderAsync(e, ct))
+                .Subscribe((e, ct) => _exceptionFacade.FadeAsync(e, ct))
                 .AddTo(_disposable);
         }
 
