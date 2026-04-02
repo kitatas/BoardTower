@@ -1,7 +1,7 @@
 using System;
 using MessagePipe;
 
-namespace BoardTower.Base.Domain.Ports
+namespace BoardTower.Common.Domain.Ports
 {
     public abstract class BaseStatePorts<T> : BasePubSubPorts<T> where T : Enum
     {

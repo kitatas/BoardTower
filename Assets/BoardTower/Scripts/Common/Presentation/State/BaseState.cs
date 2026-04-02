@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace BoardTower.Base.Presentation.State
+namespace BoardTower.Common.Presentation.State
 {
     public abstract class BaseState<T> where T : Enum
     {

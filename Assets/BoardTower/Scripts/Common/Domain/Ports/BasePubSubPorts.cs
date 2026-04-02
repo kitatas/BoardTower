@@ -2,7 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 
-namespace BoardTower.Base.Domain.Ports
+namespace BoardTower.Common.Domain.Ports
 {
     public abstract class BasePubSubPorts<T>
     {

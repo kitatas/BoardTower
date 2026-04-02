@@ -1,4 +1,4 @@
-using BoardTower.Base.Data.Entity;
+using BoardTower.Common.Data.Entity;
 
 namespace BoardTower.Game.Data.Entity
 {

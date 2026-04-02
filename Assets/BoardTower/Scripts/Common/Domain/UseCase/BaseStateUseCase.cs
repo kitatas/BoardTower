@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
-using BoardTower.Base.Data.Entity;
-using BoardTower.Base.Domain.Ports;
+using BoardTower.Common.Data.Entity;
+using BoardTower.Common.Domain.Ports;
 using Cysharp.Threading.Tasks;
 
-namespace BoardTower.Base.Domain.UseCase
+namespace BoardTower.Common.Domain.UseCase
 {
     public abstract class BaseStateUseCase<T> : BasePubSubUseCase<T> where T : Enum
     {

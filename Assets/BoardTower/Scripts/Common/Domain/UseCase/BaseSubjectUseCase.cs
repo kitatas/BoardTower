@@ -1,8 +1,8 @@
 using System;
-using BoardTower.Base.Data.Entity;
+using BoardTower.Common.Data.Entity;
 using R3;
 
-namespace BoardTower.Base.Domain.UseCase
+namespace BoardTower.Common.Domain.UseCase
 {
     public abstract class BaseSubjectUseCase<T> : IDisposable
     {

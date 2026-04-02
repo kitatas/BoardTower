@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using BoardTower.Base.Domain.UseCase;
-using BoardTower.Base.Presentation.State;
 using BoardTower.Common.Application;
+using BoardTower.Common.Domain.UseCase;
+using BoardTower.Common.Presentation.State;
 using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 using R3;
 using VContainer.Unity;
 
-namespace BoardTower.Base.Presentation.Presenter
+namespace BoardTower.Common.Presentation.Presenter
 {
     public abstract class BaseStatePresenter<T> : IAsyncStartable, IDisposable where T : Enum
     {

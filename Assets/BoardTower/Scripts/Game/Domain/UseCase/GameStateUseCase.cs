@@ -1,5 +1,5 @@
 using System.Threading;
-using BoardTower.Base.Domain.UseCase;
+using BoardTower.Common.Domain.UseCase;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Ports;

@@ -1,4 +1,4 @@
-using BoardTower.Base.Data.DataStore;
+using BoardTower.Common.Data.DataStore;
 using UnityEngine;
 
 namespace BoardTower.Game.Data.DataStore

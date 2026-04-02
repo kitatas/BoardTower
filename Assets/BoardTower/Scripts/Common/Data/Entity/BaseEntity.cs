@@ -1,4 +1,4 @@
-namespace BoardTower.Base.Data.Entity
+namespace BoardTower.Common.Data.Entity
 {
     public abstract class BaseEntity<T>
     {

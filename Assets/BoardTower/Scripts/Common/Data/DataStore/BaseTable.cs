@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BoardTower.Base.Data.DataStore
+namespace BoardTower.Common.Data.DataStore
 {
     public abstract class BaseTable<T> : ScriptableObject where T : ScriptableObject
     {

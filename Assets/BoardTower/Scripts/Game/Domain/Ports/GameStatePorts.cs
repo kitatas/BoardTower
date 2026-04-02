@@ -1,4 +1,4 @@
-using BoardTower.Base.Domain.Ports;
+using BoardTower.Common.Domain.Ports;
 using BoardTower.Game.Application;
 using MessagePipe;
 

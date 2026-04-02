@@ -1,10 +1,10 @@
 using System.Threading;
-using BoardTower.Base.Data.Entity;
-using BoardTower.Base.Domain.Ports;
+using BoardTower.Common.Data.Entity;
+using BoardTower.Common.Domain.Ports;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 
-namespace BoardTower.Base.Domain.UseCase
+namespace BoardTower.Common.Domain.UseCase
 {
     public abstract class BasePubSubUseCase<T>
     {
