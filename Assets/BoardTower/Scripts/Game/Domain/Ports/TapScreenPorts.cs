@@ -7,19 +7,19 @@ namespace BoardTower.Game.Domain.Ports
 {
     public sealed class TapScreenPorts
     {
-        public readonly IAsyncSubscriber<TapScreenVO> tapScreenSubscriber;
-        private readonly IAsyncPublisher<TapScreenVO> _tapScreenPublisher;
+        public readonly IAsyncSubscriber<TapScreenTransitionVO> tapScreenTransitionSubscriber;
+        private readonly IAsyncPublisher<TapScreenTransitionVO> _tapScreenTransitionPublisher;
 
-        public TapScreenPorts(IAsyncSubscriber<TapScreenVO> tapScreenSubscriber,
-            IAsyncPublisher<TapScreenVO> tapScreenPublisher)
+        public TapScreenPorts(IAsyncSubscriber<TapScreenTransitionVO> tapScreenTransitionSubscriber,
+            IAsyncPublisher<TapScreenTransitionVO> tapScreenTransitionPublisher)
         {
-            this.tapScreenSubscriber = tapScreenSubscriber;
-            _tapScreenPublisher = tapScreenPublisher;
+            this.tapScreenTransitionSubscriber = tapScreenTransitionSubscriber;
+            _tapScreenTransitionPublisher = tapScreenTransitionPublisher;
         }
 
-        public UniTask PublishTapScreenAsync(TapScreenVO tapScreen, CancellationToken token)
+        public UniTask PublishTapScreenAsync(TapScreenTransitionVO tapScreen, CancellationToken token)
         {
-            return _tapScreenPublisher.PublishAsync(tapScreen, token);
+            return _tapScreenTransitionPublisher.PublishAsync(tapScreen, token);
         }
     }
 }

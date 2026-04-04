@@ -20,20 +20,20 @@ namespace BoardTower.Game.Domain.UseCase
             _tapScreen = new Subject<Unit>();
         }
 
-        public IAsyncSubscriber<TapScreenVO> tapScreen => _tapScreenPorts.tapScreenSubscriber;
+        public IAsyncSubscriber<TapScreenTransitionVO> tapScreenTransition => _tapScreenPorts.tapScreenTransitionSubscriber;
 
         public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            var tap = TapScreenVO.Create(fade);
+            var tap = TapScreenTransitionVO.Create(fade);
             return _tapScreenPorts.PublishTapScreenAsync(tap, token);
         }
 
-        public void TapScreen()
+        public void NotifyTapScreen()
         {
             _tapScreen?.OnNext(Unit.Default);
         }
 
-        public UniTask TapScreenAsync(CancellationToken token)
+        public UniTask WaitForTapScreenAsync(CancellationToken token)
         {
             return _tapScreen
                 .FirstAsync(cancellationToken: token)

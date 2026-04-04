@@ -287,19 +287,19 @@ namespace BoardTower.Game.Application
         }
     }
 
-    public sealed class TapScreenVO
+    public sealed class TapScreenTransitionVO
     {
         public readonly TransitionVO transition;
 
-        public TapScreenVO(TransitionVO transition)
+        public TapScreenTransitionVO(TransitionVO transition)
         {
             this.transition = transition;
         }
 
-        public static TapScreenVO Create(Fade fade)
+        public static TapScreenTransitionVO Create(Fade fade)
         {
             var transition = new TransitionVO(fade, TapScreenConfig.FADE_DURATION);
-            return new TapScreenVO(transition);
+            return new TapScreenTransitionVO(transition);
         }
     }
 }

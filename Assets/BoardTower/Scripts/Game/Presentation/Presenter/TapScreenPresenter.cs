@@ -22,12 +22,12 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IStartable.Start()
         {
-            _tapScreenUseCase.tapScreen
+            _tapScreenUseCase.tapScreenTransition
                 .Subscribe((t, ct) => _tapScreenFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
 
             _tapScreenFacade.OnTapAsObservable()
-                .Subscribe(_ => _tapScreenUseCase.TapScreen())
+                .Subscribe(_ => _tapScreenUseCase.NotifyTapScreen())
                 .AddTo(_disposable);
         }
 

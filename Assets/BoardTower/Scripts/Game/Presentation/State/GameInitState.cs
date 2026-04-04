@@ -31,7 +31,7 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await _tapScreenUseCase.TapScreenAsync(token);
+            await _tapScreenUseCase.WaitForTapScreenAsync(token);
             return GameState.SetUp;
         }
 

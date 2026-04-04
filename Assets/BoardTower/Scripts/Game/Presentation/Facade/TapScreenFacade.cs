@@ -18,12 +18,12 @@ namespace BoardTower.Game.Presentation.Facade
 
         public Observable<Unit> OnTapAsObservable() => _tapScreenView.tap;
 
-        public UniTask FadeAsync(TapScreenVO tapScreen, CancellationToken token)
+        public UniTask FadeAsync(TapScreenTransitionVO tapScreenTransition, CancellationToken token)
         {
-            var tween = tapScreen.transition.fade switch
+            var tween = tapScreenTransition.transition.fade switch
             {
-                Fade.In => _tapScreenView.FadeIn(tapScreen.transition.duration),
-                Fade.Out => _tapScreenView.FadeOut(tapScreen.transition.duration),
+                Fade.In => _tapScreenView.FadeIn(tapScreenTransition.transition.duration),
+                Fade.Out => _tapScreenView.FadeOut(tapScreenTransition.transition.duration),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 
