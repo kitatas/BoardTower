@@ -25,6 +25,10 @@ namespace BoardTower.Game.Presentation.Presenter
             _tapScreenUseCase.tapScreen
                 .Subscribe((t, ct) => _tapScreenFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
+
+            _tapScreenFacade.OnTapAsObservable()
+                .Subscribe(_ => _tapScreenUseCase.TapScreen())
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

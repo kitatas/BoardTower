@@ -3,6 +3,7 @@ using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Presentation.View;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -14,6 +15,8 @@ namespace BoardTower.Game.Presentation.Facade
         {
             _tapScreenView = tapScreenView;
         }
+
+        public Observable<Unit> OnTapAsObservable() => _tapScreenView.tap;
 
         public UniTask FadeAsync(TapScreenVO tapScreen, CancellationToken token)
         {
