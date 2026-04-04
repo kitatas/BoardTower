@@ -45,5 +45,6 @@ namespace BoardTower.Game.Application
     public sealed class TapScreenConfig
     {
         public const float FADE_DURATION = 0.25f;
+        public const float FLASH_DURATION = 1.0f;
     }
 }
