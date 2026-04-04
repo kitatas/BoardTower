@@ -3,7 +3,6 @@ using BoardTower.Boot.Domain.Ports;
 using BoardTower.Boot.Domain.UseCase;
 using BoardTower.Boot.Presentation.Presenter;
 using BoardTower.Boot.Presentation.State;
-using MessagePipe;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,8 +12,6 @@ namespace BoardTower.Boot.Installer
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterMessagePipe();
-
             // Entity
             builder.Register<BootStateEntity>(Lifetime.Scoped);
 

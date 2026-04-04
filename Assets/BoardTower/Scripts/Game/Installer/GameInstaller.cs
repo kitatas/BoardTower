@@ -7,7 +7,6 @@ using BoardTower.Game.Presentation.Facade;
 using BoardTower.Game.Presentation.Presenter;
 using BoardTower.Game.Presentation.State;
 using BoardTower.Game.Presentation.View;
-using MessagePipe;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -21,8 +20,6 @@ namespace BoardTower.Game.Installer
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterMessagePipe();
-
             // DataStore
             builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
             builder.RegisterInstance<SquareEventTable>(squareEventTable);
