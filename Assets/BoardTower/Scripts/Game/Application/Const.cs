@@ -41,4 +41,9 @@ namespace BoardTower.Game.Application
     {
         public const int MAX_NUM = 7;
     }
+
+    public sealed class TapScreenConfig
+    {
+        public const float FADE_DURATION = 0.25f;
+    }
 }

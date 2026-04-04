@@ -295,5 +295,11 @@ namespace BoardTower.Game.Application
         {
             this.transition = transition;
         }
+
+        public static TapScreenVO Create(Fade fade)
+        {
+            var transition = new TransitionVO(fade, TapScreenConfig.FADE_DURATION);
+            return new TapScreenVO(transition);
+        }
     }
 }
