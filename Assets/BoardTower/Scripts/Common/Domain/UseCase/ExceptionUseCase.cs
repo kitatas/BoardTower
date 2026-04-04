@@ -37,5 +37,12 @@ namespace BoardTower.Common.Domain.UseCase
         {
             return ThrowAsync(new QuitExceptionVO(message), token);
         }
+
+        public UniTask FadeOutAsync(float duration, CancellationToken token)
+        {
+            // NOTE: FadeOut時はException不要なのでnull指定
+            var notify = ExceptionNotifyVO.Create(null, Fade.Out, duration);
+            return _exceptionPorts.PublishExceptionAsync(notify, token);
+        }
     }
 }

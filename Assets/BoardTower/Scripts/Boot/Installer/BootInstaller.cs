@@ -2,6 +2,7 @@ using BoardTower.Boot.Data.Entity;
 using BoardTower.Boot.Domain.Ports;
 using BoardTower.Boot.Domain.UseCase;
 using BoardTower.Boot.Presentation.Presenter;
+using BoardTower.Boot.Presentation.State;
 using MessagePipe;
 using VContainer;
 using VContainer.Unity;
@@ -22,6 +23,9 @@ namespace BoardTower.Boot.Installer
 
             // UseCase
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
+
+            // State
+            builder.Register<BaseBootState, BootInitState>(Lifetime.Scoped);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

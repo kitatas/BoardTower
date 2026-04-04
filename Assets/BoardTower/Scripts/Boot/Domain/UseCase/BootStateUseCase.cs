@@ -15,7 +15,7 @@ namespace BoardTower.Boot.Domain.UseCase
 
         public override UniTask InitAsync(CancellationToken token)
         {
-            return default;
+            return PublishAsync(BootState.Init, token);
         }
 
         public override UniTask PublishAsync(BootState value, CancellationToken token)
