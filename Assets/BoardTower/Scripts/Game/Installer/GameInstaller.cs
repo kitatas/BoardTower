@@ -40,6 +40,7 @@ namespace BoardTower.Game.Installer
             builder.Register<FinishPorts>(Lifetime.Scoped);
             builder.Register<GameStatePorts>(Lifetime.Scoped);
             builder.Register<MovementPorts>(Lifetime.Scoped);
+            builder.Register<TapScreenPorts>(Lifetime.Scoped);
 
             // Repository
             builder.Register<BoardPatternRepository>(Lifetime.Scoped);
@@ -59,6 +60,7 @@ namespace BoardTower.Game.Installer
             builder.Register<PlyUseCase>(Lifetime.Scoped);
             builder.Register<RoundUseCase>(Lifetime.Scoped);
             builder.Register<RoundClearUseCase>(Lifetime.Scoped);
+            builder.Register<TapScreenUseCase>(Lifetime.Scoped);
 
             // State
             builder.Register<BaseGameState, GameClearState>(Lifetime.Scoped);
@@ -81,6 +83,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<PlyPresenter>();
                 entryPoints.Add<RoundPresenter>();
                 entryPoints.Add<RoundClearPresenter>();
+                entryPoints.Add<TapScreenPresenter>();
             });
 
             // Facade
@@ -91,6 +94,7 @@ namespace BoardTower.Game.Installer
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
             builder.Register<RoundClearFacade>(Lifetime.Scoped);
+            builder.Register<TapScreenFacade>(Lifetime.Scoped);
 
             // View
             builder.RegisterComponentInHierarchy<BoardView>();
@@ -101,6 +105,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<RoundView>();
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
             builder.RegisterComponentInHierarchy<RoundMaxNumView>();
+            builder.RegisterComponentInHierarchy<TapScreenView>();
         }
     }
 }
