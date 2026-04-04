@@ -3,6 +3,7 @@ namespace BoardTower.Common.Application
     public enum SceneName
     {
         None,
+        Boot,
         Game,
     }
 

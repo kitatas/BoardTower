@@ -23,6 +23,7 @@ namespace BoardTower.Boot.Installer
 
             // State
             builder.Register<BaseBootState, BootInitState>(Lifetime.Scoped);
+            builder.Register<BaseBootState, BootLoadState>(Lifetime.Scoped);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>

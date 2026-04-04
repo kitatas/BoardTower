@@ -25,7 +25,7 @@ namespace BoardTower.Boot.Presentation.State
 
         public override UniTask<BootState> TickAsync(CancellationToken token)
         {
-            return UniTask.FromResult(BootState.None);
+            return UniTask.FromResult(BootState.Load);
         }
     }
 }
