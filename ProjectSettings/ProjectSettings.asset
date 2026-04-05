@@ -146,6 +146,7 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: 346a0a34e1048427da6b77a1f2b33e09, type: 2}
   - {fileID: 11400000, guid: cb5ab7eadfd314af1903458eaf40366f, type: 2}
+  - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -523,7 +524,10 @@ PlayerSettings:
       m_Height: 720
       m_Kind: 1
       m_SubKind: 
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
@@ -837,7 +841,7 @@ PlayerSettings:
     QNX: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO
     ReservedCFE: DOTWEEN;DOTWEEN_TEXTMESHPRO
     Server: ES3_TMPRO;ES3_UGUI
-    Standalone: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO
+    Standalone: DOTWEEN;DOTWEEN_TEXTMESHPRO;ES3_TMPRO;ES3_UGUI;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT
     VisionOS: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO
     WebGL: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO
     Windows Store Apps: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO
