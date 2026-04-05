@@ -51,6 +51,13 @@ namespace BoardTower.Game.Application
         Collapse = 9,
     }
 
+    public enum RenderType
+    {
+        None = 0,
+        Refresh = 1,
+        Retain = 2,
+    }
+
     public enum RotateType
     {
         None = 0,

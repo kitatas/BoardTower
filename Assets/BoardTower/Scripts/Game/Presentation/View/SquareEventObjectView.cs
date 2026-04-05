@@ -10,9 +10,9 @@ namespace BoardTower.Game.Presentation.View
         [SerializeField] private Transform eventObjectTransform = default;
         private SquareEventType _currentType = SquareEventType.None;
 
-        public Tween Render(SquareEventVO squareEvent, float duration, float delay)
+        public Tween Render(SquareEventVO squareEvent, RenderType render, float duration, float delay)
         {
-            if (_currentType == squareEvent.type) return null;
+            if (render == RenderType.Retain && _currentType == squareEvent.type) return null;
             _currentType = squareEvent.type;
 
             eventObjectTransform.gameObject.DestroyChildren();

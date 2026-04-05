@@ -8,13 +8,13 @@ namespace BoardTower.Game.Domain.Ports
     public sealed class EventPorts
     {
         private readonly IAsyncPublisher<ChessmenMovementVO> _movementPublisher;
-        private readonly IAsyncPublisher<EventSquareVO[]> _eventSquaresPublisher;
+        private readonly IAsyncPublisher<RenderEventSquareVO> _renderEventSquarePublisher;
 
         public EventPorts(IAsyncPublisher<ChessmenMovementVO> movementPublisher,
-            IAsyncPublisher<EventSquareVO[]> eventSquaresPublisher)
+            IAsyncPublisher<RenderEventSquareVO> renderEventSquarePublisher)
         {
             _movementPublisher = movementPublisher;
-            _eventSquaresPublisher = eventSquaresPublisher;
+            _renderEventSquarePublisher = renderEventSquarePublisher;
         }
 
         public UniTask PublishChessmenMovementAsync(ChessmenMovementVO movement, CancellationToken token)
@@ -22,9 +22,9 @@ namespace BoardTower.Game.Domain.Ports
             return _movementPublisher.PublishAsync(movement, token);
         }
 
-        public UniTask PublishEventSquaresAsync(EventSquareVO[] eventSquares, CancellationToken token)
+        public UniTask PublishEventSquaresAsync(RenderEventSquareVO renderEventSquare, CancellationToken token)
         {
-            return _eventSquaresPublisher.PublishAsync(eventSquares, token);
+            return _renderEventSquarePublisher.PublishAsync(renderEventSquare, token);
         }
     }
 }

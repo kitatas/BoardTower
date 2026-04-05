@@ -168,6 +168,21 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class RenderEventSquareVO
+    {
+        public readonly RenderType render;
+        public readonly EventSquareVO[] eventSquares;
+
+        public RenderEventSquareVO(RenderType render, EventSquareVO[] eventSquares)
+        {
+            if (render is RenderType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_RENDER);
+
+            this.render = render;
+            this.eventSquares = eventSquares;
+        }
+    }
+
     public sealed class ChessmenMovementVO
     {
         public readonly SquareVO square;

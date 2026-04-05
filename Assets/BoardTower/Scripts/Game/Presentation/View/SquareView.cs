@@ -56,10 +56,10 @@ namespace BoardTower.Game.Presentation.View
             click?.Invoke();
         }
 
-        public Tween RenderEvent(SquareEventVO squareEvent, float duration, float delay)
+        public Tween RenderEvent(SquareEventVO squareEvent, RenderType render, float duration, float delay)
         {
             return squareEventObjectView
-                .Render(squareEvent, duration, delay);
+                .Render(squareEvent, render, duration, delay);
         }
     }
 }

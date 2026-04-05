@@ -35,12 +35,13 @@ namespace BoardTower.Game.Presentation.View
             return sequence;
         }
 
-        public Tween RenderEventSquareAll(SquareEventVO[] events, float duration)
+        public Tween RenderEventSquareAll(RenderEventSquareVO renderEventSquare, float duration)
         {
             var sequence = DOTween.Sequence();
             for (int i = 0; i < squareViews.Length; i++)
             {
-                var tween = squareViews[i].RenderEvent(events[i], duration, 0.0f);
+                var tween = squareViews[i]
+                    .RenderEvent(renderEventSquare.eventSquares[i].squareEvent, renderEventSquare.render, duration, 0.0f);
                 if (tween != null) sequence.Join(tween);
             }
 

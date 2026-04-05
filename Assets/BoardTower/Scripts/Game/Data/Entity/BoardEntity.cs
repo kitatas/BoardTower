@@ -36,7 +36,10 @@ namespace BoardTower.Game.Data.Entity
             _events.Add(square);
         }
 
-        public EventSquareVO[] events => _events.ToArray();
+        public RenderEventSquareVO GetRenderEventSquare(RenderType render)
+        {
+            return new RenderEventSquareVO(render, _events.ToArray());
+        }
 
         public (SquareEventVO squareEvent, int index) FindEvent(SquareVO square)
         {

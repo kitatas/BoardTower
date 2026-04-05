@@ -49,7 +49,7 @@ namespace BoardTower.Game.Domain.UseCase
         private UniTask OverrideSquareEventAsync(int index, SquareEventType type, CancellationToken token)
         {
             _boardEntity.Set(index, _squareEventRepository.Find(type));
-            return _eventPorts.PublishEventSquaresAsync(_boardEntity.events, token);
+            return _eventPorts.PublishEventSquaresAsync(_boardEntity.GetRenderEventSquare(RenderType.Retain), token);
         }
     }
 }

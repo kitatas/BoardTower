@@ -31,13 +31,9 @@ namespace BoardTower.Game.Presentation.Facade
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
 
-        public UniTask RenderEventAsync(EventSquareVO[] squares, CancellationToken token)
+        public UniTask RenderEventAsync(RenderEventSquareVO renderEventSquare, CancellationToken token)
         {
-            var events = squares
-                .Select(x => x.squareEvent)
-                .ToArray();
-
-            return _boardView.RenderEventSquareAll(events, BoardConfig.EVENT_DURATION)
+            return _boardView.RenderEventSquareAll(renderEventSquare, BoardConfig.EVENT_DURATION)
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
 

@@ -8,19 +8,19 @@ namespace BoardTower.Game.Domain.Ports
     public sealed class BoardPorts
     {
         public readonly IAsyncSubscriber<BoardTransitionVO> boardTransitionSubscriber;
-        public readonly IAsyncSubscriber<EventSquareVO[]> eventSquaresSubscriber;
+        public readonly IAsyncSubscriber<RenderEventSquareVO> renderEventSquareSubscriber;
         private readonly IAsyncPublisher<BoardTransitionVO> _boardTransitionPublisher;
-        private readonly IAsyncPublisher<EventSquareVO[]> _eventSquaresPublisher;
+        private readonly IAsyncPublisher<RenderEventSquareVO> _renderEventSquarePublisher;
 
         public BoardPorts(IAsyncSubscriber<BoardTransitionVO> boardTransitionSubscriber,
-            IAsyncSubscriber<EventSquareVO[]> eventSquaresSubscriber,
+            IAsyncSubscriber<RenderEventSquareVO> renderEventSquareSubscriber,
             IAsyncPublisher<BoardTransitionVO> boardTransitionPublisher,
-            IAsyncPublisher<EventSquareVO[]> eventSquaresPublisher)
+            IAsyncPublisher<RenderEventSquareVO> renderEventSquarePublisher)
         {
             this.boardTransitionSubscriber = boardTransitionSubscriber;
-            this.eventSquaresSubscriber = eventSquaresSubscriber;
+            this.renderEventSquareSubscriber = renderEventSquareSubscriber;
             _boardTransitionPublisher = boardTransitionPublisher;
-            _eventSquaresPublisher = eventSquaresPublisher;
+            _renderEventSquarePublisher = renderEventSquarePublisher;
         }
 
         public UniTask PublishBoardTransitionAsync(BoardTransitionVO boardTransition, CancellationToken token)
@@ -28,9 +28,9 @@ namespace BoardTower.Game.Domain.Ports
             return _boardTransitionPublisher.PublishAsync(boardTransition, token);
         }
 
-        public UniTask PublishEventSquaresAsync(EventSquareVO[] eventSquares, CancellationToken token)
+        public UniTask PublishEventSquaresAsync(RenderEventSquareVO renderEventSquare, CancellationToken token)
         {
-            return _eventSquaresPublisher.PublishAsync(eventSquares, token);
+            return _renderEventSquarePublisher.PublishAsync(renderEventSquare, token);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace BoardTower.Game.Domain.UseCase
         }
 
         public IAsyncSubscriber<BoardTransitionVO> transition => _boardPorts.boardTransitionSubscriber;
-        public IAsyncSubscriber<EventSquareVO[]> eventSquares => _boardPorts.eventSquaresSubscriber;
+        public IAsyncSubscriber<RenderEventSquareVO> renderEvent => _boardPorts.renderEventSquareSubscriber;
 
         public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
@@ -59,7 +59,7 @@ namespace BoardTower.Game.Domain.UseCase
                 }
             }
 
-            return _boardPorts.PublishEventSquaresAsync(_boardEntity.events, token);
+            return _boardPorts.PublishEventSquaresAsync(_boardEntity.GetRenderEventSquare(RenderType.Refresh), token);
         }
     }
 }
