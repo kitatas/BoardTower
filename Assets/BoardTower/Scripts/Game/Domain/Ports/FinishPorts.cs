@@ -7,19 +7,19 @@ namespace BoardTower.Game.Domain.Ports
 {
     public sealed class FinishPorts
     {
-        public readonly IAsyncSubscriber<FinishVO> finishSubscriber;
-        private readonly IAsyncPublisher<FinishVO> _finishPublisher;
+        public readonly IAsyncSubscriber<FinishTransitionVO> finishTransitionSubscriber;
+        private readonly IAsyncPublisher<FinishTransitionVO> _finishTransitionPublisher;
 
-        public FinishPorts(IAsyncSubscriber<FinishVO> finishSubscriber,
-            IAsyncPublisher<FinishVO> finishPublisher)
+        public FinishPorts(IAsyncSubscriber<FinishTransitionVO> finishTransitionSubscriber,
+            IAsyncPublisher<FinishTransitionVO> finishTransitionPublisher)
         {
-            this.finishSubscriber = finishSubscriber;
-            _finishPublisher = finishPublisher;
+            this.finishTransitionSubscriber = finishTransitionSubscriber;
+            _finishTransitionPublisher = finishTransitionPublisher;
         }
 
-        public UniTask PublishFinishAsync(FinishVO finish, CancellationToken token)
+        public UniTask PublishFinishAsync(FinishTransitionVO finishTransition, CancellationToken token)
         {
-            return _finishPublisher.PublishAsync(finish, token);
+            return _finishTransitionPublisher.PublishAsync(finishTransition, token);
         }
     }
 }

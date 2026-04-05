@@ -16,17 +16,17 @@ namespace BoardTower.Game.Domain.UseCase
             _finishPorts = finishPorts;
         }
 
-        public IAsyncSubscriber<FinishVO> finish => _finishPorts.finishSubscriber;
+        public IAsyncSubscriber<FinishTransitionVO> finishTransition => _finishPorts.finishTransitionSubscriber;
 
         public UniTask InitAsync(FinishType type, CancellationToken token)
         {
-            var f = FinishVO.Create(type, Fade.Out, 0.0f);
+            var f = FinishTransitionVO.Create(type, Fade.Out, 0.0f);
             return _finishPorts.PublishFinishAsync(f, token);
         }
 
         public UniTask FadeAsync(FinishType type, Fade fade, CancellationToken token)
         {
-            var f = FinishVO.Create(type, fade, UiConfig.DURATION);
+            var f = FinishTransitionVO.Create(type, fade, UiConfig.DURATION);
             return _finishPorts.PublishFinishAsync(f, token);
         }
     }

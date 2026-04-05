@@ -281,12 +281,12 @@ namespace BoardTower.Game.Application
         }
     }
 
-    public sealed class FinishVO
+    public sealed class FinishTransitionVO
     {
         public readonly FinishType type;
         public readonly TransitionVO transition;
 
-        public FinishVO(FinishType type, TransitionVO transition)
+        public FinishTransitionVO(FinishType type, TransitionVO transition)
         {
             if (type is FinishType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_FINISH);
@@ -295,10 +295,10 @@ namespace BoardTower.Game.Application
             this.transition = transition;
         }
 
-        public static FinishVO Create(FinishType type, Fade fade, float duration)
+        public static FinishTransitionVO Create(FinishType type, Fade fade, float duration)
         {
             var transition = new TransitionVO(fade, duration);
-            return new FinishVO(type, transition);
+            return new FinishTransitionVO(type, transition);
         }
     }
 

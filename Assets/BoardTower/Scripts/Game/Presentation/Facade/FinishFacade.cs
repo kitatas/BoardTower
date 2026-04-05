@@ -15,12 +15,12 @@ namespace BoardTower.Game.Presentation.Facade
             _finishView = finishView;
         }
 
-        public UniTask FadeAsync(FinishVO finish, CancellationToken token)
+        public UniTask FadeAsync(FinishTransitionVO finishTransition, CancellationToken token)
         {
-            var tween = finish.transition.fade switch
+            var tween = finishTransition.transition.fade switch
             {
-                Fade.In => _finishView.FadeIn(finish.type, finish.transition.duration),
-                Fade.Out => _finishView.FadeOut(finish.type, finish.transition.duration),
+                Fade.In => _finishView.FadeIn(finishTransition.type, finishTransition.transition.duration),
+                Fade.Out => _finishView.FadeOut(finishTransition.type, finishTransition.transition.duration),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 

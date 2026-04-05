@@ -22,7 +22,7 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IStartable.Start()
         {
-            _finishUseCase.finish
+            _finishUseCase.finishTransition
                 .Subscribe((f, ct) => _finishFacade.FadeAsync(f, ct))
                 .AddTo(_disposable);
         }
