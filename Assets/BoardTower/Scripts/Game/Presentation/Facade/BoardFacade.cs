@@ -40,7 +40,7 @@ namespace BoardTower.Game.Presentation.Facade
         public UniTask ShowHighlightAsync(HighlightSquareVO[] squares, CancellationToken token)
         {
             var highlights = squares
-                .Select(x => new HighlightVO(BoardHelper.ToIndex(x.square.file, x.square.rank), x.highlight))
+                .Select(x => new HighlightIndexVO(BoardHelper.ToIndex(x.square.file, x.square.rank), x.highlight))
                 .Distinct()
                 .ToArray();
 

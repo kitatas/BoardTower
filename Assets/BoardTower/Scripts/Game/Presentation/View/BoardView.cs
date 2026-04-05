@@ -48,7 +48,7 @@ namespace BoardTower.Game.Presentation.View
             return sequence;
         }
 
-        public Tween ShowHighlightSquare(HighlightVO[] highlights, float duration)
+        public Tween ShowHighlightSquare(HighlightIndexVO[] highlights, float duration)
         {
             var sequence = DOTween.Sequence();
             foreach (var highlight in highlights)
