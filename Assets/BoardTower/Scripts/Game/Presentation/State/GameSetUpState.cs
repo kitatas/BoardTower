@@ -34,10 +34,9 @@ namespace BoardTower.Game.Presentation.State
             await _chessmenUseCase.FadeAsync(Fade.In, token);
         }
 
-        public override async UniTask<GameState> TickAsync(CancellationToken token)
+        public override UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await UniTask.Yield(PlayerLoopTiming.Update, token);
-            return GameState.Input;
+            return UniTask.FromResult(GameState.Input);
         }
     }
 }

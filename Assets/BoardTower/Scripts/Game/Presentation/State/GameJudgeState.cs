@@ -18,16 +18,12 @@ namespace BoardTower.Game.Presentation.State
 
         public override GameState state => GameState.Judge;
 
-        public override async UniTask<GameState> TickAsync(CancellationToken token)
+        public override UniTask<GameState> TickAsync(CancellationToken token)
         {
-            if (_roundClearUseCase.IsClear())
-            {
-                return _roundUseCase.IsMaxRound() ? GameState.Clear : GameState.SetUp;
-            }
-            else
-            {
-                return GameState.Fail;
-            }
+            var nextState = _roundClearUseCase.IsClear()
+                ? _roundUseCase.IsMaxRound() ? GameState.Clear : GameState.SetUp
+                : GameState.Fail;
+            return UniTask.FromResult(nextState);
         }
     }
 }

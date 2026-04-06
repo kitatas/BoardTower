@@ -8,9 +8,9 @@ namespace BoardTower.Game.Presentation.State
     {
         public override GameState state => GameState.Finish;
 
-        public override async UniTask<GameState> TickAsync(CancellationToken token)
+        public override UniTask<GameState> TickAsync(CancellationToken token)
         {
-            return GameState.Init;
+            return UniTask.FromResult(GameState.Init);
         }
     }
 }
