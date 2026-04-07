@@ -36,7 +36,7 @@ namespace BoardTower.Game.Presentation.State
 
         public override UniTask<GameState> TickAsync(CancellationToken token)
         {
-            return UniTask.FromResult(GameState.Input);
+            return UniTask.FromResult(GameState.Event);
         }
     }
 }
