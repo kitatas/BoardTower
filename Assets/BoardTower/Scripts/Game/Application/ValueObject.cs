@@ -250,7 +250,7 @@ namespace BoardTower.Game.Application
         public static EventResultVO Create(SquareEventType type)
         {
             return new EventResultVO(
-                type.IsBeltEvent(),
+                type.IsBeltEvent() || type is SquareEventType.Block,
                 type == SquareEventType.Gem ? 1 : 0,
                 type == SquareEventType.Ply ? 1 : 0
             );
