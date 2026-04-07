@@ -20,6 +20,14 @@ namespace BoardTower.Game.Application
             RotateType.Angle180,
             RotateType.Angle270,
         };
+
+        public static readonly SquareEventType[] BELTS =
+        {
+            SquareEventType.BeltRight,
+            SquareEventType.BeltDown,
+            SquareEventType.BeltLeft,
+            SquareEventType.BeltUp,
+        };
     }
 
     public sealed class ChessmenConfig

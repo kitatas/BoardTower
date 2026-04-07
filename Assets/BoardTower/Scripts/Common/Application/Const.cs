@@ -14,6 +14,7 @@ namespace BoardTower.Common.Application
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
         public const string INVALID_CHESSMEN_MOVEMENT = "INVALID_CHESSMEN_MOVEMENT";
+        public const string INVALID_COLLECTION = "INVALID_COLLECTION";
         public const string INVALID_DURATION = "INVALID_DURATION";
         public const string INVALID_FADE = "INVALID_FADE";
         public const string INVALID_FINISH = "INVALID_FINISH";

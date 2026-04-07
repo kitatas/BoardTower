@@ -1,9 +1,11 @@
 using System.Threading;
 using BoardTower.Common.Application;
+using BoardTower.Common.Utility;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Ports;
 using BoardTower.Game.Domain.Repository;
+using BoardTower.Game.Utility;
 using Cysharp.Threading.Tasks;
 
 namespace BoardTower.Game.Domain.UseCase
@@ -30,6 +32,7 @@ namespace BoardTower.Game.Domain.UseCase
             await (squareEvent.type switch
             {
                 SquareEventType.Empty => UniTask.Yield(token),
+                SquareEventType.Block => BeltBlockAsync(token),
                 SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Ply => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Collapse => OverrideSquareEventAsync(index, SquareEventType.Block, token),
@@ -42,7 +45,26 @@ namespace BoardTower.Game.Domain.UseCase
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)
         {
-            _chessmenEntity.MoveBy(type.ToBeltOffset());
+            return BeltMovementAsync(new[] { type }, token);
+        }
+
+        private UniTask BeltBlockAsync(CancellationToken token)
+        {
+            return BeltMovementAsync(BoardConfig.BELTS.CopyShuffle(), token);
+        }
+
+        private UniTask BeltMovementAsync(SquareEventType[] types, CancellationToken token)
+        {
+            foreach (var type in types)
+            {
+                var offset = type.ToBeltOffset();
+                var square = _chessmenEntity.CalcMovementOffset(offset);
+                if (BoardHelper.IsOutOfBoard(square.file, square.rank)) continue;
+
+                _chessmenEntity.Set(square);
+                break;
+            }
+
             return _eventPorts.PublishChessmenMovementAsync(_chessmenEntity.movement, token);
         }
 

@@ -35,7 +35,12 @@ namespace BoardTower.Game.Data.Entity
 
         public void MoveBy(ChessmenMovementOffsetVO offset)
         {
-            Set(ChessmenHelper.CalcSquare(square, offset));
+            Set(CalcMovementOffset(offset));
+        }
+
+        public SquareVO CalcMovementOffset(ChessmenMovementOffsetVO offset)
+        {
+            return ChessmenHelper.CalcSquare(square, offset);
         }
 
         public ChessmenMovementVO movement => new(square);
