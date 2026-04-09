@@ -326,5 +326,11 @@ namespace BoardTower.Game.Application
         {
             this.transition = transition;
         }
+
+        public static HudRootTransitionVO Create(Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new HudRootTransitionVO(transition);
+        }
     }
 }
