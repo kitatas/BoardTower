@@ -55,4 +55,10 @@ namespace BoardTower.Game.Application
         public const float FADE_DURATION = 0.25f;
         public const float FLASH_DURATION = 1.0f;
     }
+
+    public sealed class HudRootConfig
+    {
+        public const float FADE_DURATION = 0.25f;
+        public const float FADE_DELAY_RATE = 0.2f;
+    }
 }

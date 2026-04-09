@@ -38,6 +38,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ChessmenPorts>(Lifetime.Scoped);
             builder.Register<EventPorts>(Lifetime.Scoped);
             builder.Register<FinishPorts>(Lifetime.Scoped);
+            builder.Register<HudRootPorts>(Lifetime.Scoped);
             builder.Register<GameStatePorts>(Lifetime.Scoped);
             builder.Register<MovementPorts>(Lifetime.Scoped);
             builder.Register<TapScreenPorts>(Lifetime.Scoped);
@@ -54,6 +55,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<EventUseCase>(Lifetime.Scoped);
             builder.Register<FinishUseCase>(Lifetime.Scoped);
+            builder.Register<HudRootUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<GemUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
@@ -78,6 +80,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<FinishPresenter>();
+                entryPoints.Add<HudRootPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
                 entryPoints.Add<PlyPresenter>();
@@ -90,6 +93,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
+            builder.Register<HudRootFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
@@ -100,6 +104,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<FinishView>();
+            builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<GemView>();
             builder.RegisterComponentInHierarchy<PlyView>();
             builder.RegisterComponentInHierarchy<RoundView>();

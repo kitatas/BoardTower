@@ -317,4 +317,14 @@ namespace BoardTower.Game.Application
             return new TapScreenTransitionVO(transition);
         }
     }
+
+    public sealed class HudRootTransitionVO
+    {
+        public readonly TransitionVO transition;
+
+        public HudRootTransitionVO(TransitionVO transition)
+        {
+            this.transition = transition;
+        }
+    }
 }
