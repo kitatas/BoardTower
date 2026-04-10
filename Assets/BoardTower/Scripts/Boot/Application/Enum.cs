@@ -5,6 +5,7 @@ namespace BoardTower.Boot.Application
         None = 0,
         Init = 1,
         Load = 2,
+        Splash = 3,
     }
 
     public enum SplashType

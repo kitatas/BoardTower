@@ -22,6 +22,13 @@ namespace BoardTower.Boot.Domain.UseCase
 
         public IAsyncSubscriber<SplashTransitionVO> transition => _splashPorts.splashTransitionSubscriber;
 
+        public UniTask InitAsync(CancellationToken token)
+        {
+            // NOTE: FadeOut時はSplash不要なのでnull指定
+            var splashTransition = SplashTransitionVO.Create(null, Fade.Out, 0.0f);
+            return _splashPorts.PublishSplashTransitionAsync(splashTransition, token);
+        }
+
         public async UniTask SequentialRenderAsync(CancellationToken token)
         {
             foreach (var type in SplashConfig.TYPES)
