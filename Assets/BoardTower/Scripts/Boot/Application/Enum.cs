@@ -6,4 +6,11 @@ namespace BoardTower.Boot.Application
         Init = 1,
         Load = 2,
     }
+
+    public enum SplashType
+    {
+        None = 0,
+        Developer = 1,
+        PlayFab = 2,
+    }
 }

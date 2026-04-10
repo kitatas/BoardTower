@@ -1,0 +1,20 @@
+{
+    "name": "Boot.Presentation.Facade",
+    "rootNamespace": "",
+    "references": [
+        "GUID:193efd1822ac4de5ae719bcf6d254d69",
+        "GUID:b230b301053f4478a82a19d2c9dc24b8",
+        "GUID:0c36894df493497d92c5293ca9e06b72",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

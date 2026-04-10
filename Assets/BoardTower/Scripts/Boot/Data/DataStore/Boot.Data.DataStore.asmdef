@@ -1,0 +1,17 @@
+{
+    "name": "Boot.Data.DataStore",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7aa364571c32414589df097445f1b89c",
+        "GUID:b230b301053f4478a82a19d2c9dc24b8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

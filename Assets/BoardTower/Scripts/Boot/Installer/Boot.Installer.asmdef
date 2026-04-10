@@ -2,11 +2,15 @@
     "name": "Boot.Installer",
     "rootNamespace": "",
     "references": [
+        "GUID:062fd7a60e2e4004aacf0e8d2c87a443",
         "GUID:0d94e4b04f8a43a0bda5b22e66f32eed",
         "GUID:94bca67d3ee94747b70f62e2238a6f1e",
+        "GUID:c94c08686c4d475db09fe19e9e1bbc87",
         "GUID:4a8c56445c1e41b0b0933d65ba8f83b1",
+        "GUID:4f427ae096484d06ab21886c42cc1cfc",
         "GUID:f75bbdc823ea45ee9c6f3252ba14d4f6",
         "GUID:9847ff68b80c480a8539bbdd5ecc2e48",
+        "GUID:0c36894df493497d92c5293ca9e06b72",
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
     ],
     "includePlatforms": [],
