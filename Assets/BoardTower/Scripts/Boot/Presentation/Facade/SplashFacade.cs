@@ -21,6 +21,7 @@ namespace BoardTower.Boot.Presentation.Facade
             {
                 Fade.In => _splashView.FadeIn(splashTransition.splash.sprite, splashTransition.transition.duration),
                 Fade.Out => _splashView.FadeOut(splashTransition.transition.duration),
+                Fade.InOut => _splashView.FadeInOut(splashTransition.splash.sprite, splashTransition.transition.duration),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
 

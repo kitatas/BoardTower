@@ -19,5 +19,6 @@ namespace BoardTower.Common.Application
         None,
         In,
         Out,
+        InOut,
     }
 }

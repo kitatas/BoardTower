@@ -1,3 +1,4 @@
+using BoardTower.Boot.Application;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,9 +17,7 @@ namespace BoardTower.Boot.Presentation.View
 
             copyright.sprite = sprite;
             _tween = DOTween.Sequence()
-                .Append(copyright
-                    .DOFade(1.0f, duration)
-                    .SetEase(Ease.Linear))
+                .Append(Fade(1.0f, duration))
                 .SetLink(gameObject);
 
             return _tween;
@@ -29,17 +28,37 @@ namespace BoardTower.Boot.Presentation.View
             Kill();
 
             _tween = DOTween.Sequence()
-                .Append(copyright
-                    .DOFade(0.0f, duration)
-                    .SetEase(Ease.Linear))
+                .Append(Fade(0.0f, duration))
                 .SetLink(gameObject);
 
             return _tween;
         }
 
+        public Tween FadeInOut(Sprite sprite, float duration)
+        {
+            Kill();
+
+            copyright.sprite = sprite;
+            _tween = DOTween.Sequence()
+                .Append(Fade(1.0f, duration))
+                .AppendInterval(SplashConfig.DISPLAY_DURATION)
+                .Append(Fade(0.0f, duration))
+                .SetLink(gameObject);
+
+            return _tween;
+        }
+
+        private Tween Fade(float value, float duration)
+        {
+            return copyright
+                .DOFade(value, duration)
+                .SetEase(Ease.Linear);
+        }
+
         public void Kill()
         {
             _tween?.Kill(true);
+            _tween = null;
         }
     }
 }
