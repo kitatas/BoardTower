@@ -3,6 +3,7 @@ using BoardTower.Boot.Application;
 using BoardTower.Boot.Presentation.View;
 using BoardTower.Common.Application;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Boot.Presentation.Facade
 {
@@ -14,6 +15,8 @@ namespace BoardTower.Boot.Presentation.Facade
         {
             _splashView = splashView;
         }
+
+        public Observable<Unit> OnTapAsObservable() => _splashView.tap;
 
         public UniTask FadeAsync(SplashTransitionVO splashTransition, CancellationToken token)
         {

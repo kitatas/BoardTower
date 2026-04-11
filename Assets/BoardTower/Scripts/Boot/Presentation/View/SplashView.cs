@@ -1,5 +1,7 @@
 using BoardTower.Boot.Application;
 using DG.Tweening;
+using R3;
+using R3.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +9,14 @@ namespace BoardTower.Boot.Presentation.View
 {
     public sealed class SplashView : MonoBehaviour
     {
+        [SerializeField] private Button button = default;
         [SerializeField] private Image copyright = default;
 
         private Tween _tween;
+
+        public Observable<Unit> tap => button
+            .OnPointerDownAsObservable()
+            .Select(_ => Unit.Default);
 
         public Tween FadeIn(Sprite sprite, float duration)
         {

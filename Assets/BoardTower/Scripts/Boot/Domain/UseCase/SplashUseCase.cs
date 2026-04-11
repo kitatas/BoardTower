@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using BoardTower.Boot.Application;
 using BoardTower.Boot.Domain.Ports;
@@ -5,18 +6,21 @@ using BoardTower.Boot.Domain.Repository;
 using BoardTower.Common.Application;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using R3;
 
 namespace BoardTower.Boot.Domain.UseCase
 {
-    public sealed class SplashUseCase
+    public sealed class SplashUseCase : IDisposable
     {
         private readonly SplashPorts _splashPorts;
         private readonly SplashRepository _splashRepository;
+        private readonly Subject<Unit> _tapScreen;
 
         public SplashUseCase(SplashPorts splashPorts, SplashRepository splashRepository)
         {
             _splashPorts = splashPorts;
             _splashRepository = splashRepository;
+            _tapScreen = new Subject<Unit>();
         }
 
         public IAsyncSubscriber<SplashTransitionVO> transition => _splashPorts.splashTransitionSubscriber;
@@ -32,7 +36,17 @@ namespace BoardTower.Boot.Domain.UseCase
         {
             foreach (var type in SplashConfig.TYPES)
             {
-                await FadeAsync(type, token);
+                using var iterationCts = CancellationTokenSource.CreateLinkedTokenSource(token);
+
+                var result = await UniTask.WhenAny(
+                    FadeAsync(type, iterationCts.Token),
+                    _tapScreen.FirstAsync(cancellationToken: token).AsUniTask()
+                );
+
+                // tapScreen であれば Tween cancel
+                if (result == 1) iterationCts.Cancel();
+
+                await UniTask.Yield(token);
             }
         }
 
@@ -41,6 +55,16 @@ namespace BoardTower.Boot.Domain.UseCase
             var splash = _splashRepository.Find(type);
             var splashTransition = SplashTransitionVO.Create(splash, Fade.InOut, SplashConfig.FADE_DURATION);
             return _splashPorts.PublishSplashTransitionAsync(splashTransition, token);
+        }
+
+        public void NotifyTapScreen()
+        {
+            _tapScreen?.OnNext(Unit.Default);
+        }
+
+        void IDisposable.Dispose()
+        {
+            _tapScreen?.Dispose();
         }
     }
 }

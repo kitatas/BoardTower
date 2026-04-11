@@ -25,6 +25,10 @@ namespace BoardTower.Boot.Presentation.Presenter
             _splashUseCase.transition
                 .Subscribe((s, ct) => _splashFacade.FadeAsync(s, ct))
                 .AddTo(_disposable);
+
+            _splashFacade.OnTapAsObservable()
+                .Subscribe(_ => _splashUseCase.NotifyTapScreen())
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()
