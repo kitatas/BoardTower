@@ -71,6 +71,22 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class LoadingTransitionVO
+    {
+        public readonly TransitionVO transition;
+
+        public LoadingTransitionVO(TransitionVO transition)
+        {
+            this.transition = transition;
+        }
+
+        public static LoadingTransitionVO Create(Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new LoadingTransitionVO(transition);
+        }
+    }
+
     public sealed class TransitionVO
     {
         public readonly Fade fade;

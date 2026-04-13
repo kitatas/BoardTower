@@ -29,6 +29,11 @@ namespace BoardTower.Common.Application
         public const string INVALID_SQUARE_INDEX = "INVALID_SQUARE_INDEX";
     }
 
+    public sealed class LoadingConfig
+    {
+        public const float FADE_DURATION = 0.05f;
+    }
+
     public sealed class UiConfig
     {
         public const float DURATION = 0.25f;
