@@ -17,6 +17,12 @@ namespace BoardTower.Common.Domain.UseCase
 
         public IAsyncSubscriber<LoadingTransitionVO> transition => _loadingPorts.loadingTransitionSubscriber;
 
+        public UniTask InitAsync(CancellationToken token)
+        {
+            var loadingTransition = LoadingTransitionVO.Create(Fade.Out, 0.0f);
+            return _loadingPorts.PublishLoadingTransitionAsync(loadingTransition, token);
+        }
+
         public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
             var loadingTransition = LoadingTransitionVO.Create(fade, LoadingConfig.FADE_DURATION);

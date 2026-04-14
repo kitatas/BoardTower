@@ -8,10 +8,12 @@ namespace BoardTower.Boot.Presentation.State
     public sealed class BootInitState : BaseBootState
     {
         private readonly ExceptionUseCase _exceptionUseCase;
+        private readonly LoadingUseCase _loadingUseCase;
 
-        public BootInitState(ExceptionUseCase exceptionUseCase)
+        public BootInitState(ExceptionUseCase exceptionUseCase, LoadingUseCase loadingUseCase)
         {
             _exceptionUseCase = exceptionUseCase;
+            _loadingUseCase = loadingUseCase;
         }
 
         public override BootState state => BootState.Init;
@@ -19,7 +21,8 @@ namespace BoardTower.Boot.Presentation.State
         public override async UniTask EnterAsync(CancellationToken token)
         {
             await (
-                _exceptionUseCase.FadeOutAsync(0.0f, token)
+                _exceptionUseCase.FadeOutAsync(0.0f, token),
+                _loadingUseCase.InitAsync(token)
             );
         }
 
