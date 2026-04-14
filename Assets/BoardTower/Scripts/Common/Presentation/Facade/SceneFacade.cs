@@ -16,24 +16,20 @@ namespace BoardTower.Common.Presentation.Facade
             _transitionView = transitionView;
         }
 
-        public UniTask LoadAsync(LoadVO load, CancellationToken token)
+        public UniTask FadeAsync(Fade fade, CancellationToken token)
         {
-            return load.loadType switch
+            var tween = fade switch
             {
-                LoadType.Direct => LoadSceneAsync(load.sceneName, token),
-                LoadType.Fade => FadeLoadAsync(load.sceneName, token),
-                _ => throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_LOAD),
+                Fade.In => _transitionView.FadeIn(SceneConfig.FADE_DURATION),
+                Fade.Out => _transitionView.FadeOut(SceneConfig.FADE_DURATION),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
+
+            return tween
+                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
 
-        private async UniTask FadeLoadAsync(SceneName sceneName, CancellationToken token)
-        {
-            await _transitionView.FadeIn(0.1f).ToUniTask(cancellationToken: token);
-            await LoadSceneAsync(sceneName, token);
-            await _transitionView.FadeOut(0.1f).ToUniTask(cancellationToken: token);
-        }
-
-        private static UniTask LoadSceneAsync(SceneName sceneName, CancellationToken token)
+        public UniTask LoadSceneAsync(SceneName sceneName, CancellationToken token)
         {
             return SceneManager.LoadSceneAsync(sceneName.FastToString())
                 .ToUniTask(cancellationToken: token);

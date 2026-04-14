@@ -37,6 +37,11 @@ namespace BoardTower.Common.Application
         public const float ICON_ANIMATION_DURATION = 2.0f;
     }
 
+    public sealed class SceneConfig
+    {
+        public const float FADE_DURATION = 0.1f;
+    }
+
     public sealed class UiConfig
     {
         public const float DURATION = 0.25f;
