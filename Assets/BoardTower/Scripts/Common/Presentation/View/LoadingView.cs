@@ -1,27 +1,81 @@
+using BoardTower.Common.Application;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace BoardTower.Common.Presentation.View
 {
     public sealed class LoadingView : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup canvasGroup = default;
+        [SerializeField] private RectTransform body = default;
+        [SerializeField] private RectTransform icon = default;
+        [SerializeField] private TextMeshProUGUI loading = default;
+
+        private Sequence _tween;
+
+        private void Awake()
+        {
+            _tween = DOTween.Sequence()
+                .Join(TweenLoadingIcon())
+                .Join(TweenLoadingText())
+                .SetLink(gameObject);
+        }
+
+        private Tween TweenLoadingIcon()
+        {
+            var endValue = Vector3.back * 360.0f;
+            return icon
+                .DORotate(endValue, LoadingConfig.ICON_ANIMATION_DURATION, RotateMode.FastBeyond360)
+                .SetEase(Ease.Linear)
+                .SetLoops(-1)
+                .SetLink(gameObject);
+        }
+
+        private Tween TweenLoadingText()
+        {
+            var animator = new DOTweenTMPAnimator(loading);
+            var offset = Vector3.up * 5.0f;
+            var length = loading.textInfo.characterCount;
+
+            var sequence = DOTween.Sequence();
+            for (int i = 0; i < length; i++)
+            {
+                if (char.IsWhiteSpace(loading.text[i])) continue;
+
+                var interval = (i + 1) * LoadingConfig.TEXT_ANIMATION_INTERVAL;
+                var endValue = animator.GetCharOffset(i) + offset;
+                sequence
+                    .Join(DOTween.Sequence()
+                        .AppendInterval(interval)
+                        .Append(animator
+                            .DOOffsetChar(i, endValue, LoadingConfig.TEXT_ANIMATION_DURATION)
+                            .SetLoops(2, LoopType.Yoyo)
+                            .SetDelay(interval))
+                        .AppendInterval(length * LoadingConfig.TEXT_ANIMATION_INTERVAL - interval));
+            }
+
+            return sequence
+                .SetLoops(-1)
+                .SetLink(gameObject);
+        }
 
         public Tween FadeIn(float duration)
         {
-            return Fade(1.0f, duration);
+            _tween?.Restart();
+            return Fade(40.0f, duration);
         }
 
         public Tween FadeOut(float duration)
         {
-            return Fade(0.0f, duration);
+            _tween?.Pause();
+            return Fade(body.rect.width, duration);
         }
 
         private Tween Fade(float value, float duration)
         {
             return DOTween.Sequence()
-                .Append(canvasGroup
-                    .DOFade(value, duration)
+                .Append(body
+                    .DOAnchorPosX(value, duration)
                     .SetEase(Ease.Linear))
                 .SetLink(gameObject);
         }
