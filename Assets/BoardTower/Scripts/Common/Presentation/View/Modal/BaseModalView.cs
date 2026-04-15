@@ -1,0 +1,50 @@
+using System;
+using DG.Tweening;
+using UniEx;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace BoardTower.Common.Presentation.View.Modal
+{
+    public abstract class BaseModalView<T> : MonoBehaviour where T : Enum
+    {
+        [SerializeField] private T modalType = default;
+        [SerializeField] private CanvasGroup canvasGroup = default;
+        [SerializeField] private ScrollRect scrollRect = default;
+        private Sequence _tween;
+
+        public T type => modalType;
+
+        public Tween FadeIn(float duration)
+        {
+            _tween?.Kill();
+            return _tween = DOTween.Sequence()
+                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
+                .Append(canvasGroup
+                    .DOFade(1.0f, duration)
+                    .SetEase(Ease.OutBack))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one, duration)
+                    .SetEase(Ease.OutBack))
+                .SetLink(gameObject);
+        }
+
+        public Tween FadeOut(float duration)
+        {
+            _tween?.Kill();
+            return _tween = DOTween.Sequence()
+                .Append(canvasGroup
+                    .DOFade(0.0f, duration)
+                    .SetEase(Ease.OutQuart))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one * 0.8f, duration)
+                    .SetEase(Ease.OutQuart))
+                .AppendCallback(() => canvasGroup.blocksRaycasts = false)
+                .OnComplete(() =>
+                {
+                    if (scrollRect) scrollRect.verticalNormalizedPosition = 1.0f;
+                })
+                .SetLink(gameObject);
+        }
+    }
+}

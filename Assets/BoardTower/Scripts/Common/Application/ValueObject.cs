@@ -101,4 +101,16 @@ namespace BoardTower.Common.Application
             this.duration = duration;
         }
     }
+
+    public abstract class BaseModalTransitionVO<T> where T : Enum
+    {
+        public readonly T type;
+        public readonly TransitionVO transition;
+
+        protected BaseModalTransitionVO(T type, TransitionVO transition)
+        {
+            this.type = type;
+            this.transition = transition;
+        }
+    }
 }
