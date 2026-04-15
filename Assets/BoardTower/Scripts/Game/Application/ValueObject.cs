@@ -333,4 +333,19 @@ namespace BoardTower.Game.Application
             return new HudRootTransitionVO(transition);
         }
     }
+
+    public sealed class GameModalTransitionVO : BaseModalTransitionVO<GameModalType>
+    {
+        public GameModalTransitionVO(GameModalType type, TransitionVO transition) : base(type, transition)
+        {
+            if (type is GameModalType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODAL);
+        }
+
+        public static GameModalTransitionVO Create(GameModalType type, Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new GameModalTransitionVO(type, transition);
+        }
+    }
 }

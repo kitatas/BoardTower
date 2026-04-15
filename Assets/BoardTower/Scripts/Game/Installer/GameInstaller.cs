@@ -27,6 +27,7 @@ namespace BoardTower.Game.Installer
             // Entity
             builder.Register<BoardEntity>(Lifetime.Scoped);
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
+            builder.Register<GameModalEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
             builder.Register<GemEntity>(Lifetime.Scoped);
             builder.Register<PlyEntity>(Lifetime.Scoped);
@@ -39,6 +40,7 @@ namespace BoardTower.Game.Installer
             builder.Register<EventPorts>(Lifetime.Scoped);
             builder.Register<FinishPorts>(Lifetime.Scoped);
             builder.Register<HudRootPorts>(Lifetime.Scoped);
+            builder.Register<GameModalPorts>(Lifetime.Scoped);
             builder.Register<GameStatePorts>(Lifetime.Scoped);
             builder.Register<MovementPorts>(Lifetime.Scoped);
             builder.Register<TapScreenPorts>(Lifetime.Scoped);
@@ -56,6 +58,7 @@ namespace BoardTower.Game.Installer
             builder.Register<EventUseCase>(Lifetime.Scoped);
             builder.Register<FinishUseCase>(Lifetime.Scoped);
             builder.Register<HudRootUseCase>(Lifetime.Scoped);
+            builder.Register<GameModalUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<GemUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
@@ -81,6 +84,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<HudRootPresenter>();
+                entryPoints.Add<GameModalPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
                 entryPoints.Add<PlyPresenter>();
@@ -94,6 +98,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<HudRootFacade>(Lifetime.Scoped);
+            builder.Register<GameModalFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);

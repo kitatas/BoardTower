@@ -73,4 +73,9 @@ namespace BoardTower.Game.Application
         Clear = 1,
         Fail = 2,
     }
+
+    public enum GameModalType
+    {
+        None = 0,
+    }
 }

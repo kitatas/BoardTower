@@ -61,4 +61,9 @@ namespace BoardTower.Game.Application
         public const float FADE_DURATION = 0.25f;
         public const float FADE_DELAY_RATE = 0.2f;
     }
+
+    public sealed class GameModalConfig
+    {
+        public const float FADE_DURATION = 0.25f;
+    }
 }
