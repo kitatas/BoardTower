@@ -4,14 +4,13 @@ using R3;
 using R3.Triggers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BoardTower.Game.Presentation.View
 {
     public sealed class TapScreenView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup = default;
-        [SerializeField] private Button button = default;
+        [SerializeField] private UnityEngine.UI.Button button = default;
         [SerializeField] private TextMeshProUGUI touch = default;
 
         public Observable<Unit> tap => button

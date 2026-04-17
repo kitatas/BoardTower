@@ -14,7 +14,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         protected override BaseModalTransitionVO<GameModalType> GetModalTransition(BaseModalVO<GameModalType> modal)
         {
-            return null;
+            return GameModalTransitionVO.Create(modal as GameModalVO, GameModalConfig.FADE_DURATION);
         }
     }
 }

@@ -334,6 +334,15 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class GameModalVO : BaseModalVO<GameModalType>
+    {
+        public GameModalVO(GameModalType type, Fade fade) : base(type, fade)
+        {
+            if (type is GameModalType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODAL);
+        }
+    }
+
     public sealed class GameModalTransitionVO : BaseModalTransitionVO<GameModalType>
     {
         public GameModalTransitionVO(GameModalType type, TransitionVO transition) : base(type, transition)
@@ -346,6 +355,12 @@ namespace BoardTower.Game.Application
         {
             var transition = new TransitionVO(fade, duration);
             return new GameModalTransitionVO(type, transition);
+        }
+
+        public static GameModalTransitionVO Create(GameModalVO gameModal, float duration)
+        {
+            var transition = new TransitionVO(gameModal.fade, duration);
+            return new GameModalTransitionVO(gameModal.type, transition);
         }
     }
 }
