@@ -1,17 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using BoardTower.Common.Application;
+using BoardTower.Common.Presentation.View.Button;
 using BoardTower.Common.Presentation.View.Modal;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Common.Presentation.Facade
 {
     public abstract class BaseModalFacade<T> where T : Enum
     {
         private readonly Dictionary<T, BaseModalView<T>> _modalMap;
+        private readonly List<BaseModalButtonView<T>> _buttons;
 
-        public BaseModalFacade(IEnumerable<BaseModalView<T>> modals)
+        public BaseModalFacade(IEnumerable<BaseModalView<T>> modals,
+            IEnumerable<BaseModalButtonView<T>> buttons)
         {
             _modalMap = new Dictionary<T, BaseModalView<T>>();
             foreach (var m in modals)
@@ -19,7 +24,12 @@ namespace BoardTower.Common.Presentation.Facade
                 _modalMap.TryAdd(m.type, m);
                 m.FadeOut(0.0f);
             }
+
+            _buttons = buttons.ToList();
         }
+
+        public IEnumerable<Observable<BaseModalVO<T>>> OnPointerDownAsObservables()
+            => _buttons.Select(x => x.pointerDown);
 
         public UniTask FadeAsync(BaseModalTransitionVO<T> transition, CancellationToken token)
         {
