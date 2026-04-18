@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: SquareEventData - Collapse
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
   squareEventType: 9
-  eventObject: {fileID: 9161460041793399534, guid: 692c48cd5508b4a0ab28a58ecf540e8b, type: 3}
-  isRotate: 0
+  eventObject: {fileID: 4913447206194745235, guid: 90284bf386e164a47abc6b83c9d2dda3, type: 3}

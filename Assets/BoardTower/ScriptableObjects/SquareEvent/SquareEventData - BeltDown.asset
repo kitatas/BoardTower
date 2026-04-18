@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SquareEventData - BeltDown
   m_EditorClassIdentifier: Game.Data.DataStore::BoardTower.Game.Data.DataStore.SquareEventData
   squareEventType: 3
-  eventObject: {fileID: 2000524449271152294, guid: f6ae50bb36fd549d4a3c7ed8dd212c7e, type: 3}
+  eventObject: {fileID: 7779315572009755475, guid: a2dc6760c38be436cab41edcff07f8e7, type: 3}
