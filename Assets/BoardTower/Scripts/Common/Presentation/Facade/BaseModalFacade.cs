@@ -13,10 +13,9 @@ namespace BoardTower.Common.Presentation.Facade
     public abstract class BaseModalFacade<T> where T : Enum
     {
         private readonly Dictionary<T, BaseModalView<T>> _modalMap;
-        private readonly List<BaseModalButtonView<T>> _buttons;
+        private readonly BaseModalButtonView<T>[] _buttons;
 
-        public BaseModalFacade(IEnumerable<BaseModalView<T>> modals,
-            IEnumerable<BaseModalButtonView<T>> buttons)
+        public BaseModalFacade(BaseModalView<T>[] modals, BaseModalButtonView<T>[] buttons)
         {
             _modalMap = new Dictionary<T, BaseModalView<T>>();
             foreach (var m in modals)
@@ -25,7 +24,7 @@ namespace BoardTower.Common.Presentation.Facade
                 m.FadeOut(0.0f);
             }
 
-            _buttons = buttons.ToList();
+            _buttons = buttons;
         }
 
         public IEnumerable<Observable<BaseModalVO<T>>> OnPointerDownAsObservables()
