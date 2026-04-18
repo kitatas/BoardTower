@@ -10,5 +10,11 @@ namespace BoardTower.Common.Utility
         {
             return builder.RegisterInstance<T>(Object.FindFirstObjectByType<T>());
         }
+
+        public static RegistrationBuilder RegisterFindObjectsByType<T>(this IContainerBuilder builder)
+            where T : MonoBehaviour
+        {
+            return builder.RegisterInstance<T[]>(Object.FindObjectsByType<T>(FindObjectsSortMode.None));
+        }
     }
 }

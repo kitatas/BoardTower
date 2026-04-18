@@ -1,3 +1,4 @@
+using BoardTower.Common.Utility;
 using BoardTower.Game.Data.DataStore;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Ports;
@@ -7,6 +8,8 @@ using BoardTower.Game.Presentation.Facade;
 using BoardTower.Game.Presentation.Presenter;
 using BoardTower.Game.Presentation.State;
 using BoardTower.Game.Presentation.View;
+using BoardTower.Game.Presentation.View.Button;
+using BoardTower.Game.Presentation.View.Modal;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -106,6 +109,8 @@ namespace BoardTower.Game.Installer
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
 
             // View
+            builder.RegisterFindObjectsByType<GameModalButtonView>();
+            builder.RegisterFindObjectsByType<GameModalView>();
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<FinishView>();
