@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &354927455725234820
+--- !u!1001 &1570417987261035955
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,59 +8,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4567748621025526136}
     m_Modifications:
-    - target: {fileID: 3594230317687801100, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
-      propertyPath: m_Name
-      value: snow-tile
-      objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
+    - target: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848717163418652109, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
+      propertyPath: m_Name
+      value: snow-tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
---- !u!4 &4487381148556719410 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
+--- !u!4 &515407127722795716 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4227355864254177206, guid: 7a83331a7ed334621a64db4e040b01e5, type: 3}
-  m_PrefabInstance: {fileID: 354927455725234820}
+  m_CorrespondingSourceObject: {fileID: 1363507511592540023, guid: 3650d2dff6f2e45069d10684d86af533, type: 3}
+  m_PrefabInstance: {fileID: 1570417987261035955}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5490981225236961815
 PrefabInstance:
@@ -123,7 +123,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8309147357884668783, guid: da56d5b310977440fb79902802d0996b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4487381148556719410}
+      addedObject: {fileID: 515407127722795716}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da56d5b310977440fb79902802d0996b, type: 3}
 --- !u!4 &4567748621025526136 stripped
