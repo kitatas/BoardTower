@@ -37,7 +37,6 @@ namespace BoardTower.Game.Presentation.Presenter
 
             _roundUseCase.round
                 .Where(x => x != 0)
-                .DistinctUntilChanged()
                 .Subscribe(x =>
                 {
                     _gemUseCase.SetUp();
