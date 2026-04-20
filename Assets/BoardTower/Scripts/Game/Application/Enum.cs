@@ -78,5 +78,8 @@ namespace BoardTower.Game.Application
     {
         None = 0,
         Menu = 1,
+        Policy = 2,
+        License = 3,
+        Credit = 4,
     }
 }

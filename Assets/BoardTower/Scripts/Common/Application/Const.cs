@@ -12,6 +12,7 @@ namespace BoardTower.Common.Application
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
+        public const string NOT_FOUND_WEBVIEW = "NOT_FOUND_WEBVIEW";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
         public const string INVALID_CHESSMEN_MOVEMENT = "INVALID_CHESSMEN_MOVEMENT";
         public const string INVALID_COLLECTION = "INVALID_COLLECTION";
@@ -47,5 +48,14 @@ namespace BoardTower.Common.Application
     public sealed class UiConfig
     {
         public const float DURATION = 0.25f;
+    }
+
+    public sealed class UrlConfig
+    {
+        // TODO: fix url
+        public const string URL_BASE = "https://kitatas.github.io/games/numeri_rogue/";
+        public const string URL_POLICY = URL_BASE + "policy";
+        public const string URL_LICENSE = URL_BASE + "license";
+        public const string URL_CREDIT = URL_BASE + "credit";
     }
 }

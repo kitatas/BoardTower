@@ -18,6 +18,7 @@ namespace BoardTower.Common.Presentation.View.Modal
         public Tween FadeIn(float duration)
         {
             _tween?.Kill();
+            PreFadeIn();
             return _tween = DOTween.Sequence()
                 .AppendCallback(() => canvasGroup.blocksRaycasts = true)
                 .Append(canvasGroup
@@ -26,12 +27,14 @@ namespace BoardTower.Common.Presentation.View.Modal
                 .Join(canvasGroup.transform.ToRectTransform()
                     .DOScale(Vector3.one, duration)
                     .SetEase(Ease.OutBack))
+                .OnComplete(PostFadeIn)
                 .SetLink(gameObject);
         }
 
         public Tween FadeOut(float duration)
         {
             _tween?.Kill();
+            PreFadeOut();
             return _tween = DOTween.Sequence()
                 .Append(canvasGroup
                     .DOFade(0.0f, duration)
@@ -43,8 +46,25 @@ namespace BoardTower.Common.Presentation.View.Modal
                 .OnComplete(() =>
                 {
                     if (scrollRect) scrollRect.verticalNormalizedPosition = 1.0f;
+                    PostFadeOut();
                 })
                 .SetLink(gameObject);
+        }
+
+        protected virtual void PreFadeIn()
+        {
+        }
+
+        protected virtual void PostFadeIn()
+        {
+        }
+
+        protected virtual void PreFadeOut()
+        {
+        }
+
+        protected virtual void PostFadeOut()
+        {
         }
     }
 }

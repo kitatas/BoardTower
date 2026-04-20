@@ -76,5 +76,16 @@ namespace BoardTower.Game.Application
 
             return t.ToSquareEventType();
         }
+
+        public static string ToURL(this GameModalType self)
+        {
+            return self switch
+            {
+                GameModalType.Policy => UrlConfig.URL_POLICY,
+                GameModalType.License => UrlConfig.URL_LICENSE,
+                GameModalType.Credit => UrlConfig.URL_CREDIT,
+                _ => throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_WEBVIEW),
+            };
+        }
     }
 }
