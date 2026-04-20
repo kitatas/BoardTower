@@ -7,7 +7,7 @@ namespace BoardTower.Game.Presentation.Facade
 {
     public sealed class GameModalFacade : BaseModalFacade<GameModalType>
     {
-        public GameModalFacade(GameModalView[] modals, GameModalButtonView[] buttons) : base(modals, buttons)
+        public GameModalFacade(BaseGameModalView[] modals, GameModalButtonView[] buttons) : base(modals, buttons)
         {
         }
     }

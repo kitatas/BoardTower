@@ -110,7 +110,7 @@ namespace BoardTower.Game.Installer
 
             // View
             builder.RegisterFindObjectsByType<GameModalButtonView>();
-            builder.RegisterFindObjectsByType<GameModalView>();
+            builder.RegisterFindObjectsByType<BaseGameModalView>();
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<FinishView>();
