@@ -1,7 +1,6 @@
 using System;
 using BoardTower.Common.Application;
 using R3;
-using R3.Triggers;
 using UnityEngine;
 
 namespace BoardTower.Common.Presentation.View.Button
@@ -14,8 +13,8 @@ namespace BoardTower.Common.Presentation.View.Button
 
         protected abstract BaseModalVO<T> modal { get; }
 
-        public Observable<BaseModalVO<T>> pointerDown => button
-            .OnPointerDownAsObservable()
+        public Observable<BaseModalVO<T>> click => button
+            .OnClickAsObservable()
             .Select(_ => modal);
     }
 }

@@ -27,8 +27,8 @@ namespace BoardTower.Common.Presentation.Facade
             _buttons = buttons;
         }
 
-        public IEnumerable<Observable<BaseModalVO<T>>> OnPointerDownAsObservables()
-            => _buttons.Select(x => x.pointerDown);
+        public IEnumerable<Observable<BaseModalVO<T>>> OnClickAsObservables()
+            => _buttons.Select(x => x.click);
 
         public UniTask FadeAsync(BaseModalTransitionVO<T> transition, CancellationToken token)
         {

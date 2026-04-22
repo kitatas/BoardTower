@@ -29,9 +29,9 @@ namespace BoardTower.Common.Presentation.Presenter
                 .Subscribe((t, ct) => _modalFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
 
-            foreach (var pointerDownAsObservable in _modalFacade.OnPointerDownAsObservables())
+            foreach (var observable in _modalFacade.OnClickAsObservables())
             {
-                pointerDownAsObservable
+                observable
                     .Subscribe(x => _modalUseCase.FadeAsync(x, _tokenSource.Token))
                     .AddTo(_disposable);
             }
