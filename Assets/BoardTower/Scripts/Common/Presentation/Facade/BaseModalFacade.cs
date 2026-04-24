@@ -13,17 +13,11 @@ namespace BoardTower.Common.Presentation.Facade
     public abstract class BaseModalFacade<T> where T : Enum
     {
         private readonly Dictionary<T, BaseModalView<T>> _modalMap;
-        private readonly BaseModalButtonView<T>[] _buttons;
+        private readonly IEnumerable<BaseModalButtonView<T>> _buttons;
 
-        public BaseModalFacade(BaseModalView<T>[] modals, BaseModalButtonView<T>[] buttons)
+        public BaseModalFacade(IEnumerable<BaseModalView<T>> modals, IEnumerable<BaseModalButtonView<T>> buttons)
         {
-            _modalMap = new Dictionary<T, BaseModalView<T>>();
-            foreach (var m in modals)
-            {
-                _modalMap.TryAdd(m.type, m);
-                m.FadeOut(0.0f);
-            }
-
+            _modalMap = modals.ToDictionary(x => x.type, x => x);
             _buttons = buttons;
         }
 

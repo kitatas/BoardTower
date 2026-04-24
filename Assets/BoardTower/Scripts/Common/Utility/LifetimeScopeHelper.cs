@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 
@@ -14,7 +15,7 @@ namespace BoardTower.Common.Utility
         public static RegistrationBuilder RegisterFindObjectsByType<T>(this IContainerBuilder builder)
             where T : MonoBehaviour
         {
-            return builder.RegisterInstance<T[]>(Object.FindObjectsByType<T>(FindObjectsSortMode.None));
+            return builder.RegisterInstance<IEnumerable<T>>(Object.FindObjectsByType<T>(FindObjectsSortMode.None));
         }
     }
 }

@@ -15,6 +15,11 @@ namespace BoardTower.Common.Presentation.View.Modal
 
         public T type => modalType;
 
+        private void Awake()
+        {
+            FadeOut(0.0f);
+        }
+
         public Tween FadeIn(float duration)
         {
             _tween?.Kill();
