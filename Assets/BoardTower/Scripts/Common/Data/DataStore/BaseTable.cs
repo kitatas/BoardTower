@@ -7,6 +7,6 @@ namespace BoardTower.Common.Data.DataStore
     {
         [SerializeField] private List<T> list = default;
 
-        public List<T> records => list;
+        public IEnumerable<T> all => list;
     }
 }

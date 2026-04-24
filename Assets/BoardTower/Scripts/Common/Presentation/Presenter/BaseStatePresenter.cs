@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Domain.UseCase;
@@ -22,8 +23,7 @@ namespace BoardTower.Common.Presentation.Presenter
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
             _stateUseCase = stateUseCase;
-            _stateMap = new Dictionary<T, BaseState<T>>();
-            foreach (var s in states) _stateMap.TryAdd(s.state, s);
+            _stateMap = states.ToDictionary(x => x.state, x => x);
             _locker = new AsyncLockLite();
             _disposable = new CompositeDisposable();
         }

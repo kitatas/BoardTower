@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.DataStore;
@@ -11,8 +12,7 @@ namespace BoardTower.Game.Domain.Repository
 
         public SquareEventRepository(SquareEventTable squareEventTable)
         {
-            _squareEventMap = new Dictionary<SquareEventType, SquareEventVO>();
-            foreach (var s in squareEventTable.records) _squareEventMap.TryAdd(s.type, s.ToVO());
+            _squareEventMap = squareEventTable.all.ToDictionary(x  => x.type, x => x.ToVO());
         }
 
         public SquareEventVO Find(SquareEventType type)

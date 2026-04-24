@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BoardTower.Boot.Application;
 using BoardTower.Boot.Data.DataStore;
 using BoardTower.Common.Application;
@@ -11,8 +12,7 @@ namespace BoardTower.Boot.Domain.Repository
 
         public SplashRepository(SplashTable splashTable)
         {
-            _splashMap = new Dictionary<SplashType, SplashVO>();
-            foreach (var s in splashTable.records) _splashMap.TryAdd(s.type, s.ToVO());
+            _splashMap = splashTable.all.ToDictionary(x => x.type, x => x.ToVO());
         }
 
         public SplashVO Find(SplashType type)
