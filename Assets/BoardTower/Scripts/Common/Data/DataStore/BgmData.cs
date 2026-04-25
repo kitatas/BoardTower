@@ -10,6 +10,6 @@ namespace BoardTower.Common.Data.DataStore
         [SerializeField] private AudioClip audioClip = default;
 
         public BgmType type => bgmType;
-        public AudioVO ToVO() => new(audioClip);
+        public BgmAudioVO ToVO() => new(bgmType, audioClip);
     }
 }

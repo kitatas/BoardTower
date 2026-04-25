@@ -130,13 +130,55 @@ namespace BoardTower.Common.Application
         }
     }
 
-    public sealed class AudioVO
+    public abstract class AudioVO<T> where T : Enum
     {
+        public readonly T type;
         public readonly AudioClip clip;
 
-        public AudioVO(AudioClip clip)
+        public AudioVO(T type, AudioClip clip)
         {
+            this.type = type;
             this.clip = clip;
+        }
+    }
+
+    public sealed class BgmAudioVO : AudioVO<BgmType>
+    {
+        public BgmAudioVO(BgmType type, AudioClip clip) : base(type, clip)
+        {
+        }
+    }
+
+    public sealed class SeAudioVO : AudioVO<SeType>
+    {
+        public SeAudioVO(SeType type, AudioClip clip) : base(type, clip)
+        {
+        }
+    }
+
+    public abstract class SoundVO<T> where T : Enum
+    {
+        public readonly AudioVO<T> audio;
+        public readonly float delay;
+
+        public SoundVO(AudioVO<T> audio, float delay)
+        {
+            this.audio = audio;
+            this.delay = delay;
+        }
+    }
+
+    public sealed class BgmSoundVO : SoundVO<BgmType>
+    {
+        public BgmSoundVO(BgmAudioVO audio, float delay) : base(audio, delay)
+        {
+        }
+    }
+
+    public sealed class SeSoundVO : SoundVO<SeType>
+    {
+        public SeSoundVO(SeAudioVO audio, float delay) : base(audio, delay)
+        {
         }
     }
 }

@@ -10,6 +10,6 @@ namespace BoardTower.Common.Data.DataStore
         [SerializeField] private AudioClip audioClip = default;
 
         public SeType type => seType;
-        public AudioVO ToVO() => new(audioClip);
+        public SeAudioVO ToVO() => new(seType, audioClip);
     }
 }

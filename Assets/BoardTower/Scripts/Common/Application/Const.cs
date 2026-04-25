@@ -9,8 +9,11 @@ namespace BoardTower.Common.Application
         public const string QUIT_MESSAGE = "Exit this app.";
 
         public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
+        public const string NOT_FOUND_BGM = "NOT_FOUND_BGM";
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
+        public const string NOT_FOUND_SE = "NOT_FOUND_SE";
+        public const string NOT_FOUND_SOUND_TYPE = "NOT_FOUND_SOUND_TYPE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
         public const string NOT_FOUND_WEBVIEW = "NOT_FOUND_WEBVIEW";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
