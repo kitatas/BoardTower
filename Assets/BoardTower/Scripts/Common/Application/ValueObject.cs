@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Text;
+using UnityEngine;
 
 namespace BoardTower.Common.Application
 {
@@ -126,6 +127,16 @@ namespace BoardTower.Common.Application
         {
             this.type = type;
             this.transition = transition;
+        }
+    }
+
+    public sealed class AudioVO
+    {
+        public readonly AudioClip clip;
+
+        public AudioVO(AudioClip clip)
+        {
+            this.clip = clip;
         }
     }
 }

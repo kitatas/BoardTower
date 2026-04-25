@@ -21,4 +21,14 @@ namespace BoardTower.Common.Application
         Out,
         InOut,
     }
+
+    public enum BgmType
+    {
+        None = 0,
+    }
+
+    public enum SeType
+    {
+        None = 0,
+    }
 }
