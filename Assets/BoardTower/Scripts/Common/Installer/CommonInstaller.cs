@@ -38,6 +38,7 @@ namespace BoardTower.Common.Installer
             builder.Register<ExceptionUseCase>(Lifetime.Singleton);
             builder.Register<LoadingUseCase>(Lifetime.Singleton);
             builder.Register<SceneUseCase>(Lifetime.Singleton);
+            builder.Register<SeUseCase>(Lifetime.Singleton);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
@@ -46,6 +47,7 @@ namespace BoardTower.Common.Installer
                 entryPoints.Add<ExceptionPresenter>();
                 entryPoints.Add<LoadingPresenter>();
                 entryPoints.Add<ScenePresenter>();
+                entryPoints.Add<SePresenter>();
             });
 
             // Facade
@@ -53,6 +55,7 @@ namespace BoardTower.Common.Installer
             builder.Register<ExceptionFacade>(Lifetime.Singleton);
             builder.Register<LoadingFacade>(Lifetime.Singleton);
             builder.Register<SceneFacade>(Lifetime.Singleton);
+            builder.Register<SeFacade>(Lifetime.Singleton);
 
             // View
             builder.RegisterFindFirstObjectByType<SoundView>();

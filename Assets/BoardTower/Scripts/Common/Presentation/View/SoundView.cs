@@ -7,6 +7,7 @@ namespace BoardTower.Common.Presentation.View
     public sealed class SoundView : MonoBehaviour
     {
         [SerializeField] private AudioSource bgmSource = default;
+        [SerializeField] private AudioSource seSource = default;
 
         public void PlayBgm(BgmSoundVO sound)
         {
@@ -14,6 +15,14 @@ namespace BoardTower.Common.Presentation.View
             {
                 bgmSource.clip = sound.audio.clip;
                 bgmSource.Play();
+            });
+        }
+
+        public void PlaySe(SeSoundVO sound)
+        {
+            this.Delay(sound.delay, () =>
+            {
+                seSource.PlayOneShot(sound.audio.clip);
             });
         }
     }
