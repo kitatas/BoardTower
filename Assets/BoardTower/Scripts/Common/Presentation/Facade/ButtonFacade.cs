@@ -12,10 +12,19 @@ namespace BoardTower.Common.Presentation.Facade
 
         public ButtonFacade(IEnumerable<BaseButtonView> buttons)
         {
-            _buttons = buttons;
+            _buttons = buttons
+                .Where(x => x.isInitialized == false);
         }
 
         public IEnumerable<Observable<SeType>> OnClickAsObservables()
             => _buttons.Select(x => x.click);
+
+        public void Init()
+        {
+            foreach (var button in _buttons)
+            {
+                button.Init();
+            }
+        }
     }
 }

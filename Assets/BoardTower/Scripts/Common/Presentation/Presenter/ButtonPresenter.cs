@@ -27,6 +27,8 @@ namespace BoardTower.Common.Presentation.Presenter
                     .Subscribe(x => _seUseCase.Play(x))
                     .AddTo(_disposable);
             }
+
+            _buttonFacade.Init();
         }
 
         void IDisposable.Dispose()

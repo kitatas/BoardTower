@@ -12,5 +12,12 @@ namespace BoardTower.Common.Presentation.View.Button
         public Observable<SeType> click => button
             .OnClickAsObservable()
             .Select(_ => seType);
+
+        public bool isInitialized { get; private set; } = false;
+
+        public void Init()
+        {
+            isInitialized = true;
+        }
     }
 }

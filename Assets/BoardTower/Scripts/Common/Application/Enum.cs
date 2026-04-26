@@ -30,5 +30,7 @@ namespace BoardTower.Common.Application
     public enum SeType
     {
         None = 0,
+        Decision = 1,
+        Cancel = 2,
     }
 }
