@@ -7,6 +7,10 @@ using BoardTower.Boot.Presentation.Facade;
 using BoardTower.Boot.Presentation.Presenter;
 using BoardTower.Boot.Presentation.State;
 using BoardTower.Boot.Presentation.View;
+using BoardTower.Common.Presentation.Facade;
+using BoardTower.Common.Presentation.Presenter;
+using BoardTower.Common.Presentation.View.Button;
+using BoardTower.Common.Utility;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -37,6 +41,7 @@ namespace BoardTower.Boot.Installer
             builder.Register<SplashUseCase>(Lifetime.Scoped);
 
             // Facade
+            builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<SplashFacade>(Lifetime.Scoped);
 
             // State
@@ -48,10 +53,12 @@ namespace BoardTower.Boot.Installer
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
                 entryPoints.Add<BootStatePresenter>();
+                entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<SplashPresenter>();
             });
 
             // View
+            builder.RegisterFindObjectsByType<BaseButtonView>();
             builder.RegisterComponentInHierarchy<SplashView>();
         }
     }

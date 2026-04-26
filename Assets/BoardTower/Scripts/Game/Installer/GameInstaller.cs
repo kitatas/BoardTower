@@ -1,3 +1,6 @@
+using BoardTower.Common.Presentation.Facade;
+using BoardTower.Common.Presentation.Presenter;
+using BoardTower.Common.Presentation.View.Button;
 using BoardTower.Common.Utility;
 using BoardTower.Game.Data.DataStore;
 using BoardTower.Game.Data.Entity;
@@ -84,6 +87,7 @@ namespace BoardTower.Game.Installer
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
                 entryPoints.Add<BoardPresenter>();
+                entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<HudRootPresenter>();
@@ -98,6 +102,7 @@ namespace BoardTower.Game.Installer
 
             // Facade
             builder.Register<BoardFacade>(Lifetime.Scoped);
+            builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<HudRootFacade>(Lifetime.Scoped);
@@ -109,6 +114,7 @@ namespace BoardTower.Game.Installer
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
 
             // View
+            builder.RegisterFindObjectsByType<BaseButtonView>();
             builder.RegisterFindObjectsByType<GameModalButtonView>();
             builder.RegisterFindObjectsByType<BaseGameModalView>();
             builder.RegisterComponentInHierarchy<BoardView>();
