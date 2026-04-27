@@ -1,5 +1,6 @@
 using System.Threading;
 using BoardTower.Common.Application;
+using BoardTower.Common.Domain.UseCase;
 using BoardTower.Game.Application;
 using BoardTower.Game.Domain.UseCase;
 using Cysharp.Threading.Tasks;
@@ -8,14 +9,16 @@ namespace BoardTower.Game.Presentation.State
 {
     public sealed class GameInitState : BaseGameState
     {
+        private readonly BgmUseCase _bgmUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
         private readonly HudRootUseCase _hudRootUseCase;
         private readonly RoundUseCase _roundUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
-        public GameInitState(ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase, RoundUseCase roundUseCase,
-            TapScreenUseCase tapScreenUseCase)
+        public GameInitState(BgmUseCase bgmUseCase, ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase,
+            RoundUseCase roundUseCase, TapScreenUseCase tapScreenUseCase)
         {
+            _bgmUseCase = bgmUseCase;
             _chessmenUseCase = chessmenUseCase;
             _hudRootUseCase = hudRootUseCase;
             _roundUseCase = roundUseCase;
@@ -31,6 +34,7 @@ namespace BoardTower.Game.Presentation.State
 
         public override async UniTask EnterAsync(CancellationToken token)
         {
+            _bgmUseCase.Play(BgmType.Top);
             _chessmenUseCase.Init();
             _roundUseCase.Init();
             await (
@@ -51,6 +55,8 @@ namespace BoardTower.Game.Presentation.State
                 _hudRootUseCase.FadeAsync(Fade.In, token),
                 _tapScreenUseCase.FadeAsync(Fade.Out, token)
             );
+
+            _bgmUseCase.Play(BgmType.Game);
         }
     }
 }

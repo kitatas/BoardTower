@@ -25,6 +25,8 @@ namespace BoardTower.Common.Application
     public enum BgmType
     {
         None = 0,
+        Top = 1,
+        Game = 2,
     }
 
     public enum SeType
