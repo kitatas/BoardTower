@@ -1,0 +1,47 @@
+using System;
+using BoardTower.Common.Application;
+using BoardTower.Common.Domain.UseCase;
+using BoardTower.Game.Presentation.Facade;
+using R3;
+using VContainer.Unity;
+
+namespace BoardTower.Game.Presentation.Presenter
+{
+    public sealed class VolumePresenter : IInitializable, IDisposable
+    {
+        private readonly BgmUseCase _bgmUseCase;
+        private readonly SeUseCase _seUseCase;
+        private readonly VolumeFacade _volumeFacade;
+        private readonly CompositeDisposable _disposable;
+
+        public VolumePresenter(BgmUseCase bgmUseCase, SeUseCase seUseCase, VolumeFacade volumeFacade)
+        {
+            _bgmUseCase = bgmUseCase;
+            _seUseCase = seUseCase;
+            _volumeFacade = volumeFacade;
+            _disposable = new CompositeDisposable();
+        }
+
+        void IInitializable.Initialize()
+        {
+            _volumeFacade.Init(_bgmUseCase.volume.CurrentValue, _seUseCase.volume.CurrentValue);
+
+            _volumeFacade.bgmVolume
+                .Subscribe(_bgmUseCase.SetVolume)
+                .AddTo(_disposable);
+
+            _volumeFacade.seVolume
+                .Subscribe(_seUseCase.SetVolume)
+                .AddTo(_disposable);
+
+            _volumeFacade.releaseHandle
+                .Subscribe(_ => _seUseCase.Play(SeType.Decision))
+                .AddTo(_disposable);
+        }
+
+        void IDisposable.Dispose()
+        {
+            _disposable?.Dispose();
+        }
+    }
+}
