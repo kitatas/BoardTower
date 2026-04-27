@@ -24,6 +24,10 @@ namespace BoardTower.Common.Presentation.Presenter
             _seUseCase.play
                 .Subscribe(_seFacade.Play)
                 .AddTo(_disposable);
+
+            _seUseCase.volume
+                .Subscribe(_seFacade.SetVolume)
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

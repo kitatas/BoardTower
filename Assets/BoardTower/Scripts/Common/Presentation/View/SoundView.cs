@@ -25,5 +25,15 @@ namespace BoardTower.Common.Presentation.View
                 seSource.PlayOneShot(sound.audio.clip);
             });
         }
+
+        public void SetBgmVolume(float volume)
+        {
+            bgmSource.volume = volume;
+        }
+
+        public void SetSeVolume(float volume)
+        {
+            seSource.volume = volume;
+        }
     }
 }

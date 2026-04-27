@@ -16,5 +16,10 @@ namespace BoardTower.Common.Presentation.Facade
         {
             _soundView.PlaySe(sound);
         }
+
+        public void SetVolume(float volume)
+        {
+            _soundView.SetSeVolume(volume);
+        }
     }
 }

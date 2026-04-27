@@ -61,4 +61,9 @@ namespace BoardTower.Common.Application
         public const string URL_LICENSE = URL_BASE + "license";
         public const string URL_CREDIT = URL_BASE + "credit";
     }
+
+    public sealed class SoundConfig
+    {
+        public const float INIT_VOLUME = 0.7f;
+    }
 }
