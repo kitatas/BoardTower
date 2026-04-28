@@ -18,6 +18,12 @@ namespace BoardTower.Common.Domain.UseCase
             return saveData.bgmVolume;
         }
 
+        public override void SaveVolume()
+        {
+            var vo = new VolumeVO(volume.CurrentValue);
+            _saveRepository.SaveBgmVolume(vo);
+        }
+
         protected override BgmSoundVO CreateSound(AudioVO<BgmType> audio, float delay)
         {
             return new BgmSoundVO(audio as BgmAudioVO, delay);

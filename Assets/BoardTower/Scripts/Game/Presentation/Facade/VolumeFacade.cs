@@ -14,7 +14,9 @@ namespace BoardTower.Game.Presentation.Facade
 
         public Observable<float> bgmVolume => _volumeView.bgmVolume;
         public Observable<float> seVolume => _volumeView.seVolume;
-        public Observable<Unit> releaseHandle => _volumeView.releaseHandle;
+        public Observable<Unit> releaseBgm => _volumeView.releaseBgm;
+        public Observable<Unit> releaseSe => _volumeView.releaseSe;
+        public Observable<Unit> releaseAny => releaseBgm.Merge(releaseSe);
 
         public void Init(float bgmValue, float seValue)
         {

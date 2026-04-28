@@ -1,7 +1,9 @@
+using System;
 using BoardTower.Common.Application;
 
 namespace BoardTower.Common.Data.DataStore
 {
+    [Serializable]
     public sealed class VolumeDTO
     {
         public float value;

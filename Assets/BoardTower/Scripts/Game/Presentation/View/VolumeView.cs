@@ -13,9 +13,8 @@ namespace BoardTower.Game.Presentation.View
         public Observable<float> bgmVolume => bgm.OnValueChangedAsObservable();
         public Observable<float> seVolume => se.OnValueChangedAsObservable();
 
-        public Observable<Unit> releaseHandle => bgm.OnPointerUpAsObservable()
-            .Merge(se.OnPointerUpAsObservable())
-            .Select(_ => Unit.Default);
+        public Observable<Unit> releaseBgm => bgm.OnPointerUpAsObservable().Select(_ => Unit.Default);
+        public Observable<Unit> releaseSe => se.OnPointerUpAsObservable().Select(_ => Unit.Default);
 
         public void Init(float bgmValue, float seValue)
         {

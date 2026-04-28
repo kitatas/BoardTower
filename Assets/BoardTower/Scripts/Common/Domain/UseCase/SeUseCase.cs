@@ -18,6 +18,12 @@ namespace BoardTower.Common.Domain.UseCase
             return saveData.seVolume;
         }
 
+        public override void SaveVolume()
+        {
+            var vo = new VolumeVO(volume.CurrentValue);
+            _saveRepository.SaveSeVolume(vo);
+        }
+
         protected override SeSoundVO CreateSound(AudioVO<SeType> audio, float delay)
         {
             return new SeSoundVO(audio as SeAudioVO, delay);

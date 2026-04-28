@@ -47,6 +47,8 @@ namespace BoardTower.Common.Domain.UseCase
             _volume.Value = Mathf.Clamp01(value);
         }
 
+        public abstract void SaveVolume();
+
         protected abstract TSoundVO CreateSound(AudioVO<TType> audio, float delay);
 
         void IDisposable.Dispose()

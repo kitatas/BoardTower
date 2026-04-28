@@ -34,7 +34,15 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe(_seUseCase.SetVolume)
                 .AddTo(_disposable);
 
-            _volumeFacade.releaseHandle
+            _volumeFacade.releaseBgm
+                .Subscribe(_ => _bgmUseCase.SaveVolume())
+                .AddTo(_disposable);
+
+            _volumeFacade.releaseSe
+                .Subscribe(_ => _seUseCase.SaveVolume())
+                .AddTo(_disposable);
+
+            _volumeFacade.releaseAny
                 .Subscribe(_ => _seUseCase.Play(SeType.Decision))
                 .AddTo(_disposable);
         }

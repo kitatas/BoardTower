@@ -33,5 +33,19 @@ namespace BoardTower.Common.Domain.Repository
         {
             ES3.Save(SaveConfig.ES3_KEY, JsonUtility.ToJson(data));
         }
+
+        public void SaveBgmVolume(VolumeVO value)
+        {
+            var data = Load();
+            data.bgmVolume = new VolumeDTO(value);
+            Save(data);
+        }
+
+        public void SaveSeVolume(VolumeVO value)
+        {
+            var data = Load();
+            data.seVolume = new VolumeDTO(value);
+            Save(data);
+        }
     }
 }
