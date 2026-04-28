@@ -27,5 +27,15 @@ namespace BoardTower.Game.Presentation.View
             bgm.value = bgmValue;
             se.value = seValue;
         }
+
+        public void ActivateBgmMute(bool value)
+        {
+            bgmMute.ActivateMute(value);
+        }
+
+        public void ActivateSeMute(bool value)
+        {
+            seMute.ActivateMute(value);
+        }
     }
 }
