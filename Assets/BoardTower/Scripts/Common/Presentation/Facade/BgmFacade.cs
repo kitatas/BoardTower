@@ -21,5 +21,17 @@ namespace BoardTower.Common.Presentation.Facade
         {
             _soundView.SetBgmVolume(volume);
         }
+
+        public void SetMute(bool value)
+        {
+            if (value)
+            {
+                _soundView.PauseBgm();
+            }
+            else
+            {
+                _soundView.UnPauseBgm();
+            }
+        }
     }
 }

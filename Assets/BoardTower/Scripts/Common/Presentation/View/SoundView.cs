@@ -35,5 +35,15 @@ namespace BoardTower.Common.Presentation.View
         {
             seSource.volume = volume;
         }
+
+        public void PauseBgm()
+        {
+            bgmSource.Pause();
+        }
+
+        public void UnPauseBgm()
+        {
+            bgmSource.UnPause();
+        }
     }
 }

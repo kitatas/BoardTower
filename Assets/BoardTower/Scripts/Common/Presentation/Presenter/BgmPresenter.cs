@@ -28,6 +28,10 @@ namespace BoardTower.Common.Presentation.Presenter
             _bgmUseCase.volume
                 .Subscribe(_bgmFacade.SetVolume)
                 .AddTo(_disposable);
+
+            _bgmUseCase.isMute
+                .Subscribe(_bgmFacade.SetMute)
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

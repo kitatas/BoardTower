@@ -15,6 +15,7 @@ namespace BoardTower.Common.Domain.UseCase
         private readonly SoundRepository _soundRepository;
         private readonly Subject<TSoundVO> _play;
         private readonly ReactiveProperty<float> _volume;
+        private readonly ReactiveProperty<bool> _isMute;
 
         public BaseSoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
         {
@@ -22,10 +23,12 @@ namespace BoardTower.Common.Domain.UseCase
             _soundRepository = soundRepository;
             _play = new Subject<TSoundVO>();
             _volume = new ReactiveProperty<float>(0.0f);
+            _isMute = new ReactiveProperty<bool>(false);
         }
 
         public virtual Subject<TSoundVO> play => _play;
         public virtual ReadOnlyReactiveProperty<float> volume => _volume;
+        public virtual ReadOnlyReactiveProperty<bool> isMute => _isMute;
 
         protected abstract UniTask<VolumeVO> LoadVolumeAsync(CancellationToken token);
 
@@ -37,6 +40,8 @@ namespace BoardTower.Common.Domain.UseCase
 
         public virtual void Play(TType type, float delay = 0.0f)
         {
+            if (isMute.CurrentValue) return;
+
             var audio = _soundRepository.Find(type);
             var sound = CreateSound(audio, delay);
             _play?.OnNext(sound);
@@ -55,6 +60,7 @@ namespace BoardTower.Common.Domain.UseCase
         {
             _play?.Dispose();
             _volume?.Dispose();
+            _isMute?.Dispose();
         }
     }
 }
