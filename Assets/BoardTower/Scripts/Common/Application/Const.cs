@@ -66,4 +66,9 @@ namespace BoardTower.Common.Application
     {
         public const float INIT_VOLUME = 0.7f;
     }
+
+    public sealed class SaveConfig
+    {
+        public const string ES3_KEY = "";
+    }
 }
