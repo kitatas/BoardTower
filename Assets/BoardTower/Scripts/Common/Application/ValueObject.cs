@@ -181,4 +181,26 @@ namespace BoardTower.Common.Application
         {
         }
     }
+
+    public sealed class SaveVO
+    {
+        public readonly VolumeVO bgmVolume;
+        public readonly VolumeVO seVolume;
+
+        public SaveVO(VolumeVO bgmVolume, VolumeVO seVolume)
+        {
+            this.bgmVolume = bgmVolume;
+            this.seVolume = seVolume;
+        }
+    }
+
+    public sealed class VolumeVO
+    {
+        public readonly float value;
+
+        public VolumeVO(float value)
+        {
+            this.value = value;
+        }
+    }
 }
