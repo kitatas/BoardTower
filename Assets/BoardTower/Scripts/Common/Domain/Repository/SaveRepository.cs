@@ -47,5 +47,12 @@ namespace BoardTower.Common.Domain.Repository
             data.seVolume = new VolumeDTO(value);
             Save(data);
         }
+
+        public void SaveMasterVolume(VolumeVO value)
+        {
+            var data = Load();
+            data.masterVolume = new VolumeDTO(value);
+            Save(data);
+        }
     }
 }

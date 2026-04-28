@@ -186,11 +186,13 @@ namespace BoardTower.Common.Application
 
     public sealed class SaveVO
     {
+        public readonly VolumeVO masterVolume;
         public readonly VolumeVO bgmVolume;
         public readonly VolumeVO seVolume;
 
-        public SaveVO(VolumeVO bgmVolume, VolumeVO seVolume)
+        public SaveVO(VolumeVO masterVolume, VolumeVO bgmVolume, VolumeVO seVolume)
         {
+            this.masterVolume = masterVolume;
             this.bgmVolume = bgmVolume;
             this.seVolume = seVolume;
         }
