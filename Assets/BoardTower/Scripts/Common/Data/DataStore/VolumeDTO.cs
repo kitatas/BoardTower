@@ -7,17 +7,20 @@ namespace BoardTower.Common.Data.DataStore
     public sealed class VolumeDTO
     {
         public float value;
+        public bool isMute;
 
         public VolumeDTO()
         {
             value = SoundConfig.INIT_VOLUME;
+            isMute = false;
         }
 
         public VolumeDTO(VolumeVO volume)
         {
             value = volume.value;
+            isMute = volume.isMute;
         }
 
-        public VolumeVO ToVO() => new(value);
+        public VolumeVO ToVO() => new(value, isMute);
     }
 }

@@ -20,7 +20,7 @@ namespace BoardTower.Common.Domain.UseCase
 
         public override void SaveVolume()
         {
-            var vo = new VolumeVO(volume.CurrentValue);
+            var vo = new VolumeVO(volume.CurrentValue, isMute.CurrentValue);
             _saveRepository.SaveSeVolume(vo);
         }
 

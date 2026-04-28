@@ -197,10 +197,12 @@ namespace BoardTower.Common.Application
     public sealed class VolumeVO
     {
         public readonly float value;
+        public readonly bool isMute;
 
-        public VolumeVO(float value)
+        public VolumeVO(float value, bool isMute)
         {
             this.value = value;
+            this.isMute = isMute;
         }
     }
 }

@@ -36,6 +36,7 @@ namespace BoardTower.Common.Domain.UseCase
         {
             var data = await LoadVolumeAsync(token);
             SetVolume(data.value);
+            _isMute.Value = data.isMute;
         }
 
         public virtual void Play(TType type, float delay = 0.0f)
@@ -55,6 +56,7 @@ namespace BoardTower.Common.Domain.UseCase
         public virtual void SwitchMute()
         {
             _isMute.Value = !isMute.CurrentValue;
+            SaveVolume();
         }
 
         public abstract void SaveVolume();
