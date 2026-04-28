@@ -1,6 +1,8 @@
 using System;
+using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Domain.Repository;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -9,19 +11,29 @@ namespace BoardTower.Common.Domain.UseCase
     public abstract class BaseSoundUseCase<TType, TSoundVO> : IDisposable
         where TType : Enum where TSoundVO : SoundVO<TType>
     {
+        protected readonly SaveRepository _saveRepository;
         private readonly SoundRepository _soundRepository;
         private readonly Subject<TSoundVO> _play;
         private readonly ReactiveProperty<float> _volume;
 
-        public BaseSoundUseCase(SoundRepository soundRepository)
+        public BaseSoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
         {
+            _saveRepository = saveRepository;
             _soundRepository = soundRepository;
             _play = new Subject<TSoundVO>();
-            _volume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
+            _volume = new ReactiveProperty<float>(0.0f);
         }
 
         public virtual Subject<TSoundVO> play => _play;
         public virtual ReadOnlyReactiveProperty<float> volume => _volume;
+
+        protected abstract UniTask<VolumeVO> LoadVolumeAsync(CancellationToken token);
+
+        public virtual async UniTask LoadAsync(CancellationToken token)
+        {
+            var data = await LoadVolumeAsync(token);
+            SetVolume(data.value);
+        }
 
         public virtual void Play(TType type, float delay = 0.0f)
         {

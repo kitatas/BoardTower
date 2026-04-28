@@ -1,5 +1,7 @@
+using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Data.DataStore;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace BoardTower.Common.Domain.Repository
@@ -14,9 +16,10 @@ namespace BoardTower.Common.Domain.Repository
                 : JsonUtility.FromJson<SaveDTO>(data);
         }
 
-        public SaveVO LoadData()
+        public async UniTask<SaveVO> LoadAsync(CancellationToken token)
         {
-            return Load().ToVO();
+            var dto = await UniTask.RunOnThreadPool(Load, cancellationToken: token);
+            return dto.ToVO();
         }
 
         private static SaveDTO Create()
