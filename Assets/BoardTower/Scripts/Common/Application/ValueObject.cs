@@ -160,24 +160,26 @@ namespace BoardTower.Common.Application
     {
         public readonly AudioVO<T> audio;
         public readonly float delay;
+        public readonly bool isMute;
 
-        public SoundVO(AudioVO<T> audio, float delay)
+        public SoundVO(AudioVO<T> audio, float delay, bool isMute)
         {
             this.audio = audio;
             this.delay = delay;
+            this.isMute = isMute;
         }
     }
 
     public sealed class BgmSoundVO : SoundVO<BgmType>
     {
-        public BgmSoundVO(BgmAudioVO audio, float delay) : base(audio, delay)
+        public BgmSoundVO(AudioVO<BgmType> audio, float delay, bool isMute) : base(audio, delay, isMute)
         {
         }
     }
 
     public sealed class SeSoundVO : SoundVO<SeType>
     {
-        public SeSoundVO(SeAudioVO audio, float delay) : base(audio, delay)
+        public SeSoundVO(AudioVO<SeType> audio, float delay, bool isMute) : base(audio, delay, isMute)
         {
         }
     }

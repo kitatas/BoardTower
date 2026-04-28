@@ -26,7 +26,7 @@ namespace BoardTower.Common.Domain.UseCase
 
         protected override BgmSoundVO CreateSound(AudioVO<BgmType> audio, float delay)
         {
-            return new BgmSoundVO(audio as BgmAudioVO, delay);
+            return new BgmSoundVO(audio as BgmAudioVO, delay, isMute.CurrentValue);
         }
     }
 }

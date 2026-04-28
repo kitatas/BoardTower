@@ -26,7 +26,7 @@ namespace BoardTower.Common.Domain.UseCase
 
         protected override SeSoundVO CreateSound(AudioVO<SeType> audio, float delay)
         {
-            return new SeSoundVO(audio as SeAudioVO, delay);
+            return new SeSoundVO(audio as SeAudioVO, delay, isMute.CurrentValue);
         }
     }
 }

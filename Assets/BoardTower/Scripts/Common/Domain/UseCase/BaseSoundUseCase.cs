@@ -41,8 +41,6 @@ namespace BoardTower.Common.Domain.UseCase
 
         public virtual void Play(TType type, float delay = 0.0f)
         {
-            if (isMute.CurrentValue) return;
-
             var audio = _soundRepository.Find(type);
             var sound = CreateSound(audio, delay);
             _play?.OnNext(sound);

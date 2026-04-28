@@ -11,19 +11,19 @@ namespace BoardTower.Common.Presentation.View
 
         public void PlayBgm(BgmSoundVO sound)
         {
-            this.Delay(sound.delay, () =>
-            {
-                bgmSource.clip = sound.audio.clip;
-                bgmSource.Play();
-            });
+            if (bgmSource.clip == sound.audio.clip) return;
+            bgmSource.clip = sound.audio.clip;
+
+            if (sound.isMute) return;
+
+            this.Delay(sound.delay, () => bgmSource.Play());
         }
 
         public void PlaySe(SeSoundVO sound)
         {
-            this.Delay(sound.delay, () =>
-            {
-                seSource.PlayOneShot(sound.audio.clip);
-            });
+            if (sound.isMute) return;
+
+            this.Delay(sound.delay, () => seSource.PlayOneShot(sound.audio.clip));
         }
 
         public void SetBgmVolume(float volume)
@@ -43,7 +43,14 @@ namespace BoardTower.Common.Presentation.View
 
         public void UnPauseBgm()
         {
-            bgmSource.UnPause();
+            if (bgmSource.time > 0.0f)
+            {
+                bgmSource.UnPause();
+            }
+            else
+            {
+                bgmSource.Play();
+            }
         }
     }
 }
