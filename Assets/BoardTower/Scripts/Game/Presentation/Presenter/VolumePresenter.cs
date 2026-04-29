@@ -42,6 +42,11 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe(_seUseCase.SetVolume)
                 .AddTo(_disposable);
 
+            _volumeFacade.releaseMaster
+                // NOTE: 保存の重複を避けるため、bgm側のみ実行
+                .Subscribe(_ => _bgmUseCase.SaveMasterVolume())
+                .AddTo(_disposable);
+
             _volumeFacade.releaseBgm
                 .Subscribe(_ => _bgmUseCase.SaveVolume())
                 .AddTo(_disposable);

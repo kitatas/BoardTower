@@ -79,9 +79,16 @@ namespace BoardTower.Common.Domain.UseCase
         public virtual void SwitchMasterMute()
         {
             _isMasterMute.Value = !_isMasterMute.CurrentValue;
+            SaveMasterVolume();
         }
 
         public abstract void SaveVolume();
+
+        public void SaveMasterVolume()
+        {
+            var vo = new VolumeVO(_masterVolume.CurrentValue, _isMasterMute.CurrentValue);
+            _saveRepository.SaveMasterVolume(vo);
+        }
 
         protected abstract TSoundVO CreateSound(AudioVO<TType> audio, float delay);
 
