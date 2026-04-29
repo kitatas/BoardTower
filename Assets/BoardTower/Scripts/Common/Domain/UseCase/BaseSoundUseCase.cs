@@ -99,7 +99,11 @@ namespace BoardTower.Common.Domain.UseCase
         void IDisposable.Dispose()
         {
             _play?.Dispose();
+            _thisVolume?.Dispose();
+            _masterVolume?.Dispose();
             _volume?.Dispose();
+            _isThisMute?.Dispose();
+            _isMasterMute?.Dispose();
             _isMute?.Dispose();
         }
     }
