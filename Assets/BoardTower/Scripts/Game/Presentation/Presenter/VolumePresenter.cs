@@ -26,6 +26,14 @@ namespace BoardTower.Game.Presentation.Presenter
         {
             _volumeFacade.Init(_bgmUseCase.volume.CurrentValue, _seUseCase.volume.CurrentValue);
 
+            _volumeFacade.masterVolume
+                .Subscribe(x =>
+                {
+                    _bgmUseCase.SetMasterVolume(x);
+                    _seUseCase.SetMasterVolume(x);
+                })
+                .AddTo(_disposable);
+
             _volumeFacade.bgmVolume
                 .Subscribe(_bgmUseCase.SetVolume)
                 .AddTo(_disposable);

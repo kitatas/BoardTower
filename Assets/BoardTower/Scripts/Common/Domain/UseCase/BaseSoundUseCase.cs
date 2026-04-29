@@ -14,7 +14,9 @@ namespace BoardTower.Common.Domain.UseCase
         protected readonly SaveRepository _saveRepository;
         private readonly SoundRepository _soundRepository;
         private readonly Subject<TSoundVO> _play;
-        private readonly ReactiveProperty<float> _volume;
+        private readonly ReactiveProperty<float> _thisVolume;
+        private readonly ReactiveProperty<float> _masterVolume;
+        private readonly ReadOnlyReactiveProperty<float> _volume;
         private readonly ReactiveProperty<bool> _isMute;
 
         public BaseSoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
@@ -22,7 +24,11 @@ namespace BoardTower.Common.Domain.UseCase
             _saveRepository = saveRepository;
             _soundRepository = soundRepository;
             _play = new Subject<TSoundVO>();
-            _volume = new ReactiveProperty<float>(0.0f);
+            _thisVolume = new ReactiveProperty<float>(0.0f);
+            _masterVolume = new ReactiveProperty<float>(0.0f);
+            _volume = _thisVolume
+                .CombineLatest(_masterVolume, (x, y) => x * y)
+                .ToReadOnlyReactiveProperty();
             _isMute = new ReactiveProperty<bool>(false);
         }
 
@@ -48,7 +54,12 @@ namespace BoardTower.Common.Domain.UseCase
 
         public virtual void SetVolume(float value)
         {
-            _volume.Value = Mathf.Clamp01(value);
+            _thisVolume.Value = Mathf.Clamp01(value);
+        }
+
+        public virtual void SetMasterVolume(float value)
+        {
+            _masterVolume.Value = Mathf.Clamp01(value);
         }
 
         public virtual void SwitchMute()
