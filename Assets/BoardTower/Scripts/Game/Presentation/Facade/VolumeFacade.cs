@@ -19,6 +19,7 @@ namespace BoardTower.Game.Presentation.Facade
         public Observable<Unit> releaseBgm => _volumeView.releaseBgm;
         public Observable<Unit> releaseSe => _volumeView.releaseSe;
         public Observable<Unit> releaseAny => releaseMaster.Merge(releaseBgm).Merge(releaseSe);
+        public Observable<Unit> muteMaster => _volumeView.muteMaster;
         public Observable<Unit> muteBgm => _volumeView.muteBgm;
         public Observable<Unit> muteSe => _volumeView.muteSe;
 

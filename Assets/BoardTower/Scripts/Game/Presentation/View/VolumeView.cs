@@ -11,6 +11,7 @@ namespace BoardTower.Game.Presentation.View
         [SerializeField] private Slider master = default;
         [SerializeField] private Slider bgm = default;
         [SerializeField] private Slider se = default;
+        [SerializeField] private MuteButtonView masterMute = default;
         [SerializeField] private MuteButtonView bgmMute = default;
         [SerializeField] private MuteButtonView seMute = default;
 
@@ -22,6 +23,7 @@ namespace BoardTower.Game.Presentation.View
         public Observable<Unit> releaseBgm => bgm.OnPointerUpAsObservable().Select(_ => Unit.Default);
         public Observable<Unit> releaseSe => se.OnPointerUpAsObservable().Select(_ => Unit.Default);
 
+        public Observable<Unit> muteMaster => masterMute.click.Select(_ => Unit.Default);
         public Observable<Unit> muteBgm => bgmMute.click.Select(_ => Unit.Default);
         public Observable<Unit> muteSe => seMute.click.Select(_ => Unit.Default);
 

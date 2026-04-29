@@ -17,7 +17,9 @@ namespace BoardTower.Common.Domain.UseCase
         private readonly ReactiveProperty<float> _thisVolume;
         private readonly ReactiveProperty<float> _masterVolume;
         private readonly ReadOnlyReactiveProperty<float> _volume;
-        private readonly ReactiveProperty<bool> _isMute;
+        private readonly ReactiveProperty<bool> _isThisMute;
+        private readonly ReactiveProperty<bool> _isMasterMute;
+        private readonly ReadOnlyReactiveProperty<bool> _isMute;
 
         public BaseSoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
         {
@@ -29,11 +31,17 @@ namespace BoardTower.Common.Domain.UseCase
             _volume = _thisVolume
                 .CombineLatest(_masterVolume, (x, y) => x * y)
                 .ToReadOnlyReactiveProperty();
-            _isMute = new ReactiveProperty<bool>(false);
+            _isThisMute = new ReactiveProperty<bool>(false);
+            _isMasterMute = new ReactiveProperty<bool>(false);
+            _isMute = _isThisMute
+                .CombineLatest(_isMasterMute, (x, y) => x || y)
+                .ToReadOnlyReactiveProperty();
         }
 
         public virtual Subject<TSoundVO> play => _play;
         public virtual ReadOnlyReactiveProperty<float> volume => _volume;
+        public virtual ReadOnlyReactiveProperty<bool> isThisMute => _isThisMute;
+        public virtual ReadOnlyReactiveProperty<bool> isMasterMute => _isMasterMute;
         public virtual ReadOnlyReactiveProperty<bool> isMute => _isMute;
 
         protected abstract UniTask<VolumeVO> LoadVolumeAsync(CancellationToken token);
@@ -42,7 +50,7 @@ namespace BoardTower.Common.Domain.UseCase
         {
             var data = await LoadVolumeAsync(token);
             SetVolume(data.value);
-            _isMute.Value = data.isMute;
+            _isThisMute.Value = data.isMute;
         }
 
         public virtual void Play(TType type, float delay = 0.0f)
@@ -64,8 +72,13 @@ namespace BoardTower.Common.Domain.UseCase
 
         public virtual void SwitchMute()
         {
-            _isMute.Value = !isMute.CurrentValue;
+            _isThisMute.Value = !_isThisMute.CurrentValue;
             SaveVolume();
+        }
+
+        public virtual void SwitchMasterMute()
+        {
+            _isMasterMute.Value = !_isMasterMute.CurrentValue;
         }
 
         public abstract void SaveVolume();
