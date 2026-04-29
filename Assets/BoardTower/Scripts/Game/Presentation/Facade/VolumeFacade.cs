@@ -26,6 +26,10 @@ namespace BoardTower.Game.Presentation.Facade
         public void Init(float bgmValue, float seValue)
         {
             _volumeView.Init(bgmValue, seValue);
+
+        public void ActivateMasterMute(bool value)
+        {
+            _volumeView.ActivateMasterMute(value);
         }
 
         public void ActivateBgmMute(bool value)

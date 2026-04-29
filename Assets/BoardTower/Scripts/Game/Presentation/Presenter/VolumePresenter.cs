@@ -75,6 +75,10 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe(_ => _seUseCase.SwitchMute())
                 .AddTo(_disposable);
 
+            _bgmUseCase.isMasterMute
+                .Subscribe(_volumeFacade.ActivateMasterMute)
+                .AddTo(_disposable);
+
             _bgmUseCase.isThisMute
                 .Subscribe(_volumeFacade.ActivateBgmMute)
                 .AddTo(_disposable);

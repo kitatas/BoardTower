@@ -33,6 +33,11 @@ namespace BoardTower.Game.Presentation.View
             se.value = seValue;
         }
 
+        public void ActivateMasterMute(bool value)
+        {
+            masterMute.ActivateMute(value);
+        }
+
         public void ActivateBgmMute(bool value)
         {
             bgmMute.ActivateMute(value);
