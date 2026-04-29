@@ -23,9 +23,10 @@ namespace BoardTower.Game.Presentation.Facade
         public Observable<Unit> muteBgm => _volumeView.muteBgm;
         public Observable<Unit> muteSe => _volumeView.muteSe;
 
-        public void Init(float bgmValue, float seValue)
+        public void Init(float masterValue, float bgmValue, float seValue)
         {
-            _volumeView.Init(bgmValue, seValue);
+            _volumeView.Init(masterValue, bgmValue, seValue);
+        }
 
         public void ActivateMasterMute(bool value)
         {

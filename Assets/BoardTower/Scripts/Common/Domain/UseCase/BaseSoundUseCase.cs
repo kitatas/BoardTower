@@ -40,17 +40,21 @@ namespace BoardTower.Common.Domain.UseCase
 
         public virtual Subject<TSoundVO> play => _play;
         public virtual ReadOnlyReactiveProperty<float> volume => _volume;
+        public float thisVolumeValue => _thisVolume.CurrentValue;
+        public float masterVolumeValue => _masterVolume.CurrentValue;
         public virtual ReadOnlyReactiveProperty<bool> isThisMute => _isThisMute;
         public virtual ReadOnlyReactiveProperty<bool> isMasterMute => _isMasterMute;
         public virtual ReadOnlyReactiveProperty<bool> isMute => _isMute;
 
-        protected abstract UniTask<VolumeVO> LoadVolumeAsync(CancellationToken token);
+        protected abstract UniTask<(VolumeVO thisVolume, VolumeVO masterVolume)> LoadVolumeAsync(CancellationToken token);
 
         public virtual async UniTask LoadAsync(CancellationToken token)
         {
             var data = await LoadVolumeAsync(token);
-            SetVolume(data.value);
-            _isThisMute.Value = data.isMute;
+            SetVolume(data.thisVolume.value);
+            SetMasterVolume(data.masterVolume.value);
+            _isThisMute.Value = data.thisVolume.isMute;
+            _isMasterMute.Value = data.masterVolume.isMute;
         }
 
         public virtual void Play(TType type, float delay = 0.0f)

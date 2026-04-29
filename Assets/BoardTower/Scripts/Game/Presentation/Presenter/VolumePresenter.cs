@@ -24,7 +24,10 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IInitializable.Initialize()
         {
-            _volumeFacade.Init(_bgmUseCase.volume.CurrentValue, _seUseCase.volume.CurrentValue);
+            _volumeFacade.Init(
+                _bgmUseCase.masterVolumeValue,
+                _bgmUseCase.thisVolumeValue,
+                _seUseCase.thisVolumeValue);
 
             _volumeFacade.masterVolume
                 .Subscribe(x =>

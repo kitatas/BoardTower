@@ -27,8 +27,9 @@ namespace BoardTower.Game.Presentation.View
         public Observable<Unit> muteBgm => bgmMute.click.Select(_ => Unit.Default);
         public Observable<Unit> muteSe => seMute.click.Select(_ => Unit.Default);
 
-        public void Init(float bgmValue, float seValue)
+        public void Init(float masterValue, float bgmValue, float seValue)
         {
+            master.value = masterValue;
             bgm.value = bgmValue;
             se.value = seValue;
         }

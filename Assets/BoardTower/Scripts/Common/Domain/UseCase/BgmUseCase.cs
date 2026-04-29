@@ -12,10 +12,11 @@ namespace BoardTower.Common.Domain.UseCase
         {
         }
 
-        protected override async UniTask<VolumeVO> LoadVolumeAsync(CancellationToken token)
+        protected override async UniTask<(VolumeVO thisVolume, VolumeVO masterVolume)> LoadVolumeAsync(
+            CancellationToken token)
         {
             var saveData = await _saveRepository.LoadAsync(token);
-            return saveData.bgmVolume;
+            return (saveData.bgmVolume, saveData.masterVolume);
         }
 
         public override void SaveVolume()
