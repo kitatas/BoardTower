@@ -83,7 +83,6 @@ namespace BoardTower.Common.Domain.UseCase
         public virtual void SwitchMasterMute()
         {
             _isMasterMute.Value = !_isMasterMute.CurrentValue;
-            SaveMasterVolume();
         }
 
         public abstract void SaveVolume();

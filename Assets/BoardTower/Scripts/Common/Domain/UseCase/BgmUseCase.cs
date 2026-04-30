@@ -18,6 +18,12 @@ namespace BoardTower.Common.Domain.UseCase
             var saveData = await _saveRepository.LoadAsync(token);
             return (saveData.bgmVolume, saveData.masterVolume);
         }
+        
+        public override void SwitchMasterMute()
+        {
+            base.SwitchMasterMute();
+            SaveMasterVolume();
+        }
 
         public override void SaveVolume()
         {
