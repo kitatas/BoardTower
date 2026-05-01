@@ -89,6 +89,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
+                entryPoints.Add<DeletePresenter>();
                 entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<HudRootPresenter>();
                 entryPoints.Add<GameModalPresenter>();
@@ -105,6 +106,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
+            builder.Register<DeleteFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<HudRootFacade>(Lifetime.Scoped);
             builder.Register<GameModalFacade>(Lifetime.Scoped);
@@ -121,6 +123,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterFindObjectsByType<BaseGameModalView>();
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
+            builder.RegisterComponentInHierarchy<DeleteView>();
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<GemView>();
