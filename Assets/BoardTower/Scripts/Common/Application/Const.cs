@@ -9,6 +9,7 @@ namespace BoardTower.Common.Application
         public const string QUIT_MESSAGE = "Exit this app.";
 
         public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
+        public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
         public const string NOT_FOUND_BGM = "NOT_FOUND_BGM";
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
@@ -46,6 +47,9 @@ namespace BoardTower.Common.Application
     public sealed class SceneConfig
     {
         public const float FADE_DURATION = 0.1f;
+        public const float LOAD_PROGRESS_THRESHOLD = 0.9f;
+        public const float STABILITY_FRAME = 3;
+        public const float STABILITY_TIME = 0.5f;
     }
 
     public sealed class UiConfig

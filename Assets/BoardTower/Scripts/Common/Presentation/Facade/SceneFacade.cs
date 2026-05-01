@@ -1,6 +1,8 @@
+using System;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Presentation.View;
+using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using FastEnumUtility;
 using UnityEngine.SceneManagement;
@@ -29,10 +31,27 @@ namespace BoardTower.Common.Presentation.Facade
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
 
-        public UniTask LoadSceneAsync(SceneName sceneName, CancellationToken token)
+        public async UniTask LoadSceneAsync(SceneName sceneName, CancellationToken token)
         {
-            return SceneManager.LoadSceneAsync(sceneName.FastToString())
+            var asyncOperation = SceneManager.LoadSceneAsync(sceneName.FastToString());
+            if (asyncOperation == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_LOAD_SCENE);
+
+            asyncOperation.allowSceneActivation = false;
+            await UniTask.WaitUntil(() => asyncOperation.progress >= SceneConfig.LOAD_PROGRESS_THRESHOLD,
+                PlayerLoopTiming.Update, token);
+
+            GC.Collect();
+
+            asyncOperation.allowSceneActivation = true;
+            await asyncOperation
                 .ToUniTask(cancellationToken: token);
+
+            for (int i = 0; i < SceneConfig.STABILITY_FRAME; i++)
+            {
+                await UniTask.Yield(PlayerLoopTiming.Update, token);
+            }
+
+            await UniTaskHelper.DelayAsync(SceneConfig.STABILITY_TIME, token);
         }
     }
 }
