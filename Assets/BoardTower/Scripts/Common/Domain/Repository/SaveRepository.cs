@@ -29,6 +29,12 @@ namespace BoardTower.Common.Domain.Repository
             return data;
         }
 
+        public void Delete()
+        {
+            var data = SaveDTO.Recreate(Load());
+            Save(data);
+        }
+
         private static void Save(SaveDTO data)
         {
             ES3.Save(SaveConfig.ES3_KEY, JsonUtility.ToJson(data));

@@ -15,6 +15,16 @@ namespace BoardTower.Common.Data.DataStore
             seVolume = new VolumeDTO();
         }
 
+        public static SaveDTO Recreate(SaveDTO dto)
+        {
+            return new SaveDTO
+            {
+                masterVolume = dto.masterVolume,
+                bgmVolume = dto.bgmVolume,
+                seVolume = dto.seVolume,
+            };
+        }
+
         public SaveVO ToVO() => new(masterVolume.ToVO(), bgmVolume.ToVO(), seVolume.ToVO());
     }
 }

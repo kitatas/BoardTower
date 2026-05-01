@@ -40,6 +40,7 @@ namespace BoardTower.Common.Installer
             builder.Register<LoadingUseCase>(Lifetime.Singleton);
             builder.Register<SceneUseCase>(Lifetime.Singleton);
             builder.Register<SeUseCase>(Lifetime.Singleton);
+            builder.Register<UserDataUseCase>(Lifetime.Singleton);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
