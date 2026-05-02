@@ -32,5 +32,12 @@ namespace BoardTower.Game.Presentation.State
 
             return GameState.Event;
         }
+
+        public override async UniTask ForceExitAsync(CancellationToken token)
+        {
+            await (
+                _movementUseCase.ClearHighlightSquareAsync(token)
+            );
+        }
     }
 }
