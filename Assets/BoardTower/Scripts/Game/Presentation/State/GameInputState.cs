@@ -26,6 +26,7 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             await _movementUseCase.InputAsync(token);
+            _movementUseCase.ClearHighlightSquareAsync(token).Forget();
             _plyUseCase.Decrease();
             await _movementUseCase.MoveAsync(token);
 

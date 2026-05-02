@@ -49,19 +49,22 @@ namespace BoardTower.Game.Domain.UseCase
             _lastHighlights = highlightVos;
         }
 
-        public UniTask HandleClickAsync(ClickSquareVO clickSquare, CancellationToken token)
+        public void HandleClick(ClickSquareVO clickSquare)
         {
             // GameState.Input 以外は処理させない
-            if (!_gameStateEntity.IsEqual(GameState.Input)) return UniTask.Yield(token);
+            if (!_gameStateEntity.IsEqual(GameState.Input)) return;
 
             // 移動可能なマスが更新されていない場合は処理させない
-            if (_lastHighlights.Length == 0) return UniTask.Yield(token);
+            if (_lastHighlights.Length == 0) return;
 
             // 移動可能範囲外であれば処理させない
-            if (!_lastHighlights.Any(x => x.square.IsEqual(clickSquare.square))) return UniTask.Yield(token);
+            if (!_lastHighlights.Any(x => x.square.IsEqual(clickSquare.square))) return;
 
             _movement?.OnNext(clickSquare);
+        }
 
+        public UniTask ClearHighlightSquareAsync(CancellationToken token)
+        {
             var highlightVos = _lastHighlights
                 .Select(x => new HighlightSquareVO(x.square, HighlightSquareType.Default))
                 .ToArray();

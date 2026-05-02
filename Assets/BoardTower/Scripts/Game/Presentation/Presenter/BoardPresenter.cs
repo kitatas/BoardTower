@@ -1,8 +1,6 @@
 using System;
-using System.Threading;
 using BoardTower.Game.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
-using Cysharp.Threading.Tasks;
 using MessagePipe;
 using R3;
 using VContainer.Unity;
@@ -14,7 +12,6 @@ namespace BoardTower.Game.Presentation.Presenter
         private readonly BoardUseCase _boardUseCase;
         private readonly MovementUseCase _movementUseCase;
         private readonly BoardFacade _boardFacade;
-        private readonly CancellationTokenSource _tokenSource;
         private readonly CompositeDisposable _disposable;
 
         public BoardPresenter(BoardUseCase boardUseCase, MovementUseCase movementUseCase, BoardFacade boardFacade)
@@ -22,7 +19,6 @@ namespace BoardTower.Game.Presentation.Presenter
             _boardUseCase = boardUseCase;
             _movementUseCase = movementUseCase;
             _boardFacade = boardFacade;
-            _tokenSource = new CancellationTokenSource();
             _disposable = new CompositeDisposable();
         }
 
@@ -41,14 +37,12 @@ namespace BoardTower.Game.Presentation.Presenter
                 .AddTo(_disposable);
 
             _boardFacade.OnClickAnySquareAsObservable()
-                .Subscribe(s => _movementUseCase.HandleClickAsync(s, _tokenSource.Token).Forget())
+                .Subscribe(s => _movementUseCase.HandleClick(s))
                 .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()
         {
-            _tokenSource?.Cancel();
-            _tokenSource?.Dispose();
             _disposable?.Dispose();
         }
     }
