@@ -95,6 +95,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<GameModalPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
+                entryPoints.Add<GiveUpPresenter>();
                 entryPoints.Add<PlyPresenter>();
                 entryPoints.Add<RoundPresenter>();
                 entryPoints.Add<RoundClearPresenter>();
@@ -111,6 +112,7 @@ namespace BoardTower.Game.Installer
             builder.Register<HudRootFacade>(Lifetime.Scoped);
             builder.Register<GameModalFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
+            builder.Register<GiveUpFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
             builder.Register<RoundClearFacade>(Lifetime.Scoped);
@@ -127,6 +129,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<GemView>();
+            builder.RegisterComponentInHierarchy<GiveUpView>();
             builder.RegisterComponentInHierarchy<PlyView>();
             builder.RegisterComponentInHierarchy<RoundView>();
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
