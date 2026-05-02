@@ -81,5 +81,10 @@ namespace BoardTower.Game.Application
         Policy = 2,
         License = 3,
         Credit = 4,
+        Sound = 5,
+        DeleteConfirm = 6,
+        DeleteComplete = 7,
+        GiveUpConfirm = 8,
+        GiveUpComplete = 9,
     }
 }
