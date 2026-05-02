@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Ports;
@@ -6,7 +7,7 @@ using MessagePipe;
 
 namespace BoardTower.Common.Domain.UseCase
 {
-    public abstract class BasePubSubUseCase<T>
+    public abstract class BasePubSubUseCase<T> : IDisposable
     {
         protected readonly BaseEntity<T> _entity;
         protected readonly BasePubSubPorts<T> _ports;
@@ -23,6 +24,10 @@ namespace BoardTower.Common.Domain.UseCase
         {
             _entity.Set(value);
             return _ports.PublishAsync(_entity.value, token);
+        }
+
+        public virtual void Dispose()
+        {
         }
     }
 }

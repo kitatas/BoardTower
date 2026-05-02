@@ -19,6 +19,7 @@ namespace BoardTower.Common.Presentation.Presenter
         private readonly Dictionary<T, BaseState<T>> _stateMap;
         private readonly AsyncLockLite _locker;
         private readonly CompositeDisposable _disposable;
+        private CancellationTokenSource _tokenSource;
 
         public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
         {
@@ -26,6 +27,7 @@ namespace BoardTower.Common.Presentation.Presenter
             _stateMap = states.ToDictionary(x => x.state, x => x);
             _locker = new AsyncLockLite();
             _disposable = new CompositeDisposable();
+            _tokenSource = new CancellationTokenSource();
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken token)
@@ -46,6 +48,15 @@ namespace BoardTower.Common.Presentation.Presenter
                 })
                 .AddTo(_disposable);
 
+            _stateUseCase.forceChange
+                .Subscribe(_ =>
+                {
+                    _tokenSource?.Cancel();
+                    _tokenSource?.Dispose();
+                    _tokenSource = new CancellationTokenSource();
+                })
+                .AddTo(_disposable);
+
             await _stateUseCase.InitAsync(token);
         }
 
@@ -60,14 +71,23 @@ namespace BoardTower.Common.Presentation.Presenter
 
                 var nextState = state;
 
-                await currentState.EnterAsync(token);
+                using var linkedTokenSource =
+                    CancellationTokenSource.CreateLinkedTokenSource(token, _tokenSource.Token);
+
+                await currentState.EnterAsync(linkedTokenSource.Token);
                 while (EqualityComparer<T>.Default.Equals(nextState, state))
                 {
-                    nextState = await currentState.TickAsync(token);
+                    linkedTokenSource.Token.ThrowIfCancellationRequested();
+                    nextState = await currentState.TickAsync(linkedTokenSource.Token);
                 }
-                await currentState.ExitAsync(token);
+                await currentState.ExitAsync(linkedTokenSource.Token);
 
                 return nextState;
+            }
+            catch (OperationCanceledException)
+            {
+                // Stateの強制変更
+                return _stateUseCase.forceChangeState;
             }
             catch (Exception e)
             {
@@ -79,6 +99,8 @@ namespace BoardTower.Common.Presentation.Presenter
         void IDisposable.Dispose()
         {
             _disposable?.Dispose();
+            _tokenSource?.Cancel();
+            _tokenSource?.Dispose();
         }
     }
 }
