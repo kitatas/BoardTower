@@ -28,5 +28,10 @@ namespace BoardTower.Common.Presentation.State
         {
             return UniTask.Yield(PlayerLoopTiming.Update, token);
         }
+
+        public virtual UniTask ForceExitAsync(CancellationToken token)
+        {
+            return UniTask.Yield(PlayerLoopTiming.Update, token);
+        }
     }
 }

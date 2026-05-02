@@ -86,6 +86,13 @@ namespace BoardTower.Common.Presentation.Presenter
             }
             catch (OperationCanceledException)
             {
+                if (!_stateMap.TryGetValue(state, out var currentState))
+                {
+                    throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_STATE);
+                }
+
+                await currentState.ForceExitAsync(token);
+
                 // Stateの強制変更
                 return _stateUseCase.forceChangeState;
             }
