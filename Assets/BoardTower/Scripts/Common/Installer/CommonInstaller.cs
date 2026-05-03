@@ -1,4 +1,5 @@
 using BoardTower.Common.Data.DataStore;
+using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Ports;
 using BoardTower.Common.Domain.Repository;
 using BoardTower.Common.Domain.UseCase;
@@ -25,6 +26,9 @@ namespace BoardTower.Common.Installer
             // DataStore
             builder.RegisterInstance<BgmTable>(bgmTable);
             builder.RegisterInstance<SeTable>(seTable);
+
+            // Entity
+            builder.Register<UserEntity>(Lifetime.Singleton);
 
             // Ports
             builder.Register<ExceptionPorts>(Lifetime.Singleton);
