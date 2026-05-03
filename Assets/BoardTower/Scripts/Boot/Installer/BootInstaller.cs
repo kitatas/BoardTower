@@ -38,6 +38,7 @@ namespace BoardTower.Boot.Installer
 
             // UseCase
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
+            builder.Register<LoginUseCase>(Lifetime.Scoped);
             builder.Register<SplashUseCase>(Lifetime.Scoped);
 
             // Facade
@@ -47,6 +48,7 @@ namespace BoardTower.Boot.Installer
             // State
             builder.Register<BaseBootState, BootInitState>(Lifetime.Scoped);
             builder.Register<BaseBootState, BootLoadState>(Lifetime.Scoped);
+            builder.Register<BaseBootState, BootLoginState>(Lifetime.Scoped);
             builder.Register<BaseBootState, BootSplashState>(Lifetime.Scoped);
 
             // Presenter

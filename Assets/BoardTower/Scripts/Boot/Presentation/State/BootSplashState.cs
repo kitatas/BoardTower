@@ -25,7 +25,7 @@ namespace BoardTower.Boot.Presentation.State
         {
             await _splashUseCase.SequentialRenderAsync(token);
 
-            return BootState.Load;
+            return BootState.Login;
         }
     }
 }
