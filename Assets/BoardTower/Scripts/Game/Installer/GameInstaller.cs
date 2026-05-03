@@ -100,6 +100,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<RoundPresenter>();
                 entryPoints.Add<RoundClearPresenter>();
                 entryPoints.Add<TapScreenPresenter>();
+                entryPoints.Add<UserPresenter>();
                 entryPoints.Add<VolumePresenter>();
             });
 
@@ -117,6 +118,7 @@ namespace BoardTower.Game.Installer
             builder.Register<RoundFacade>(Lifetime.Scoped);
             builder.Register<RoundClearFacade>(Lifetime.Scoped);
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
+            builder.Register<UserFacade>(Lifetime.Scoped);
             builder.Register<VolumeFacade>(Lifetime.Scoped);
 
             // View
@@ -135,6 +137,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
             builder.RegisterComponentInHierarchy<RoundMaxNumView>();
             builder.RegisterComponentInHierarchy<TapScreenView>();
+            builder.RegisterComponentInHierarchy<UidView>();
             builder.RegisterComponentInHierarchy<VolumeView>();
         }
     }
