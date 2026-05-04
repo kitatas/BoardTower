@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BoardTower.Common.Application;
 using UniEx;
@@ -376,6 +377,16 @@ namespace BoardTower.Game.Application
 
             this.type = type;
             this.content = content;
+        }
+    }
+
+    public sealed class LotRelicVO
+    {
+        public readonly IEnumerable<RelicVO> relics;
+
+        public LotRelicVO(IEnumerable<RelicVO> relics)
+        {
+            this.relics = relics;
         }
     }
 }

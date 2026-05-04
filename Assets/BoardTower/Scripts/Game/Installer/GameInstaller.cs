@@ -22,12 +22,14 @@ namespace BoardTower.Game.Installer
     public sealed class GameInstaller : LifetimeScope
     {
         [SerializeField] private TextAsset memoryFile = default;
+        [SerializeField] private RelicTable relicTable = default;
         [SerializeField] private SquareEventTable squareEventTable = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // DataStore
             builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
+            builder.RegisterInstance<RelicTable>(relicTable);
             builder.RegisterInstance<SquareEventTable>(squareEventTable);
 
             // Entity
@@ -36,6 +38,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GameModalEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
             builder.Register<GemEntity>(Lifetime.Scoped);
+            builder.Register<LotRelicEntity>(Lifetime.Scoped);
             builder.Register<PlyEntity>(Lifetime.Scoped);
             builder.Register<RoundEntity>(Lifetime.Scoped);
             builder.Register<RoundClearGemEntity>(Lifetime.Scoped);
@@ -54,6 +57,7 @@ namespace BoardTower.Game.Installer
             // Repository
             builder.Register<BoardPatternRepository>(Lifetime.Scoped);
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
+            builder.Register<RelicRepository>(Lifetime.Scoped);
             builder.Register<RoundClearRepository>(Lifetime.Scoped);
             builder.Register<RoundPlyRepository>(Lifetime.Scoped);
             builder.Register<SquareEventRepository>(Lifetime.Scoped);
@@ -68,6 +72,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<GemUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
+            builder.Register<LotRelicUseCase>(Lifetime.Scoped);
             builder.Register<PlyUseCase>(Lifetime.Scoped);
             builder.Register<RoundUseCase>(Lifetime.Scoped);
             builder.Register<RoundClearUseCase>(Lifetime.Scoped);

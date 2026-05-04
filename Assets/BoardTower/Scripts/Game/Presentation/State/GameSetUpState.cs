@@ -10,12 +10,15 @@ namespace BoardTower.Game.Presentation.State
     {
         private readonly BoardUseCase _boardUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
+        private readonly LotRelicUseCase _lotRelicUseCase;
         private readonly RoundUseCase _roundUseCase;
 
-        public GameSetUpState(BoardUseCase boardUseCase, ChessmenUseCase chessmenUseCase, RoundUseCase roundUseCase)
+        public GameSetUpState(BoardUseCase boardUseCase, ChessmenUseCase chessmenUseCase,
+            LotRelicUseCase lotRelicUseCase, RoundUseCase roundUseCase)
         {
             _boardUseCase = boardUseCase;
             _chessmenUseCase = chessmenUseCase;
+            _lotRelicUseCase = lotRelicUseCase;
             _roundUseCase = roundUseCase;
         }
 
@@ -27,6 +30,7 @@ namespace BoardTower.Game.Presentation.State
                 _boardUseCase.FadeAsync(Fade.Out, token),
                 _chessmenUseCase.FadeAsync(Fade.Out, token)
             );
+            _lotRelicUseCase.Lot();
             _roundUseCase.Increment();
 
             await _boardUseCase.BuildSquaresAsync(token);
