@@ -87,4 +87,9 @@ namespace BoardTower.Game.Application
         GiveUpConfirm = 8,
         GiveUpComplete = 9,
     }
+
+    public enum RelicType
+    {
+        None = 0,
+    }
 }

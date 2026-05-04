@@ -363,4 +363,19 @@ namespace BoardTower.Game.Application
             return new GameModalTransitionVO(gameModal.type, transition);
         }
     }
+
+    public sealed class RelicVO
+    {
+        public readonly RelicType type;
+        public readonly string content;
+
+        public RelicVO(RelicType type, string content)
+        {
+            if (type is RelicType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_RELIC);
+
+            this.type = type;
+            this.content = content;
+        }
+    }
 }
