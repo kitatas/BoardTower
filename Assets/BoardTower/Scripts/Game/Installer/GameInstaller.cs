@@ -97,6 +97,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<DeletePresenter>();
                 entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<HudRootPresenter>();
+                entryPoints.Add<LotRelicPresenter>();
                 entryPoints.Add<GameModalPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
@@ -116,6 +117,7 @@ namespace BoardTower.Game.Installer
             builder.Register<DeleteFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<HudRootFacade>(Lifetime.Scoped);
+            builder.Register<LotRelicFacade>(Lifetime.Scoped);
             builder.Register<GameModalFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<GiveUpFacade>(Lifetime.Scoped);
@@ -135,6 +137,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<DeleteView>();
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
+            builder.RegisterComponentInHierarchy<LotRelicView>();
             builder.RegisterComponentInHierarchy<GemView>();
             builder.RegisterComponentInHierarchy<GiveUpView>();
             builder.RegisterComponentInHierarchy<PlyView>();
