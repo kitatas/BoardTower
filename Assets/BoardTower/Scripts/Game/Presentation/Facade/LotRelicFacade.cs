@@ -1,5 +1,8 @@
+using System.Threading;
+using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Presentation.View;
+using Cysharp.Threading.Tasks;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -15,6 +18,19 @@ namespace BoardTower.Game.Presentation.Facade
         public void Render(LotRelicVO lotRelic)
         {
             _lotRelicView.Render(lotRelic);
+        }
+
+        public UniTask FadeAsync(LotRelicTransitionVO lotRelicTransition, CancellationToken token)
+        {
+            var tween = lotRelicTransition.transition.fade switch
+            {
+                Fade.In => _lotRelicView.FadeIn(lotRelicTransition.transition.duration),
+                Fade.Out => _lotRelicView.FadeOut(lotRelicTransition.transition.duration),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
+            };
+
+            return tween
+                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
     }
 }

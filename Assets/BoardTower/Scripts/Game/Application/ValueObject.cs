@@ -389,4 +389,20 @@ namespace BoardTower.Game.Application
             this.relics = relics;
         }
     }
+
+    public sealed class LotRelicTransitionVO
+    {
+        public readonly TransitionVO transition;
+
+        public LotRelicTransitionVO(TransitionVO transition)
+        {
+            this.transition = transition;
+        }
+
+        public static LotRelicTransitionVO Create(Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new LotRelicTransitionVO(transition);
+        }
+    }
 }

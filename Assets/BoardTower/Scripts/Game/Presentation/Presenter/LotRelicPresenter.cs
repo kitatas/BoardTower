@@ -1,6 +1,7 @@
 using System;
 using BoardTower.Game.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
+using MessagePipe;
 using R3;
 using VContainer.Unity;
 
@@ -23,6 +24,10 @@ namespace BoardTower.Game.Presentation.Presenter
         {
             _lotRelicUseCase.lotRelic
                 .Subscribe(_lotRelicFacade.Render)
+                .AddTo(_disposable);
+
+            _lotRelicUseCase.transition
+                .Subscribe((r, ct) => _lotRelicFacade.FadeAsync(r, ct))
                 .AddTo(_disposable);
         }
 
