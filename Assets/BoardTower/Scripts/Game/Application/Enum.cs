@@ -11,6 +11,7 @@ namespace BoardTower.Game.Application
         Clear = 6,
         Fail = 7,
         Finish = 8,
+        Pick = 9,
     }
 
     public enum ChessmenType

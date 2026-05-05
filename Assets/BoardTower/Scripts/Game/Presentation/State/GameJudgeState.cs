@@ -21,7 +21,7 @@ namespace BoardTower.Game.Presentation.State
         public override UniTask<GameState> TickAsync(CancellationToken token)
         {
             var nextState = _roundClearUseCase.IsClear()
-                ? _roundUseCase.IsMaxRound() ? GameState.Clear : GameState.SetUp
+                ? _roundUseCase.IsMaxRound() ? GameState.Clear : GameState.Pick
                 : GameState.Fail;
             return UniTask.FromResult(nextState);
         }
