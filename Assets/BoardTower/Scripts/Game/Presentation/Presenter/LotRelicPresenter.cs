@@ -35,16 +35,20 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe((r, ct) => _lotRelicFacade.FadeAsync(r, ct))
                 .AddTo(_disposable);
 
-            // 未選択から選択された場合は highlight を表示
             _lotRelicFacade.OnClickAnyAsObservable()
-                .Where(x => !_selectRelicFacade.IsEqualPosition(x))
-                .Subscribe(_selectRelicFacade.SetPosition)
-                .AddTo(_disposable);
-
-            // 選択済みが再度選択された場合は決定に
-            _lotRelicFacade.OnClickAnyAsObservable()
-                .Where(x => _selectRelicFacade.IsEqualPosition(x))
-                .Subscribe(_pickRelicUseCase.HandlePick)
+                .Subscribe(x =>
+                {
+                    if (_selectRelicFacade.IsEqualPosition(x))
+                    {
+                        // 選択済みが再度選択された場合は決定
+                        _pickRelicUseCase.HandlePick(x);
+                    }
+                    else
+                    {
+                        // 未選択から選択された場合は highlight を表示
+                        _selectRelicFacade.SetPosition(x);
+                    }
+                })
                 .AddTo(_disposable);
         }
 
