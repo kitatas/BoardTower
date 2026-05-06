@@ -9,10 +9,12 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GamePickState : BaseGameState
     {
         private readonly LotRelicUseCase _lotRelicUseCase;
+        private readonly PickRelicUseCase _pickRelicUseCase;
 
-        public GamePickState(LotRelicUseCase lotRelicUseCase)
+        public GamePickState(LotRelicUseCase lotRelicUseCase, PickRelicUseCase pickRelicUseCase)
         {
             _lotRelicUseCase = lotRelicUseCase;
+            _pickRelicUseCase = pickRelicUseCase;
         }
 
         public override GameState state => GameState.Pick;
@@ -27,7 +29,7 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             await _lotRelicUseCase.FadeAsync(Fade.In, token);
-            // TODO: 選択待ち
+            await _pickRelicUseCase.PickAsync(token);
             await _lotRelicUseCase.FadeAsync(Fade.Out, token);
 
             return GameState.SetUp;

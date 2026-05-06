@@ -406,6 +406,16 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class PickRelicVO
+    {
+        public readonly IEnumerable<RelicVO> relics;
+
+        public PickRelicVO(IEnumerable<RelicVO> relics)
+        {
+            this.relics = relics;
+        }
+    }
+
     public sealed class SelectRelicVO
     {
         public readonly int index;
