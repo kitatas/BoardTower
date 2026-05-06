@@ -74,6 +74,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GemUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
             builder.Register<LotRelicUseCase>(Lifetime.Scoped);
+            builder.Register<PickRelicUseCase>(Lifetime.Scoped);
             builder.Register<PlyUseCase>(Lifetime.Scoped);
             builder.Register<RoundUseCase>(Lifetime.Scoped);
             builder.Register<RoundClearUseCase>(Lifetime.Scoped);
