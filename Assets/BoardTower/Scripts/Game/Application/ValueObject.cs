@@ -405,4 +405,16 @@ namespace BoardTower.Game.Application
             return new LotRelicTransitionVO(transition);
         }
     }
+
+    public sealed class SelectRelicVO
+    {
+        public readonly int index;
+        public readonly Vector3 position;
+
+        public SelectRelicVO(int index, Vector3 position)
+        {
+            this.index = index;
+            this.position = position;
+        }
+    }
 }

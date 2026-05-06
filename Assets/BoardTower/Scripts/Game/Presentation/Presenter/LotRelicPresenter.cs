@@ -11,12 +11,15 @@ namespace BoardTower.Game.Presentation.Presenter
     {
         private readonly LotRelicUseCase _lotRelicUseCase;
         private readonly LotRelicFacade _lotRelicFacade;
+        private readonly SelectRelicFacade _selectRelicFacade;
         private readonly CompositeDisposable _disposable;
 
-        public LotRelicPresenter(LotRelicUseCase lotRelicUseCase, LotRelicFacade lotRelicFacade)
+        public LotRelicPresenter(LotRelicUseCase lotRelicUseCase, LotRelicFacade lotRelicFacade,
+            SelectRelicFacade selectRelicFacade)
         {
             _lotRelicUseCase = lotRelicUseCase;
             _lotRelicFacade = lotRelicFacade;
+            _selectRelicFacade = selectRelicFacade;
             _disposable = new CompositeDisposable();
         }
 
@@ -28,6 +31,10 @@ namespace BoardTower.Game.Presentation.Presenter
 
             _lotRelicUseCase.transition
                 .Subscribe((r, ct) => _lotRelicFacade.FadeAsync(r, ct))
+                .AddTo(_disposable);
+
+            _lotRelicFacade.OnClickAnyAsObservable()
+                .Subscribe(_selectRelicFacade.SetPosition)
                 .AddTo(_disposable);
         }
 

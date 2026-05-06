@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BoardTower.Game.Application;
 using DG.Tweening;
+using R3;
+using R3.Triggers;
 using UnityEngine;
 
 namespace BoardTower.Game.Presentation.View
@@ -40,6 +42,16 @@ namespace BoardTower.Game.Presentation.View
             }
 
             return sequence;
+        }
+
+        public Observable<SelectRelicVO> OnClickAnyAsObservable()
+        {
+            return relicViews
+                .Select((r, i) => r
+                    .OnPointerClickAsObservable()
+                    .Select(_ => new SelectRelicVO(i, r.transform.position)))
+                .Merge()
+                .Share();
         }
     }
 }

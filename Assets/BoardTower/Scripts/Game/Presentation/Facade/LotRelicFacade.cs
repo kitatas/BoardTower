@@ -3,6 +3,7 @@ using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Presentation.View;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -31,6 +32,11 @@ namespace BoardTower.Game.Presentation.Facade
 
             return tween
                 .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+        }
+
+        public Observable<SelectRelicVO> OnClickAnyAsObservable()
+        {
+            return _lotRelicView.OnClickAnyAsObservable();
         }
     }
 }

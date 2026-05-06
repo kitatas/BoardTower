@@ -126,6 +126,7 @@ namespace BoardTower.Game.Installer
             builder.Register<PlyFacade>(Lifetime.Scoped);
             builder.Register<RoundFacade>(Lifetime.Scoped);
             builder.Register<RoundClearFacade>(Lifetime.Scoped);
+            builder.Register<SelectRelicFacade>(Lifetime.Scoped);
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
             builder.Register<UserFacade>(Lifetime.Scoped);
             builder.Register<VolumeFacade>(Lifetime.Scoped);
@@ -146,6 +147,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<RoundView>();
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
             builder.RegisterComponentInHierarchy<RoundMaxNumView>();
+            builder.RegisterComponentInHierarchy<SelectRelicView>();
             builder.RegisterComponentInHierarchy<TapScreenView>();
             builder.RegisterComponentInHierarchy<UidView>();
             builder.RegisterComponentInHierarchy<VolumeView>();

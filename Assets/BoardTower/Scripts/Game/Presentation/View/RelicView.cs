@@ -2,10 +2,11 @@ using BoardTower.Game.Application;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BoardTower.Game.Presentation.View
 {
-    public sealed class RelicView : MonoBehaviour
+    public sealed class RelicView : UIBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private TextMeshProUGUI content = default;
