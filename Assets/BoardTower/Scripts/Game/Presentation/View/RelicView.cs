@@ -18,18 +18,22 @@ namespace BoardTower.Game.Presentation.View
 
         public Tween FadeIn(float duration, float delay)
         {
-            return canvasGroup
-                .DOFade(1.0f, duration)
-                .SetEase(Ease.Linear)
+            return DOTween.Sequence()
+                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
+                .Append(canvasGroup
+                    .DOFade(1.0f, duration)
+                    .SetEase(Ease.Linear))
                 .SetDelay(delay)
                 .SetLink(gameObject);
         }
 
         public Tween FadeOut(float duration, float delay)
         {
-            return canvasGroup
-                .DOFade(0.0f, duration)
-                .SetEase(Ease.Linear)
+            return DOTween.Sequence()
+                .Append(canvasGroup
+                    .DOFade(0.0f, duration)
+                    .SetEase(Ease.Linear))
+                .AppendCallback(() => canvasGroup.blocksRaycasts = false)
                 .SetDelay(delay)
                 .SetLink(gameObject);
         }
