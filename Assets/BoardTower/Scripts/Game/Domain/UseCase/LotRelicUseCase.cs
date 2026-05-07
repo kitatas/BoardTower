@@ -15,14 +15,16 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class LotRelicUseCase : IDisposable
     {
         private readonly LotRelicEntity _lotRelicEntity;
+        private readonly PickRelicEntity _pickRelicEntity;
         private readonly LotRelicPorts _lotRelicPorts;
         private readonly RelicRepository _relicRepository;
         private readonly Subject<LotRelicVO> _lotRelic;
 
-        public LotRelicUseCase(LotRelicEntity lotRelicEntity, LotRelicPorts lotRelicPorts,
-            RelicRepository relicRepository)
+        public LotRelicUseCase(LotRelicEntity lotRelicEntity, PickRelicEntity pickRelicEntity,
+            LotRelicPorts lotRelicPorts, RelicRepository relicRepository)
         {
             _lotRelicEntity = lotRelicEntity;
+            _pickRelicEntity = pickRelicEntity;
             _lotRelicPorts = lotRelicPorts;
             _relicRepository = relicRepository;
             _lotRelic = new Subject<LotRelicVO>();
@@ -45,9 +47,12 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void Lot()
         {
-            // TODO: 保持済み・抽選済みの重複回避
-            var relics = Enumerable.Range(1, 4)
-                .Select(x => _relicRepository.Find((RelicType)x));
+            // 保持中の種類を除き、重複しないように抽選
+            var rand = new Random();
+            var relics = _relicRepository.FindsByTypeNotIn(_pickRelicEntity.relicTypes)
+                .OrderBy(_ => rand.Next())
+                .Take(RelicConfig.LOT_NUM)
+                .ToArray();
 
             _lotRelicEntity.Set(new LotRelicVO(relics));
             _lotRelic?.OnNext(_lotRelicEntity.value);

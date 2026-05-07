@@ -26,5 +26,11 @@ namespace BoardTower.Game.Domain.Repository
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_RELIC);
             }
         }
+
+        public IEnumerable<RelicVO> FindsByTypeNotIn(IEnumerable<RelicType> types)
+        {
+            return _relicMap.Values
+                .Where(x => !types.Contains(x.type));
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace BoardTower.Game.Data.Entity
             }
         }
 
+        public IEnumerable<RelicType> relicTypes => relics.Select(x => x.type);
+
         public void Add(RelicVO relic)
         {
             var vos = relics.Append(relic);
