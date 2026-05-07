@@ -25,8 +25,8 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void SetUp(int round)
         {
-            var vo = _roundPlyRepository.Find(round);
-            _plyEntity.SetUp(vo.plyCount);
+            var plyCount = round > 0 ? _roundPlyRepository.Find(round)?.plyCount ?? 0 : 0;
+            _plyEntity.SetUp(plyCount);
             _ply.Value = _plyEntity.value;
             _plyMax.Value = _plyEntity.maxValue;
         }

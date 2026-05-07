@@ -25,8 +25,8 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void SetUp(int round)
         {
-            var vo = _roundClearRepository.Find(round);
-            _roundClearGemEntity.Set(vo.gemCount);
+            var gemCount = round > 0 ? _roundClearRepository.Find(round)?.gemCount ?? 0 : 0; 
+            _roundClearGemEntity.Set(gemCount);
             _roundClear.Value = _roundClearGemEntity.value;
         }
 

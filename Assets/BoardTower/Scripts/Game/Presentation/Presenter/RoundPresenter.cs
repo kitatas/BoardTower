@@ -36,15 +36,15 @@ namespace BoardTower.Game.Presentation.Presenter
                 .AddTo(_disposable);
 
             _roundUseCase.round
-                .Where(x => x != 0)
                 .Subscribe(x =>
                 {
                     _gemUseCase.SetUp();
                     _plyUseCase.SetUp(x);
                     _roundClearUseCase.SetUp(x);
-                    if (x == 1) _roundFacade.RenderMax((0, RoundConfig.MAX_NUM));
                 })
                 .AddTo(_disposable);
+
+            _roundFacade.RenderMax((0, RoundConfig.MAX_NUM));
         }
 
         void IDisposable.Dispose()

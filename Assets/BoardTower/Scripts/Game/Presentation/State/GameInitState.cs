@@ -36,11 +36,12 @@ namespace BoardTower.Game.Presentation.State
         {
             _bgmUseCase.Play(BgmType.Top);
             _chessmenUseCase.Init();
-            _roundUseCase.Init();
             await (
                 _hudRootUseCase.FadeAsync(Fade.Out, token),
                 _tapScreenUseCase.FadeAsync(Fade.In, token)
             );
+
+            _roundUseCase.Init();
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
