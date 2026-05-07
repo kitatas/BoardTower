@@ -112,6 +112,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<PlyPresenter>();
                 entryPoints.Add<RoundPresenter>();
                 entryPoints.Add<RoundClearPresenter>();
+                entryPoints.Add<SelectRelicPresenter>();
                 entryPoints.Add<TapScreenPresenter>();
                 entryPoints.Add<UserPresenter>();
                 entryPoints.Add<VolumePresenter>();

@@ -12,14 +12,14 @@ namespace BoardTower.Game.Presentation.Facade
             _selectRelicView = selectRelicView;
         }
 
-        public bool IsEqualPosition(SelectRelicVO selectRelic)
+        public void Render(SelectRelicVO selectRelic)
         {
-            return _selectRelicView.IsEqualPosition(selectRelic.position);
+            _selectRelicView.Render(selectRelic.position);
         }
 
-        public void SetPosition(SelectRelicVO selectRelic)
+        public void Hide()
         {
-            _selectRelicView.SetPosition(selectRelic.position);
+            _selectRelicView.Hide();
         }
     }
 }

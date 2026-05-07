@@ -8,15 +8,15 @@ namespace BoardTower.Game.Presentation.View
     {
         [SerializeField] private Image highlight = default;
 
-        public bool IsEqualPosition(Vector3 position)
-        {
-            var pos = transform.position;
-            return pos.x.IsEqual(position.x) && pos.y.IsEqual(position.y) && pos.z.IsEqual(position.z);
-        }
-
-        public void SetPosition(Vector3 position)
+        public void Render(Vector3 position)
         {
             highlight.transform.position = position;
+            highlight.SetColorA(1.0f);
+        }
+
+        public void Hide()
+        {
+            highlight.SetColorA(0.0f);
         }
     }
 }

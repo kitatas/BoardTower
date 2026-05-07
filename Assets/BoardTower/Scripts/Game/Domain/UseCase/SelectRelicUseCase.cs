@@ -15,6 +15,9 @@ namespace BoardTower.Game.Domain.UseCase
             _decisionRelic = new BehaviorSubject<SelectRelicVO>(null);
         }
 
+        public Observable<SelectRelicVO> selectRelic => _selectRelic.Where(x => x != null);
+        public Observable<SelectRelicVO> decisionRelic => _decisionRelic.Where(x => x != null);
+
         public void Select(SelectRelicVO relic)
         {
             if (_selectRelic.Value == null)
