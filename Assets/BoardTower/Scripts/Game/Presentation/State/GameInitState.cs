@@ -12,15 +12,17 @@ namespace BoardTower.Game.Presentation.State
         private readonly BgmUseCase _bgmUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
         private readonly HudRootUseCase _hudRootUseCase;
+        private readonly PickRelicUseCase _pickRelicUseCase;
         private readonly RoundUseCase _roundUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
         public GameInitState(BgmUseCase bgmUseCase, ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase,
-            RoundUseCase roundUseCase, TapScreenUseCase tapScreenUseCase)
+            PickRelicUseCase pickRelicUseCase, RoundUseCase roundUseCase, TapScreenUseCase tapScreenUseCase)
         {
             _bgmUseCase = bgmUseCase;
             _chessmenUseCase = chessmenUseCase;
             _hudRootUseCase = hudRootUseCase;
+            _pickRelicUseCase = pickRelicUseCase;
             _roundUseCase = roundUseCase;
             _tapScreenUseCase = tapScreenUseCase;
         }
@@ -42,6 +44,9 @@ namespace BoardTower.Game.Presentation.State
             );
 
             _roundUseCase.Init();
+            await (
+                _pickRelicUseCase.InitAsync(token)
+            );
         }
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)

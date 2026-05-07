@@ -414,6 +414,11 @@ namespace BoardTower.Game.Application
         {
             this.relics = relics;
         }
+
+        public static PickRelicVO Empty()
+        {
+            return new PickRelicVO(Enumerable.Empty<RelicVO>());
+        }
     }
 
     public sealed class SelectRelicVO

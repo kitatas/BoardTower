@@ -28,6 +28,12 @@ namespace BoardTower.Game.Domain.UseCase
 
         public IAsyncSubscriber<PickRelicVO> pickRelic => _pickRelicPorts.pickRelicSubscriber;
 
+        public UniTask InitAsync(CancellationToken token)
+        {
+            _pickRelicEntity.Set(PickRelicVO.Empty());
+            return _pickRelicPorts.PublishPickRelicAsync(_pickRelicEntity.value, token);
+        }
+
         public void HandlePick(SelectRelicVO selectRelic)
         {
             var relic = _lotRelicEntity.value.relics.ElementAt(selectRelic.index);

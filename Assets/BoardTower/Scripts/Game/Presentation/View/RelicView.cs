@@ -1,4 +1,5 @@
 using BoardTower.Game.Application;
+using Cysharp.Text;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,11 @@ namespace BoardTower.Game.Presentation.View
         public void Render(RelicVO value)
         {
             content.text = value.content;
+        }
+
+        public void RenderEmpty()
+        {
+            content.text = ZString.Format("{0}", "---");
         }
 
         public Tween FadeIn(float duration, float delay)
