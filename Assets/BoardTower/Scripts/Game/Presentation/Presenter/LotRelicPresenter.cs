@@ -10,18 +10,16 @@ namespace BoardTower.Game.Presentation.Presenter
     public sealed class LotRelicPresenter : IStartable, IDisposable
     {
         private readonly LotRelicUseCase _lotRelicUseCase;
-        private readonly PickRelicUseCase _pickRelicUseCase;
+        private readonly SelectRelicUseCase _selectRelicUseCase;
         private readonly LotRelicFacade _lotRelicFacade;
-        private readonly SelectRelicFacade _selectRelicFacade;
         private readonly CompositeDisposable _disposable;
 
-        public LotRelicPresenter(LotRelicUseCase lotRelicUseCase, PickRelicUseCase pickRelicUseCase,
-            LotRelicFacade lotRelicFacade, SelectRelicFacade selectRelicFacade)
+        public LotRelicPresenter(LotRelicUseCase lotRelicUseCase, SelectRelicUseCase selectRelicUseCase,
+            LotRelicFacade lotRelicFacade)
         {
             _lotRelicUseCase = lotRelicUseCase;
-            _pickRelicUseCase = pickRelicUseCase;
+            _selectRelicUseCase = selectRelicUseCase;
             _lotRelicFacade = lotRelicFacade;
-            _selectRelicFacade = selectRelicFacade;
             _disposable = new CompositeDisposable();
         }
 
@@ -36,19 +34,7 @@ namespace BoardTower.Game.Presentation.Presenter
                 .AddTo(_disposable);
 
             _lotRelicFacade.OnClickAnyAsObservable()
-                .Subscribe(x =>
-                {
-                    if (_selectRelicFacade.IsEqualPosition(x))
-                    {
-                        // 選択済みが再度選択された場合は決定
-                        _pickRelicUseCase.HandlePick(x);
-                    }
-                    else
-                    {
-                        // 未選択から選択された場合は highlight を表示
-                        _selectRelicFacade.SetPosition(x);
-                    }
-                })
+                .Subscribe(_selectRelicUseCase.Select)
                 .AddTo(_disposable);
         }
 
