@@ -64,6 +64,7 @@ namespace BoardTower.Game.Installer
             builder.Register<RelicRepository>(Lifetime.Scoped);
             builder.Register<RoundClearRepository>(Lifetime.Scoped);
             builder.Register<RoundPlyRepository>(Lifetime.Scoped);
+            builder.Register<ScoreRateRepository>(Lifetime.Scoped);
             builder.Register<SquareEventRepository>(Lifetime.Scoped);
 
             // UseCase

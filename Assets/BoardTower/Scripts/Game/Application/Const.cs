@@ -73,4 +73,9 @@ namespace BoardTower.Game.Application
         public const float LOT_FADE_DURATION = 0.25f;
         public const float LOT_DELAY_RATE = 0.1f;
     }
+
+    public sealed class ScoreConfig
+    {
+        public const int BASE_GEM_VALUE = 100;
+    }
 }

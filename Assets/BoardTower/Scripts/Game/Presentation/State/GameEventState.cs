@@ -10,12 +10,14 @@ namespace BoardTower.Game.Presentation.State
         private readonly EventUseCase _eventUseCase;
         private readonly GemUseCase _gemUseCase;
         private readonly PlyUseCase _plyUseCase;
+        private readonly ScoreUseCase _scoreUseCase;
 
-        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, PlyUseCase plyUseCase)
+        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, PlyUseCase plyUseCase, ScoreUseCase scoreUseCase)
         {
             _eventUseCase = eventUseCase;
             _gemUseCase = gemUseCase;
             _plyUseCase = plyUseCase;
+            _scoreUseCase = scoreUseCase;
         }
 
         public override GameState state => GameState.Event;
@@ -27,8 +29,12 @@ namespace BoardTower.Game.Presentation.State
             // Belt 系であれば、移動後の SquareEvent 実行
             if (result.isBelt) return state;
 
-            // TODO: 獲得数の算出
-            if (result.gemNum > 0) _gemUseCase.Add(result.gemNum);
+            if (result.gemNum > 0)
+            {
+                _gemUseCase.Add(result.gemNum);
+                _scoreUseCase.ApplyGemScore(result.gemNum);
+            }
+
             if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);
 
             return _plyUseCase.IsZero() ? GameState.Judge : GameState.Input;

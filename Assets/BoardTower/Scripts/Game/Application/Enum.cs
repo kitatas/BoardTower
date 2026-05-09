@@ -106,5 +106,6 @@ namespace BoardTower.Game.Application
     public enum ScoreRateType
     {
         None = 0,
+        Gem = 1,
     }
 }
