@@ -46,13 +46,14 @@ namespace BoardTower.Game.Data.DataStore
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(6)
             {
                 {typeof(BoardPatternMaster[]), 0 },
                 {typeof(ChessmenMovementRuleMaster[]), 1 },
                 {typeof(RoundClearMaster[]), 2 },
-                {typeof(RoundPlyMaster[]), 3 },
-                {typeof(ScoreRateMaster[]), 4 },
+                {typeof(RoundMaster[]), 3 },
+                {typeof(RoundPlyMaster[]), 4 },
+                {typeof(ScoreRateMaster[]), 5 },
             };
         }
 
@@ -66,8 +67,9 @@ namespace BoardTower.Game.Data.DataStore
                 case 0: return new MessagePack.Formatters.ArrayFormatter<BoardPatternMaster>();
                 case 1: return new MessagePack.Formatters.ArrayFormatter<ChessmenMovementRuleMaster>();
                 case 2: return new MessagePack.Formatters.ArrayFormatter<RoundClearMaster>();
-                case 3: return new MessagePack.Formatters.ArrayFormatter<RoundPlyMaster>();
-                case 4: return new MessagePack.Formatters.ArrayFormatter<ScoreRateMaster>();
+                case 3: return new MessagePack.Formatters.ArrayFormatter<RoundMaster>();
+                case 4: return new MessagePack.Formatters.ArrayFormatter<RoundPlyMaster>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<ScoreRateMaster>();
                 default: return null;
             }
         }

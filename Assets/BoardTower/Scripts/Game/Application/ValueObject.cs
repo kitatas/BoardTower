@@ -264,6 +264,20 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class RoundVO
+    {
+        public readonly int round;
+        public readonly int plyCount;
+        public readonly int gemCount;
+
+        public RoundVO(int round, int plyCount, int gemCount)
+        {
+            this.round = round;
+            this.plyCount = plyCount;
+            this.gemCount = gemCount;
+        }
+    }
+
     public sealed class RoundPlyVO
     {
         public readonly int round;

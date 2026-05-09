@@ -34,6 +34,12 @@ namespace BoardTower.Game.Data.DataStore
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<RoundMaster> dataSource)
+        {
+            AppendCore(dataSource, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
+            return this;
+        }
+
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<RoundPlyMaster> dataSource)
         {
             AppendCore(dataSource, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
