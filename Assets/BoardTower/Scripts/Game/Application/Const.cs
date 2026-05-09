@@ -77,5 +77,6 @@ namespace BoardTower.Game.Application
     public sealed class ScoreConfig
     {
         public const int BASE_GEM_VALUE = 100;
+        public const int BASE_ROUND_CLEAR_VALUE = 500;
     }
 }

@@ -37,6 +37,13 @@ namespace BoardTower.Game.Domain.UseCase
             Add(value);
         }
 
+        public void ApplyRoundClearScore()
+        {
+            var rate = _scoreRateRepository.FindRoundClearRate(_roundEntity.value);
+            var value = Mathf.CeilToInt(ScoreConfig.BASE_ROUND_CLEAR_VALUE * rate.value);
+            Add(value);
+        }
+
         private void Add(int value)
         {
             _scoreEntity.Add(value);

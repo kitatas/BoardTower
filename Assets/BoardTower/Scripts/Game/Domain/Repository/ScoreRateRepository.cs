@@ -20,6 +20,11 @@ namespace BoardTower.Game.Domain.Repository
             return Find(ScoreRateType.Gem, round);
         }
 
+        public ScoreRateVO FindRoundClearRate(int round)
+        {
+            return Find(ScoreRateType.RoundClear, round);
+        }
+
         private ScoreRateVO Find(ScoreRateType type, int threshold)
         {
             if (_scoreRateMasterTable.TryFindByTypeAndThreshold((type.ToInt32(), threshold), out var master))
