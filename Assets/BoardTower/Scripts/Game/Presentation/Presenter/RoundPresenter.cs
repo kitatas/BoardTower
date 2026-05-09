@@ -10,16 +10,18 @@ namespace BoardTower.Game.Presentation.Presenter
     public sealed class RoundPresenter : IStartable, IDisposable
     {
         private readonly GemUseCase _gemUseCase;
+        private readonly GemComboUseCase _gemComboUseCase;
         private readonly PlyUseCase _plyUseCase;
         private readonly RoundUseCase _roundUseCase;
         private readonly RoundClearUseCase _roundClearUseCase;
         private readonly RoundFacade _roundFacade;
         private readonly CompositeDisposable _disposable;
 
-        public RoundPresenter(GemUseCase gemUseCase, PlyUseCase plyUseCase, RoundUseCase roundUseCase,
-            RoundClearUseCase roundClearUseCase, RoundFacade roundFacade)
+        public RoundPresenter(GemUseCase gemUseCase, GemComboUseCase gemComboUseCase, PlyUseCase plyUseCase,
+            RoundUseCase roundUseCase, RoundClearUseCase roundClearUseCase, RoundFacade roundFacade)
         {
             _gemUseCase = gemUseCase;
+            _gemComboUseCase = gemComboUseCase;
             _plyUseCase = plyUseCase;
             _roundUseCase = roundUseCase;
             _roundClearUseCase = roundClearUseCase;
@@ -39,6 +41,7 @@ namespace BoardTower.Game.Presentation.Presenter
                 .Subscribe(x =>
                 {
                     _gemUseCase.SetUp();
+                    _gemComboUseCase.SetUp();
                     _plyUseCase.SetUp(x);
                     _roundClearUseCase.SetUp(x);
                 })
