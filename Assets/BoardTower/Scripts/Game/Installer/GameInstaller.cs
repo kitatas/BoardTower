@@ -38,6 +38,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GameModalEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
             builder.Register<GemEntity>(Lifetime.Scoped);
+            builder.Register<GemComboEntity>(Lifetime.Scoped);
             builder.Register<LotRelicEntity>(Lifetime.Scoped);
             builder.Register<PickRelicEntity>(Lifetime.Scoped);
             builder.Register<PlyEntity>(Lifetime.Scoped);

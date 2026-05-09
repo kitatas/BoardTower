@@ -237,12 +237,17 @@ namespace BoardTower.Game.Application
 
     public sealed class EventResultVO
     {
+        public readonly SquareEventType type;
         public readonly bool isBelt;
         public readonly int gemNum;
         public readonly int plyNum;
 
-        public EventResultVO(bool isBelt, int gemNum, int plyNum)
+        public EventResultVO(SquareEventType type, bool isBelt, int gemNum, int plyNum)
         {
+            if (type is SquareEventType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
+
+            this.type = type;
             this.isBelt = isBelt;
             this.gemNum = gemNum;
             this.plyNum = plyNum;
@@ -251,6 +256,7 @@ namespace BoardTower.Game.Application
         public static EventResultVO Create(SquareEventType type)
         {
             return new EventResultVO(
+                type,
                 type.IsBeltEvent() || type is SquareEventType.Block,
                 type == SquareEventType.Gem ? 1 : 0,
                 type == SquareEventType.Ply ? 1 : 0

@@ -9,13 +9,16 @@ namespace BoardTower.Game.Presentation.State
     {
         private readonly EventUseCase _eventUseCase;
         private readonly GemUseCase _gemUseCase;
+        private readonly GemComboUseCase _gemComboUseCase;
         private readonly PlyUseCase _plyUseCase;
         private readonly ScoreUseCase _scoreUseCase;
 
-        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, PlyUseCase plyUseCase, ScoreUseCase scoreUseCase)
+        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, GemComboUseCase gemComboUseCase,
+            PlyUseCase plyUseCase, ScoreUseCase scoreUseCase)
         {
             _eventUseCase = eventUseCase;
             _gemUseCase = gemUseCase;
+            _gemComboUseCase = gemComboUseCase;
             _plyUseCase = plyUseCase;
             _scoreUseCase = scoreUseCase;
         }
@@ -28,6 +31,8 @@ namespace BoardTower.Game.Presentation.State
 
             // Belt 系であれば、移動後の SquareEvent 実行
             if (result.isBelt) return state;
+
+            _gemComboUseCase.Apply(result.type);
 
             if (result.gemNum > 0)
             {
