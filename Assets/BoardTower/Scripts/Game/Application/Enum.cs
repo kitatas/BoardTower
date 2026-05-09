@@ -108,5 +108,6 @@ namespace BoardTower.Game.Application
         None = 0,
         Gem = 1,
         RoundClear = 2,
+        GemCombo = 3,
     }
 }

@@ -20,6 +20,11 @@ namespace BoardTower.Game.Domain.Repository
             return Find(ScoreRateType.Gem, round);
         }
 
+        public ScoreRateVO FindGemComboRate(int combo)
+        {
+            return FindClosest(ScoreRateType.GemCombo, combo);
+        }
+
         public ScoreRateVO FindRoundClearRate(int round)
         {
             return Find(ScoreRateType.RoundClear, round);
@@ -35,6 +40,13 @@ namespace BoardTower.Game.Domain.Repository
             {
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_SCORE_RATE);
             }
+        }
+
+        private ScoreRateVO FindClosest(ScoreRateType type, int threshold)
+        {
+            return _scoreRateMasterTable
+                .FindClosestByTypeAndThreshold((type.ToInt32(), threshold))
+                .ToVO();
         }
     }
 }

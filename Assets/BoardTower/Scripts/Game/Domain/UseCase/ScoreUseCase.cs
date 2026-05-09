@@ -9,13 +9,16 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class ScoreUseCase : IDisposable
     {
+        private readonly GemComboEntity _gemComboEntity;
         private readonly RoundEntity _roundEntity;
         private readonly ScoreEntity _scoreEntity;
-        private readonly ScoreRateRepository  _scoreRateRepository;
+        private readonly ScoreRateRepository _scoreRateRepository;
         private readonly ReactiveProperty<int> _score;
 
-        public ScoreUseCase(RoundEntity roundEntity, ScoreEntity scoreEntity, ScoreRateRepository scoreRateRepository)
+        public ScoreUseCase(GemComboEntity gemComboEntity, RoundEntity roundEntity, ScoreEntity scoreEntity,
+            ScoreRateRepository scoreRateRepository)
         {
+            _gemComboEntity = gemComboEntity;
             _roundEntity = roundEntity;
             _scoreEntity = scoreEntity;
             _scoreRateRepository = scoreRateRepository;
@@ -33,7 +36,8 @@ namespace BoardTower.Game.Domain.UseCase
         public void ApplyGemScore(int gemNum)
         {
             var rate = _scoreRateRepository.FindGemRate(_roundEntity.value);
-            var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate.value) * gemNum;
+            var comboRate = _scoreRateRepository.FindGemComboRate(_gemComboEntity.value);
+            var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate.value * comboRate.value) * gemNum;
             Add(value);
         }
 
