@@ -9,15 +9,15 @@ namespace BoardTower.Game.Domain.UseCase
     {
         private readonly GemEntity _gemEntity;
         private readonly RoundClearGemEntity  _roundClearGemEntity;
-        private readonly RoundClearRepository _roundClearRepository;
+        private readonly RoundRepository _roundRepository;
         private readonly ReactiveProperty<int> _roundClear;
 
         public RoundClearUseCase(GemEntity gemEntity, RoundClearGemEntity roundClearGemEntity,
-            RoundClearRepository roundClearRepository)
+            RoundRepository roundRepository)
         {
             _gemEntity = gemEntity;
             _roundClearGemEntity = roundClearGemEntity;
-            _roundClearRepository = roundClearRepository;
+            _roundRepository = roundRepository;
             _roundClear = new ReactiveProperty<int>(0);
         }
 
@@ -25,7 +25,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void SetUp(int round)
         {
-            var gemCount = round > 0 ? _roundClearRepository.Find(round)?.gemCount ?? 0 : 0; 
+            var gemCount = round > 0 ? _roundRepository.Find(round)?.gemCount ?? 0 : 0; 
             _roundClearGemEntity.Set(gemCount);
             _roundClear.Value = _roundClearGemEntity.value;
         }

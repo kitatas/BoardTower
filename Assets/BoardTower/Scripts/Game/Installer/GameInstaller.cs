@@ -63,6 +63,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardPatternRepository>(Lifetime.Scoped);
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
             builder.Register<RelicRepository>(Lifetime.Scoped);
+            builder.Register<RoundRepository>(Lifetime.Scoped);
             builder.Register<RoundClearRepository>(Lifetime.Scoped);
             builder.Register<RoundPlyRepository>(Lifetime.Scoped);
             builder.Register<ScoreRateRepository>(Lifetime.Scoped);

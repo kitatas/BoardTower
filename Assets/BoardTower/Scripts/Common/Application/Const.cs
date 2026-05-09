@@ -30,6 +30,7 @@ namespace BoardTower.Common.Application
         public const string INVALID_RENDER = "INVALID_RENDER";
         public const string INVALID_RELIC = "INVALID_RELIC";
         public const string INVALID_ROTATE = "INVALID_ROTATE";
+        public const string INVALID_ROUND = "INVALID_ROUND";
         public const string INVALID_ROUND_CLEAR = "INVALID_ROUND_CLEAR";
         public const string INVALID_ROUND_PLY = "INVALID_ROUND_PLY";
         public const string INVALID_SCORE_RATE = "INVALID_SCORE_RATE";

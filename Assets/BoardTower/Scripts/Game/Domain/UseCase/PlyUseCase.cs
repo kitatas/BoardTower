@@ -8,14 +8,14 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class PlyUseCase : IDisposable
     {
         private readonly PlyEntity _plyEntity;
-        private readonly RoundPlyRepository _roundPlyRepository;
+        private readonly RoundRepository _roundRepository;
         private readonly ReactiveProperty<int> _ply;
         private readonly ReactiveProperty<int> _plyMax;
 
-        public PlyUseCase(PlyEntity plyEntity, RoundPlyRepository roundPlyRepository)
+        public PlyUseCase(PlyEntity plyEntity, RoundRepository roundRepository)
         {
             _plyEntity = plyEntity;
-            _roundPlyRepository = roundPlyRepository;
+            _roundRepository = roundRepository;
             _ply = new ReactiveProperty<int>(0);
             _plyMax = new ReactiveProperty<int>(0);
         }
@@ -25,7 +25,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void SetUp(int round)
         {
-            var plyCount = round > 0 ? _roundPlyRepository.Find(round)?.plyCount ?? 0 : 0;
+            var plyCount = round > 0 ? _roundRepository.Find(round)?.plyCount ?? 0 : 0;
             _plyEntity.SetUp(plyCount);
             _ply.Value = _plyEntity.value;
             _plyMax.Value = _plyEntity.maxValue;
