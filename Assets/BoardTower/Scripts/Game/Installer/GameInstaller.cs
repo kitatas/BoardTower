@@ -76,6 +76,7 @@ namespace BoardTower.Game.Installer
             builder.Register<GameModalUseCase>(Lifetime.Scoped);
             builder.Register<GameStateUseCase>(Lifetime.Scoped);
             builder.Register<GemUseCase>(Lifetime.Scoped);
+            builder.Register<GemComboUseCase>(Lifetime.Scoped);
             builder.Register<MovementUseCase>(Lifetime.Scoped);
             builder.Register<LotRelicUseCase>(Lifetime.Scoped);
             builder.Register<PickRelicUseCase>(Lifetime.Scoped);
@@ -110,6 +111,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<GameModalPresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
+                entryPoints.Add<GemComboPresenter>();
                 entryPoints.Add<GiveUpPresenter>();
                 entryPoints.Add<PickRelicPresenter>();
                 entryPoints.Add<PlyPresenter>();
@@ -132,6 +134,7 @@ namespace BoardTower.Game.Installer
             builder.Register<LotRelicFacade>(Lifetime.Scoped);
             builder.Register<GameModalFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
+            builder.Register<GemComboFacade>(Lifetime.Scoped);
             builder.Register<GiveUpFacade>(Lifetime.Scoped);
             builder.Register<PickRelicFacade>(Lifetime.Scoped);
             builder.Register<PlyFacade>(Lifetime.Scoped);
@@ -154,6 +157,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<LotRelicView>();
             builder.RegisterComponentInHierarchy<GemView>();
+            builder.RegisterComponentInHierarchy<GemComboView>();
             builder.RegisterComponentInHierarchy<GiveUpView>();
             builder.RegisterComponentInHierarchy<PickRelicView>();
             builder.RegisterComponentInHierarchy<PlyView>();
