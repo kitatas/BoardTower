@@ -14,16 +14,19 @@ namespace BoardTower.Game.Presentation.State
         private readonly HudRootUseCase _hudRootUseCase;
         private readonly PickRelicUseCase _pickRelicUseCase;
         private readonly RoundUseCase _roundUseCase;
+        private readonly ScoreUseCase _scoreUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
         public GameInitState(BgmUseCase bgmUseCase, ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase,
-            PickRelicUseCase pickRelicUseCase, RoundUseCase roundUseCase, TapScreenUseCase tapScreenUseCase)
+            PickRelicUseCase pickRelicUseCase, RoundUseCase roundUseCase, ScoreUseCase scoreUseCase,
+            TapScreenUseCase tapScreenUseCase)
         {
             _bgmUseCase = bgmUseCase;
             _chessmenUseCase = chessmenUseCase;
             _hudRootUseCase = hudRootUseCase;
             _pickRelicUseCase = pickRelicUseCase;
             _roundUseCase = roundUseCase;
+            _scoreUseCase = scoreUseCase;
             _tapScreenUseCase = tapScreenUseCase;
         }
 
@@ -44,6 +47,7 @@ namespace BoardTower.Game.Presentation.State
             );
 
             _roundUseCase.Init();
+            _scoreUseCase.Init();
             await (
                 _pickRelicUseCase.InitAsync(token)
             );

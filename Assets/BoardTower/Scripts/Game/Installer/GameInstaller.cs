@@ -43,6 +43,7 @@ namespace BoardTower.Game.Installer
             builder.Register<PlyEntity>(Lifetime.Scoped);
             builder.Register<RoundEntity>(Lifetime.Scoped);
             builder.Register<RoundClearGemEntity>(Lifetime.Scoped);
+            builder.Register<ScoreEntity>(Lifetime.Scoped);
 
             // Ports
             builder.Register<BoardPorts>(Lifetime.Scoped);
