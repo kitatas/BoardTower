@@ -28,8 +28,6 @@ namespace BoardTower.Editor
             var databaseBuilder = new DatabaseBuilder();
             databaseBuilder.Append(DeserializeJson<BoardPatternMaster>("board_pattern"));
             databaseBuilder.Append(DeserializeJson<RoundMaster>("round"));
-            databaseBuilder.Append(DeserializeJson<RoundClearMaster>("round_clear"));
-            databaseBuilder.Append(DeserializeJson<RoundPlyMaster>("round_ply"));
             databaseBuilder.Append(DeserializeJson<ScoreRateMaster>("score_rate"));
             databaseBuilder.Append(GetChessmenMovementRuleMaster());
 

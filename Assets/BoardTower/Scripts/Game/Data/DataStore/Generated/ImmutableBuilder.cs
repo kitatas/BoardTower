@@ -32,9 +32,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -48,9 +46,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -64,9 +60,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -79,9 +73,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -95,9 +87,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -111,56 +101,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void ReplaceAll(System.Collections.Generic.IList<RoundClearMaster> data)
-        {
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundClearMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                table,
-                memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void RemoveRoundClearMaster(int[] keys)
-        {
-            var data = RemoveCore(memory.RoundClearMasterTable.GetRawDataUnsafe(), keys, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundClearMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                table,
-                memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void Diff(RoundClearMaster[] addOrReplaceData)
-        {
-            var data = DiffCore(memory.RoundClearMasterTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundClearMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                table,
-                memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -173,9 +114,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 table,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -189,9 +128,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 table,
-                memory.RoundPlyMasterTable,
                 memory.ScoreRateMasterTable
             
             );
@@ -205,55 +142,6 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
-                table,
-                memory.RoundPlyMasterTable,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void ReplaceAll(System.Collections.Generic.IList<RoundPlyMaster> data)
-        {
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundPlyMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
-                memory.RoundMasterTable,
-                table,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void RemoveRoundPlyMaster(int[] keys)
-        {
-            var data = RemoveCore(memory.RoundPlyMasterTable.GetRawDataUnsafe(), keys, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundPlyMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
-                memory.RoundMasterTable,
-                table,
-                memory.ScoreRateMasterTable
-            
-            );
-        }
-
-        public void Diff(RoundPlyMaster[] addOrReplaceData)
-        {
-            var data = DiffCore(memory.RoundPlyMasterTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
-            var table = new RoundPlyMasterTable(newData);
-            memory = new MemoryDatabase(
-                memory.BoardPatternMasterTable,
-                memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
-                memory.RoundMasterTable,
                 table,
                 memory.ScoreRateMasterTable
             
@@ -267,9 +155,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 table
             
             );
@@ -283,9 +169,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 table
             
             );
@@ -299,9 +183,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
-                memory.RoundClearMasterTable,
                 memory.RoundMasterTable,
-                memory.RoundPlyMasterTable,
                 table
             
             );
