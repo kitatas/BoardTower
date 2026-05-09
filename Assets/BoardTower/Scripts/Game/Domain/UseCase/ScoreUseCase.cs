@@ -35,16 +35,18 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void ApplyGemScore(int gemNum)
         {
-            var rate = _scoreRateRepository.FindGemRate(_roundEntity.value);
+            var roundRate = _scoreRateRepository.FindRoundGemRate(_roundEntity.value);
             var comboRate = _scoreRateRepository.FindGemComboRate(_gemComboEntity.value);
-            var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate.value * comboRate.value) * gemNum;
+            var rate = roundRate.value * comboRate.value;
+            var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate) * gemNum;
             Add(value);
         }
 
         public void ApplyRoundClearScore()
         {
-            var rate = _scoreRateRepository.FindRoundClearRate(_roundEntity.value);
-            var value = Mathf.CeilToInt(ScoreConfig.BASE_ROUND_CLEAR_VALUE * rate.value);
+            var roundRate = _scoreRateRepository.FindRoundClearRate(_roundEntity.value);
+            var rate = roundRate.value;
+            var value = Mathf.CeilToInt(ScoreConfig.BASE_ROUND_CLEAR_VALUE * rate);
             Add(value);
         }
 

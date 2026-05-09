@@ -15,9 +15,9 @@ namespace BoardTower.Game.Domain.Repository
             _scoreRateMasterTable = memoryDatabase.ScoreRateMasterTable;
         }
 
-        public ScoreRateVO FindGemRate(int round)
+        public ScoreRateVO FindRoundGemRate(int round)
         {
-            return Find(ScoreRateType.Gem, round);
+            return Find(ScoreRateType.RoundGem, round);
         }
 
         public ScoreRateVO FindGemComboRate(int combo)
