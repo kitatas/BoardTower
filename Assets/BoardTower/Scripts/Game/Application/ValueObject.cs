@@ -432,4 +432,22 @@ namespace BoardTower.Game.Application
             this.position = position;
         }
     }
+
+    public sealed class ScoreRateVO
+    {
+        public readonly ScoreRateType type;
+        public readonly int threshold;
+        public readonly float value;
+
+        public ScoreRateVO(int type, int threshold, float value)
+        {
+            var t = type.ToScoreRateType();
+            if (t is ScoreRateType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_SCORE_RATE);
+
+            this.type = t;
+            this.threshold = threshold;
+            this.value = value;
+        }
+    }
 }

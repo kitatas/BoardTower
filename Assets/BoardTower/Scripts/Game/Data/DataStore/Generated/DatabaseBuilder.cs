@@ -40,5 +40,11 @@ namespace BoardTower.Game.Data.DataStore
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<ScoreRateMaster> dataSource)
+        {
+            AppendCore(dataSource, x => (x.Type, x.Threshold), System.Collections.Generic.Comparer<(int Type, int Threshold)>.Default);
+            return this;
+        }
+
     }
 }

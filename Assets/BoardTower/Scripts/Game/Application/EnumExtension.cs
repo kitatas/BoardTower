@@ -27,6 +27,13 @@ namespace BoardTower.Game.Application
                 : throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT);
         }
 
+        public static ScoreRateType ToScoreRateType(this int self)
+        {
+            return FastEnum.IsDefined<ScoreRateType>(self)
+                ? (ScoreRateType)self
+                : throw new QuitExceptionVO(ExceptionConfig.INVALID_SCORE_RATE);
+        }
+
         public static bool IsBeltEvent(this SquareEventType self)
         {
             return self is SquareEventType.BeltUp or

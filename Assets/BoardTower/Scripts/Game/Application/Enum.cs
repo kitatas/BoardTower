@@ -102,4 +102,9 @@ namespace BoardTower.Game.Application
         Scripture = 8,
         Bell = 9,
     }
+
+    public enum ScoreRateType
+    {
+        None = 0,
+    }
 }
