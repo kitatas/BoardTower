@@ -17,6 +17,7 @@ namespace BoardTower.Game.Domain.UseCase
         private readonly BoardEntity _boardEntity;
         private readonly ChessmenEntity _chessmenEntity;
         private readonly GameStateEntity _gameStateEntity;
+        private readonly PickRelicEntity _pickRelicEntity;
         private readonly MovementPorts _movementPorts;
         private readonly ChessmenMovementRepository _chessmenMovementRepository;
         private readonly Subject<ClickSquareVO> _movement;
@@ -24,11 +25,13 @@ namespace BoardTower.Game.Domain.UseCase
         private HighlightSquareVO[] _lastHighlights;
 
         public MovementUseCase(BoardEntity boardEntity, ChessmenEntity chessmenEntity, GameStateEntity gameStateEntity,
-            MovementPorts movementPorts, ChessmenMovementRepository chessmenMovementRepository)
+            PickRelicEntity pickRelicEntity, MovementPorts movementPorts,
+            ChessmenMovementRepository chessmenMovementRepository)
         {
             _boardEntity = boardEntity;
             _chessmenEntity = chessmenEntity;
             _gameStateEntity = gameStateEntity;
+            _pickRelicEntity = pickRelicEntity;
             _movementPorts = movementPorts;
             _chessmenMovementRepository = chessmenMovementRepository;
             _movement = new Subject<ClickSquareVO>();
@@ -39,9 +42,11 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask PublishMovableSquaresAsync(CancellationToken token)
         {
+            var canMoveToBlock = _pickRelicEntity.IsContain(RelicType.Horseshoe);
+
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
             var highlightVos = ChessmenHelper.GetMovableSquares(_chessmenEntity.square, rule)
-                .Where(x => _boardEntity.IsMovable(x))
+                .Where(x => _boardEntity.IsMovable(x, canMoveToBlock))
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 

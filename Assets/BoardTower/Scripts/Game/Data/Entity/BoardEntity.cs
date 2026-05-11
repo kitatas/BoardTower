@@ -49,13 +49,16 @@ namespace BoardTower.Game.Data.Entity
                 : (_events[index].squareEvent, index);
         }
 
-        public bool IsMovable(SquareVO square)
+        public bool IsMovable(SquareVO square, bool canMoveToBlock)
         {
             var (squareEvent, _) = FindEvent(square);
             if (squareEvent == null) return true;
-            if (squareEvent.type == SquareEventType.Block) return false;
 
-            return true;
+            return squareEvent.type switch
+            {
+                SquareEventType.Block => canMoveToBlock,
+                _ => true,
+            };
         }
     }
 }

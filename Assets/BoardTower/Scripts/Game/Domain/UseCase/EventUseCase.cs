@@ -14,25 +14,29 @@ namespace BoardTower.Game.Domain.UseCase
     {
         private readonly BoardEntity _boardEntity;
         private readonly ChessmenEntity _chessmenEntity;
+        private readonly PickRelicEntity _pickRelicEntity;
         private readonly EventPorts _eventPorts;
         private readonly SquareEventRepository _squareEventRepository;
 
-        public EventUseCase(BoardEntity boardEntity, ChessmenEntity chessmenEntity, EventPorts eventPorts,
-            SquareEventRepository squareEventRepository)
+        public EventUseCase(BoardEntity boardEntity, ChessmenEntity chessmenEntity, PickRelicEntity pickRelicEntity,
+            EventPorts eventPorts, SquareEventRepository squareEventRepository)
         {
             _boardEntity = boardEntity;
             _chessmenEntity = chessmenEntity;
+            _pickRelicEntity = pickRelicEntity;
             _eventPorts = eventPorts;
             _squareEventRepository = squareEventRepository;
         }
 
         public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
+            var canMoveToBlock = _pickRelicEntity.IsContain(RelicType.Horseshoe);
+
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch
             {
                 SquareEventType.Empty => UniTask.Yield(token),
-                SquareEventType.Block => BeltBlockAsync(token),
+                SquareEventType.Block => canMoveToBlock ? UniTask.Yield(token) : BeltBlockAsync(token),
                 SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Ply => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Collapse => OverrideSquareEventAsync(index, SquareEventType.Block, token),
@@ -40,7 +44,7 @@ namespace BoardTower.Game.Domain.UseCase
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
 
-            return EventResultVO.Create(squareEvent.type);
+            return EventResultVO.Create(squareEvent.type, canMoveToBlock);
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)

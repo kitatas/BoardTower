@@ -253,11 +253,11 @@ namespace BoardTower.Game.Application
             this.plyNum = plyNum;
         }
 
-        public static EventResultVO Create(SquareEventType type)
+        public static EventResultVO Create(SquareEventType type, bool canMoveToBlock)
         {
             return new EventResultVO(
                 type,
-                type.IsBeltEvent() || type is SquareEventType.Block,
+                type.IsBeltEvent() || (!canMoveToBlock && type is SquareEventType.Block),
                 type == SquareEventType.Gem ? 1 : 0,
                 type == SquareEventType.Ply ? 1 : 0
             );

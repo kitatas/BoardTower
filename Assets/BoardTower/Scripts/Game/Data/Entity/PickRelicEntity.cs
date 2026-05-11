@@ -29,5 +29,10 @@ namespace BoardTower.Game.Data.Entity
             var vos = relics.Append(relic);
             Set(new PickRelicVO(vos));
         }
+
+        public bool IsContain(params RelicType[] types)
+        {
+            return relicTypes.Any(types.Contains);
+        }
     }
 }
