@@ -31,6 +31,7 @@ namespace BoardTower.Game.Domain.UseCase
         public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
             var canMoveToBlock = _pickRelicEntity.IsContain(RelicType.Horseshoe);
+            var isIgnoreCollapse = _pickRelicEntity.IsContain(RelicType.Greaves);
 
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch
@@ -39,7 +40,7 @@ namespace BoardTower.Game.Domain.UseCase
                 SquareEventType.Block => canMoveToBlock ? UniTask.Yield(token) : BeltBlockAsync(token),
                 SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Ply => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
-                SquareEventType.Collapse => OverrideSquareEventAsync(index, SquareEventType.Block, token),
+                SquareEventType.Collapse => isIgnoreCollapse ? UniTask.Yield(token) : OverrideSquareEventAsync(index, SquareEventType.Block, token),
                 var type when type.IsBeltEvent() => BeltAsync(squareEvent.type, token),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
