@@ -30,9 +30,9 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
-            var canMoveToBlock = _pickRelicEntity.IsContain(RelicType.Horseshoe);
-            var isIgnoreCollapse = _pickRelicEntity.IsContain(RelicType.Greaves);
-            var isIgnoreBelt = _pickRelicEntity.IsContain(RelicType.Scales);
+            var canMoveToBlock = _pickRelicEntity.canMoveToBlock;
+            var isIgnoreCollapse = _pickRelicEntity.isIgnoreCollapse;
+            var isIgnoreBelt = _pickRelicEntity.isIgnoreBelt;
 
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch

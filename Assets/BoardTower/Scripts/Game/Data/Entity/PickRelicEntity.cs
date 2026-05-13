@@ -24,13 +24,17 @@ namespace BoardTower.Game.Data.Entity
 
         public IEnumerable<RelicType> relicTypes => relics.Select(x => x.type);
 
+        public bool canMoveToBlock => IsContain(RelicType.Horseshoe);
+        public bool isIgnoreCollapse => IsContain(RelicType.Greaves);
+        public bool isIgnoreBelt => IsContain(RelicType.Scales);
+
         public void Add(RelicVO relic)
         {
             var vos = relics.Append(relic);
             Set(new PickRelicVO(vos));
         }
 
-        public bool IsContain(params RelicType[] types)
+        private bool IsContain(params RelicType[] types)
         {
             return relicTypes.Any(types.Contains);
         }
