@@ -27,6 +27,7 @@ namespace BoardTower.Game.Data.Entity
         public bool canMoveToBlock => IsContain(RelicType.Horseshoe);
         public bool isIgnoreCollapse => IsContain(RelicType.Greaves);
         public bool isIgnoreBelt => IsContain(RelicType.Scales);
+        public bool hasAdditionGem => IsContain(RelicType.Grace);
 
         public void Add(RelicVO relic)
         {

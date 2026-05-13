@@ -253,12 +253,15 @@ namespace BoardTower.Game.Application
             this.plyNum = plyNum;
         }
 
-        public static EventResultVO Create(SquareEventType type, bool canMoveToBlock, bool isIgnoreBelt)
+        public static EventResultVO Create(SquareEventType type, bool canMoveToBlock, bool isIgnoreBelt,
+            bool hasAdditionGem)
         {
+            var additionGem = hasAdditionGem && Random.Range(0, 100) > RelicConfig.ADDITION_THRESHOLD ? 1 : 0;
+
             return new EventResultVO(
                 type,
                 (!isIgnoreBelt && type.IsBeltEvent()) || (!canMoveToBlock && type is SquareEventType.Block),
-                type == SquareEventType.Gem ? 1 : 0,
+                type == SquareEventType.Gem ? 1 + additionGem : 0,
                 type == SquareEventType.Ply ? 1 : 0
             );
         }
