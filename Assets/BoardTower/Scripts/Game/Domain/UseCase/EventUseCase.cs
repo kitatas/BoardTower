@@ -34,6 +34,7 @@ namespace BoardTower.Game.Domain.UseCase
             var isIgnoreCollapse = _pickRelicEntity.isIgnoreCollapse;
             var isIgnoreBelt = _pickRelicEntity.isIgnoreBelt;
             var hasAdditionGem = _pickRelicEntity.hasAdditionGem;
+            var hasAdditionHeart = _pickRelicEntity.hasAdditionHeart;
 
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch
@@ -47,7 +48,7 @@ namespace BoardTower.Game.Domain.UseCase
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
 
-            return EventResultVO.Create(squareEvent.type, canMoveToBlock, isIgnoreBelt, hasAdditionGem);
+            return EventResultVO.Create(squareEvent.type, canMoveToBlock, isIgnoreBelt, hasAdditionGem, hasAdditionHeart);
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)
