@@ -30,25 +30,21 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
-            var canMoveToBlock = _pickRelicEntity.canMoveToBlock;
-            var isIgnoreCollapse = _pickRelicEntity.isIgnoreCollapse;
-            var isIgnoreBelt = _pickRelicEntity.isIgnoreBelt;
-            var hasAdditionGem = _pickRelicEntity.hasAdditionGem;
-            var hasAdditionHeart = _pickRelicEntity.hasAdditionHeart;
+            var relicEffect = RelicEffectVO.Create(_pickRelicEntity.relicTypes);
 
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch
             {
                 SquareEventType.Empty => UniTask.Yield(token),
-                SquareEventType.Block => canMoveToBlock ? UniTask.Yield(token) : BeltBlockAsync(token),
+                SquareEventType.Block => relicEffect.canMoveToBlock ? UniTask.Yield(token) : BeltBlockAsync(token),
                 SquareEventType.Gem => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
                 SquareEventType.Ply => OverrideSquareEventAsync(index, SquareEventType.Empty, token),
-                SquareEventType.Collapse => isIgnoreCollapse ? UniTask.Yield(token) : OverrideSquareEventAsync(index, SquareEventType.Block, token),
-                var type when type.IsBeltEvent() => isIgnoreBelt ? UniTask.Yield(token) : BeltAsync(squareEvent.type, token),
+                SquareEventType.Collapse => relicEffect.isIgnoreCollapse ? UniTask.Yield(token) : OverrideSquareEventAsync(index, SquareEventType.Block, token),
+                var type when type.IsBeltEvent() => relicEffect.isIgnoreBelt ? UniTask.Yield(token) : BeltAsync(squareEvent.type, token),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_SQUARE_EVENT),
             });
 
-            return EventResultVO.Create(squareEvent.type, canMoveToBlock, isIgnoreBelt, hasAdditionGem, hasAdditionHeart);
+            return EventResultVO.Create(squareEvent.type, relicEffect);
         }
 
         private UniTask BeltAsync(SquareEventType type, CancellationToken token)

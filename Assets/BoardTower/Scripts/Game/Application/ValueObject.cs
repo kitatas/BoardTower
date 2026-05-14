@@ -253,19 +253,23 @@ namespace BoardTower.Game.Application
             this.plyNum = plyNum;
         }
 
-        public static EventResultVO Create(SquareEventType type, bool canMoveToBlock, bool isIgnoreBelt,
-            bool hasAdditionGem, bool hasAdditionHeart)
+        public static EventResultVO Create(SquareEventType type, RelicEffectVO relicEffect)
         {
-            var additionGem = hasAdditionGem && Random.Range(0, 100) > RelicConfig.ADDITION_THRESHOLD ? 1 : 0;
-            var additionHeart = hasAdditionHeart && Random.Range(0, 100) > RelicConfig.ADDITION_THRESHOLD ? 1 : 0;
+            var isBelt = !relicEffect.isIgnoreBelt && type.IsBeltEvent();
+            var isBlockBelt = !relicEffect.canMoveToBlock && type is SquareEventType.Block;
+            var additionGem = relicEffect.hasAdditionGem && LotGem() ? 1 : 0;
+            var additionHeart = relicEffect.hasAdditionHeart && LotHeart() ? 1 : 0;
 
             return new EventResultVO(
                 type,
-                (!isIgnoreBelt && type.IsBeltEvent()) || (!canMoveToBlock && type is SquareEventType.Block),
-                type == SquareEventType.Gem ? 1 + additionGem : 0,
-                type == SquareEventType.Ply ? 1 + additionHeart : 0
+                isBelt || isBlockBelt,
+                type is SquareEventType.Gem ? 1 + additionGem : 0,
+                type is SquareEventType.Ply ? 1 + additionHeart : 0
             );
         }
+
+        private static bool LotGem() => Random.Range(0, 100) > RelicConfig.ADDITION_THRESHOLD;
+        private static bool LotHeart() => Random.Range(0, 100) > RelicConfig.ADDITION_THRESHOLD;
     }
 
     public sealed class RoundVO
@@ -430,6 +434,37 @@ namespace BoardTower.Game.Application
         {
             this.index = index;
             this.position = position;
+        }
+    }
+
+    public sealed class RelicEffectVO
+    {
+        public readonly bool canMoveToBlock;
+        public readonly bool isIgnoreCollapse;
+        public readonly bool isIgnoreBelt;
+        public readonly bool hasAdditionGem;
+        public readonly bool hasAdditionHeart;
+
+        public RelicEffectVO(bool canMoveToBlock, bool isIgnoreCollapse, bool isIgnoreBelt, bool hasAdditionGem,
+            bool hasAdditionHeart)
+        {
+            this.canMoveToBlock = canMoveToBlock;
+            this.isIgnoreCollapse = isIgnoreCollapse;
+            this.isIgnoreBelt = isIgnoreBelt;
+            this.hasAdditionGem = hasAdditionGem;
+            this.hasAdditionHeart = hasAdditionHeart;
+        }
+
+        public static RelicEffectVO Create(IEnumerable<RelicType> relicTypes)
+        {
+            var types = relicTypes as RelicType[] ?? relicTypes.ToArray();
+            return new RelicEffectVO(
+                types.Any(x => new[] { RelicType.Horseshoe }.Contains(x)),
+                types.Any(x => new[] { RelicType.Greaves }.Contains(x)),
+                types.Any(x => new[] { RelicType.Scales }.Contains(x)),
+                types.Any(x => new[] { RelicType.Grace }.Contains(x)),
+                types.Any(x => new[] { RelicType.Lantern }.Contains(x))
+            );
         }
     }
 
