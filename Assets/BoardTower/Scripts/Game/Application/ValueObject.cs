@@ -442,15 +442,17 @@ namespace BoardTower.Game.Application
         public readonly bool canMoveToBlock;
         public readonly bool isIgnoreCollapse;
         public readonly bool isIgnoreBelt;
+        public readonly bool isComboContinuation;
         public readonly bool hasAdditionGem;
         public readonly bool hasAdditionHeart;
 
-        public RelicEffectVO(bool canMoveToBlock, bool isIgnoreCollapse, bool isIgnoreBelt, bool hasAdditionGem,
-            bool hasAdditionHeart)
+        public RelicEffectVO(bool canMoveToBlock, bool isIgnoreCollapse, bool isIgnoreBelt, bool isComboContinuation,
+            bool hasAdditionGem, bool hasAdditionHeart)
         {
             this.canMoveToBlock = canMoveToBlock;
             this.isIgnoreCollapse = isIgnoreCollapse;
             this.isIgnoreBelt = isIgnoreBelt;
+            this.isComboContinuation = isComboContinuation;
             this.hasAdditionGem = hasAdditionGem;
             this.hasAdditionHeart = hasAdditionHeart;
         }
@@ -459,11 +461,12 @@ namespace BoardTower.Game.Application
         {
             var types = relicTypes as RelicType[] ?? relicTypes.ToArray();
             return new RelicEffectVO(
-                types.Any(x => new[] { RelicType.Horseshoe }.Contains(x)),
-                types.Any(x => new[] { RelicType.Greaves }.Contains(x)),
-                types.Any(x => new[] { RelicType.Scales }.Contains(x)),
-                types.Any(x => new[] { RelicType.Grace }.Contains(x)),
-                types.Any(x => new[] { RelicType.Lantern }.Contains(x))
+                canMoveToBlock: types.Any(x => new[] { RelicType.Horseshoe }.Contains(x)),
+                isIgnoreCollapse: types.Any(x => new[] { RelicType.Greaves }.Contains(x)),
+                isIgnoreBelt: types.Any(x => new[] { RelicType.Scales }.Contains(x)),
+                isComboContinuation: types.Any(x => new[] { RelicType.Compass }.Contains(x)),
+                hasAdditionGem: types.Any(x => new[] { RelicType.Grace }.Contains(x)),
+                hasAdditionHeart: types.Any(x => new[] { RelicType.Lantern }.Contains(x))
             );
         }
     }

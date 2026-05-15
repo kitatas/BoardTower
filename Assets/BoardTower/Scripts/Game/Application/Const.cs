@@ -74,6 +74,7 @@ namespace BoardTower.Game.Application
         public const float LOT_DELAY_RATE = 0.1f;
 
         public const int ADDITION_THRESHOLD = 70;
+        public const int CONTINUATION_THRESHOLD = 70;
     }
 
     public sealed class ScoreConfig
