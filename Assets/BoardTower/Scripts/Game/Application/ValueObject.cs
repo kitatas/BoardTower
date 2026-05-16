@@ -372,15 +372,20 @@ namespace BoardTower.Game.Application
     public sealed class RelicVO
     {
         public readonly RelicType type;
+        public readonly string relicName;
         public readonly string content;
+        public readonly bool isUniq;
 
-        public RelicVO(RelicType type, string content)
+        public RelicVO(int type, string relicName, string content, bool isUniq)
         {
-            if (type is RelicType.None)
+            var t = type.ToRelicType();
+            if (t is RelicType.None)
                 throw new QuitExceptionVO(ExceptionConfig.INVALID_RELIC);
 
-            this.type = type;
+            this.type = t;
+            this.relicName = relicName;
             this.content = content;
+            this.isUniq = isUniq;
         }
     }
 

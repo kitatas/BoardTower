@@ -20,6 +20,13 @@ namespace BoardTower.Game.Application
                 : throw new QuitExceptionVO(ExceptionConfig.INVALID_CHESSMEN_MOVEMENT);
         }
 
+        public static RelicType ToRelicType(this int self)
+        {
+            return FastEnum.IsDefined<RelicType>(self)
+                ? (RelicType)self
+                : throw new QuitExceptionVO(ExceptionConfig.INVALID_RELIC);
+        }
+
         public static SquareEventType ToSquareEventType(this int self)
         {
             return FastEnum.IsDefined<SquareEventType>(self)

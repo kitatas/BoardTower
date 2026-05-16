@@ -1,4 +1,5 @@
 using BoardTower.Game.Application;
+using FastEnumUtility;
 using UnityEngine;
 
 namespace BoardTower.Game.Data.DataStore
@@ -10,6 +11,6 @@ namespace BoardTower.Game.Data.DataStore
         [SerializeField] private string content = default;
 
         public RelicType type => relicType;
-        public RelicVO ToVO() => new(relicType, content);
+        public RelicVO ToVO() => new(relicType.ToInt32(), "", content, false);
     }
 }
