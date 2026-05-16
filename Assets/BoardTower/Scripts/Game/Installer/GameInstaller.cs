@@ -22,14 +22,12 @@ namespace BoardTower.Game.Installer
     public sealed class GameInstaller : LifetimeScope
     {
         [SerializeField] private TextAsset memoryFile = default;
-        [SerializeField] private RelicTable relicTable = default;
         [SerializeField] private SquareEventTable squareEventTable = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // DataStore
             builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
-            builder.RegisterInstance<RelicTable>(relicTable);
             builder.RegisterInstance<SquareEventTable>(squareEventTable);
 
             // Entity
