@@ -47,9 +47,8 @@ namespace BoardTower.Game.Domain.UseCase
 
         public void Lot()
         {
-            // 保持中の種類を除き、重複しないように抽選
             var rand = new Random();
-            var relics = _relicRepository.FindsByTypeNotIn(_pickRelicEntity.relicTypes)
+            var relics = _relicRepository.FindsLotRelics(_pickRelicEntity.relicTypes)
                 .OrderBy(_ => rand.Next())
                 .Take(RelicConfig.LOT_NUM)
                 .ToArray();

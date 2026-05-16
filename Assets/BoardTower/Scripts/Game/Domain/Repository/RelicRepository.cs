@@ -1,36 +1,32 @@
 using System.Collections.Generic;
 using System.Linq;
-using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.DataStore;
+using BoardTower.Game.Data.DataStore.Tables;
 
 namespace BoardTower.Game.Domain.Repository
 {
     public sealed class RelicRepository
     {
-        private readonly Dictionary<RelicType, RelicVO> _relicMap;
+        private readonly RelicMasterTable _relicMasterTable;
 
-        public RelicRepository(RelicTable relicTable)
+        public RelicRepository(MemoryDatabase memoryDatabase)
         {
-            _relicMap = relicTable.all.ToDictionary(x => x.type, x => x.ToVO());
+            _relicMasterTable = memoryDatabase.RelicMasterTable;
         }
 
-        public RelicVO Find(RelicType type)
+        public IEnumerable<RelicVO> FindsLotRelics(IEnumerable<RelicType> types)
         {
-            if (_relicMap.TryGetValue(type, out var vo))
-            {
-                return vo;
-            }
-            else
-            {
-                throw new QuitExceptionVO(ExceptionConfig.INVALID_RELIC);
-            }
-        }
+            var uniqRelics = _relicMasterTable
+                .FindByIsUniq(true)
+                .Where(x => !types.Contains(x.Type.ToRelicType()));
 
-        public IEnumerable<RelicVO> FindsByTypeNotIn(IEnumerable<RelicType> types)
-        {
-            return _relicMap.Values
-                .Where(x => !types.Contains(x.type));
+            var nonUniqRelics = _relicMasterTable
+                .FindByIsUniq(false);
+
+            return uniqRelics
+                .Union(nonUniqRelics)
+                .Select(x => x.ToVO());
         }
     }
 }
