@@ -28,6 +28,12 @@ namespace BoardTower.Game.Data.DataStore
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<RelicMaster> dataSource)
+        {
+            AppendCore(dataSource, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            return this;
+        }
+
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<RoundMaster> dataSource)
         {
             AppendCore(dataSource, x => x.Round, System.Collections.Generic.Comparer<int>.Default);

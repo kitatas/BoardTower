@@ -32,6 +32,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -46,6 +47,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -60,6 +62,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 table,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -73,6 +76,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -87,6 +91,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -101,6 +106,51 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 table,
+                memory.RelicMasterTable,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<RelicMaster> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            var table = new RelicMasterTable(newData);
+            memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                table,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
+        public void RemoveRelicMaster(int[] keys)
+        {
+            var data = RemoveCore(memory.RelicMasterTable.GetRawDataUnsafe(), keys, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            var table = new RelicMasterTable(newData);
+            memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                table,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
+        public void Diff(RelicMaster[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.RelicMasterTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
+            var table = new RelicMasterTable(newData);
+            memory = new MemoryDatabase(
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                table,
                 memory.RoundMasterTable,
                 memory.ScoreRateMasterTable
             
@@ -114,6 +164,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 table,
                 memory.ScoreRateMasterTable
             
@@ -128,6 +179,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 table,
                 memory.ScoreRateMasterTable
             
@@ -142,6 +194,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 table,
                 memory.ScoreRateMasterTable
             
@@ -155,6 +208,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 table
             
@@ -169,6 +223,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 table
             
@@ -183,6 +238,7 @@ namespace BoardTower.Game.Data.DataStore
             memory = new MemoryDatabase(
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
                 memory.RoundMasterTable,
                 table
             
