@@ -23,6 +23,7 @@ namespace BoardTower.Game.Data.Entity
         }
 
         public IEnumerable<RelicType> relicTypes => relics.Select(x => x.type);
+        public RelicEffectVO effect => RelicEffectVO.Create(relicTypes);
 
         public void Add(RelicVO relic)
         {

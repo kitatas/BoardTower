@@ -50,8 +50,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         private bool IsComboContinuation()
         {
-            var relicEffect = RelicEffectVO.Create(_pickRelicEntity.relicTypes);
-            if (relicEffect.isComboContinuation)
+            if (_pickRelicEntity.effect.isComboContinuation)
             {
                 return Random.Range(0, 100) > RelicConfig.CONTINUATION_THRESHOLD;
             }

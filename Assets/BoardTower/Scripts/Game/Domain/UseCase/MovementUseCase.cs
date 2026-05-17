@@ -42,11 +42,9 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask PublishMovableSquaresAsync(CancellationToken token)
         {
-            var relicEffect = RelicEffectVO.Create(_pickRelicEntity.relicTypes);
-
             var rule = _chessmenMovementRepository.Find(_chessmenEntity.chessmenType);
             var highlightVos = ChessmenHelper.GetMovableSquares(_chessmenEntity.square, rule)
-                .Where(x => _boardEntity.IsMovable(x, relicEffect.canMoveToBlock))
+                .Where(x => _boardEntity.IsMovable(x, _pickRelicEntity.effect.canMoveToBlock))
                 .Select(x => new HighlightSquareVO(x, HighlightSquareType.Movable))
                 .ToArray();
 

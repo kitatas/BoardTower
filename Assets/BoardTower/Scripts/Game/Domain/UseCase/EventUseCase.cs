@@ -30,7 +30,7 @@ namespace BoardTower.Game.Domain.UseCase
 
         public async UniTask<EventResultVO> ApplyEventAsync(CancellationToken token)
         {
-            var relicEffect = RelicEffectVO.Create(_pickRelicEntity.relicTypes);
+            var relicEffect = _pickRelicEntity.effect;
 
             var (squareEvent, index) = _boardEntity.FindEvent(_chessmenEntity.square);
             await (squareEvent.type switch
