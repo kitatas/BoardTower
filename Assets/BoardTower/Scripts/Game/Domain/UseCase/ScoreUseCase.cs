@@ -10,15 +10,17 @@ namespace BoardTower.Game.Domain.UseCase
     public sealed class ScoreUseCase : IDisposable
     {
         private readonly GemComboEntity _gemComboEntity;
+        private readonly PickRelicEntity _pickRelicEntity;
         private readonly RoundEntity _roundEntity;
         private readonly ScoreEntity _scoreEntity;
         private readonly ScoreRateRepository _scoreRateRepository;
         private readonly ReactiveProperty<int> _score;
 
-        public ScoreUseCase(GemComboEntity gemComboEntity, RoundEntity roundEntity, ScoreEntity scoreEntity,
-            ScoreRateRepository scoreRateRepository)
+        public ScoreUseCase(GemComboEntity gemComboEntity, PickRelicEntity pickRelicEntity, RoundEntity roundEntity,
+            ScoreEntity scoreEntity, ScoreRateRepository scoreRateRepository)
         {
             _gemComboEntity = gemComboEntity;
+            _pickRelicEntity = pickRelicEntity;
             _roundEntity = roundEntity;
             _scoreEntity = scoreEntity;
             _scoreRateRepository = scoreRateRepository;
@@ -37,7 +39,9 @@ namespace BoardTower.Game.Domain.UseCase
         {
             var roundRate = _scoreRateRepository.FindRoundGemRate(_roundEntity.value);
             var comboRate = _scoreRateRepository.FindGemComboRate(_gemComboEntity.value);
-            var rate = roundRate.value * comboRate.value;
+            var relicEffect = _pickRelicEntity.effect;
+            var unitRelicRate = _scoreRateRepository.FindGemUnitRelicRate(relicEffect.gemUnitRateNum);
+            var rate = roundRate.value * comboRate.value * unitRelicRate.value;
             var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate) * gemNum;
             Add(value);
         }

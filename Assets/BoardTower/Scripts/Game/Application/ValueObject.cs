@@ -450,9 +450,10 @@ namespace BoardTower.Game.Application
         public readonly bool isComboContinuation;
         public readonly bool hasAdditionGem;
         public readonly bool hasAdditionHeart;
+        public readonly int gemUnitRateNum;
 
         public RelicEffectVO(bool canMoveToBlock, bool isIgnoreCollapse, bool isIgnoreBelt, bool isComboContinuation,
-            bool hasAdditionGem, bool hasAdditionHeart)
+            bool hasAdditionGem, bool hasAdditionHeart, int gemUnitRateNum)
         {
             this.canMoveToBlock = canMoveToBlock;
             this.isIgnoreCollapse = isIgnoreCollapse;
@@ -460,6 +461,7 @@ namespace BoardTower.Game.Application
             this.isComboContinuation = isComboContinuation;
             this.hasAdditionGem = hasAdditionGem;
             this.hasAdditionHeart = hasAdditionHeart;
+            this.gemUnitRateNum = gemUnitRateNum;
         }
 
         public static RelicEffectVO Create(IEnumerable<RelicType> relicTypes)
@@ -471,7 +473,8 @@ namespace BoardTower.Game.Application
                 isIgnoreBelt: types.Any(x => new[] { RelicType.Scales }.Contains(x)),
                 isComboContinuation: types.Any(x => new[] { RelicType.Compass }.Contains(x)),
                 hasAdditionGem: types.Any(x => new[] { RelicType.Grace }.Contains(x)),
-                hasAdditionHeart: types.Any(x => new[] { RelicType.Lantern }.Contains(x))
+                hasAdditionHeart: types.Any(x => new[] { RelicType.Lantern }.Contains(x)),
+                gemUnitRateNum: types.Count(x => new[] { RelicType.Cross }.Contains(x))
             );
         }
     }

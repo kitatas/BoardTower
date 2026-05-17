@@ -25,6 +25,11 @@ namespace BoardTower.Game.Domain.Repository
             return FindClosest(ScoreRateType.GemCombo, combo);
         }
 
+        public ScoreRateVO FindGemUnitRelicRate(int gemUnitRelicNum)
+        {
+            return Find(ScoreRateType.GemUnitRelic, gemUnitRelicNum);
+        }
+
         public ScoreRateVO FindRoundClearRate(int round)
         {
             return Find(ScoreRateType.RoundClear, round);
