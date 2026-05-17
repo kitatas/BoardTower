@@ -110,5 +110,6 @@ namespace BoardTower.Game.Application
         RoundClear = 2,
         GemCombo = 3,
         GemUnitRelic = 4,
+        RoundClearRelic = 5,
     }
 }

@@ -30,6 +30,11 @@ namespace BoardTower.Game.Domain.Repository
             return Find(ScoreRateType.GemUnitRelic, gemUnitRelicNum);
         }
 
+        public ScoreRateVO FindRoundClearRelicRate(int comboRelicNum)
+        {
+            return Find(ScoreRateType.RoundClearRelic,  comboRelicNum);
+        }
+
         public ScoreRateVO FindRoundClearRate(int round)
         {
             return Find(ScoreRateType.RoundClear, round);

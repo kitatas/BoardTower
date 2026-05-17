@@ -49,7 +49,9 @@ namespace BoardTower.Game.Domain.UseCase
         public void ApplyRoundClearScore()
         {
             var roundRate = _scoreRateRepository.FindRoundClearRate(_roundEntity.value);
-            var rate = roundRate.value;
+            var relicEffect = _pickRelicEntity.effect;
+            var clearRelicRate = _scoreRateRepository.FindRoundClearRelicRate(relicEffect.roundClearRateNum);
+            var rate = roundRate.value * clearRelicRate.value;
             var value = Mathf.CeilToInt(ScoreConfig.BASE_ROUND_CLEAR_VALUE * rate);
             Add(value);
         }
