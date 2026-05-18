@@ -4,6 +4,7 @@ using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Repository;
 using R3;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BoardTower.Game.Domain.UseCase
 {
@@ -43,6 +44,21 @@ namespace BoardTower.Game.Domain.UseCase
             var unitRelicRate = _scoreRateRepository.FindGemUnitRelicRate(relicEffect.gemUnitRateNum);
             var rate = roundRate.value * comboRate.value * unitRelicRate.value;
             var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate) * gemNum;
+            Add(value);
+        }
+
+        public void ApplyRideOnSquare(SquareEventType type)
+        {
+            if (type is SquareEventType.Collapse) ApplyRideOnCollapseScore();
+        }
+
+        private void ApplyRideOnCollapseScore()
+        {
+            var seed = Random.Range(0, 100);
+            if (seed > RelicConfig.ADDITION_THRESHOLD) return;
+
+            var relicEffect = _pickRelicEntity.effect;
+            var value = ScoreConfig.BASE_RIDE_ON_COLLAPSE_VALUE * relicEffect.rideOnCollapseNum;
             Add(value);
         }
 

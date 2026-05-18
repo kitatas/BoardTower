@@ -29,6 +29,8 @@ namespace BoardTower.Game.Presentation.State
         {
             var result = await _eventUseCase.ApplyEventAsync(token);
 
+            _scoreUseCase.ApplyRideOnSquare(result.type);
+
             // Belt 系であれば、移動後の SquareEvent 実行
             if (result.isBelt) return state;
 
