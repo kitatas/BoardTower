@@ -11,15 +11,17 @@ namespace BoardTower.Game.Presentation.State
         private readonly GemUseCase _gemUseCase;
         private readonly GemComboUseCase _gemComboUseCase;
         private readonly PlyUseCase _plyUseCase;
+        private readonly RoundClearUseCase _roundClearUseCase;
         private readonly ScoreUseCase _scoreUseCase;
 
         public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, GemComboUseCase gemComboUseCase,
-            PlyUseCase plyUseCase, ScoreUseCase scoreUseCase)
+            PlyUseCase plyUseCase, RoundClearUseCase roundClearUseCase, ScoreUseCase scoreUseCase)
         {
             _eventUseCase = eventUseCase;
             _gemUseCase = gemUseCase;
             _gemComboUseCase = gemComboUseCase;
             _plyUseCase = plyUseCase;
+            _roundClearUseCase = roundClearUseCase;
             _scoreUseCase = scoreUseCase;
         }
 
@@ -39,7 +41,7 @@ namespace BoardTower.Game.Presentation.State
             if (result.gemNum > 0)
             {
                 _gemUseCase.Add(result.gemNum);
-                _scoreUseCase.ApplyGemScore(result.gemNum);
+                _scoreUseCase.ApplyGemScore(result.gemNum, _roundClearUseCase.IsOverflowClearGem());
             }
 
             if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);

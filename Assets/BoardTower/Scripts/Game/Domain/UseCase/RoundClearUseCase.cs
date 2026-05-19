@@ -35,6 +35,11 @@ namespace BoardTower.Game.Domain.UseCase
             return _roundClearGemEntity.value <= _gemEntity.value;
         }
 
+        public bool IsOverflowClearGem()
+        {
+            return _roundClearGemEntity.value < _gemEntity.value;
+        }
+
         void IDisposable.Dispose()
         {
             _roundClear?.Dispose();

@@ -36,13 +36,14 @@ namespace BoardTower.Game.Domain.UseCase
             _score.Value = _scoreEntity.value;
         }
 
-        public void ApplyGemScore(int gemNum)
+        public void ApplyGemScore(int gemNum, bool isClear)
         {
             var roundRate = _scoreRateRepository.FindRoundGemRate(_roundEntity.value);
             var comboRate = _scoreRateRepository.FindGemComboRate(_gemComboEntity.value);
             var relicEffect = _pickRelicEntity.effect;
             var unitRelicRate = _scoreRateRepository.FindGemUnitRelicRate(relicEffect.gemUnitRateNum);
             var rate = roundRate.value * comboRate.value * unitRelicRate.value;
+            if (isClear && relicEffect.isOverflowRoundGem) rate *= ScoreConfig.OVERFLOW_ROUND_GEM_RATE;
             var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate) * gemNum;
             Add(value);
         }

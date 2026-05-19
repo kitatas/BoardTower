@@ -448,6 +448,7 @@ namespace BoardTower.Game.Application
         public readonly bool isIgnoreCollapse;
         public readonly bool isIgnoreBelt;
         public readonly bool isComboContinuation;
+        public readonly bool isOverflowRoundGem;
         public readonly bool hasAdditionGem;
         public readonly bool hasAdditionHeart;
         public readonly int rideOnCollapseNum;
@@ -455,13 +456,14 @@ namespace BoardTower.Game.Application
         public readonly int roundClearRateNum;
 
         public RelicEffectVO(bool canMoveToBlock, bool isIgnoreCollapse, bool isIgnoreBelt, bool isComboContinuation,
-            bool hasAdditionGem, bool hasAdditionHeart, int rideOnCollapseNum, int gemUnitRateNum,
-            int roundClearRateNum)
+            bool isOverflowRoundGem, bool hasAdditionGem, bool hasAdditionHeart, int rideOnCollapseNum,
+            int gemUnitRateNum, int roundClearRateNum)
         {
             this.canMoveToBlock = canMoveToBlock;
             this.isIgnoreCollapse = isIgnoreCollapse;
             this.isIgnoreBelt = isIgnoreBelt;
             this.isComboContinuation = isComboContinuation;
+            this.isOverflowRoundGem = isOverflowRoundGem;
             this.hasAdditionGem = hasAdditionGem;
             this.hasAdditionHeart = hasAdditionHeart;
             this.rideOnCollapseNum = rideOnCollapseNum;
@@ -477,6 +479,7 @@ namespace BoardTower.Game.Application
                 isIgnoreCollapse: types.Any(x => new[] { RelicType.Greaves }.Contains(x)),
                 isIgnoreBelt: types.Any(x => new[] { RelicType.Scales }.Contains(x)),
                 isComboContinuation: types.Any(x => new[] { RelicType.Compass }.Contains(x)),
+                isOverflowRoundGem: types.Any(x => new[] { RelicType.Chain }.Contains(x)),
                 hasAdditionGem: types.Any(x => new[] { RelicType.Grace }.Contains(x)),
                 hasAdditionHeart: types.Any(x => new[] { RelicType.Lantern }.Contains(x)),
                 rideOnCollapseNum: types.Count(x => new[] { RelicType.Bell }.Contains(x)),
