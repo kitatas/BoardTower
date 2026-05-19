@@ -102,6 +102,7 @@ namespace BoardTower.Game.Application
         Scripture = 8,
         Bell = 9,
         Chain = 10,
+        Gavel = 11,
     }
 
     public enum ScoreRateType

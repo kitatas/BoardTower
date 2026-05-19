@@ -2,18 +2,21 @@ using System;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Repository;
 using R3;
+using UnityEngine;
 
 namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class PlyUseCase : IDisposable
     {
+        private readonly PickRelicEntity _pickRelicEntity;
         private readonly PlyEntity _plyEntity;
         private readonly RoundRepository _roundRepository;
         private readonly ReactiveProperty<int> _ply;
         private readonly ReactiveProperty<int> _plyMax;
 
-        public PlyUseCase(PlyEntity plyEntity, RoundRepository roundRepository)
+        public PlyUseCase(PickRelicEntity pickRelicEntity, PlyEntity plyEntity, RoundRepository roundRepository)
         {
+            _pickRelicEntity = pickRelicEntity;
             _plyEntity = plyEntity;
             _roundRepository = roundRepository;
             _ply = new ReactiveProperty<int>(0);
@@ -26,6 +29,10 @@ namespace BoardTower.Game.Domain.UseCase
         public void SetUp(int round)
         {
             var plyCount = round > 0 ? _roundRepository.Find(round)?.plyCount ?? 0 : 0;
+
+            var relicEffect = _pickRelicEntity.effect;
+            if (relicEffect.isPlyHalved) plyCount = Mathf.CeilToInt(plyCount / 2.0f);
+
             _plyEntity.SetUp(plyCount);
             _ply.Value = _plyEntity.value;
             _plyMax.Value = _plyEntity.maxValue;

@@ -84,5 +84,6 @@ namespace BoardTower.Game.Application
         public const int BASE_RIDE_ON_COLLAPSE_VALUE = 50;
 
         public const float OVERFLOW_ROUND_GEM_RATE = 2.0f;
+        public const float HALVED_RATE = 1.5f;
     }
 }
