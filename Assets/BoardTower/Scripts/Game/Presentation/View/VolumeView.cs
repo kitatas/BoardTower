@@ -1,52 +1,46 @@
-using BoardTower.Game.Presentation.View.Button;
 using R3;
-using R3.Triggers;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BoardTower.Game.Presentation.View
 {
     public sealed class VolumeView : MonoBehaviour
     {
-        [SerializeField] private Slider master = default;
-        [SerializeField] private Slider bgm = default;
-        [SerializeField] private Slider se = default;
-        [SerializeField] private MuteButtonView masterMute = default;
-        [SerializeField] private MuteButtonView bgmMute = default;
-        [SerializeField] private MuteButtonView seMute = default;
+        [SerializeField] private VolumeItemView master = default;
+        [SerializeField] private VolumeItemView bgm = default;
+        [SerializeField] private VolumeItemView se = default;
 
-        public Observable<float> masterVolume => master.OnValueChangedAsObservable();
-        public Observable<float> bgmVolume => bgm.OnValueChangedAsObservable();
-        public Observable<float> seVolume => se.OnValueChangedAsObservable();
+        public Observable<float> masterVolume => master.volume;
+        public Observable<float> bgmVolume => bgm.volume;
+        public Observable<float> seVolume => se.volume;
 
-        public Observable<Unit> releaseMaster => master.OnPointerUpAsObservable().Select(_ => Unit.Default);
-        public Observable<Unit> releaseBgm => bgm.OnPointerUpAsObservable().Select(_ => Unit.Default);
-        public Observable<Unit> releaseSe => se.OnPointerUpAsObservable().Select(_ => Unit.Default);
+        public Observable<Unit> releaseMaster => master.release;
+        public Observable<Unit> releaseBgm => bgm.release;
+        public Observable<Unit> releaseSe => se.release;
 
-        public Observable<Unit> muteMaster => masterMute.click.Select(_ => Unit.Default);
-        public Observable<Unit> muteBgm => bgmMute.click.Select(_ => Unit.Default);
-        public Observable<Unit> muteSe => seMute.click.Select(_ => Unit.Default);
+        public Observable<Unit> muteMaster => master.mute;
+        public Observable<Unit> muteBgm => bgm.mute;
+        public Observable<Unit> muteSe => se.mute;
 
         public void Init(float masterValue, float bgmValue, float seValue)
         {
-            master.value = masterValue;
-            bgm.value = bgmValue;
-            se.value = seValue;
+            master.SetVolume(masterValue);
+            bgm.SetVolume(bgmValue);
+            se.SetVolume(seValue);
         }
 
         public void ActivateMasterMute(bool value)
         {
-            masterMute.ActivateMute(value);
+            master.ActivateMute(value);
         }
 
         public void ActivateBgmMute(bool value)
         {
-            bgmMute.ActivateMute(value);
+            bgm.ActivateMute(value);
         }
 
         public void ActivateSeMute(bool value)
         {
-            seMute.ActivateMute(value);
+            se.ActivateMute(value);
         }
     }
 }
