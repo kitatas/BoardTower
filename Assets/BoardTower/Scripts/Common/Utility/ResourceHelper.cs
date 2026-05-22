@@ -55,5 +55,29 @@ namespace BoardTower.Common.Utility
                 throw;
             }
         }
+
+        public static void Release(string path)
+        {
+            if (_handleCaches.TryGetValue(path, out var cache) && cache.IsValid())
+            {
+                Addressables.Release(cache);
+                _handleCaches.Remove(path);
+            }
+        }
+
+        public static void ReleaseAll()
+        {
+            // 新規ロードとの競合を回避する
+            var handles = new List<AsyncOperationHandle>(_handleCaches.Values);
+            _handleCaches.Clear();
+
+            foreach (var handle in handles)
+            {
+                if (handle.IsValid())
+                {
+                    Addressables.Release(handle);
+                }
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Domain.UseCase;
 using BoardTower.Common.Presentation.Facade;
+using BoardTower.Common.Utility;
 using Cysharp.Threading.Tasks;
 using R3;
 using VContainer.Unity;
@@ -30,6 +31,7 @@ namespace BoardTower.Common.Presentation.Presenter
                 .SubscribeAwait(async (x, ct) =>
                 {
                     if (x.loadType is LoadType.Fade) await FadeAsync(Fade.In, ct);
+                    ResourceHelper.ReleaseAll();
                     await _sceneFacade.LoadSceneAsync(x.sceneName, ct);
                     if (x.loadType is LoadType.Fade) await FadeAsync(Fade.Out, ct);
                 })
