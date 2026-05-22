@@ -479,18 +479,18 @@ namespace BoardTower.Game.Application
         {
             var types = relicTypes as RelicType[] ?? relicTypes.ToArray();
             return new RelicEffectVO(
-                canMoveToBlock: types.Any(x => new[] { RelicType.Horseshoe }.Contains(x)),
-                isIgnoreCollapse: types.Any(x => new[] { RelicType.Greaves }.Contains(x)),
-                isIgnoreBelt: types.Any(x => new[] { RelicType.Scales }.Contains(x)),
-                isComboContinuation: types.Any(x => new[] { RelicType.Compass }.Contains(x)),
-                isOverflowRoundGem: types.Any(x => new[] { RelicType.Chain }.Contains(x)),
-                isPlyHalved: types.Any(x => new[] { RelicType.Gavel }.Contains(x)),
-                isRoundClearHalved: types.Any(x => new[] { RelicType.Gavel }.Contains(x)),
-                hasAdditionGem: types.Any(x => new[] { RelicType.Grace }.Contains(x)),
-                hasAdditionHeart: types.Any(x => new[] { RelicType.Lantern }.Contains(x)),
-                rideOnCollapseNum: types.Count(x => new[] { RelicType.Bell }.Contains(x)),
-                gemUnitRateNum: types.Count(x => new[] { RelicType.Cross }.Contains(x)),
-                roundClearRateNum: types.Count(x => new[] { RelicType.Scripture }.Contains(x))
+                canMoveToBlock: types.Any(x => new[] { RelicType.Boots }.Contains(x)),
+                isIgnoreCollapse: types.Any(x => new[] { RelicType.Codex }.Contains(x)),
+                isIgnoreBelt: types.Any(x => new[] { RelicType.Anchor }.Contains(x)),
+                isComboContinuation: types.Any(x => new[] { RelicType.Baton }.Contains(x)),
+                isOverflowRoundGem: types.Any(x => new[] { RelicType.Seal }.Contains(x)),
+                isPlyHalved: types.Any(x => new[] { RelicType.Pact }.Contains(x)),
+                isRoundClearHalved: types.Any(x => new[] { RelicType.Pact }.Contains(x)),
+                hasAdditionGem: types.Any(x => new[] { RelicType.Charm }.Contains(x)),
+                hasAdditionHeart: types.Any(x => new[] { RelicType.Chalice }.Contains(x)),
+                rideOnCollapseNum: types.Count(x => new[] { RelicType.Medal }.Contains(x)),
+                gemUnitRateNum: types.Count(x => new[] { RelicType.Scales }.Contains(x)),
+                roundClearRateNum: types.Count(x => new[] { RelicType.Banner }.Contains(x))
             );
         }
     }

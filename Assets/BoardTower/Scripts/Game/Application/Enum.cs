@@ -92,17 +92,17 @@ namespace BoardTower.Game.Application
     public enum RelicType
     {
         None = 0,
-        Scales = 1,
-        Greaves = 2,
-        Grace = 3,
-        Lantern = 4,
-        Compass = 5,
-        Horseshoe = 6,
-        Cross = 7,
-        Scripture = 8,
-        Bell = 9,
-        Chain = 10,
-        Gavel = 11,
+        Boots = 1,
+        Codex = 2,
+        Anchor = 3,
+        Charm = 4,
+        Chalice = 5,
+        Baton = 6,
+        Pact = 7,
+        Seal = 8,
+        Scales = 9,
+        Banner = 10,
+        Medal = 11,
     }
 
     public enum ScoreRateType
