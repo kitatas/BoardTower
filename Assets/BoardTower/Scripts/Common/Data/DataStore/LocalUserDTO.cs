@@ -4,20 +4,20 @@ using BoardTower.Common.Application;
 namespace BoardTower.Common.Data.DataStore
 {
     [Serializable]
-    public sealed class UserDTO
+    public sealed class LocalUserDTO
     {
         public string id;
 
-        public UserDTO()
+        public LocalUserDTO()
         {
             id = "";
         }
 
-        public UserDTO(UserVO user)
+        public LocalUserDTO(LocalUserVO user)
         {
             id = user.id;
         }
 
-        public UserVO ToVO() => new(id);
+        public LocalUserVO ToVO() => new(id);
     }
 }

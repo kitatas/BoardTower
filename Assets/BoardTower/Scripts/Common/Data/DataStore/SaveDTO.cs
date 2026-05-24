@@ -4,14 +4,14 @@ namespace BoardTower.Common.Data.DataStore
 {
     public sealed class SaveDTO
     {
-        public UserDTO user;
+        public LocalUserDTO user;
         public VolumeDTO masterVolume;
         public VolumeDTO bgmVolume;
         public VolumeDTO seVolume;
 
         public SaveDTO()
         {
-            user = new UserDTO();
+            user = new LocalUserDTO();
             masterVolume = new VolumeDTO();
             bgmVolume = new VolumeDTO();
             seVolume = new VolumeDTO();
@@ -21,7 +21,7 @@ namespace BoardTower.Common.Data.DataStore
         {
             return new SaveDTO
             {
-                user = new UserDTO(),
+                user = new LocalUserDTO(),
                 masterVolume = dto.masterVolume,
                 bgmVolume = dto.bgmVolume,
                 seVolume = dto.seVolume,

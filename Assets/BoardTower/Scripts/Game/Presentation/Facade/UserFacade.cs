@@ -12,7 +12,7 @@ namespace BoardTower.Game.Presentation.Facade
             _uidView = uidView;
         }
 
-        public void Render(UserVO user)
+        public void Render(LocalUserVO user)
         {
             _uidView.Render(user.id);
         }

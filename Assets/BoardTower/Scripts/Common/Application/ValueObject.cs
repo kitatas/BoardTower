@@ -186,12 +186,12 @@ namespace BoardTower.Common.Application
 
     public sealed class SaveVO
     {
-        public readonly UserVO user;
+        public readonly LocalUserVO user;
         public readonly VolumeVO masterVolume;
         public readonly VolumeVO bgmVolume;
         public readonly VolumeVO seVolume;
 
-        public SaveVO(UserVO user, VolumeVO masterVolume, VolumeVO bgmVolume, VolumeVO seVolume)
+        public SaveVO(LocalUserVO user, VolumeVO masterVolume, VolumeVO bgmVolume, VolumeVO seVolume)
         {
             this.user = user;
             this.masterVolume = masterVolume;
@@ -200,11 +200,11 @@ namespace BoardTower.Common.Application
         }
     }
 
-    public sealed class UserVO
+    public sealed class LocalUserVO
     {
         public readonly string id;
 
-        public UserVO(string id)
+        public LocalUserVO(string id)
         {
             this.id = id;
         }

@@ -24,7 +24,7 @@ namespace BoardTower.Boot.Domain.UseCase
             _userEntity.Set(user);
         }
 
-        private async UniTask<UserVO> FetchUserAsync(CancellationToken token)
+        private async UniTask<LocalUserVO> FetchUserAsync(CancellationToken token)
         {
             var saveData = await _saveRepository.LoadAsync(token);
             if (string.IsNullOrEmpty(saveData.user.id))
@@ -37,10 +37,10 @@ namespace BoardTower.Boot.Domain.UseCase
             }
         }
 
-        private UserVO CreateUser()
+        private LocalUserVO CreateUser()
         {
             var id = Ulid.NewUlid().ToString();
-            var user = new UserVO(id);
+            var user = new LocalUserVO(id);
             _saveRepository.SaveUser(user);
             return user;
         }

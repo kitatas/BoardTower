@@ -40,10 +40,10 @@ namespace BoardTower.Common.Domain.Repository
             ES3.Save(SaveConfig.ES3_KEY, JsonUtility.ToJson(data));
         }
 
-        public void SaveUser(UserVO value)
+        public void SaveUser(LocalUserVO value)
         {
             var data = Load();
-            data.user = new UserDTO(value);
+            data.user = new LocalUserDTO(value);
             Save(data);
         }
 
