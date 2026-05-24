@@ -233,4 +233,16 @@ namespace BoardTower.Common.Application
             this.displayName = displayName;
         }
     }
+
+    public sealed class UserVO
+    {
+        public readonly LocalUserVO localUser;
+        public readonly PlayFabUserVO playFabUser;
+
+        public UserVO(LocalUserVO localUser, PlayFabUserVO playFabUser)
+        {
+            this.localUser = localUser;
+            this.playFabUser = playFabUser;
+        }
+    }
 }

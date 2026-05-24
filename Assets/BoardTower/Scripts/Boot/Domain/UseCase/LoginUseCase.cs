@@ -21,7 +21,7 @@ namespace BoardTower.Boot.Domain.UseCase
         public async UniTask LoginAsync(CancellationToken token)
         {
             var user = await FetchUserAsync(token);
-            _userEntity.Set(user);
+            _userEntity.Set(new UserVO(user, default));
         }
 
         private async UniTask<LocalUserVO> FetchUserAsync(CancellationToken token)
