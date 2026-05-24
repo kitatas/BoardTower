@@ -10,6 +10,8 @@ namespace BoardTower.Common.Application
 
         public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
+        public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";
+        public const string FAILED_TO_FETCH_RECORD = "FAILED_TO_FETCH_RECORD";
         public const string NOT_FOUND_BGM = "NOT_FOUND_BGM";
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
@@ -75,5 +77,14 @@ namespace BoardTower.Common.Application
     public sealed class SaveConfig
     {
         public const string ES3_KEY = "";
+    }
+
+    public sealed class PlayFabConfig
+    {
+#if UNITY_EDITOR
+        public const string TITLE_ID = "";
+#else
+        public const string TITLE_ID = "";
+#endif
     }
 }

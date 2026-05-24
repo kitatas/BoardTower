@@ -2,7 +2,8 @@
     "name": "Common.Data.DataStore",
     "rootNamespace": "",
     "references": [
-        "GUID:193efd1822ac4de5ae719bcf6d254d69"
+        "GUID:193efd1822ac4de5ae719bcf6d254d69",
+        "GUID:0da6d172d18a54e4389d0dce1e1ffdf2"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

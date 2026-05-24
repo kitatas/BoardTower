@@ -221,4 +221,16 @@ namespace BoardTower.Common.Application
             this.isMute = isMute;
         }
     }
+
+    public sealed class PlayFabUserVO
+    {
+        public readonly bool isNewly;
+        public readonly string displayName;
+
+        public PlayFabUserVO(bool isNewly, string displayName)
+        {
+            this.isNewly = isNewly;
+            this.displayName = displayName;
+        }
+    }
 }
