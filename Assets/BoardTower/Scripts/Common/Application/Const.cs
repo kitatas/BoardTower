@@ -12,6 +12,7 @@ namespace BoardTower.Common.Application
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
         public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";
         public const string FAILED_TO_FETCH_RECORD = "FAILED_TO_FETCH_RECORD";
+        public const string FAILED_TO_CREATE_UID = "FAILED_TO_CREATE_UID";
         public const string NOT_FOUND_BGM = "NOT_FOUND_BGM";
         public const string NOT_FOUND_LOAD = "NOT_FOUND_LOAD";
         public const string NOT_FOUND_SCENE = "NOT_FOUND_SCENE";
@@ -86,5 +87,7 @@ namespace BoardTower.Common.Application
 #else
         public const string TITLE_ID = "";
 #endif
+
+        public const int CREATE_UID_RETRY_COUNT = 10;
     }
 }
