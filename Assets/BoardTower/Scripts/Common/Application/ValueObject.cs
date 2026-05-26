@@ -245,4 +245,16 @@ namespace BoardTower.Common.Application
             this.playFabUser = playFabUser;
         }
     }
+
+    public sealed class LoginResultVO
+    {
+        public readonly bool isSuccess;
+        public readonly bool isRegistered;
+
+        public LoginResultVO(bool isSuccess, bool isRegistered)
+        {
+            this.isSuccess = isSuccess;
+            this.isRegistered = isRegistered;
+        }
+    }
 }

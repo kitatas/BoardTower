@@ -10,6 +10,7 @@ namespace BoardTower.Common.Application
 
         public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
+        public const string FAILED_TO_LOGIN = "FAILED_TO_LOGIN";
         public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";
         public const string FAILED_TO_FETCH_RECORD = "FAILED_TO_FETCH_RECORD";
         public const string FAILED_TO_CREATE_UID = "FAILED_TO_CREATE_UID";

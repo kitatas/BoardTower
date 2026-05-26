@@ -24,7 +24,12 @@ namespace BoardTower.Boot.Presentation.State
         {
             await _loadingUseCase.FadeAsync(Fade.In, token);
 
-            await _loginUseCase.LoginAsync(token);
+            var loginResult = await _loginUseCase.LoginAsync(token);
+            if (!loginResult.isSuccess) throw new RetryExceptionVO(ExceptionConfig.FAILED_TO_LOGIN);
+            if (!loginResult.isRegistered)
+            {
+                // TODO: ユーザー名登録
+            }
 
             await _loadingUseCase.FadeAsync(Fade.Out, token);
 

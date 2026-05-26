@@ -20,10 +20,11 @@ namespace BoardTower.Boot.Domain.UseCase
             _saveRepository = saveRepository;
         }
 
-        public async UniTask LoginAsync(CancellationToken token)
+        public async UniTask<LoginResultVO> LoginAsync(CancellationToken token)
         {
             var user = await FetchUserAsync(token);
             _userEntity.Set(user);
+            return new LoginResultVO(true, _userEntity.isRegistered);
         }
 
         private async UniTask<UserVO> FetchUserAsync(CancellationToken token)
