@@ -9,16 +9,24 @@ namespace BoardTower.Boot.Presentation.State
 {
     public sealed class BootLoginState : BaseBootState
     {
+        private readonly DisplayNameUseCase _displayNameUseCase;
         private readonly LoadingUseCase _loadingUseCase;
         private readonly LoginUseCase _loginUseCase;
 
-        public BootLoginState(LoadingUseCase loadingUseCase, LoginUseCase loginUseCase)
+        public BootLoginState(DisplayNameUseCase displayNameUseCase, LoadingUseCase loadingUseCase,
+            LoginUseCase loginUseCase)
         {
+            _displayNameUseCase = displayNameUseCase;
             _loadingUseCase = loadingUseCase;
             _loginUseCase = loginUseCase;
         }
 
         public override BootState state => BootState.Login;
+
+        public override UniTask InitAsync(CancellationToken token)
+        {
+            return _displayNameUseCase.InitAsync(token);
+        }
 
         public override async UniTask<BootState> TickAsync(CancellationToken token)
         {
