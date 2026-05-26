@@ -31,6 +31,7 @@ namespace BoardTower.Boot.Installer
 
             // Ports
             builder.Register<BootStatePorts>(Lifetime.Scoped);
+            builder.Register<DisplayNamePorts>(Lifetime.Scoped);
             builder.Register<SplashPorts>(Lifetime.Scoped);
 
             // Repository
@@ -38,11 +39,13 @@ namespace BoardTower.Boot.Installer
 
             // UseCase
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
+            builder.Register<DisplayNameUseCase>(Lifetime.Scoped);
             builder.Register<LoginUseCase>(Lifetime.Scoped);
             builder.Register<SplashUseCase>(Lifetime.Scoped);
 
             // Facade
             builder.Register<ButtonFacade>(Lifetime.Scoped);
+            builder.Register<DisplayNameFacade>(Lifetime.Scoped);
             builder.Register<SplashFacade>(Lifetime.Scoped);
 
             // State
@@ -56,11 +59,13 @@ namespace BoardTower.Boot.Installer
             {
                 entryPoints.Add<BootStatePresenter>();
                 entryPoints.Add<ButtonPresenter>();
+                entryPoints.Add<DisplayNamePresenter>();
                 entryPoints.Add<SplashPresenter>();
             });
 
             // View
             builder.RegisterFindObjectsByType<BaseButtonView>();
+            builder.RegisterComponentInHierarchy<DisplayNameView>();
             builder.RegisterComponentInHierarchy<SplashView>();
         }
     }

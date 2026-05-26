@@ -3,6 +3,22 @@ using UnityEngine;
 
 namespace BoardTower.Boot.Application
 {
+    public sealed class DisplayNameTransitionVO
+    {
+        public readonly TransitionVO transition;
+
+        public DisplayNameTransitionVO(TransitionVO transition)
+        {
+            this.transition = transition;
+        }
+
+        public static DisplayNameTransitionVO Create(Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new DisplayNameTransitionVO(transition);
+        }
+    }
+
     public sealed class SplashVO
     {
         public readonly SplashType type;

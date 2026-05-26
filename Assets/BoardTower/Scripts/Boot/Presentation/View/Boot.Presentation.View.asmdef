@@ -2,9 +2,11 @@
     "name": "Boot.Presentation.View",
     "rootNamespace": "",
     "references": [
+        "GUID:824c6d93d7ea4ebbaa9f0bca87c573a2",
         "GUID:b230b301053f4478a82a19d2c9dc24b8",
         "GUID:971e8a35ba8d54e6cb9b25d1ee54d5e4",
-        "GUID:77221876cc6b8244180b96e320b1bcd4"
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
