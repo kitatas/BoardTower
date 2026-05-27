@@ -29,7 +29,7 @@ namespace BoardTower.Boot.Presentation.Facade
             };
 
             return tween
-                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+                .ToUniTask(TweenCancelBehaviour.KillWithCompleteCallbackAndCancelAwait, token);
         }
     }
 }
