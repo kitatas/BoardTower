@@ -50,5 +50,23 @@ namespace BoardTower.Common.Domain.Repository
             var displayName = payload.PlayerProfile?.DisplayName ?? "";
             return new PlayFabUserDTO(loginResult.NewlyCreated, displayName, records);
         }
+
+        public async UniTask<UserDisplayNameVO> UpdateDisplayNameAsync(string name, CancellationToken token)
+        {
+            var completionSource = new UniTaskCompletionSource<UpdateUserTitleDisplayNameResult>();
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = name,
+            };
+
+            PlayFabClientAPI.UpdateUserTitleDisplayName(
+                request,
+                result => completionSource.TrySetResult(result),
+                error => completionSource.TrySetException(new RetryExceptionVO(error.ErrorMessage))
+            );
+
+            var response = await completionSource.Task.AttachExternalCancellation(token);
+            return new UserDisplayNameVO(response.DisplayName);
+        }
     }
 }

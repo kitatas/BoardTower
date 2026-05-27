@@ -36,7 +36,11 @@ namespace BoardTower.Boot.Presentation.State
             if (!loginResult.isSuccess) throw new RetryExceptionVO(ExceptionConfig.FAILED_TO_LOGIN);
             if (!loginResult.isRegistered)
             {
-                // TODO: ユーザー名登録
+                await _loadingUseCase.FadeAsync(Fade.Out, token);
+                var userDisplayName = await _displayNameUseCase.DecideDisplayNameAsync(token);
+
+                await _loadingUseCase.FadeAsync(Fade.In, token);
+                await _loginUseCase.RegisterAsync(userDisplayName, token);
             }
 
             await _loadingUseCase.FadeAsync(Fade.Out, token);
