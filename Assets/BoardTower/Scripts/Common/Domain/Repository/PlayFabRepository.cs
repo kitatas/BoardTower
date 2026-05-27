@@ -47,7 +47,8 @@ namespace BoardTower.Common.Domain.Repository
             var records = payload.UserData;
             if (records == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_RECORD);
 
-            var displayName = payload.PlayerProfile?.DisplayName ?? "";
+            var name = payload.PlayerProfile?.DisplayName ?? "";
+            var displayName = string.IsNullOrEmpty(name) ? UserDisplayNameVO.Create() : new UserDisplayNameVO(name);
             return new PlayFabUserDTO(loginResult.NewlyCreated, displayName, records);
         }
 

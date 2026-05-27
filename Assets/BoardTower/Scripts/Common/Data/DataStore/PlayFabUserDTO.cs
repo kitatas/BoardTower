@@ -7,10 +7,10 @@ namespace BoardTower.Common.Data.DataStore
     public sealed class PlayFabUserDTO
     {
         public readonly bool isNewly;
-        public readonly string displayName;
+        public readonly UserDisplayNameVO displayName;
         public readonly Dictionary<string, UserDataRecord> records;
 
-        public PlayFabUserDTO(bool isNewly, string displayName, Dictionary<string, UserDataRecord> records)
+        public PlayFabUserDTO(bool isNewly, UserDisplayNameVO displayName, Dictionary<string, UserDataRecord> records)
         {
             this.isNewly = isNewly;
             this.displayName = displayName;

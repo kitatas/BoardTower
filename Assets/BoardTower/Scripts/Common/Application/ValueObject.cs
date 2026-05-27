@@ -225,9 +225,9 @@ namespace BoardTower.Common.Application
     public sealed class PlayFabUserVO
     {
         public readonly bool isNewly;
-        public readonly string displayName;
+        public readonly UserDisplayNameVO displayName;
 
-        public PlayFabUserVO(bool isNewly, string displayName)
+        public PlayFabUserVO(bool isNewly, UserDisplayNameVO displayName)
         {
             this.isNewly = isNewly;
             this.displayName = displayName;
@@ -238,9 +238,19 @@ namespace BoardTower.Common.Application
     {
         public readonly string value;
 
+        private UserDisplayNameVO()
+        {
+            this.value = "";
+        }
+
         public UserDisplayNameVO(string value)
         {
             this.value = value;
+        }
+
+        public static UserDisplayNameVO Create()
+        {
+            return new UserDisplayNameVO();
         }
     }
 

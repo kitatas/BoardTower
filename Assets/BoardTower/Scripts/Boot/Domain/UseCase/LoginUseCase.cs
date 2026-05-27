@@ -60,9 +60,10 @@ namespace BoardTower.Boot.Domain.UseCase
             throw new RebootExceptionVO(ExceptionConfig.FAILED_TO_CREATE_UID);
         }
 
-        public UniTask RegisterAsync(UserDisplayNameVO userDisplayName, CancellationToken token)
+        public async UniTask RegisterAsync(UserDisplayNameVO userDisplayName, CancellationToken token)
         {
-            return _playFabRepository.UpdateDisplayNameAsync(userDisplayName.value, token);
+            var displayName = await _playFabRepository.UpdateDisplayNameAsync(userDisplayName.value, token);
+            _userEntity.SetDisplayName(displayName);
         }
     }
 }
