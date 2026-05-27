@@ -3,6 +3,7 @@ using BoardTower.Boot.Application;
 using BoardTower.Boot.Presentation.View;
 using BoardTower.Common.Application;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Boot.Presentation.Facade
 {
@@ -14,6 +15,9 @@ namespace BoardTower.Boot.Presentation.Facade
         {
             _displayNameView = displayNameView;
         }
+
+        public Observable<UserDisplayNameVO> OnDecisionDisplayName() => _displayNameView.decisionDisplayName
+            .Select(x => new UserDisplayNameVO(x));
 
         public UniTask FadeAsync(DisplayNameTransitionVO displayNameTransition, CancellationToken token)
         {

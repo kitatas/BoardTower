@@ -25,6 +25,10 @@ namespace BoardTower.Boot.Presentation.Presenter
             _displayNameUseCase.transition
                 .Subscribe((t, ct) => _displayNameFacade.FadeAsync(t, ct))
                 .AddTo(_disposable);
+
+            _displayNameFacade.OnDecisionDisplayName()
+                .Subscribe(_displayNameUseCase.HandleDisplayName)
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

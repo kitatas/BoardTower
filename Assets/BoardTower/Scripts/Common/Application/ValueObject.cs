@@ -234,6 +234,16 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class UserDisplayNameVO
+    {
+        public readonly string value;
+
+        public UserDisplayNameVO(string value)
+        {
+            this.value = value;
+        }
+    }
+
     public sealed class UserVO
     {
         public readonly LocalUserVO localUser;

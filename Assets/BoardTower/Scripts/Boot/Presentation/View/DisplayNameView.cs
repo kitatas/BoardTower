@@ -1,4 +1,7 @@
+using BoardTower.Common.Presentation.View.Button;
 using DG.Tweening;
+using R3;
+using TMPro;
 using UnityEngine;
 
 namespace BoardTower.Boot.Presentation.View
@@ -6,8 +9,13 @@ namespace BoardTower.Boot.Presentation.View
     public sealed class DisplayNameView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup = default;
+        [SerializeField] private TMP_InputField inputField = default;
+        [SerializeField] private CommonButtonView commonButtonView = default;
 
         private Tween _tween;
+
+        public Observable<string> decisionDisplayName => commonButtonView.click
+            .Select(_ => inputField.text);
 
         public Tween FadeIn(float duration)
         {
