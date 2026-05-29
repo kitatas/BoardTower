@@ -1,18 +1,22 @@
+using System;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Domain.Ports;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using R3;
 
 namespace BoardTower.Common.Domain.UseCase
 {
-    public sealed class ExceptionUseCase
+    public sealed class ExceptionUseCase : IDisposable
     {
         private readonly ExceptionPorts _exceptionPorts;
+        private readonly Subject<Unit> _decision;
 
         public ExceptionUseCase(ExceptionPorts exceptionPorts)
         {
             _exceptionPorts = exceptionPorts;
+            _decision = new Subject<Unit>();
         }
 
         public IAsyncSubscriber<ExceptionNotifyVO> exception => _exceptionPorts.exceptionSubscriber;
@@ -43,6 +47,16 @@ namespace BoardTower.Common.Domain.UseCase
             // NOTE: FadeOut時はException不要なのでnull指定
             var notify = ExceptionNotifyVO.Create(null, Fade.Out, duration);
             return _exceptionPorts.PublishExceptionAsync(notify, token);
+        }
+
+        public void HandleDecision(Unit unit)
+        {
+            _decision?.OnNext(unit);
+        }
+
+        public void Dispose()
+        {
+            _decision?.Dispose();
         }
     }
 }

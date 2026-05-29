@@ -1,4 +1,6 @@
+using BoardTower.Common.Presentation.View.Button;
 using DG.Tweening;
+using R3;
 using TMPro;
 using UniEx;
 using UnityEngine;
@@ -9,6 +11,10 @@ namespace BoardTower.Common.Presentation.View
     {
         [SerializeField] private CanvasGroup canvasGroup = default;
         [SerializeField] private TextMeshProUGUI message = default;
+        [SerializeField] private CommonButtonView commonButtonView = default;
+
+        public Observable<Unit> decision => commonButtonView.click
+            .Select(_ => Unit.Default);
 
         public Tween FadeIn(string value, float duration)
         {

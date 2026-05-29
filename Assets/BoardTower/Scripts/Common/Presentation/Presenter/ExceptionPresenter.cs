@@ -25,6 +25,10 @@ namespace BoardTower.Common.Presentation.Presenter
             _exceptionUseCase.exception
                 .Subscribe((e, ct) => _exceptionFacade.FadeAsync(e, ct))
                 .AddTo(_disposable);
+
+            _exceptionFacade.OnDecision()
+                .Subscribe(_exceptionUseCase.HandleDecision)
+                .AddTo(_disposable);
         }
 
         void IDisposable.Dispose()

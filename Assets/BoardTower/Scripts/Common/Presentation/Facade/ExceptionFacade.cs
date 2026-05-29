@@ -2,6 +2,7 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Presentation.View;
 using Cysharp.Threading.Tasks;
+using R3;
 
 namespace BoardTower.Common.Presentation.Facade
 {
@@ -13,6 +14,8 @@ namespace BoardTower.Common.Presentation.Facade
         {
             _exceptionView = exceptionView;
         }
+
+        public Observable<Unit> OnDecision() => _exceptionView.decision;
 
         public UniTask FadeAsync(ExceptionNotifyVO notify, CancellationToken token)
         {
