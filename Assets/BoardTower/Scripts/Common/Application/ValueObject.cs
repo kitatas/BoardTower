@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Text;
+using UniEx;
 using UnityEngine;
 
 namespace BoardTower.Common.Application
@@ -245,6 +246,12 @@ namespace BoardTower.Common.Application
 
         public UserDisplayNameVO(string value)
         {
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+                throw new RetryExceptionVO(ExceptionConfig.INVALID_DISPLAY_NAME);
+
+            if (value.Length.IsBetween(3, 10) == false)
+                throw new RetryExceptionVO(ExceptionConfig.INVALID_DISPLAY_NAME_LENGTH);
+
             this.value = value;
         }
 

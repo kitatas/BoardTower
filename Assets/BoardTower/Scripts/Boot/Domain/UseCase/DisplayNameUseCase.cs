@@ -12,12 +12,12 @@ namespace BoardTower.Boot.Domain.UseCase
     public sealed class DisplayNameUseCase : IDisposable
     {
         private readonly DisplayNamePorts _displayNamePorts;
-        private readonly Subject<UserDisplayNameVO> _displayName;
+        private readonly Subject<string> _displayName;
 
         public DisplayNameUseCase(DisplayNamePorts displayNamePorts)
         {
             _displayNamePorts = displayNamePorts;
-            _displayName = new Subject<UserDisplayNameVO>();
+            _displayName = new Subject<string>();
         }
 
         public IAsyncSubscriber<DisplayNameTransitionVO> transition =>
@@ -35,9 +35,9 @@ namespace BoardTower.Boot.Domain.UseCase
             return _displayNamePorts.PublishDisplayNameTransitionAsync(displayNameTransition, token);
         }
 
-        public void HandleDisplayName(UserDisplayNameVO userDisplayName)
+        public void HandleDisplayName(string name)
         {
-            _displayName?.OnNext(userDisplayName);
+            _displayName?.OnNext(name);
         }
 
         public async UniTask<UserDisplayNameVO> DecideDisplayNameAsync(CancellationToken token)
@@ -46,10 +46,11 @@ namespace BoardTower.Boot.Domain.UseCase
             {
                 await FadeAsync(Fade.In, token);
 
-                var userDisplayName = await _displayName.FirstAsync(token);
+                var name = await _displayName.FirstAsync(token);
 
                 await FadeAsync(Fade.Out, token);
 
+                var userDisplayName = new UserDisplayNameVO(name);
                 if (!string.IsNullOrEmpty(userDisplayName.value)) return userDisplayName;
             }
 

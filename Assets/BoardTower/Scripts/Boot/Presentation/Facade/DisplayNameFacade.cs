@@ -16,8 +16,7 @@ namespace BoardTower.Boot.Presentation.Facade
             _displayNameView = displayNameView;
         }
 
-        public Observable<UserDisplayNameVO> OnDecisionDisplayName() => _displayNameView.decisionDisplayName
-            .Select(x => new UserDisplayNameVO(x));
+        public Observable<string> OnDecisionDisplayName() => _displayNameView.decisionDisplayName;
 
         public UniTask FadeAsync(DisplayNameTransitionVO displayNameTransition, CancellationToken token)
         {

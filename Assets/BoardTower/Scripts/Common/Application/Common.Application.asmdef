@@ -1,3 +1,16 @@
 {
-  "name": "Common.Application"
+    "name": "Common.Application",
+    "rootNamespace": "",
+    "references": [
+        "GUID:827f47054e407413e9663c748e13f0a6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
