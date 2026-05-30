@@ -28,6 +28,7 @@ namespace BoardTower.Common.Installer
             builder.RegisterInstance<SeTable>(seTable);
 
             // Entity
+            builder.Register<RetryCountEntity>(Lifetime.Singleton);
             builder.Register<UserEntity>(Lifetime.Singleton);
 
             // Ports
