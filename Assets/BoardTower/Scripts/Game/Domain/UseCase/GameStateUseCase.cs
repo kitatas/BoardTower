@@ -1,4 +1,5 @@
 using System.Threading;
+using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.UseCase;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
@@ -9,7 +10,8 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class GameStateUseCase : BaseStateUseCase<GameState>
     {
-        public GameStateUseCase(GameStateEntity entity, GameStatePorts ports) : base(entity, ports)
+        public GameStateUseCase(GameStateEntity entity, RetryCountEntity retryCountEntity, GameStatePorts ports) : base(
+            entity, retryCountEntity, ports)
         {
         }
 

@@ -10,6 +10,7 @@ namespace BoardTower.Common.Application
         public const string QUIT_MESSAGE = "Exit this app.";
 
         public const string UNKNOWN_ERROR = "UNKNOWN_ERROR";
+        public const string MAX_RETRY = "MAX_RETRY";
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
         public const string FAILED_TO_LOGIN = "FAILED_TO_LOGIN";
         public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";

@@ -102,11 +102,17 @@ namespace BoardTower.Common.Presentation.Presenter
             }
             catch (ExceptionVO e)
             {
-                // TODO: retry count check
-                // TODO: exec reboot
-                // TODO: exec quit
+                var isRetry = e is RetryExceptionVO;
+                if (isRetry && _stateUseCase.IsMaxRetry(state))
+                {
+                    await _exceptionUseCase.ThrowRebootAsync(ExceptionConfig.MAX_RETRY, token);
+                    throw;
+                }
+
                 await _exceptionUseCase.ThrowAsync(e, token);
-                return state;
+                if (isRetry) return state;
+
+                throw;
             }
             catch (Exception e)
             {

@@ -2,6 +2,7 @@ using System.Threading;
 using BoardTower.Boot.Application;
 using BoardTower.Boot.Data.Entity;
 using BoardTower.Boot.Domain.Ports;
+using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.UseCase;
 using Cysharp.Threading.Tasks;
 
@@ -9,7 +10,8 @@ namespace BoardTower.Boot.Domain.UseCase
 {
     public sealed class BootStateUseCase : BaseStateUseCase<BootState>
     {
-        public BootStateUseCase(BootStateEntity entity, BootStatePorts ports) : base(entity, ports)
+        public BootStateUseCase(BootStateEntity entity, RetryCountEntity retryCountEntity, BootStatePorts ports) : base(
+            entity, retryCountEntity, ports)
         {
         }
 
