@@ -151,6 +151,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<DeleteView>();
+            builder.RegisterComponentInHierarchy<DisplayNameView>();
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<LotRelicView>();

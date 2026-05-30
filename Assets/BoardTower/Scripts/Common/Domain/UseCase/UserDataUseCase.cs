@@ -15,7 +15,7 @@ namespace BoardTower.Common.Domain.UseCase
             _saveRepository = saveRepository;
         }
 
-        public LocalUserVO user => _userEntity.value.localUser;
+        public UserVO user => _userEntity.value;
 
         public void Delete()
         {
