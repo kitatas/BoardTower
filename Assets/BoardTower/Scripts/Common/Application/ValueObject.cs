@@ -73,6 +73,16 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class ExceptionActionVO
+    {
+        public readonly ExceptionVO exception;
+
+        public ExceptionActionVO(ExceptionVO exception)
+        {
+            this.exception = exception;
+        }
+    }
+
     public sealed class LoadingTransitionVO
     {
         public readonly TransitionVO transition;

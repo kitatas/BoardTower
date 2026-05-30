@@ -19,16 +19,20 @@ namespace BoardTower.Common.Domain.UseCase
             _decision = new Subject<Unit>();
         }
 
-        public IAsyncSubscriber<ExceptionNotifyVO> exception => _exceptionPorts.exceptionSubscriber;
+        public IAsyncSubscriber<ExceptionNotifyVO> exceptionNotify => _exceptionPorts.exceptionNotifySubscriber;
+        public IAsyncSubscriber<ExceptionActionVO> exceptionAction => _exceptionPorts.exceptionActionSubscriber;
 
         public async UniTask ThrowAsync(ExceptionVO ex, CancellationToken token)
         {
             var notify = ExceptionNotifyVO.Create(ex, Fade.In, ExceptionConfig.FADE_DURATION);
-            await _exceptionPorts.PublishExceptionAsync(notify, token);
+            await _exceptionPorts.PublishExceptionNotifyAsync(notify, token);
 
             await _decision.FirstAsync(token).AsUniTask();
 
             await FadeOutAsync(ExceptionConfig.FADE_DURATION, token);
+
+            var action = new ExceptionActionVO(ex);
+            await _exceptionPorts.PublishExceptionActionAsync(action, token);
         }
 
         public UniTask ThrowRebootAsync(string message, CancellationToken token)
@@ -50,7 +54,7 @@ namespace BoardTower.Common.Domain.UseCase
         {
             // NOTE: FadeOut時はException不要なのでnull指定
             var notify = ExceptionNotifyVO.Create(null, Fade.Out, duration);
-            return _exceptionPorts.PublishExceptionAsync(notify, token);
+            return _exceptionPorts.PublishExceptionNotifyAsync(notify, token);
         }
 
         public void HandleDecision(Unit unit)
