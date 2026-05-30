@@ -15,14 +15,17 @@ namespace BoardTower.Common.Presentation.Presenter
 {
     public abstract class BaseStatePresenter<T> : IAsyncStartable, IDisposable where T : Enum
     {
+        private readonly ExceptionUseCase _exceptionUseCase;
         private readonly BaseStateUseCase<T> _stateUseCase;
         private readonly Dictionary<T, BaseState<T>> _stateMap;
         private readonly AsyncLockLite _locker;
         private readonly CompositeDisposable _disposable;
         private CancellationTokenSource _tokenSource;
 
-        public BaseStatePresenter(BaseStateUseCase<T> stateUseCase, IEnumerable<BaseState<T>> states)
+        public BaseStatePresenter(ExceptionUseCase exceptionUseCase, BaseStateUseCase<T> stateUseCase,
+            IEnumerable<BaseState<T>> states)
         {
+            _exceptionUseCase = exceptionUseCase;
             _stateUseCase = stateUseCase;
             _stateMap = states.ToDictionary(x => x.state, x => x);
             _locker = new AsyncLockLite();
@@ -88,7 +91,8 @@ namespace BoardTower.Common.Presentation.Presenter
             {
                 if (!_stateMap.TryGetValue(state, out var currentState))
                 {
-                    throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_STATE);
+                    await _exceptionUseCase.ThrowQuitAsync(ExceptionConfig.NOT_FOUND_STATE, token);
+                    throw;
                 }
 
                 await currentState.ForceExitAsync(token);
@@ -96,9 +100,17 @@ namespace BoardTower.Common.Presentation.Presenter
                 // Stateの強制変更
                 return _stateUseCase.forceChangeState;
             }
+            catch (ExceptionVO e)
+            {
+                // TODO: retry count check
+                // TODO: exec reboot
+                // TODO: exec quit
+                await _exceptionUseCase.ThrowAsync(e, token);
+                return state;
+            }
             catch (Exception e)
             {
-                // TODO: catch exception
+                await _exceptionUseCase.ThrowQuitAsync(ExceptionConfig.UNKNOWN_ERROR, token);
                 throw;
             }
         }

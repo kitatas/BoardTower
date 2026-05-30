@@ -21,10 +21,14 @@ namespace BoardTower.Common.Domain.UseCase
 
         public IAsyncSubscriber<ExceptionNotifyVO> exception => _exceptionPorts.exceptionSubscriber;
 
-        public UniTask ThrowAsync(ExceptionVO ex, CancellationToken token)
+        public async UniTask ThrowAsync(ExceptionVO ex, CancellationToken token)
         {
             var notify = ExceptionNotifyVO.Create(ex, Fade.In, ExceptionConfig.FADE_DURATION);
-            return _exceptionPorts.PublishExceptionAsync(notify, token);
+            await _exceptionPorts.PublishExceptionAsync(notify, token);
+
+            await _decision.FirstAsync(token).AsUniTask();
+
+            await FadeOutAsync(ExceptionConfig.FADE_DURATION, token);
         }
 
         public UniTask ThrowRebootAsync(string message, CancellationToken token)
