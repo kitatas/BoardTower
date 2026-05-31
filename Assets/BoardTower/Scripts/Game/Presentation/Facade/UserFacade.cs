@@ -1,5 +1,6 @@
 using BoardTower.Common.Application;
 using BoardTower.Game.Presentation.View;
+using R3;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -13,6 +14,8 @@ namespace BoardTower.Game.Presentation.Facade
             _displayNameView = displayNameView;
             _uidView = uidView;
         }
+
+        public Observable<string> OnDecisionDisplayName() => _displayNameView.decisionDisplayName;
 
         public void Render(UserVO user)
         {
