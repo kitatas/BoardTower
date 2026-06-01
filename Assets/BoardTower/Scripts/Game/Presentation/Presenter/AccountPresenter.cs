@@ -9,31 +9,31 @@ using VContainer.Unity;
 
 namespace BoardTower.Game.Presentation.Presenter
 {
-    public sealed class UserPresenter : IStartable, IDisposable
+    public sealed class AccountPresenter : IStartable, IDisposable
     {
+        private readonly AccountUseCase _accountUseCase;
         private readonly ExceptionUseCase _exceptionUseCase;
         private readonly LoadingUseCase _loadingUseCase;
-        private readonly UserDataUseCase _userDataUseCase;
-        private readonly UserFacade _userFacade;
+        private readonly AccountFacade _accountFacade;
         private readonly CompositeDisposable _disposable;
 
-        public UserPresenter(ExceptionUseCase exceptionUseCase, LoadingUseCase loadingUseCase,
-            UserDataUseCase userDataUseCase, UserFacade userFacade)
+        public AccountPresenter(AccountUseCase accountUseCase, ExceptionUseCase exceptionUseCase,
+            LoadingUseCase loadingUseCase, AccountFacade accountFacade)
         {
+            _accountUseCase = accountUseCase;
             _exceptionUseCase = exceptionUseCase;
             _loadingUseCase = loadingUseCase;
-            _userDataUseCase = userDataUseCase;
-            _userFacade = userFacade;
+            _accountFacade = accountFacade;
             _disposable = new CompositeDisposable();
         }
 
         void IStartable.Start()
         {
-            _userFacade.OnDecisionDisplayName()
+            _accountFacade.OnDecisionDisplayName()
                 .SubscribeAwait(async (x, ct) => await UpdateDisplayNameAsync(x, ct))
                 .AddTo(_disposable);
 
-            _userFacade.Render(_userDataUseCase.user);
+            _accountFacade.Render(_accountUseCase.user);
         }
 
         private async UniTask UpdateDisplayNameAsync(string name, CancellationToken token)
@@ -43,7 +43,7 @@ namespace BoardTower.Game.Presentation.Presenter
                 await _loadingUseCase.FadeAsync(Fade.In, token);
 
                 var userDisplayName = new UserDisplayNameVO(name);
-                await _userDataUseCase.UpdateDisplayNameAsync(userDisplayName, token);
+                await _accountUseCase.UpdateDisplayNameAsync(userDisplayName, token);
 
                 await _loadingUseCase.FadeAsync(Fade.Out, token);
             }
@@ -60,7 +60,7 @@ namespace BoardTower.Game.Presentation.Presenter
             }
             finally
             {
-                _userFacade.Render(_userDataUseCase.user);
+                _accountFacade.Render(_accountUseCase.user);
             }
         }
 

@@ -4,12 +4,12 @@ using R3;
 
 namespace BoardTower.Game.Presentation.Facade
 {
-    public sealed class UserFacade
+    public sealed class AccountFacade
     {
         private readonly DisplayNameView _displayNameView;
         private readonly UidView _uidView;
 
-        public UserFacade(DisplayNameView displayNameView, UidView uidView)
+        public AccountFacade(DisplayNameView displayNameView, UidView uidView)
         {
             _displayNameView = displayNameView;
             _uidView = uidView;

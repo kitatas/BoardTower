@@ -41,12 +41,12 @@ namespace BoardTower.Common.Installer
             builder.Register<SoundRepository>(Lifetime.Singleton);
 
             // UseCase
+            builder.Register<AccountUseCase>(Lifetime.Singleton);
             builder.Register<BgmUseCase>(Lifetime.Singleton);
             builder.Register<ExceptionUseCase>(Lifetime.Singleton);
             builder.Register<LoadingUseCase>(Lifetime.Singleton);
             builder.Register<SceneUseCase>(Lifetime.Singleton);
             builder.Register<SeUseCase>(Lifetime.Singleton);
-            builder.Register<UserDataUseCase>(Lifetime.Singleton);
 
             // Presenter
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>

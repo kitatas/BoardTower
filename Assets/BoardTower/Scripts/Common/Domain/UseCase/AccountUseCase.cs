@@ -6,13 +6,13 @@ using Cysharp.Threading.Tasks;
 
 namespace BoardTower.Common.Domain.UseCase
 {
-    public sealed class UserDataUseCase
+    public sealed class AccountUseCase
     {
         private readonly UserEntity _userEntity;
         private readonly PlayFabRepository _playFabRepository;
         private readonly SaveRepository _saveRepository;
 
-        public UserDataUseCase(UserEntity userEntity, PlayFabRepository playFabRepository,
+        public AccountUseCase(UserEntity userEntity, PlayFabRepository playFabRepository,
             SaveRepository saveRepository)
         {
             _userEntity = userEntity;

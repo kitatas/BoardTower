@@ -99,6 +99,7 @@ namespace BoardTower.Game.Installer
             // Presenter
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
+                entryPoints.Add<AccountPresenter>();
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
@@ -118,11 +119,11 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<ScorePresenter>();
                 entryPoints.Add<SelectRelicPresenter>();
                 entryPoints.Add<TapScreenPresenter>();
-                entryPoints.Add<UserPresenter>();
                 entryPoints.Add<VolumePresenter>();
             });
 
             // Facade
+            builder.Register<AccountFacade>(Lifetime.Scoped);
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
@@ -141,7 +142,6 @@ namespace BoardTower.Game.Installer
             builder.Register<ScoreFacade>(Lifetime.Scoped);
             builder.Register<SelectRelicFacade>(Lifetime.Scoped);
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
-            builder.Register<UserFacade>(Lifetime.Scoped);
             builder.Register<VolumeFacade>(Lifetime.Scoped);
 
             // View
