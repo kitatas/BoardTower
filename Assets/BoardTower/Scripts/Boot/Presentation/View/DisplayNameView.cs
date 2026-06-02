@@ -19,6 +19,7 @@ namespace BoardTower.Boot.Presentation.View
 
         public Tween FadeIn(float duration)
         {
+            inputField.text = "";
             _tween?.Kill(true);
 
             return _tween = DOTween.Sequence()
