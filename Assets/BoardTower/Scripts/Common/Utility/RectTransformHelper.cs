@@ -4,7 +4,20 @@ namespace BoardTower.Common.Utility
 {
     public static class RectTransformHelper
     {
-        public static (int, int, int, int) GetMargins(this RectTransform self, Canvas canvas)
+        public static (int left, int top, int right, int bottom) GetMargins(this RectTransform self)
+        {
+            var corners = new Vector3[4];
+            self.GetWorldCorners(corners);
+
+            return (
+                Mathf.RoundToInt(corners[0].x),
+                Mathf.RoundToInt(Screen.height - corners[2].y),
+                Mathf.RoundToInt(Screen.width - corners[2].x),
+                Mathf.RoundToInt(corners[0].y)
+            );
+        }
+
+        public static (int left, int top, int right, int bottom) GetMargins(this RectTransform self, Canvas canvas)
         {
             var corners = new Vector3[4];
             self.GetWorldCorners(corners);

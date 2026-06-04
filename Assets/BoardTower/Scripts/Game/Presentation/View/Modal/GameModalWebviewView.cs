@@ -7,7 +7,6 @@ namespace BoardTower.Game.Presentation.View.Modal
 {
     public sealed class GameModalWebviewView : BaseGameModalView
     {
-        [SerializeField] private Canvas canvas = default;
         [SerializeField] private RectTransform view = default;
         private static WebViewObject _webViewObject = null;
 
@@ -20,8 +19,8 @@ namespace BoardTower.Game.Presentation.View.Modal
             _webViewObject.bitmapRefreshCycle = 1;
 #endif
 
-            var (left, top, right, bottom) = view.GetMargins(canvas);
-            _webViewObject.SetMargins(left, top, right, bottom);
+            var margins = view.GetMargins();
+            _webViewObject.SetMargins(margins.left, margins.top, margins.right, margins.bottom);
             _webViewObject.LoadURL(type.ToURL());
         }
 
