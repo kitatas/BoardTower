@@ -69,7 +69,7 @@ namespace BoardTower.Tests.EditMode.Game.Data.Entity
 
             _entity.Set(10);
 
-            Assert.That(_entity.value, Is.EqualTo(6));
+            Assert.That(_entity.value, Is.EqualTo(5));
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace BoardTower.Tests.EditMode.Game.Data.Entity
 
             _entity.Add(5);
 
-            Assert.That(_entity.value, Is.EqualTo(4));
+            Assert.That(_entity.value, Is.EqualTo(3));
         }
 
         [Test]

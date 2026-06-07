@@ -15,12 +15,14 @@ namespace BoardTower.Boot.Domain.UseCase
         private readonly SplashPorts _splashPorts;
         private readonly SplashRepository _splashRepository;
         private readonly Subject<Unit> _tapScreen;
+        private bool _isDisposed;
 
         public SplashUseCase(SplashPorts splashPorts, SplashRepository splashRepository)
         {
             _splashPorts = splashPorts;
             _splashRepository = splashRepository;
             _tapScreen = new Subject<Unit>();
+            _isDisposed = false;
         }
 
         public IAsyncSubscriber<SplashTransitionVO> transition => _splashPorts.splashTransitionSubscriber;
@@ -59,11 +61,14 @@ namespace BoardTower.Boot.Domain.UseCase
 
         public void NotifyTapScreen()
         {
+            if (_isDisposed) return;
             _tapScreen?.OnNext(Unit.Default);
         }
 
         void IDisposable.Dispose()
         {
+            if (_isDisposed) return;
+            _isDisposed = true;
             _tapScreen?.Dispose();
         }
     }

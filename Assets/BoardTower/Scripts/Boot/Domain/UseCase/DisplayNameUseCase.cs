@@ -13,11 +13,13 @@ namespace BoardTower.Boot.Domain.UseCase
     {
         private readonly DisplayNamePorts _displayNamePorts;
         private readonly Subject<string> _displayName;
+        private bool _isDisposed;
 
         public DisplayNameUseCase(DisplayNamePorts displayNamePorts)
         {
             _displayNamePorts = displayNamePorts;
             _displayName = new Subject<string>();
+            _isDisposed = false;
         }
 
         public IAsyncSubscriber<DisplayNameTransitionVO> transition =>
@@ -37,6 +39,7 @@ namespace BoardTower.Boot.Domain.UseCase
 
         public void HandleDisplayName(string name)
         {
+            if (_isDisposed) return;
             _displayName?.OnNext(name);
         }
 
@@ -59,6 +62,8 @@ namespace BoardTower.Boot.Domain.UseCase
 
         void IDisposable.Dispose()
         {
+            if (_isDisposed) return;
+            _isDisposed = true;
             _displayName?.Dispose();
         }
     }
