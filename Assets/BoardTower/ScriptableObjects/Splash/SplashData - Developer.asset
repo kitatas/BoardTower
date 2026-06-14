@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SplashData - Developer
   m_EditorClassIdentifier: Boot.Data.DataStore::BoardTower.Boot.Data.DataStore.SplashData
   splashType: 1
-  splashSprite: {fileID: 21300000, guid: f4d86b644fc3240edb3ab2a63ee992bc, type: 3}
+  splashSprite: {fileID: 21300000, guid: bca775b6ca72b497e888445d804c8707, type: 3}
