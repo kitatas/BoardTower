@@ -24,21 +24,21 @@
       "url": "https://package.openupm.com"
     },
     "com.cysharp.messagepipe": {
-      "version": "1.8.1",
+      "version": "1.8.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
     "com.cysharp.messagepipe.vcontainer": {
-      "version": "1.8.1",
+      "version": "1.8.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
     "com.cysharp.r3": {
-      "version": "1.3.0",
+      "version": "1.3.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -54,7 +54,7 @@
       "url": "https://package.openupm.com"
     },
     "com.cysharp.unitask": {
-      "version": "2.5.10",
+      "version": "2.5.11",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -86,15 +86,6 @@
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.scriptablebuildpipeline": "2.6.1",
         "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.ai.navigation": {
-      "version": "2.0.12",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.ai": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -293,7 +284,7 @@
       }
     },
     "jp.hadashikick.vcontainer": {
-      "version": "1.17.0",
+      "version": "1.18.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -316,12 +307,12 @@
       "url": "https://unitynuget-registry.openupm.com"
     },
     "org.nuget.messagepack": {
-      "version": "3.1.4",
+      "version": "3.1.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "org.nuget.messagepackanalyzer": "3.1.4",
-        "org.nuget.messagepack.annotations": "3.1.4",
+        "org.nuget.messagepackanalyzer": "3.1.7",
+        "org.nuget.messagepack.annotations": "3.1.7",
         "org.nuget.microsoft.bcl.asyncinterfaces": "8.0.0",
         "org.nuget.system.collections.immutable": "8.0.0",
         "org.nuget.system.reflection.emit": "4.7.0",
@@ -333,14 +324,14 @@
       "url": "https://unitynuget-registry.openupm.com"
     },
     "org.nuget.messagepack.annotations": {
-      "version": "3.1.4",
+      "version": "3.1.7",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://unitynuget-registry.openupm.com"
     },
     "org.nuget.messagepackanalyzer": {
-      "version": "3.1.4",
+      "version": "3.1.7",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -395,7 +386,7 @@
       "url": "https://unitynuget-registry.openupm.com"
     },
     "org.nuget.r3": {
-      "version": "1.3.0",
+      "version": "1.3.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
