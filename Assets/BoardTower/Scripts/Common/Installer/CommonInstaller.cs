@@ -69,6 +69,7 @@ namespace BoardTower.Common.Installer
             builder.RegisterFindFirstObjectByType<SoundView>();
             builder.RegisterFindFirstObjectByType<ExceptionView>();
             builder.RegisterFindFirstObjectByType<LoadingView>();
+            builder.RegisterFindFirstObjectByType<TapEffectPoolView>();
             builder.RegisterFindFirstObjectByType<TransitionView>();
         }
     }
