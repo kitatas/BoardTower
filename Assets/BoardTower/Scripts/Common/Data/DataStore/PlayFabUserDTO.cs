@@ -6,17 +6,17 @@ namespace BoardTower.Common.Data.DataStore
 {
     public sealed class PlayFabUserDTO
     {
-        public readonly bool isNewly;
+        public readonly LoginResult loginResult;
         public readonly UserDisplayNameVO displayName;
         public readonly Dictionary<string, UserDataRecord> records;
 
-        public PlayFabUserDTO(bool isNewly, UserDisplayNameVO displayName, Dictionary<string, UserDataRecord> records)
+        public PlayFabUserDTO(LoginResult loginResult, UserDisplayNameVO displayName, Dictionary<string, UserDataRecord> records)
         {
-            this.isNewly = isNewly;
+            this.loginResult = loginResult;
             this.displayName = displayName;
             this.records = records;
         }
 
-        public PlayFabUserVO ToVO() => new(isNewly, displayName);
+        public PlayFabUserVO ToVO() => new(loginResult.NewlyCreated, displayName);
     }
 }

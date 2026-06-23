@@ -49,7 +49,7 @@ namespace BoardTower.Common.Domain.Repository
 
             var name = payload.PlayerProfile?.DisplayName ?? "";
             var displayName = string.IsNullOrEmpty(name) ? UserDisplayNameVO.Create() : new UserDisplayNameVO(name);
-            return new PlayFabUserDTO(loginResult.NewlyCreated, displayName, records);
+            return new PlayFabUserDTO(loginResult, displayName, records);
         }
 
         public async UniTask<UserDisplayNameVO> UpdateDisplayNameAsync(string name, CancellationToken token)
