@@ -22,7 +22,14 @@ namespace BoardTower.Common.Data.DataStore
             _playFabProgressionInstanceAPI = new PlayFabProgressionInstanceAPI(_playFabAuthenticationContext);
         }
 
+        public string entityType => _playFabAuthenticationContext.EntityType;
         public string entityId => _playFabAuthenticationContext.EntityId;
+
+        public void UpdateStatistics(UpdateStatisticsRequest request,
+            Action<UpdateStatisticsResponse> result, Action<PlayFabError> error)
+        {
+            _playFabProgressionInstanceAPI.UpdateStatistics(request, result, error);
+        }
 
         public void UpdateLeaderboardEntries(UpdateLeaderboardEntriesRequest request,
             Action<PlayFab.ProgressionModels.EmptyResponse> result, Action<PlayFabError> error)

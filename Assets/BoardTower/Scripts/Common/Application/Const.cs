@@ -95,6 +95,7 @@ namespace BoardTower.Common.Application
 #endif
 
         public const string SCORE_RANKING_KEY = "";
+        public const string SCORE_KEY = "";
 
         public const int CREATE_UID_RETRY_COUNT = 10;
         public const int DECISION_NAME_RETRY_COUNT = 10;

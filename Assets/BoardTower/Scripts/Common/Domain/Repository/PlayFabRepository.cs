@@ -76,6 +76,42 @@ namespace BoardTower.Common.Domain.Repository
             return new UserDisplayNameVO(response.DisplayName);
         }
 
+        public UniTask UpdatePlayerScoreAsync(int score, CancellationToken token)
+        {
+            return UpdatePlayerStatisticsAsync(PlayFabConfig.SCORE_KEY, score, token);
+        }
+
+        private async UniTask UpdatePlayerStatisticsAsync(string key, int score, CancellationToken token)
+        {
+            if (_playFabSession == null) return;
+
+            var completionSource = new UniTaskCompletionSource<UpdateStatisticsResponse>();
+            var request = new UpdateStatisticsRequest
+            {
+                Entity = new PlayFab.ProgressionModels.EntityKey
+                {
+                    Id = _playFabSession.entityId,
+                    Type = _playFabSession.entityType,
+                },
+                Statistics = new List<PlayFab.ProgressionModels.StatisticUpdate>
+                {
+                    new()
+                    {
+                        Name = key,
+                        Scores = new List<string> { score.ToString() },
+                    },
+                },
+            };
+
+            _playFabSession.UpdateStatistics(
+                request,
+                result => completionSource.TrySetResult(result),
+                error => completionSource.TrySetException(new RebootExceptionVO(error.ErrorMessage))
+            );
+
+            await completionSource.Task.AttachExternalCancellation(token);
+        }
+
         public UniTask SendScoreRankingAsync(int score, CancellationToken token)
         {
             return SendRankingAsync(PlayFabConfig.SCORE_RANKING_KEY, score, token);
