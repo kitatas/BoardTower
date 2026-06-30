@@ -12,6 +12,7 @@ namespace BoardTower.Game.Application
         Fail = 7,
         Finish = 8,
         Pick = 9,
+        Send = 10,
     }
 
     public enum ChessmenType

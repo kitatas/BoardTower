@@ -31,7 +31,7 @@ namespace BoardTower.Game.Presentation.State
             await UniTaskHelper.DelayAsync(1.0f, token);
             await _finishUseCase.FadeAsync(FinishType.Clear, Fade.Out, token);
 
-            return GameState.Finish;
+            return GameState.Send;
         }
 
         public override async UniTask ForceExitAsync(CancellationToken token)
