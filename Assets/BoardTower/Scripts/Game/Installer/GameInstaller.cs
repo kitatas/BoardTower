@@ -83,6 +83,7 @@ namespace BoardTower.Game.Installer
             builder.Register<RoundClearUseCase>(Lifetime.Scoped);
             builder.Register<ScoreUseCase>(Lifetime.Scoped);
             builder.Register<SelectRelicUseCase>(Lifetime.Scoped);
+            builder.Register<SendUseCase>(Lifetime.Scoped);
             builder.Register<TapScreenUseCase>(Lifetime.Scoped);
 
             // State
