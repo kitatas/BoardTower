@@ -245,6 +245,20 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class AchievementVO
+    {
+        public readonly AchievementType type;
+        public readonly AchievementRankType rank;
+        public readonly int value;
+
+        public AchievementVO(AchievementType type, AchievementRankType rank, int value)
+        {
+            this.type = type;
+            this.rank = rank;
+            this.value = value;
+        }
+    }
+
     public sealed class UserDisplayNameVO
     {
         public readonly string value;

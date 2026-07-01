@@ -35,4 +35,14 @@ namespace BoardTower.Common.Application
         Decision = 1,
         Cancel = 2,
     }
+
+    public enum AchievementType
+    {
+        None = 0,
+    }
+
+    public enum AchievementRankType
+    {
+        None = 0,
+    }
 }
