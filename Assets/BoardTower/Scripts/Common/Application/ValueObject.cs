@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Text;
 using UniEx;
 using UnityEngine;
@@ -242,6 +243,16 @@ namespace BoardTower.Common.Application
         {
             this.isNewly = isNewly;
             this.displayName = displayName;
+        }
+    }
+
+    public sealed class PlayFabMasterVO
+    {
+        public readonly IEnumerable<AchievementVO> achievements;
+
+        public PlayFabMasterVO(IEnumerable<AchievementVO> achievements)
+        {
+            this.achievements = achievements;
         }
     }
 

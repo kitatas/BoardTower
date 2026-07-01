@@ -13,6 +13,7 @@ namespace BoardTower.Common.Application
         public const string MAX_RETRY = "MAX_RETRY";
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
         public const string FAILED_TO_LOGIN = "FAILED_TO_LOGIN";
+        public const string FAILED_TO_DESERIALIZE_MASTER = "FAILED_TO_DESERIALIZE_MASTER";
         public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";
         public const string FAILED_TO_FETCH_RECORD = "FAILED_TO_FETCH_RECORD";
         public const string FAILED_TO_CREATE_UID = "FAILED_TO_CREATE_UID";
@@ -96,6 +97,7 @@ namespace BoardTower.Common.Application
 
         public const string SCORE_RANKING_KEY = "";
         public const string SCORE_KEY = "";
+        public const string ACHIEVEMENT_KEY = "";
 
         public const int CREATE_UID_RETRY_COUNT = 10;
         public const int DECISION_NAME_RETRY_COUNT = 10;
