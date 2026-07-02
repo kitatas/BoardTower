@@ -308,6 +308,16 @@ namespace BoardTower.Common.Application
         }
     }
 
+    public sealed class MasterVO
+    {
+        public readonly PlayFabMasterVO playFabMaster;
+
+        public MasterVO(PlayFabMasterVO playFabMaster)
+        {
+            this.playFabMaster = playFabMaster;
+        }
+    }
+
     public sealed class LoginResultVO
     {
         public readonly bool isSuccess;

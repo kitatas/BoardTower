@@ -9,12 +9,15 @@ namespace BoardTower.Boot.Domain.UseCase
 {
     public sealed class LoginUseCase
     {
+        private readonly MasterEntity _masterEntity;
         private readonly UserEntity _userEntity;
         private readonly PlayFabRepository _playFabRepository;
         private readonly SaveRepository _saveRepository;
 
-        public LoginUseCase(UserEntity userEntity, PlayFabRepository playFabRepository, SaveRepository saveRepository)
+        public LoginUseCase(MasterEntity masterEntity, UserEntity userEntity, PlayFabRepository playFabRepository,
+            SaveRepository saveRepository)
         {
+            _masterEntity = masterEntity;
             _userEntity = userEntity;
             _playFabRepository = playFabRepository;
             _saveRepository = saveRepository;
@@ -22,12 +25,13 @@ namespace BoardTower.Boot.Domain.UseCase
 
         public async UniTask<LoginResultVO> LoginAsync(CancellationToken token)
         {
-            var user = await FetchUserAsync(token);
+            var (master, user) = await FetchUserAsync(token);
+            _masterEntity.Set(master);
             _userEntity.Set(user);
             return new LoginResultVO(true, _userEntity.isRegistered);
         }
 
-        private async UniTask<UserVO> FetchUserAsync(CancellationToken token)
+        private async UniTask<(MasterVO, UserVO)> FetchUserAsync(CancellationToken token)
         {
             var saveData = await _saveRepository.LoadAsync(token);
             if (string.IsNullOrEmpty(saveData.user.id))
@@ -38,11 +42,14 @@ namespace BoardTower.Boot.Domain.UseCase
             {
                 var uid = saveData.user.id;
                 var (playFabMaster, playFabUser) = await _playFabRepository.LoginAsync(uid, token);
-                return new UserVO(saveData.user, playFabUser);
+                return (
+                    new MasterVO(playFabMaster),
+                    new UserVO(saveData.user, playFabUser)
+                );
             }
         }
 
-        private async UniTask<UserVO> CreateUserAsync(CancellationToken token)
+        private async UniTask<(MasterVO, UserVO)> CreateUserAsync(CancellationToken token)
         {
             for (int i = 0; i < PlayFabConfig.CREATE_UID_RETRY_COUNT; i++)
             {
@@ -53,7 +60,10 @@ namespace BoardTower.Boot.Domain.UseCase
                 {
                     var localUser = new LocalUserVO(uid);
                     _saveRepository.SaveUser(localUser);
-                    return new UserVO(localUser, playFabUser);
+                    return (
+                        new MasterVO(playFabMaster),
+                        new UserVO(localUser, playFabUser)
+                    );
                 }
             }
 
