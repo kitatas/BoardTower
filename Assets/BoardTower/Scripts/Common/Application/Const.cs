@@ -13,6 +13,7 @@ namespace BoardTower.Common.Application
         public const string MAX_RETRY = "MAX_RETRY";
         public const string FAILED_TO_LOAD_SCENE = "FAILED_TO_LOAD_SCENE";
         public const string FAILED_TO_LOGIN = "FAILED_TO_LOGIN";
+        public const string FAILED_TO_FETCH_MASTER = "FAILED_TO_FETCH_MASTER";
         public const string FAILED_TO_DESERIALIZE_MASTER = "FAILED_TO_DESERIALIZE_MASTER";
         public const string FAILED_TO_FETCH_PAYLOAD = "FAILED_TO_FETCH_PAYLOAD";
         public const string FAILED_TO_FETCH_RECORD = "FAILED_TO_FETCH_RECORD";

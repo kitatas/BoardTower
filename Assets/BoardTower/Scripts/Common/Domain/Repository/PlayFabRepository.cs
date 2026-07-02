@@ -18,7 +18,7 @@ namespace BoardTower.Common.Domain.Repository
             PlayFabSettings.staticSettings.TitleId = PlayFabConfig.TITLE_ID;
         }
 
-        public async UniTask<PlayFabUserVO> LoginAsync(string uid, CancellationToken token)
+        public async UniTask<(PlayFabMasterVO, PlayFabUserVO)> LoginAsync(string uid, CancellationToken token)
         {
             var completionSource = new UniTaskCompletionSource<LoginResult>();
             var request = new LoginWithCustomIDRequest
@@ -29,6 +29,7 @@ namespace BoardTower.Common.Domain.Repository
                 {
                     GetUserData = true,
                     GetPlayerProfile = true,
+                    GetTitleData = true,
                 },
             };
 
@@ -41,11 +42,23 @@ namespace BoardTower.Common.Domain.Repository
             var response = await completionSource.Task.AttachExternalCancellation(token);
             _playFabSession = new PlayFabSession(response);
 
-            var user = Create(response);
-            return user.ToVO();
+            var master = FetchMaster(response);
+            var user = FetchUser(response);
+            return (master.ToVO(), user.ToVO());
         }
 
-        private static PlayFabUserDTO Create(LoginResult loginResult)
+        private static PlayFabMasterDTO FetchMaster(LoginResult loginResult)
+        {
+            var payload = loginResult.InfoResultPayload;
+            if (payload == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_PAYLOAD);
+
+            var titleData = payload.TitleData;
+            if (titleData == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_MASTER);
+
+            return new PlayFabMasterDTO(titleData);
+        }
+
+        private static PlayFabUserDTO FetchUser(LoginResult loginResult)
         {
             var payload = loginResult.InfoResultPayload;
             if (payload == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_PAYLOAD);

@@ -37,7 +37,7 @@ namespace BoardTower.Boot.Domain.UseCase
             else
             {
                 var uid = saveData.user.id;
-                var playFabUser = await _playFabRepository.LoginAsync(uid, token);
+                var (playFabMaster, playFabUser) = await _playFabRepository.LoginAsync(uid, token);
                 return new UserVO(saveData.user, playFabUser);
             }
         }
@@ -47,7 +47,7 @@ namespace BoardTower.Boot.Domain.UseCase
             for (int i = 0; i < PlayFabConfig.CREATE_UID_RETRY_COUNT; i++)
             {
                 var uid = Ulid.NewUlid().ToString();
-                var playFabUser = await _playFabRepository.LoginAsync(uid, token);
+                var (playFabMaster, playFabUser) = await _playFabRepository.LoginAsync(uid, token);
 
                 if (playFabUser.isNewly)
                 {
