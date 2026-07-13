@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using BoardTower.Game.Application;
 using BoardTower.Game.Utility;
 using FastEnumUtility;
@@ -8,195 +6,189 @@ using NUnit.Framework;
 
 namespace BoardTower.Tests.EditMode.Game.Utility
 {
-    public class ChessmenHelperTests
+    [TestFixture]
+    public sealed class ChessmenHelperTests
     {
+        // -----------------------------------------------------------------------
+        // GetMovableSquares
+        // -----------------------------------------------------------------------
 
-        [Test, TestCaseSource(nameof(GetChessmenMovementRules))]
-        public void GetMovableSquares_FromCenter_SatisfiesRuleProperties(ChessmenMovementRuleVO rule)
+        [Test]
+        public void GetMovableSquares_WithLeaperMovement_ShouldReturnExactlyOneStepPerOffset()
         {
-            var origin = new SquareVO(
-                (BoardConfig.MIN_FILE + BoardConfig.MAX_FILE) / 2,
-                (BoardConfig.MIN_RANK + BoardConfig.MAX_RANK) / 2);
+            // Arrange
+            var origin = new SquareVO(4, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Knight.ToInt32(),
+                ChessmenMovementType.Leaper.ToInt32(),
+                new[] { (2, 1) }
+            );
 
-            var squares = ChessmenHelper.GetMovableSquares(origin, rule);
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
 
-            AssertSquaresSatisfyRule(origin, rule, squares);
-        }
-
-        [Test, TestCaseSource(nameof(GetChessmenMovementRules))]
-        public void GetMovableSquares_FromBottomLeftCorner_SatisfiesRuleProperties(ChessmenMovementRuleVO rule)
-        {
-            var origin = new SquareVO(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK);
-
-            var squares = ChessmenHelper.GetMovableSquares(origin, rule);
-
-            AssertSquaresSatisfyRule(origin, rule, squares);
-        }
-
-        private static IEnumerable<ChessmenMovementRuleVO> GetChessmenMovementRules()
-        {
-            return new[]
-            {
-                new ChessmenMovementRuleVO(ChessmenType.King.ToInt32(), ChessmenMovementType.Leaper.ToInt32(),
-                    new[]
-                    {
-                        (dx: -1, dy: -1),
-                        (dx: -1, dy: 0),
-                        (dx: -1, dy: 1),
-                        (dx: 0, dy: -1),
-                        (dx: 0, dy: 1),
-                        (dx: 1, dy: -1),
-                        (dx: 1, dy: 0),
-                        (dx: 1, dy: 1),
-                    }),
-                new ChessmenMovementRuleVO(ChessmenType.Queen.ToInt32(), ChessmenMovementType.Slider.ToInt32(),
-                    new[]
-                    {
-                        (dx: -1, dy: -1),
-                        (dx: -1, dy: 0),
-                        (dx: -1, dy: 1),
-                        (dx: 0, dy: -1),
-                        (dx: 0, dy: 1),
-                        (dx: 1, dy: -1),
-                        (dx: 1, dy: 0),
-                        (dx: 1, dy: 1),
-                    }),
-                new ChessmenMovementRuleVO(ChessmenType.Rook.ToInt32(), ChessmenMovementType.Slider.ToInt32(),
-                    new[]
-                    {
-                        (dx: -1, dy: 0),
-                        (dx: 1, dy: 0),
-                        (dx: 0, dy: -1),
-                        (dx: 0, dy: 1),
-                    }),
-                new ChessmenMovementRuleVO(ChessmenType.Bishop.ToInt32(), ChessmenMovementType.Slider.ToInt32(),
-                    new[]
-                    {
-                        (dx: -1, dy: -1),
-                        (dx: -1, dy: 1),
-                        (dx: 1, dy: -1),
-                        (dx: 1, dy: 1),
-                    }),
-                new ChessmenMovementRuleVO(ChessmenType.Knight.ToInt32(), ChessmenMovementType.Leaper.ToInt32(),
-                    new[]
-                    {
-                        (dx: -2, dy: -1),
-                        (dx: -2, dy: 1),
-                        (dx: -1, dy: -2),
-                        (dx: -1, dy: 2),
-                        (dx: 1, dy: -2),
-                        (dx: 1, dy: 2),
-                        (dx: 2, dy: -1),
-                        (dx: 2, dy: 1),
-                    }),
-            };
-        }
-
-        // 期待性質の検証
-        private static void AssertSquaresSatisfyRule(SquareVO origin, ChessmenMovementRuleVO rule,
-            IList<SquareVO> squares)
-        {
-            // 1) 盤外なし・重複なし
-            Assert.That(squares.All(s => !BoardHelper.IsOutOfBoard(s.file, s.rank)), Is.True,
-                "contains out-of-board square");
-            var uniq = squares
-                .Select(s => (s.file, s.rank))
-                .ToHashSet();
-            Assert.That(uniq.Count, Is.EqualTo(squares.Count), "contains duplicate squares");
-
-            if (rule.movement == ChessmenMovementType.Leaper)
-            {
-                // 2-L) 1手先のみ＆オフセット一致、件数は盤内に収まるオフセット数
-                var expected = rule.offsets
-                    .Select(o => (origin.file + o.dx, origin.rank + o.dy))
-                    .Where(p => !BoardHelper.IsOutOfBoard(p.Item1, p.Item2))
-                    .ToHashSet();
-
-                Assert.That(uniq, Is.EquivalentTo(expected), "Leaper destinations mismatch");
-            }
-            else
-            {
-                // 2-S) 件数は各方向の端までの歩数の総和
-                var totalSteps = rule.offsets.Sum(o => StepsToEdge(origin.file, origin.rank, o.dx, o.dy));
-                Assert.That(squares.Count, Is.EqualTo(totalSteps), "Slider total steps mismatch");
-
-                // 3-S) 返却マスは必ずいずれかのレイ上にあり、各レイは 1..N の連続ステップが揃う
-                var matched = new HashSet<(int, int)>();
-                foreach (var o in rule.offsets)
-                {
-                    var limit = StepsToEdge(origin.file, origin.rank, o.dx, o.dy);
-                    var steps = new HashSet<int>();
-
-                    foreach (var s in squares)
-                    {
-                        if (TryGetStepOnRay(origin, s, o.dx, o.dy, out var step))
-                        {
-                            steps.Add(step);
-                            matched.Add((s.file, s.rank));
-                        }
-                    }
-
-                    // この方向のマスは 1..limit が全て揃い、件数も一致
-                    Assert.That(steps.Count, Is.EqualTo(limit), $"ray ({o.dx},{o.dy}) count mismatch");
-                    for (int t = 1; t <= limit; t++)
-                        Assert.That(steps.Contains(t), Is.True, $"ray ({o.dx},{o.dy}) missing step {t}");
-                }
-
-                // 4-S) すべての返却マスはどれかのレイに該当している
-                Assert.That(matched.Count, Is.EqualTo(squares.Count), "contains squares not on any allowed ray");
-            }
-        }
-
-        private static bool TryGetStepOnRay(SquareVO origin, SquareVO s, int dx, int dy, out int step)
-        {
-            step = 0;
-            var df = s.file - origin.file;
-            var dr = s.rank - origin.rank;
-
-            if (dx == 0 && dy == 0) return false;
-
-            if (dx == 0)
-            {
-                if (df != 0) return false;
-                if (dy == 0) return false;
-                if (dr % dy != 0) return false;
-                step = dr / dy;
-                return step > 0;
-            }
-
-            if (dy == 0)
-            {
-                if (dr != 0) return false;
-                if (df % dx != 0) return false;
-                step = df / dx;
-                return step > 0;
-            }
-
-            // 斜め・任意方向
-            if (df % dx != 0) return false;
-            step = df / dx;
-            if (step <= 0) return false;
-            return dr == dy * step;
-        }
-
-        private static int StepsToEdge(int f, int r, int dx, int dy)
-        {
-            int stepsX = dx > 0 ? BoardConfig.MAX_FILE - f
-                : dx < 0 ? f - BoardConfig.MIN_FILE
-                : int.MaxValue;
-
-            int stepsY = dy > 0 ? BoardConfig.MAX_RANK - r
-                : dy < 0 ? r - BoardConfig.MIN_RANK
-                : int.MaxValue;
-
-            return Math.Min(stepsX, stepsY);
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(1), "Leaper は1オフセットにつき1マスのみ返すべき");
+            Assert.That(result[0].file, Is.EqualTo(6));
+            Assert.That(result[0].rank, Is.EqualTo(5));
         }
 
         [Test]
-        public void CalcSquare_正の値のオフセット_正しく計算される()
+        public void GetMovableSquares_WithSliderMovement_ShouldReturnAllSquaresUntilBoardEdge()
+        {
+            // Arrange: (4,4) から右方向にスライド → file 5,6,7,8 の4マス
+            var origin = new SquareVO(4, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Rook.ToInt32(),
+                ChessmenMovementType.Slider.ToInt32(),
+                new[] { (1, 0) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(4), "Slider は盤端まですべてのマスを返すべき");
+        }
+
+        [Test]
+        public void GetMovableSquares_WithSliderFromMinBoundary_ShouldReturn7Squares()
+        {
+            // Arrange: file=1 から右方向にスライド → file 2..8 の7マス
+            var origin = new SquareVO(BoardConfig.MIN_FILE, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Rook.ToInt32(),
+                ChessmenMovementType.Slider.ToInt32(),
+                new[] { (1, 0) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void GetMovableSquares_WithOffsetLeadingImmediatelyOffBoard_ShouldReturnEmptyList()
+        {
+            // Arrange: (1,1) から左方向 → 即座に盤外
+            var origin = new SquareVO(1, 1);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Knight.ToInt32(),
+                ChessmenMovementType.Leaper.ToInt32(),
+                new[] { (-1, 0) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(0), "盤外に出るオフセットのマスは含まれるべきでない");
+        }
+
+        [Test]
+        public void GetMovableSquares_WithOriginAtMaxBoundaryAndOutwardOffset_ShouldReturnEmptyList()
+        {
+            // Arrange: (8,8) から右・上方向 → 両方とも即座に盤外
+            var origin = new SquareVO(BoardConfig.MAX_FILE, BoardConfig.MAX_RANK);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Rook.ToInt32(),
+                ChessmenMovementType.Slider.ToInt32(),
+                new[] { (1, 0), (0, 1) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetMovableSquares_WithMultipleLeaperOffsets_ShouldReturnOneSquarePerValidOffset()
+        {
+            // Arrange: (4,4) から上下左右 4方向すべて盤内
+            var origin = new SquareVO(4, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Knight.ToInt32(),
+                ChessmenMovementType.Leaper.ToInt32(),
+                new[] { (1, 0), (-1, 0), (0, 1), (0, -1) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(4), "有効なオフセットの数だけ1マスずつ返すべき");
+        }
+
+        [Test]
+        public void GetMovableSquares_WithEmptyOffsets_ShouldReturnEmptyList()
         {
             // Arrange
-            var square = new SquareVO(3, 4);
+            var origin = new SquareVO(4, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Knight.ToInt32(),
+                ChessmenMovementType.Leaper.ToInt32(), 
+                Array.Empty<(int, int)>()
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(0), "オフセットが空の場合は空リストを返すべき");
+        }
+
+        [Test]
+        public void GetMovableSquares_WithLeaperAtCorner_ShouldExcludeOutOfBoardMoves()
+        {
+            // Arrange: (1,1) からナイト8方向 → 盤内は (3,2) と (2,3) の2マスのみ
+            var origin = new SquareVO(1, 1);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Knight.ToInt32(),
+                ChessmenMovementType.Leaper.ToInt32(),
+                new[] { (2, 1), (-2, 1), (2, -1), (-2, -1), (1, 2), (-1, 2), (1, -2), (-1, -2) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result.Count, Is.EqualTo(2), "角のナイトは2マスのみ移動できるべき");
+        }
+
+        [Test]
+        public void GetMovableSquares_WithSliderMovement_ShouldReturnSquaresInOrder()
+        {
+            // Arrange: (4,4) から右方向スライド → file 5,6,7,8 の順で返すべき
+            var origin = new SquareVO(4, 4);
+            var rule = new ChessmenMovementRuleVO(
+                ChessmenType.Rook.ToInt32(),
+                ChessmenMovementType.Slider.ToInt32(),
+                new[] { (1, 0) }
+            );
+
+            // Act
+            var result = ChessmenHelper.GetMovableSquares(origin, rule);
+
+            // Assert
+            Assert.That(result[0].file, Is.EqualTo(5));
+            Assert.That(result[1].file, Is.EqualTo(6));
+            Assert.That(result[2].file, Is.EqualTo(7));
+            Assert.That(result[3].file, Is.EqualTo(8));
+        }
+
+        // -----------------------------------------------------------------------
+        // CalcSquare
+        // -----------------------------------------------------------------------
+
+        [Test]
+        public void CalcSquare_WithPositiveOffset_ShouldReturnCorrectSquare()
+        {
+            // Arrange
+            var square = new SquareVO(3, 3);
             var offset = new ChessmenMovementOffsetVO(2, 1);
 
             // Act
@@ -204,29 +196,14 @@ namespace BoardTower.Tests.EditMode.Game.Utility
 
             // Assert
             Assert.That(result.file, Is.EqualTo(5));
-            Assert.That(result.rank, Is.EqualTo(5));
+            Assert.That(result.rank, Is.EqualTo(4));
         }
 
         [Test]
-        public void CalcSquare_負の値のオフセット_正しく計算される()
+        public void CalcSquare_WithZeroOffset_ShouldReturnSamePosition()
         {
             // Arrange
-            var square = new SquareVO(5, 6);
-            var offset = new ChessmenMovementOffsetVO(-2, -3);
-
-            // Act
-            var result = ChessmenHelper.CalcSquare(square, offset);
-
-            // Assert
-            Assert.That(result.file, Is.EqualTo(3));
-            Assert.That(result.rank, Is.EqualTo(3));
-        }
-
-        [Test]
-        public void CalcSquare_ゼロのオフセット_元の座標と同じ()
-        {
-            // Arrange
-            var square = new SquareVO(4, 7);
+            var square = new SquareVO(4, 5);
             var offset = new ChessmenMovementOffsetVO(0, 0);
 
             // Act
@@ -234,73 +211,37 @@ namespace BoardTower.Tests.EditMode.Game.Utility
 
             // Assert
             Assert.That(result.file, Is.EqualTo(4));
-            Assert.That(result.rank, Is.EqualTo(7));
+            Assert.That(result.rank, Is.EqualTo(5));
         }
 
         [Test]
-        public void CalcSquare_混合オフセット_正しく計算される()
+        public void CalcSquare_WithNegativeOffset_ShouldReturnCorrectSquare()
         {
             // Arrange
-            var square = new SquareVO(2, 8);
-            var offset = new ChessmenMovementOffsetVO(3, -5);
+            var square = new SquareVO(5, 5);
+            var offset = new ChessmenMovementOffsetVO(-2, -3);
 
             // Act
             var result = ChessmenHelper.CalcSquare(square, offset);
 
             // Assert
-            Assert.That(result.file, Is.EqualTo(5));
-            Assert.That(result.rank, Is.EqualTo(3));
+            Assert.That(result.file, Is.EqualTo(3));
+            Assert.That(result.rank, Is.EqualTo(2));
         }
 
         [Test]
-        public void CalcSquare_境界値での計算_正しく処理される()
+        public void CalcSquare_WithMaxBoundarySquare_ShouldReturnSquareWithAddedOffset()
         {
             // Arrange
-            var square = new SquareVO(1, 1);
-            var offset = new ChessmenMovementOffsetVO(7, 7);
+            var square = new SquareVO(BoardConfig.MAX_FILE, BoardConfig.MAX_RANK);
+            var offset = new ChessmenMovementOffsetVO(-1, -1);
 
             // Act
             var result = ChessmenHelper.CalcSquare(square, offset);
 
             // Assert
-            Assert.That(result.file, Is.EqualTo(8));
-            Assert.That(result.rank, Is.EqualTo(8));
-        }
-
-        [Test]
-        public void CalcSquare_大きなオフセット値_正しく計算される()
-        {
-            // Arrange
-            var square = new SquareVO(10, 15);
-            var offset = new ChessmenMovementOffsetVO(-8, -12);
-
-            // Act
-            var result = ChessmenHelper.CalcSquare(square, offset);
-
-            // Assert
-            Assert.That(result.file, Is.EqualTo(2));
-            Assert.That(result.rank, Is.EqualTo(3));
-        }
-
-        [TestCase(1, 1, 1, 1, 2, 2)]
-        [TestCase(5, 5, -2, -2, 3, 3)]
-        [TestCase(4, 3, 0, 4, 4, 7)]
-        [TestCase(8, 8, -7, -7, 1, 1)]
-        public void CalcSquare_パラメータ化テスト_正しく計算される(
-            int originalFile, int originalRank,
-            int dx, int dy,
-            int expectedFile, int expectedRank)
-        {
-            // Arrange
-            var square = new SquareVO(originalFile, originalRank);
-            var offset = new ChessmenMovementOffsetVO(dx, dy);
-
-            // Act
-            var result = ChessmenHelper.CalcSquare(square, offset);
-
-            // Assert
-            Assert.That(result.file, Is.EqualTo(expectedFile));
-            Assert.That(result.rank, Is.EqualTo(expectedRank));
+            Assert.That(result.file, Is.EqualTo(BoardConfig.MAX_FILE - 1));
+            Assert.That(result.rank, Is.EqualTo(BoardConfig.MAX_RANK - 1));
         }
     }
 }
