@@ -238,6 +238,7 @@ namespace BoardTower.Common.Application
     {
         public readonly bool isNewly;
         public readonly UserDisplayNameVO displayName;
+        public readonly ProgressVO[] progresses;
 
         public PlayFabUserVO(bool isNewly, UserDisplayNameVO displayName)
         {
@@ -267,6 +268,30 @@ namespace BoardTower.Common.Application
             this.type = type;
             this.rank = rank;
             this.value = value;
+        }
+    }
+
+    public sealed class ProgressVO
+    {
+        public readonly AchievementType type;
+        public readonly int value;
+
+        public ProgressVO(AchievementType type, int value)
+        {
+            this.type = type;
+            this.value = value;
+        }
+    }
+
+    public sealed class AchievementProgressVO
+    {
+        public readonly AchievementVO achievement;
+        public readonly ProgressVO progress;
+
+        public AchievementProgressVO(AchievementVO achievement, ProgressVO progress)
+        {
+            this.achievement = achievement;
+            this.progress = progress;
         }
     }
 
