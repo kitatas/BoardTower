@@ -45,6 +45,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ScoreEntity>(Lifetime.Scoped);
 
             // Ports
+            builder.Register<AchievementPorts>(Lifetime.Scoped);
             builder.Register<BoardPorts>(Lifetime.Scoped);
             builder.Register<ChessmenPorts>(Lifetime.Scoped);
             builder.Register<EventPorts>(Lifetime.Scoped);
@@ -66,6 +67,7 @@ namespace BoardTower.Game.Installer
             builder.Register<SquareEventRepository>(Lifetime.Scoped);
 
             // UseCase
+            builder.Register<AchievementUseCase>(Lifetime.Scoped);
             builder.Register<BoardUseCase>(Lifetime.Scoped);
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<EventUseCase>(Lifetime.Scoped);
@@ -102,6 +104,7 @@ namespace BoardTower.Game.Installer
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
                 entryPoints.Add<AccountPresenter>();
+                entryPoints.Add<AchievementPresenter>();
                 entryPoints.Add<BoardPresenter>();
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
@@ -126,6 +129,7 @@ namespace BoardTower.Game.Installer
 
             // Facade
             builder.Register<AccountFacade>(Lifetime.Scoped);
+            builder.Register<AchievementFacade>(Lifetime.Scoped);
             builder.Register<BoardFacade>(Lifetime.Scoped);
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
@@ -150,6 +154,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterFindObjectsByType<BaseButtonView>();
             builder.RegisterFindObjectsByType<GameModalButtonView>();
             builder.RegisterFindObjectsByType<BaseGameModalView>();
+            builder.RegisterComponentInHierarchy<AchievementView>();
             builder.RegisterComponentInHierarchy<BoardView>();
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<DeleteView>();

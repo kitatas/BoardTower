@@ -10,6 +10,7 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GameInitState : BaseGameState
     {
         private readonly BgmUseCase _bgmUseCase;
+        private readonly AchievementUseCase _achievementUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
         private readonly HudRootUseCase _hudRootUseCase;
         private readonly PickRelicUseCase _pickRelicUseCase;
@@ -17,11 +18,12 @@ namespace BoardTower.Game.Presentation.State
         private readonly ScoreUseCase _scoreUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
-        public GameInitState(BgmUseCase bgmUseCase, ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase,
-            PickRelicUseCase pickRelicUseCase, RoundUseCase roundUseCase, ScoreUseCase scoreUseCase,
-            TapScreenUseCase tapScreenUseCase)
+        public GameInitState(BgmUseCase bgmUseCase, AchievementUseCase achievementUseCase,
+            ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase, PickRelicUseCase pickRelicUseCase,
+            RoundUseCase roundUseCase, ScoreUseCase scoreUseCase, TapScreenUseCase tapScreenUseCase)
         {
             _bgmUseCase = bgmUseCase;
+            _achievementUseCase = achievementUseCase;
             _chessmenUseCase = chessmenUseCase;
             _hudRootUseCase = hudRootUseCase;
             _pickRelicUseCase = pickRelicUseCase;
@@ -42,6 +44,7 @@ namespace BoardTower.Game.Presentation.State
             _bgmUseCase.Play(BgmType.Top);
             _chessmenUseCase.Init();
             await (
+                _achievementUseCase.PublishAchievementProgressesAsync(token),
                 _hudRootUseCase.FadeAsync(Fade.Out, token),
                 _tapScreenUseCase.FadeAsync(Fade.In, token)
             );
