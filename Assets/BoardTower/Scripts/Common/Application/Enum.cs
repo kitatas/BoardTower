@@ -39,10 +39,18 @@ namespace BoardTower.Common.Application
     public enum AchievementType
     {
         None = 0,
+        Play = 1,
+        Score = 2,
+        Clear = 3,
     }
 
     public enum AchievementRankType
     {
         None = 0,
+        Normal = 1,
+        Bronze = 2,
+        Silver = 3,
+        Gold = 4,
+        Platinum = 5,
     }
 }
