@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BoardTower.Common.Application;
@@ -12,13 +13,13 @@ namespace BoardTower.Common.Data.Entity
         private Dictionary<AchievementType, ProgressVO> _achievement;
 
         private Dictionary<AchievementType, ProgressVO> achievement =>
-            _achievement ??= value.playFabUser.progresses
+            _achievement ??= (value.playFabUser.progresses ?? Array.Empty<ProgressVO>())
                 .ToDictionary(x => x.type, x => x);
 
         public void SetDisplayName(UserDisplayNameVO userDisplayName)
         {
             var localUser = value.localUser;
-            var playFabUser = new PlayFabUserVO(value.playFabUser.isNewly, userDisplayName);
+            var playFabUser = new PlayFabUserVO(value.playFabUser.isNewly, userDisplayName, value.playFabUser.progresses);
             var user = new UserVO(localUser, playFabUser);
             Set(user);
         }

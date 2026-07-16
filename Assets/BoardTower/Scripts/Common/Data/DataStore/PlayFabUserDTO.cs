@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BoardTower.Common.Application;
+using Newtonsoft.Json;
 using PlayFab.ClientModels;
 
 namespace BoardTower.Common.Data.DataStore
@@ -17,6 +18,12 @@ namespace BoardTower.Common.Data.DataStore
             this.records = records;
         }
 
-        public PlayFabUserVO ToVO() => new(loginResult.NewlyCreated, displayName);
+        private T Fetch<T>(string key) => records.TryGetValue(key, out var record)
+            ? JsonConvert.DeserializeObject<T>(record.Value)
+            : default;
+
+        private ProgressVO[] progresses => Fetch<ProgressVO[]>(PlayFabConfig.PROGRESS_KEY);
+
+        public PlayFabUserVO ToVO() => new(loginResult.NewlyCreated, displayName, progresses);
     }
 }

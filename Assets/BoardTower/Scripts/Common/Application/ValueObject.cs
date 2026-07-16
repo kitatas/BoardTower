@@ -240,10 +240,11 @@ namespace BoardTower.Common.Application
         public readonly UserDisplayNameVO displayName;
         public readonly ProgressVO[] progresses;
 
-        public PlayFabUserVO(bool isNewly, UserDisplayNameVO displayName)
+        public PlayFabUserVO(bool isNewly, UserDisplayNameVO displayName, ProgressVO[] progresses)
         {
             this.isNewly = isNewly;
             this.displayName = displayName;
+            this.progresses = progresses;
         }
     }
 
