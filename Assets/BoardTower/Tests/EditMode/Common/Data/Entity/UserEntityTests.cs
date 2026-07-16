@@ -69,6 +69,18 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
         }
 
         [Test]
+        public void SetDisplayName_PreservesProgresses()
+        {
+            var progresses = new[] { new ProgressVO(AchievementType.Play, 5) };
+            _entity.Set(CreateUserVOWithProgresses(progresses));
+            var newName = new UserDisplayNameVO("NewName");
+
+            _entity.SetDisplayName(newName);
+
+            Assert.That(_entity.value.playFabUser.progresses, Is.EqualTo(progresses));
+        }
+
+        [Test]
         public void Set_UpdatesValue()
         {
             var newUser = CreateUserVO("Another");
@@ -95,13 +107,45 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
             Assert.That(_entity.IsEqual(CreateUserVO("Name2")), Is.False);
         }
 
+        [Test]
+        public void Find_WhenProgressExists_ReturnsMatchingProgress()
+        {
+            var entity = new UserEntity();
+            var progress = new ProgressVO(AchievementType.Play, 5);
+            entity.Set(CreateUserVOWithProgresses(new[] { progress }));
+
+            var result = entity.Find(AchievementType.Play);
+
+            Assert.That(result.type, Is.EqualTo(AchievementType.Play));
+            Assert.That(result.value, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Find_WhenProgressNotExists_ReturnsDefaultProgressWithZeroValue()
+        {
+            var entity = new UserEntity();
+            entity.Set(CreateUserVOWithProgresses(new ProgressVO[0]));
+
+            var result = entity.Find(AchievementType.Score);
+
+            Assert.That(result.type, Is.EqualTo(AchievementType.Score));
+            Assert.That(result.value, Is.EqualTo(0));
+        }
+
         private static UserVO CreateUserVO(string displayName)
         {
             var localUser = new LocalUserVO("test-id");
             UserDisplayNameVO userDisplayName = displayName != null
                 ? new UserDisplayNameVO(displayName)
                 : UserDisplayNameVO.Create();
-            var playFabUser = new PlayFabUserVO(false, userDisplayName);
+            var playFabUser = new PlayFabUserVO(false, userDisplayName, new ProgressVO[0]);
+            return new UserVO(localUser, playFabUser);
+        }
+
+        private static UserVO CreateUserVOWithProgresses(ProgressVO[] progresses)
+        {
+            var localUser = new LocalUserVO("test-id");
+            var playFabUser = new PlayFabUserVO(false, UserDisplayNameVO.Create(), progresses);
             return new UserVO(localUser, playFabUser);
         }
     }

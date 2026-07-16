@@ -352,10 +352,21 @@ namespace BoardTower.Tests.EditMode.Common.Application
         {
             var displayName = new UserDisplayNameVO("TestUser");
 
-            var sut = new PlayFabUserVO(true, displayName);
+            var sut = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
 
             Assert.That(sut.isNewly, Is.True);
             Assert.That(sut.displayName, Is.EqualTo(displayName));
+        }
+
+        [Test]
+        public void PlayFabUserVO_Constructor_AssignsProgresses()
+        {
+            var progresses = new[] { new ProgressVO(AchievementType.Play, 3) };
+            var displayName = UserDisplayNameVO.Create();
+
+            var sut = new PlayFabUserVO(false, displayName, progresses);
+
+            Assert.That(sut.progresses, Is.EqualTo(progresses));
         }
 
         [TestCase(true)]
@@ -364,7 +375,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
         {
             var displayName = UserDisplayNameVO.Create();
 
-            var sut = new PlayFabUserVO(isNewly, displayName);
+            var sut = new PlayFabUserVO(isNewly, displayName, new ProgressVO[0]);
 
             Assert.That(sut.isNewly, Is.EqualTo(isNewly));
         }
@@ -375,7 +386,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
         public void UserVO_Constructor_AssignsLocalUserAndPlayFabUser()
         {
             var localUser = new LocalUserVO("id-001");
-            var playFabUser = new PlayFabUserVO(false, UserDisplayNameVO.Create());
+            var playFabUser = new PlayFabUserVO(false, UserDisplayNameVO.Create(), new ProgressVO[0]);
 
             var sut = new UserVO(localUser, playFabUser);
 
@@ -413,6 +424,70 @@ namespace BoardTower.Tests.EditMode.Common.Application
 
             Assert.That(sut.isSuccess, Is.EqualTo(isSuccess));
             Assert.That(sut.isRegistered, Is.EqualTo(isRegistered));
+        }
+
+        // ---- AchievementVO ----
+
+        [Test]
+        public void AchievementVO_Constructor_AssignsTypeRankAndValue()
+        {
+            var sut = new AchievementVO(AchievementType.Play, AchievementRankType.Normal, 5);
+
+            Assert.That(sut.type, Is.EqualTo(AchievementType.Play));
+            Assert.That(sut.rank, Is.EqualTo(AchievementRankType.Normal));
+            Assert.That(sut.value, Is.EqualTo(5));
+        }
+
+        // ---- ProgressVO ----
+
+        [Test]
+        public void ProgressVO_Constructor_AssignsTypeAndValue()
+        {
+            var sut = new ProgressVO(AchievementType.Score, 10);
+
+            Assert.That(sut.type, Is.EqualTo(AchievementType.Score));
+            Assert.That(sut.value, Is.EqualTo(10));
+        }
+
+        [TestCase(AchievementType.None, 0)]
+        [TestCase(AchievementType.Play, 1)]
+        [TestCase(AchievementType.Clear, 999)]
+        public void ProgressVO_Constructor_WithVariousValues_AssignsCorrectly(AchievementType type, int value)
+        {
+            var sut = new ProgressVO(type, value);
+
+            Assert.That(sut.type, Is.EqualTo(type));
+            Assert.That(sut.value, Is.EqualTo(value));
+        }
+
+        // ---- AchievementProgressVO ----
+
+        [Test]
+        public void AchievementProgressVO_Constructor_AssignsAchievementAndProgress()
+        {
+            var achievement = new AchievementVO(AchievementType.Play, AchievementRankType.Bronze, 10);
+            var progress = new ProgressVO(AchievementType.Play, 7);
+
+            var sut = new AchievementProgressVO(achievement, progress);
+
+            Assert.That(sut.achievement, Is.EqualTo(achievement));
+            Assert.That(sut.progress, Is.EqualTo(progress));
+        }
+
+        // ---- PlayFabMasterVO ----
+
+        [Test]
+        public void PlayFabMasterVO_Constructor_AssignsAchievements()
+        {
+            var achievements = new[]
+            {
+                new AchievementVO(AchievementType.Play, AchievementRankType.Normal, 1),
+                new AchievementVO(AchievementType.Score, AchievementRankType.Gold, 100),
+            };
+
+            var sut = new PlayFabMasterVO(achievements);
+
+            Assert.That(sut.achievements, Is.EqualTo(achievements));
         }
     }
 }
