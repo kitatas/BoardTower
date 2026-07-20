@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BoardTower.Common.Application;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace BoardTower.Common.Data.DataStore
 {
