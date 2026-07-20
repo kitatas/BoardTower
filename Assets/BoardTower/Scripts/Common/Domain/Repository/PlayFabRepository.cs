@@ -124,5 +124,25 @@ namespace BoardTower.Common.Domain.Repository
 
             await completionSource.Task.AttachExternalCancellation(token);
         }
+
+        private static async UniTask UpdateUserDataAsync(string key, string json, CancellationToken token)
+        {
+            var completionSource = new UniTaskCompletionSource<UpdateUserDataResult>();
+            var request = new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
+                {
+                    { key, json },
+                },
+            };
+
+            PlayFabClientAPI.UpdateUserData(
+                request,
+                result => completionSource.TrySetResult(result),
+                error => completionSource.TrySetException(new RetryExceptionVO(error.ErrorMessage))
+            );
+
+            await completionSource.Task.AttachExternalCancellation(token);
+        }
     }
 }
