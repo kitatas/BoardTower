@@ -124,37 +124,5 @@ namespace BoardTower.Common.Domain.Repository
 
             await completionSource.Task.AttachExternalCancellation(token);
         }
-
-        public UniTask SendScoreRankingAsync(int score, CancellationToken token)
-        {
-            return SendRankingAsync(PlayFabConfig.SCORE_RANKING_KEY, score, token);
-        }
-
-        private async UniTask SendRankingAsync(string key, int score, CancellationToken token)
-        {
-            if (_playFabSession == null) return;
-
-            var completionSource = new UniTaskCompletionSource<PlayFab.ProgressionModels.EmptyResponse>();
-            var request = new UpdateLeaderboardEntriesRequest
-            {
-                Entries = new List<LeaderboardEntryUpdate>
-                {
-                    new()
-                    {
-                        EntityId = _playFabSession.entityId,
-                        Scores = new List<string> { score.ToString() },
-                    },
-                },
-                LeaderboardName = key,
-            };
-
-            _playFabSession.UpdateLeaderboardEntries(
-                request,
-                result => completionSource.TrySetResult(result),
-                error => completionSource.TrySetException(new RebootExceptionVO(error.ErrorMessage))
-            );
-
-            await completionSource.Task.AttachExternalCancellation(token);
-        }
     }
 }
