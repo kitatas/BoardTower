@@ -246,6 +246,11 @@ namespace BoardTower.Common.Application
             this.displayName = displayName;
             this.progresses = progresses;
         }
+
+        public static PlayFabUserVO UpdateProgresses(PlayFabUserVO playFabUser, ProgressVO[] progresses)
+        {
+            return new PlayFabUserVO(playFabUser.isNewly, playFabUser.displayName, progresses);
+        }
     }
 
     public sealed class PlayFabMasterVO

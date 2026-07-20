@@ -10,11 +10,14 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GameSendState : BaseGameState
     {
         private readonly LoadingUseCase _loadingUseCase;
+        private readonly RoundClearUseCase _roundClearUseCase;
         private readonly SendUseCase _sendUseCase;
 
-        public GameSendState(LoadingUseCase loadingUseCase, SendUseCase sendUseCase)
+        public GameSendState(LoadingUseCase loadingUseCase, RoundClearUseCase roundClearUseCase,
+            SendUseCase sendUseCase)
         {
             _loadingUseCase = loadingUseCase;
+            _roundClearUseCase = roundClearUseCase;
             _sendUseCase = sendUseCase;
         }
 
@@ -23,7 +26,10 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             await _loadingUseCase.FadeAsync(Fade.In, token);
-            await _sendUseCase.SendScoreAsync(token);
+            await (
+                _sendUseCase.SendScoreAsync(token),
+                _sendUseCase.UpdateProgressAsync(_roundClearUseCase.IsClear(), token)
+            );
             await _loadingUseCase.FadeAsync(Fade.Out, token);
 
             return GameState.Finish;

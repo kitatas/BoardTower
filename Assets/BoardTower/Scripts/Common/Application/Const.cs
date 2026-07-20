@@ -26,6 +26,7 @@ namespace BoardTower.Common.Application
         public const string NOT_FOUND_SOUND_TYPE = "NOT_FOUND_SOUND_TYPE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
         public const string NOT_FOUND_WEBVIEW = "NOT_FOUND_WEBVIEW";
+        public const string INVALID_ACHIEVEMENT = "INVALID_ACHIEVEMENT";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
         public const string INVALID_CHESSMEN_MOVEMENT = "INVALID_CHESSMEN_MOVEMENT";
         public const string INVALID_COLLECTION = "INVALID_COLLECTION";
@@ -103,5 +104,15 @@ namespace BoardTower.Common.Application
 
         public const int CREATE_UID_RETRY_COUNT = 10;
         public const int DECISION_NAME_RETRY_COUNT = 10;
+    }
+
+    public sealed class AchievementConfig
+    {
+        public static readonly AchievementType[] ACHIEVEMENTS =
+        {
+            AchievementType.Play,
+            AchievementType.Score,
+            AchievementType.Clear,
+        };
     }
 }

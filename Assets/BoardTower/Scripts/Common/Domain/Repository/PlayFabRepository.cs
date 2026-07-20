@@ -3,6 +3,7 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Data.DataStore;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.ProgressionModels;
@@ -123,6 +124,12 @@ namespace BoardTower.Common.Domain.Repository
             );
 
             await completionSource.Task.AttachExternalCancellation(token);
+        }
+
+        public UniTask UpdateProgressesAsync(ProgressVO[] progresses, CancellationToken token)
+        {
+            var json = JsonConvert.SerializeObject(progresses);
+            return UpdateUserDataAsync(PlayFabConfig.PROGRESS_KEY, json, token);
         }
 
         private static async UniTask UpdateUserDataAsync(string key, string json, CancellationToken token)

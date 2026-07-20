@@ -29,5 +29,12 @@ namespace BoardTower.Common.Data.Entity
             if (achievement.TryGetValue(type, out var progress)) return progress;
             return new ProgressVO(type, 0);
         }
+
+        public void UpdateProgress(ProgressVO[] progresses)
+        {
+            var playFabUser = PlayFabUserVO.UpdateProgresses(value.playFabUser, progresses);
+            Set(new UserVO(value.localUser, playFabUser));
+            _achievement = null;
+        }
     }
 }
