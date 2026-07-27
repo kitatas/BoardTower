@@ -15,10 +15,10 @@ namespace BoardTower.Game.Presentation.Facade
             _achievementView = achievementView;
         }
 
-        public UniTask RenderAsync(IEnumerable<AchievementProgressVO> achievementProgresses, CancellationToken token)
+        public UniTask RenderAsync(IEnumerable<AchievementContentVO> achievementContents, CancellationToken token)
         {
             _achievementView.Refresh();
-            _achievementView.Render(achievementProgresses);
+            _achievementView.Render(achievementContents);
             return UniTask.Yield(token);
         }
     }

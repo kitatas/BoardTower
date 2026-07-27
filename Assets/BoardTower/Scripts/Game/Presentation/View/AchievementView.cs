@@ -14,9 +14,9 @@ namespace BoardTower.Game.Presentation.View
             gameObject.DestroyChildren();
         }
 
-        public void Render(IEnumerable<AchievementProgressVO> achievementProgresses)
+        public void Render(IEnumerable<AchievementContentVO> achievementContents)
         {
-            foreach (var achievementProgress in achievementProgresses)
+            foreach (var achievementProgress in achievementContents)
             {
                 var view = Instantiate(achievementRecordView, transform);
                 view.Render(achievementProgress);

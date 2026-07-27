@@ -9,7 +9,7 @@ namespace BoardTower.Game.Presentation.View
     {
         [SerializeField] private TextMeshProUGUI content = default;
 
-        public void Render(AchievementProgressVO vo)
+        public void Render(AchievementContentVO vo)
         {
             // TODO: locale
             var isAchieve = vo.achievement.value <= vo.progress.value;

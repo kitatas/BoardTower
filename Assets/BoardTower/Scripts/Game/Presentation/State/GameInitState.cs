@@ -44,7 +44,7 @@ namespace BoardTower.Game.Presentation.State
             _bgmUseCase.Play(BgmType.Top);
             _chessmenUseCase.Init();
             await (
-                _achievementUseCase.PublishAchievementProgressesAsync(token),
+                _achievementUseCase.PublishAchievementContentsAsync(token),
                 _hudRootUseCase.FadeAsync(Fade.Out, token),
                 _tapScreenUseCase.FadeAsync(Fade.In, token)
             );

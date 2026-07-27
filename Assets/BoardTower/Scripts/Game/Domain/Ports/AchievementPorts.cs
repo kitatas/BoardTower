@@ -8,19 +8,19 @@ namespace BoardTower.Game.Domain.Ports
 {
     public sealed class AchievementPorts
     {
-        public readonly IAsyncSubscriber<IEnumerable<AchievementProgressVO>> achievementProgressesSubscriber;
-        private readonly IAsyncPublisher<IEnumerable<AchievementProgressVO>> _achievementProgressesPublisher;
+        public readonly IAsyncSubscriber<IEnumerable<AchievementContentVO>> achievementContentsSubscriber;
+        private readonly IAsyncPublisher<IEnumerable<AchievementContentVO>> _achievementContentsPublisher;
 
-        public AchievementPorts(IAsyncSubscriber<IEnumerable<AchievementProgressVO>> achievementProgressesSubscriber,
-            IAsyncPublisher<IEnumerable<AchievementProgressVO>> achievementProgressesPublisher)
+        public AchievementPorts(IAsyncSubscriber<IEnumerable<AchievementContentVO>> achievementContentsSubscriber,
+            IAsyncPublisher<IEnumerable<AchievementContentVO>> achievementContentsPublisher)
         {
-            this.achievementProgressesSubscriber = achievementProgressesSubscriber;
-            _achievementProgressesPublisher = achievementProgressesPublisher;
+            this.achievementContentsSubscriber = achievementContentsSubscriber;
+            _achievementContentsPublisher = achievementContentsPublisher;
         }
 
-        public UniTask PublishAchievementProgressAsync(IEnumerable<AchievementProgressVO> achievementProgresses, CancellationToken token)
+        public UniTask PublishAchievementContentsAsync(IEnumerable<AchievementContentVO> achievementContents, CancellationToken token)
         {
-            return _achievementProgressesPublisher.PublishAsync(achievementProgresses, token);
+            return _achievementContentsPublisher.PublishAsync(achievementContents, token);
         }
     }
 }

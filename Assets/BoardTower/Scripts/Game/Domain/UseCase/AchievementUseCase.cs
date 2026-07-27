@@ -21,19 +21,19 @@ namespace BoardTower.Game.Domain.UseCase
             _achievementPorts = achievementPorts;
         }
 
-        public IAsyncSubscriber<IEnumerable<AchievementProgressVO>> achievementProgresses =>
-            _achievementPorts.achievementProgressesSubscriber;
+        public IAsyncSubscriber<IEnumerable<AchievementContentVO>> achievementContents =>
+            _achievementPorts.achievementContentsSubscriber;
 
-        public UniTask PublishAchievementProgressesAsync(CancellationToken token)
+        public UniTask PublishAchievementContentsAsync(CancellationToken token)
         {
-            var vos = new List<AchievementProgressVO>();
+            var vos = new List<AchievementContentVO>();
             foreach (var achievement in _masterEntity.achievements)
             {
                 var progress = _userEntity.Find(achievement.type);
-                vos.Add(new AchievementProgressVO(achievement, progress));
+                vos.Add(new AchievementContentVO(achievement, progress));
             }
 
-            return _achievementPorts.PublishAchievementProgressAsync(vos, token);
+            return _achievementPorts.PublishAchievementContentsAsync(vos, token);
         }
     }
 }

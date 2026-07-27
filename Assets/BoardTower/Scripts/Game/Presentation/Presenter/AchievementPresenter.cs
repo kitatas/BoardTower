@@ -22,7 +22,7 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IStartable.Start()
         {
-            _achievementUseCase.achievementProgresses
+            _achievementUseCase.achievementContents
                 .Subscribe(_achievementFacade.RenderAsync)
                 .AddTo(_disposable);
         }
