@@ -41,6 +41,7 @@ namespace BoardTower.Boot.Installer
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
             builder.Register<DisplayNameUseCase>(Lifetime.Scoped);
             builder.Register<LoginUseCase>(Lifetime.Scoped);
+            builder.Register<ResourceUseCase>(Lifetime.Scoped);
             builder.Register<SplashUseCase>(Lifetime.Scoped);
 
             // Facade

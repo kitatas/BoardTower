@@ -1,5 +1,6 @@
 using System.Threading;
 using BoardTower.Boot.Application;
+using BoardTower.Boot.Domain.UseCase;
 using BoardTower.Common.Domain.UseCase;
 using Cysharp.Threading.Tasks;
 
@@ -11,14 +12,16 @@ namespace BoardTower.Boot.Presentation.State
         private readonly SeUseCase _seUseCase;
         private readonly ExceptionUseCase _exceptionUseCase;
         private readonly LoadingUseCase _loadingUseCase;
+        private readonly ResourceUseCase _resourceUseCase;
 
         public BootInitState(BgmUseCase bgmUseCase, SeUseCase seUseCase, ExceptionUseCase exceptionUseCase,
-            LoadingUseCase loadingUseCase)
+            LoadingUseCase loadingUseCase, ResourceUseCase resourceUseCase)
         {
             _bgmUseCase = bgmUseCase;
             _seUseCase = seUseCase;
             _exceptionUseCase = exceptionUseCase;
             _loadingUseCase = loadingUseCase;
+            _resourceUseCase = resourceUseCase;
         }
 
         public override BootState state => BootState.Init;
@@ -30,7 +33,8 @@ namespace BoardTower.Boot.Presentation.State
             await _seUseCase.LoadAsync(token);
             await (
                 _exceptionUseCase.FadeOutAsync(0.0f, token),
-                _loadingUseCase.InitAsync(token)
+                _loadingUseCase.InitAsync(token),
+                _resourceUseCase.LoadAsync(token)
             );
         }
 
