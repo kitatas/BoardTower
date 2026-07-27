@@ -110,6 +110,7 @@ namespace BoardTower.Common.Application
     public sealed class LocaleConfig
     {
         public const string TABLE_NAME = "LocaleTable";
+        public const string ACHIEVEMENT_CONTENT_KEY = "Achievement_{0}";
     }
 
     public sealed class AchievementConfig
@@ -120,5 +121,7 @@ namespace BoardTower.Common.Application
             AchievementType.Score,
             AchievementType.Clear,
         };
+
+        public const string SECRET_CONTENT = "???";
     }
 }

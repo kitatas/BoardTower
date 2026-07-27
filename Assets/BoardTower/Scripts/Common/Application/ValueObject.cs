@@ -292,12 +292,14 @@ namespace BoardTower.Common.Application
     public sealed class AchievementContentVO
     {
         public readonly AchievementVO achievement;
-        public readonly ProgressVO progress;
+        public readonly bool isAchieve;
+        public readonly string content;
 
-        public AchievementContentVO(AchievementVO achievement, ProgressVO progress)
+        public AchievementContentVO(AchievementVO achievement, bool isAchieve, string content)
         {
             this.achievement = achievement;
-            this.progress = progress;
+            this.isAchieve = isAchieve;
+            this.content = content;
         }
     }
 
