@@ -37,6 +37,7 @@ namespace BoardTower.Common.Installer
             builder.Register<LoadingPorts>(Lifetime.Singleton);
 
             // Repository
+            builder.Register<LocaleRepository>(Lifetime.Singleton);
             builder.Register<PlayFabRepository>(Lifetime.Singleton);
             builder.Register<SaveRepository>(Lifetime.Singleton);
             builder.Register<SoundRepository>(Lifetime.Singleton);
