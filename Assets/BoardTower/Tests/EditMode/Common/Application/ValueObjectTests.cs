@@ -1,6 +1,5 @@
 using BoardTower.Common.Application;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace BoardTower.Tests.EditMode.Common.Application
 {
@@ -460,18 +459,77 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.value, Is.EqualTo(value));
         }
 
-        // ---- AchievementProgressVO ----
+        // ---- AchievementContentVO ----
 
         [Test]
-        public void AchievementProgressVO_Constructor_AssignsAchievementAndProgress()
+        public void AchievementContentVO_Constructor_AssignsAchievementIsAchieveAndContent()
         {
-            var achievement = new AchievementVO(AchievementType.Play, AchievementRankType.Bronze, 10);
-            var progress = new ProgressVO(AchievementType.Play, 7);
+            var achievement = new AchievementVO(AchievementType.Play, AchievementRankType.Normal, 5);
 
-            var sut = new AchievementProgressVO(achievement, progress);
+            var sut = new AchievementContentVO(achievement, true, "5回プレイする");
 
             Assert.That(sut.achievement, Is.EqualTo(achievement));
-            Assert.That(sut.progress, Is.EqualTo(progress));
+            Assert.That(sut.isAchieve, Is.True);
+            Assert.That(sut.content, Is.EqualTo("5回プレイする"));
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void AchievementContentVO_Constructor_WithIsAchieveVariants_SetsCorrectly(bool isAchieve)
+        {
+            var achievement = new AchievementVO(AchievementType.Score, AchievementRankType.Gold, 100);
+
+            var sut = new AchievementContentVO(achievement, isAchieve, "content");
+
+            Assert.That(sut.isAchieve, Is.EqualTo(isAchieve));
+        }
+
+        // AchievementVO は参照型フィールドのため、同一インスタンスが保持されることを検証する
+        [Test]
+        public void AchievementContentVO_Constructor_KeepsSameAchievementReference()
+        {
+            var achievement = new AchievementVO(AchievementType.Clear, AchievementRankType.Platinum, 999);
+
+            var sut = new AchievementContentVO(achievement, false, "content");
+
+            Assert.That(sut.achievement, Is.SameAs(achievement));
+        }
+
+        // バリデーションを持たない VO のため、空文字・null もそのまま保持される
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase(null)]
+        public void AchievementContentVO_Constructor_WithEmptyOrNullContent_AssignsAsIs(string content)
+        {
+            var achievement = new AchievementVO(AchievementType.None, AchievementRankType.None, 0);
+
+            var sut = new AchievementContentVO(achievement, false, content);
+
+            Assert.That(sut.content, Is.EqualTo(content));
+        }
+
+        [Test]
+        public void AchievementContentVO_Constructor_WithNullAchievement_AssignsNull()
+        {
+            var sut = new AchievementContentVO(null, false, "content");
+
+            Assert.That(sut.achievement, Is.Null);
+        }
+
+        [TestCase(AchievementType.None, AchievementRankType.None, 0)]
+        [TestCase(AchievementType.Play, AchievementRankType.Bronze, 1)]
+        [TestCase(AchievementType.Score, AchievementRankType.Silver, 100)]
+        [TestCase(AchievementType.Clear, AchievementRankType.Platinum, 999)]
+        public void AchievementContentVO_Constructor_WithVariousAchievements_AssignsCorrectly(AchievementType type,
+            AchievementRankType rank, int value)
+        {
+            var achievement = new AchievementVO(type, rank, value);
+
+            var sut = new AchievementContentVO(achievement, true, "content");
+
+            Assert.That(sut.achievement.type, Is.EqualTo(type));
+            Assert.That(sut.achievement.rank, Is.EqualTo(rank));
+            Assert.That(sut.achievement.value, Is.EqualTo(value));
         }
 
         // ---- PlayFabMasterVO ----
