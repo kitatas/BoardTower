@@ -531,21 +531,5 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.achievement.rank, Is.EqualTo(rank));
             Assert.That(sut.achievement.value, Is.EqualTo(value));
         }
-
-        // ---- PlayFabMasterVO ----
-
-        [Test]
-        public void PlayFabMasterVO_Constructor_AssignsAchievements()
-        {
-            var achievements = new[]
-            {
-                new AchievementVO(AchievementType.Play, AchievementRankType.Normal, 1),
-                new AchievementVO(AchievementType.Score, AchievementRankType.Gold, 100),
-            };
-
-            var sut = new PlayFabMasterVO(achievements);
-
-            Assert.That(sut.achievements, Is.EqualTo(achievements));
-        }
     }
 }

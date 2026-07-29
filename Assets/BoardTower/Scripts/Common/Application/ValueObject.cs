@@ -253,16 +253,6 @@ namespace BoardTower.Common.Application
         }
     }
 
-    public sealed class PlayFabMasterVO
-    {
-        public readonly IEnumerable<AchievementVO> achievements;
-
-        public PlayFabMasterVO(IEnumerable<AchievementVO> achievements)
-        {
-            this.achievements = achievements;
-        }
-    }
-
     public sealed class AchievementVO
     {
         public readonly AchievementType type;
@@ -338,16 +328,6 @@ namespace BoardTower.Common.Application
         {
             this.localUser = localUser;
             this.playFabUser = playFabUser;
-        }
-    }
-
-    public sealed class MasterVO
-    {
-        public readonly PlayFabMasterVO playFabMaster;
-
-        public MasterVO(PlayFabMasterVO playFabMaster)
-        {
-            this.playFabMaster = playFabMaster;
         }
     }
 

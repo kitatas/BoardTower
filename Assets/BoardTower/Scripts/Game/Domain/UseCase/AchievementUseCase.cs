@@ -12,15 +12,13 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class AchievementUseCase
     {
-        private readonly MasterEntity _masterEntity;
         private readonly UserEntity _userEntity;
         private readonly AchievementPorts _achievementPorts;
         private readonly LocaleRepository _localeRepository;
 
-        public AchievementUseCase(MasterEntity masterEntity, UserEntity userEntity, AchievementPorts achievementPorts,
+        public AchievementUseCase(UserEntity userEntity, AchievementPorts achievementPorts,
             LocaleRepository localeRepository)
         {
-            _masterEntity = masterEntity;
             _userEntity = userEntity;
             _achievementPorts = achievementPorts;
             _localeRepository = localeRepository;
@@ -32,13 +30,13 @@ namespace BoardTower.Game.Domain.UseCase
         public UniTask PublishAchievementContentsAsync(CancellationToken token)
         {
             var vos = new List<AchievementContentVO>();
-            foreach (var achievement in _masterEntity.achievements)
-            {
-                var progress = _userEntity.Find(achievement.type);
-                var isAchieve = achievement.value <= progress.value;
-                var content = GetContent(achievement);
-                vos.Add(new AchievementContentVO(achievement, isAchieve, content));
-            }
+            // foreach (var achievement in _masterEntity.achievements)
+            // {
+            //     var progress = _userEntity.Find(achievement.type);
+            //     var isAchieve = achievement.value <= progress.value;
+            //     var content = GetContent(achievement);
+            //     vos.Add(new AchievementContentVO(achievement, isAchieve, content));
+            // }
 
             return _achievementPorts.PublishAchievementContentsAsync(vos, token);
         }
