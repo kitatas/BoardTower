@@ -26,6 +26,7 @@ namespace BoardTower.Common.Installer
             // DataStore
             builder.RegisterInstance<BgmTable>(bgmTable);
             builder.RegisterInstance<SeTable>(seTable);
+            builder.Register<PlayFabTitleData>(Lifetime.Singleton);
 
             // Entity
             builder.Register<RetryCountEntity>(Lifetime.Singleton);

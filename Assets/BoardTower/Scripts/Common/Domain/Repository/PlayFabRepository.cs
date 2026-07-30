@@ -12,10 +12,12 @@ namespace BoardTower.Common.Domain.Repository
 {
     public sealed class PlayFabRepository
     {
+        private readonly PlayFabTitleData _playFabTitleData;
         private PlayFabSession _playFabSession;
 
-        public PlayFabRepository()
+        public PlayFabRepository(PlayFabTitleData playFabTitleData)
         {
+            _playFabTitleData = playFabTitleData;
             PlayFabSettings.staticSettings.TitleId = PlayFabConfig.TITLE_ID;
         }
 
@@ -43,8 +45,20 @@ namespace BoardTower.Common.Domain.Repository
             var response = await completionSource.Task.AttachExternalCancellation(token);
             _playFabSession = new PlayFabSession(response);
 
+            FetchTitleData(response);
             var user = FetchUser(response);
             return user.ToVO();
+        }
+
+        private void FetchTitleData(LoginResult loginResult)
+        {
+            var payload = loginResult.InfoResultPayload;
+            if (payload == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_PAYLOAD);
+
+            var titleData = payload.TitleData;
+            if (titleData == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_FETCH_MASTER);
+
+            _playFabTitleData.CacheTitleData(titleData);
         }
 
         private static PlayFabUserDTO FetchUser(LoginResult loginResult)
