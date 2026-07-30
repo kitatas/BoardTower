@@ -101,5 +101,19 @@ namespace BoardTower.Game.Application
                 _ => throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_WEBVIEW),
             };
         }
+
+        public static AchievementType ToAchievementType(this int self)
+        {
+            return FastEnum.IsDefined<AchievementType>(self)
+                ? (AchievementType)self
+                : throw new QuitExceptionVO(ExceptionConfig.INVALID_ACHIEVEMENT);
+        }
+
+        public static AchievementRankType ToAchievementRankType(this int self)
+        {
+            return FastEnum.IsDefined<AchievementRankType>(self)
+                ? (AchievementRankType)self
+                : throw new QuitExceptionVO(ExceptionConfig.INVALID_ACHIEVEMENT_RANK);
+        }
     }
 }

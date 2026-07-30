@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using BoardTower.Common.Application;
+using BoardTower.Game.Application;
 using UniEx;
 using UnityEngine;
 

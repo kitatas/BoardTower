@@ -512,4 +512,32 @@ namespace BoardTower.Game.Application
             this.value = value;
         }
     }
+
+    public sealed class AchievementVO
+    {
+        public readonly AchievementType type;
+        public readonly AchievementRankType rank;
+        public readonly int value;
+
+        public AchievementVO(int type, int rank, int value)
+        {
+            this.type = type.ToAchievementType();
+            this.rank = rank.ToAchievementRankType();
+            this.value = value;
+        }
+    }
+
+    public sealed class AchievementContentVO
+    {
+        public readonly AchievementVO achievement;
+        public readonly bool isAchieve;
+        public readonly string content;
+
+        public AchievementContentVO(AchievementVO achievement, bool isAchieve, string content)
+        {
+            this.achievement = achievement;
+            this.isAchieve = isAchieve;
+            this.content = content;
+        }
+    }
 }

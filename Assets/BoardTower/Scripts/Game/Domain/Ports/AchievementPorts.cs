@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
-using BoardTower.Common.Application;
+using BoardTower.Game.Application;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 

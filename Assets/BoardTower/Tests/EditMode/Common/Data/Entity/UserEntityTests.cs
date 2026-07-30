@@ -71,7 +71,7 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
         [Test]
         public void SetDisplayName_PreservesProgresses()
         {
-            var progresses = new[] { new ProgressVO(AchievementType.Play, 5) };
+            var progresses = new[] { new ProgressVO(1, 5) };
             _entity.Set(CreateUserVOWithProgresses(progresses));
             var newName = new UserDisplayNameVO("NewName");
 
@@ -111,12 +111,12 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
         public void Find_WhenProgressExists_ReturnsMatchingProgress()
         {
             var entity = new UserEntity();
-            var progress = new ProgressVO(AchievementType.Play, 5);
+            var progress = new ProgressVO(1, 5);
             entity.Set(CreateUserVOWithProgresses(new[] { progress }));
 
-            var result = entity.Find(AchievementType.Play);
+            var result = entity.Find(1);
 
-            Assert.That(result.type, Is.EqualTo(AchievementType.Play));
+            Assert.That(result.type, Is.EqualTo(1));
             Assert.That(result.value, Is.EqualTo(5));
         }
 
@@ -126,9 +126,9 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
             var entity = new UserEntity();
             entity.Set(CreateUserVOWithProgresses(new ProgressVO[0]));
 
-            var result = entity.Find(AchievementType.Score);
+            var result = entity.Find(2);
 
-            Assert.That(result.type, Is.EqualTo(AchievementType.Score));
+            Assert.That(result.type, Is.EqualTo(2));
             Assert.That(result.value, Is.EqualTo(0));
         }
 

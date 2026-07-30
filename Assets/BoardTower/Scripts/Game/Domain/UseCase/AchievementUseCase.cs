@@ -3,6 +3,7 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Repository;
+using BoardTower.Game.Application;
 using BoardTower.Game.Domain.Ports;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;

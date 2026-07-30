@@ -253,43 +253,15 @@ namespace BoardTower.Common.Application
         }
     }
 
-    public sealed class AchievementVO
-    {
-        public readonly AchievementType type;
-        public readonly AchievementRankType rank;
-        public readonly int value;
-
-        public AchievementVO(AchievementType type, AchievementRankType rank, int value)
-        {
-            this.type = type;
-            this.rank = rank;
-            this.value = value;
-        }
-    }
-
     public sealed class ProgressVO
     {
-        public readonly AchievementType type;
+        public readonly int type;
         public readonly int value;
 
-        public ProgressVO(AchievementType type, int value)
+        public ProgressVO(int type, int value)
         {
             this.type = type;
             this.value = value;
-        }
-    }
-
-    public sealed class AchievementContentVO
-    {
-        public readonly AchievementVO achievement;
-        public readonly bool isAchieve;
-        public readonly string content;
-
-        public AchievementContentVO(AchievementVO achievement, bool isAchieve, string content)
-        {
-            this.achievement = achievement;
-            this.isAchieve = isAchieve;
-            this.content = content;
         }
     }
 

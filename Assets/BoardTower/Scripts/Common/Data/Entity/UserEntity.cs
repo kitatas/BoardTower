@@ -10,9 +10,9 @@ namespace BoardTower.Common.Data.Entity
         public string displayName => value.playFabUser.displayName.value;
         public bool isRegistered => !string.IsNullOrEmpty(displayName);
 
-        private Dictionary<AchievementType, ProgressVO> _achievement;
+        private Dictionary<int, ProgressVO> _achievement;
 
-        private Dictionary<AchievementType, ProgressVO> achievement =>
+        private Dictionary<int, ProgressVO> achievement =>
             _achievement ??= (value.playFabUser.progresses ?? Array.Empty<ProgressVO>())
                 .ToDictionary(x => x.type, x => x);
 
@@ -24,7 +24,7 @@ namespace BoardTower.Common.Data.Entity
             Set(user);
         }
 
-        public ProgressVO Find(AchievementType type)
+        public ProgressVO Find(int type)
         {
             if (achievement.TryGetValue(type, out var progress)) return progress;
             return new ProgressVO(type, 0);

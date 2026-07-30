@@ -86,4 +86,16 @@ namespace BoardTower.Game.Application
         public const float OVERFLOW_ROUND_GEM_RATE = 2.0f;
         public const float HALVED_RATE = 1.5f;
     }
+
+    public sealed class AchievementConfig
+    {
+        public static readonly AchievementType[] ACHIEVEMENTS =
+        {
+            AchievementType.Play,
+            AchievementType.Score,
+            AchievementType.Clear,
+        };
+
+        public const string SECRET_CONTENT = "???";
+    }
 }

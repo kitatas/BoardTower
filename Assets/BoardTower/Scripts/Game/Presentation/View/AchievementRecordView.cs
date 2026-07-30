@@ -1,4 +1,4 @@
-using BoardTower.Common.Application;
+using BoardTower.Game.Application;
 using TMPro;
 using UnityEngine;
 

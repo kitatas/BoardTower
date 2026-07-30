@@ -2,8 +2,10 @@ using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Repository;
+using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using Cysharp.Threading.Tasks;
+using FastEnumUtility;
 using UnityEngine;
 
 namespace BoardTower.Game.Domain.UseCase
@@ -31,8 +33,8 @@ namespace BoardTower.Game.Domain.UseCase
             var progresses = new ProgressVO[AchievementConfig.ACHIEVEMENTS.Length];
             for (int i = 0; i < AchievementConfig.ACHIEVEMENTS.Length; i++)
             {
-                var progress = _userEntity.Find(AchievementConfig.ACHIEVEMENTS[i]);
-                progresses[i] = progress.type switch
+                var progress = _userEntity.Find(AchievementConfig.ACHIEVEMENTS[i].ToInt32());
+                progresses[i] = progress.type.ToAchievementType() switch
                 {
                     AchievementType.Play => new(progress.type, progress.value + 1),
                     AchievementType.Score => new(progress.type, Mathf.Max(progress.value, _scoreEntity.value)),

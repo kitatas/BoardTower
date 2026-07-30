@@ -28,6 +28,7 @@ namespace BoardTower.Common.Application
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
         public const string NOT_FOUND_WEBVIEW = "NOT_FOUND_WEBVIEW";
         public const string INVALID_ACHIEVEMENT = "INVALID_ACHIEVEMENT";
+        public const string INVALID_ACHIEVEMENT_RANK = "INVALID_ACHIEVEMENT_RANK";
         public const string INVALID_CHESSMEN = "INVALID_CHESSMEN";
         public const string INVALID_CHESSMEN_MOVEMENT = "INVALID_CHESSMEN_MOVEMENT";
         public const string INVALID_COLLECTION = "INVALID_COLLECTION";
@@ -111,17 +112,5 @@ namespace BoardTower.Common.Application
     {
         public const string TABLE_NAME = "LocaleTable";
         public const string ACHIEVEMENT_CONTENT_KEY = "Achievement_{0}";
-    }
-
-    public sealed class AchievementConfig
-    {
-        public static readonly AchievementType[] ACHIEVEMENTS =
-        {
-            AchievementType.Play,
-            AchievementType.Score,
-            AchievementType.Clear,
-        };
-
-        public const string SECRET_CONTENT = "???";
     }
 }
