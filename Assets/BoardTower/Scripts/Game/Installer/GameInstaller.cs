@@ -28,6 +28,7 @@ namespace BoardTower.Game.Installer
         {
             // DataStore
             builder.RegisterInstance<MemoryDatabase>(new MemoryDatabase(memoryFile.bytes));
+            builder.Register<MemoryDbData>(Lifetime.Scoped);
             builder.RegisterInstance<SquareEventTable>(squareEventTable);
 
             // Entity

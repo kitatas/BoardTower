@@ -13,7 +13,7 @@ namespace BoardTower.Common.Data.DataStore
             _titleData = titleData;
         }
 
-        public IEnumerable<T> DeserializeTitleData<T>(string key)
+        public IList<T> Deserialize<T>(string key)
         {
             if (_titleData == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_DESERIALIZE_MASTER);
 
