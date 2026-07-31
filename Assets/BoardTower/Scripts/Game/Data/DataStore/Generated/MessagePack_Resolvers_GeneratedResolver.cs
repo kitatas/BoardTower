@@ -47,15 +47,16 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(8)
             {
                 { typeof((int, int)), 0 },
                 { typeof((int, int)[]), 1 },
-                { typeof(global::BoardTower.Game.Data.DataStore.BoardPatternMaster), 2 },
-                { typeof(global::BoardTower.Game.Data.DataStore.ChessmenMovementRuleMaster), 3 },
-                { typeof(global::BoardTower.Game.Data.DataStore.RelicMaster), 4 },
-                { typeof(global::BoardTower.Game.Data.DataStore.RoundMaster), 5 },
-                { typeof(global::BoardTower.Game.Data.DataStore.ScoreRateMaster), 6 },
+                { typeof(global::BoardTower.Game.Data.DataStore.AchievementMaster), 2 },
+                { typeof(global::BoardTower.Game.Data.DataStore.BoardPatternMaster), 3 },
+                { typeof(global::BoardTower.Game.Data.DataStore.ChessmenMovementRuleMaster), 4 },
+                { typeof(global::BoardTower.Game.Data.DataStore.RelicMaster), 5 },
+                { typeof(global::BoardTower.Game.Data.DataStore.RoundMaster), 6 },
+                { typeof(global::BoardTower.Game.Data.DataStore.ScoreRateMaster), 7 },
             };
         }
 
@@ -71,11 +72,12 @@ namespace MessagePack.Resolvers
             {
                 case 0: return new global::MessagePack.Formatters.ValueTupleFormatter<int, int>();
                 case 1: return new global::MessagePack.Formatters.ArrayFormatter<(int, int)>();
-                case 2: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.BoardPatternMasterFormatter();
-                case 3: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ChessmenMovementRuleMasterFormatter();
-                case 4: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.RelicMasterFormatter();
-                case 5: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.RoundMasterFormatter();
-                case 6: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ScoreRateMasterFormatter();
+                case 2: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.AchievementMasterFormatter();
+                case 3: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.BoardPatternMasterFormatter();
+                case 4: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ChessmenMovementRuleMasterFormatter();
+                case 5: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.RelicMasterFormatter();
+                case 6: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.RoundMasterFormatter();
+                case 7: return new MessagePack.Formatters.BoardTower.Game.Data.DataStore.ScoreRateMasterFormatter();
                 default: return null;
             }
         }

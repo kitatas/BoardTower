@@ -25,11 +25,59 @@ namespace BoardTower.Game.Data.DataStore
             return memory;
         }
 
+        public void ReplaceAll(System.Collections.Generic.IList<AchievementMaster> data)
+        {
+            var newData = CloneAndSortBy(data, x => (x.Type, x.Rank), System.Collections.Generic.Comparer<(int Type, int Rank)>.Default);
+            var table = new AchievementMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
+        public void RemoveAchievementMaster((int Type, int Rank)[] keys)
+        {
+            var data = RemoveCore(memory.AchievementMasterTable.GetRawDataUnsafe(), keys, x => (x.Type, x.Rank), System.Collections.Generic.Comparer<(int Type, int Rank)>.Default);
+            var newData = CloneAndSortBy(data, x => (x.Type, x.Rank), System.Collections.Generic.Comparer<(int Type, int Rank)>.Default);
+            var table = new AchievementMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
+        public void Diff(AchievementMaster[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.AchievementMasterTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.Type, x.Rank), System.Collections.Generic.Comparer<(int Type, int Rank)>.Default);
+            var newData = CloneAndSortBy(data, x => (x.Type, x.Rank), System.Collections.Generic.Comparer<(int Type, int Rank)>.Default);
+            var table = new AchievementMasterTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.BoardPatternMasterTable,
+                memory.ChessmenMovementRuleMasterTable,
+                memory.RelicMasterTable,
+                memory.RoundMasterTable,
+                memory.ScoreRateMasterTable
+            
+            );
+        }
+
         public void ReplaceAll(System.Collections.Generic.IList<BoardPatternMaster> data)
         {
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new BoardPatternMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 table,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -45,6 +93,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new BoardPatternMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 table,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -60,6 +109,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new BoardPatternMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 table,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -74,6 +124,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 table,
                 memory.RelicMasterTable,
@@ -89,6 +140,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 table,
                 memory.RelicMasterTable,
@@ -104,6 +156,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new ChessmenMovementRuleMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 table,
                 memory.RelicMasterTable,
@@ -118,6 +171,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new RelicMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 table,
@@ -133,6 +187,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new RelicMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 table,
@@ -148,6 +203,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Type, System.Collections.Generic.Comparer<int>.Default);
             var table = new RelicMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 table,
@@ -162,6 +218,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
             var table = new RoundMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -177,6 +234,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
             var table = new RoundMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -192,6 +250,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => x.Round, System.Collections.Generic.Comparer<int>.Default);
             var table = new RoundMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -206,6 +265,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => (x.Type, x.Threshold), System.Collections.Generic.Comparer<(int Type, int Threshold)>.Default);
             var table = new ScoreRateMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -221,6 +281,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => (x.Type, x.Threshold), System.Collections.Generic.Comparer<(int Type, int Threshold)>.Default);
             var table = new ScoreRateMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,
@@ -236,6 +297,7 @@ namespace BoardTower.Game.Data.DataStore
             var newData = CloneAndSortBy(data, x => (x.Type, x.Threshold), System.Collections.Generic.Comparer<(int Type, int Threshold)>.Default);
             var table = new ScoreRateMasterTable(newData);
             memory = new MemoryDatabase(
+                memory.AchievementMasterTable,
                 memory.BoardPatternMasterTable,
                 memory.ChessmenMovementRuleMasterTable,
                 memory.RelicMasterTable,

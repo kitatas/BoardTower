@@ -46,13 +46,14 @@ namespace BoardTower.Game.Data.DataStore
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(6)
             {
-                {typeof(BoardPatternMaster[]), 0 },
-                {typeof(ChessmenMovementRuleMaster[]), 1 },
-                {typeof(RelicMaster[]), 2 },
-                {typeof(RoundMaster[]), 3 },
-                {typeof(ScoreRateMaster[]), 4 },
+                {typeof(AchievementMaster[]), 0 },
+                {typeof(BoardPatternMaster[]), 1 },
+                {typeof(ChessmenMovementRuleMaster[]), 2 },
+                {typeof(RelicMaster[]), 3 },
+                {typeof(RoundMaster[]), 4 },
+                {typeof(ScoreRateMaster[]), 5 },
             };
         }
 
@@ -63,11 +64,12 @@ namespace BoardTower.Game.Data.DataStore
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.ArrayFormatter<BoardPatternMaster>();
-                case 1: return new MessagePack.Formatters.ArrayFormatter<ChessmenMovementRuleMaster>();
-                case 2: return new MessagePack.Formatters.ArrayFormatter<RelicMaster>();
-                case 3: return new MessagePack.Formatters.ArrayFormatter<RoundMaster>();
-                case 4: return new MessagePack.Formatters.ArrayFormatter<ScoreRateMaster>();
+                case 0: return new MessagePack.Formatters.ArrayFormatter<AchievementMaster>();
+                case 1: return new MessagePack.Formatters.ArrayFormatter<BoardPatternMaster>();
+                case 2: return new MessagePack.Formatters.ArrayFormatter<ChessmenMovementRuleMaster>();
+                case 3: return new MessagePack.Formatters.ArrayFormatter<RelicMaster>();
+                case 4: return new MessagePack.Formatters.ArrayFormatter<RoundMaster>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<ScoreRateMaster>();
                 default: return null;
             }
         }
