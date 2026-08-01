@@ -60,6 +60,7 @@ namespace BoardTower.Game.Installer
             builder.Register<TapScreenPorts>(Lifetime.Scoped);
 
             // Repository
+            builder.Register<AchievementRepository>(Lifetime.Scoped);
             builder.Register<BoardPatternRepository>(Lifetime.Scoped);
             builder.Register<ChessmenMovementRepository>(Lifetime.Scoped);
             builder.Register<RelicRepository>(Lifetime.Scoped);

@@ -5,8 +5,10 @@ using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Repository;
 using BoardTower.Game.Application;
 using BoardTower.Game.Domain.Ports;
+using BoardTower.Game.Domain.Repository;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using FastEnumUtility;
 using MessagePipe;
 
 namespace BoardTower.Game.Domain.UseCase
@@ -15,13 +17,15 @@ namespace BoardTower.Game.Domain.UseCase
     {
         private readonly UserEntity _userEntity;
         private readonly AchievementPorts _achievementPorts;
+        private readonly AchievementRepository _achievementRepository;
         private readonly LocaleRepository _localeRepository;
 
         public AchievementUseCase(UserEntity userEntity, AchievementPorts achievementPorts,
-            LocaleRepository localeRepository)
+            AchievementRepository achievementRepository, LocaleRepository localeRepository)
         {
             _userEntity = userEntity;
             _achievementPorts = achievementPorts;
+            _achievementRepository = achievementRepository;
             _localeRepository = localeRepository;
         }
 
@@ -31,13 +35,13 @@ namespace BoardTower.Game.Domain.UseCase
         public UniTask PublishAchievementContentsAsync(CancellationToken token)
         {
             var vos = new List<AchievementContentVO>();
-            // foreach (var achievement in _masterEntity.achievements)
-            // {
-            //     var progress = _userEntity.Find(achievement.type);
-            //     var isAchieve = achievement.value <= progress.value;
-            //     var content = GetContent(achievement);
-            //     vos.Add(new AchievementContentVO(achievement, isAchieve, content));
-            // }
+            foreach (var achievement in _achievementRepository.GetAll())
+            {
+                var progress = _userEntity.Find(achievement.type.ToInt32());
+                var isAchieve = achievement.value <= progress.value;
+                var content = GetContent(achievement);
+                vos.Add(new AchievementContentVO(achievement, isAchieve, content));
+            }
 
             return _achievementPorts.PublishAchievementContentsAsync(vos, token);
         }
