@@ -36,5 +36,11 @@ namespace BoardTower.Common.Data.DataStore
         {
             _playFabProgressionInstanceAPI.UpdateLeaderboardEntries(request, result, error);
         }
+
+        public void GetLeaderboard(GetEntityLeaderboardRequest request,
+            Action<GetEntityLeaderboardResponse> result, Action<PlayFabError> error)
+        {
+            _playFabProgressionInstanceAPI.GetLeaderboard(request, result, error);
+        }
     }
 }

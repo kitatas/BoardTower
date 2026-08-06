@@ -106,6 +106,7 @@ namespace BoardTower.Common.Application
 
         public const int CREATE_UID_RETRY_COUNT = 10;
         public const int DECISION_NAME_RETRY_COUNT = 10;
+        public const int RANKING_RETRY_COUNT = 100;
     }
 
     public sealed class LocaleConfig

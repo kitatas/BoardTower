@@ -314,4 +314,30 @@ namespace BoardTower.Common.Application
             this.isRegistered = isRegistered;
         }
     }
+
+    public sealed class PlayFabRankingVO
+    {
+        public readonly IEnumerable<PlayFabRankingEntryVO> entries;
+
+        public PlayFabRankingVO(IEnumerable<PlayFabRankingEntryVO> entries)
+        {
+            this.entries = entries;
+        }
+    }
+
+    public sealed class PlayFabRankingEntryVO
+    {
+        public readonly string entityId;
+        public readonly int rank;
+        public readonly string displayName;
+        public readonly string score;
+
+        public PlayFabRankingEntryVO(string entityId, int rank, string displayName, string score)
+        {
+            this.entityId = entityId;
+            this.rank = rank;
+            this.displayName = displayName;
+            this.score = score;
+        }
+    }
 }

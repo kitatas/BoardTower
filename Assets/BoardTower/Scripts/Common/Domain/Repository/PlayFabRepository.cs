@@ -128,6 +128,33 @@ namespace BoardTower.Common.Domain.Repository
             await completionSource.Task.AttachExternalCancellation(token);
         }
 
+        public async UniTask<PlayFabRankingVO> GetScoreRankingAsync(CancellationToken token)
+        {
+            var response = await GetLeaderboardAsync(PlayFabConfig.SCORE_RANKING_KEY, PlayFabConfig.RANKING_RETRY_COUNT, token);
+            var dto = new PlayFabRankingDTO(response.Rankings);
+            return dto.ToVO();
+        }
+
+        private async UniTask<GetEntityLeaderboardResponse> GetLeaderboardAsync(string key, uint size, CancellationToken token)
+        {
+            if (_playFabSession == null) return null;
+
+            var completionSource = new UniTaskCompletionSource<GetEntityLeaderboardResponse>();
+            var request = new GetEntityLeaderboardRequest
+            {
+                LeaderboardName = key,
+                PageSize = size,
+            };
+
+            _playFabSession.GetLeaderboard(
+                request,
+                result => completionSource.TrySetResult(result),
+                error => completionSource.TrySetException(new RetryExceptionVO(error.ErrorMessage))
+            );
+
+            return await completionSource.Task.AttachExternalCancellation(token);
+        }
+
         public UniTask UpdateProgressesAsync(ProgressVO[] progresses, CancellationToken token)
         {
             var json = JsonConvert.SerializeObject(progresses);
