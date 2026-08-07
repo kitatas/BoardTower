@@ -540,4 +540,14 @@ namespace BoardTower.Game.Application
             this.content = content;
         }
     }
+
+    public sealed class ScoreRankingVO
+    {
+        public readonly IEnumerable<PlayFabRankingEntryVO> entries;
+
+        public ScoreRankingVO(IEnumerable<PlayFabRankingEntryVO> entries)
+        {
+            this.entries = entries;
+        }
+    }
 }

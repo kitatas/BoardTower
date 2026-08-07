@@ -57,6 +57,7 @@ namespace BoardTower.Game.Installer
             builder.Register<MovementPorts>(Lifetime.Scoped);
             builder.Register<LotRelicPorts>(Lifetime.Scoped);
             builder.Register<PickRelicPorts>(Lifetime.Scoped);
+            builder.Register<RankingPorts>(Lifetime.Scoped);
             builder.Register<TapScreenPorts>(Lifetime.Scoped);
 
             // Repository
