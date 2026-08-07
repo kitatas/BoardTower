@@ -84,6 +84,7 @@ namespace BoardTower.Game.Installer
             builder.Register<LotRelicUseCase>(Lifetime.Scoped);
             builder.Register<PickRelicUseCase>(Lifetime.Scoped);
             builder.Register<PlyUseCase>(Lifetime.Scoped);
+            builder.Register<RankingUseCase>(Lifetime.Scoped);
             builder.Register<RoundUseCase>(Lifetime.Scoped);
             builder.Register<RoundClearUseCase>(Lifetime.Scoped);
             builder.Register<ScoreUseCase>(Lifetime.Scoped);
@@ -122,6 +123,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<GiveUpPresenter>();
                 entryPoints.Add<PickRelicPresenter>();
                 entryPoints.Add<PlyPresenter>();
+                entryPoints.Add<RankingPresenter>();
                 entryPoints.Add<RoundPresenter>();
                 entryPoints.Add<RoundClearPresenter>();
                 entryPoints.Add<ScorePresenter>();
@@ -149,6 +151,7 @@ namespace BoardTower.Game.Installer
             builder.Register<RoundFacade>(Lifetime.Scoped);
             builder.Register<RoundClearFacade>(Lifetime.Scoped);
             builder.Register<ScoreFacade>(Lifetime.Scoped);
+            builder.Register<ScoreRankingFacade>(Lifetime.Scoped);
             builder.Register<SelectRelicFacade>(Lifetime.Scoped);
             builder.Register<TapScreenFacade>(Lifetime.Scoped);
             builder.Register<VolumeFacade>(Lifetime.Scoped);
@@ -174,6 +177,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<RoundClearGemCountView>();
             builder.RegisterComponentInHierarchy<RoundMaxNumView>();
             builder.RegisterComponentInHierarchy<ScoreView>();
+            builder.RegisterComponentInHierarchy<ScoreRankingView>();
             builder.RegisterComponentInHierarchy<SelectRelicView>();
             builder.RegisterComponentInHierarchy<TapScreenView>();
             builder.RegisterComponentInHierarchy<UidView>();
