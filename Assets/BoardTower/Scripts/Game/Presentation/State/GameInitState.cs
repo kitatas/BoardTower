@@ -14,12 +14,14 @@ namespace BoardTower.Game.Presentation.State
         private readonly ChessmenUseCase _chessmenUseCase;
         private readonly HudRootUseCase _hudRootUseCase;
         private readonly PickRelicUseCase _pickRelicUseCase;
+        private readonly RankingUseCase _rankingUseCase;
         private readonly RoundUseCase _roundUseCase;
         private readonly ScoreUseCase _scoreUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
         public GameInitState(BgmUseCase bgmUseCase, AchievementUseCase achievementUseCase,
             ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase, PickRelicUseCase pickRelicUseCase,
+            RankingUseCase rankingUseCase,
             RoundUseCase roundUseCase, ScoreUseCase scoreUseCase, TapScreenUseCase tapScreenUseCase)
         {
             _bgmUseCase = bgmUseCase;
@@ -27,6 +29,7 @@ namespace BoardTower.Game.Presentation.State
             _chessmenUseCase = chessmenUseCase;
             _hudRootUseCase = hudRootUseCase;
             _pickRelicUseCase = pickRelicUseCase;
+            _rankingUseCase = rankingUseCase;
             _roundUseCase = roundUseCase;
             _scoreUseCase = scoreUseCase;
             _tapScreenUseCase = tapScreenUseCase;
@@ -46,6 +49,7 @@ namespace BoardTower.Game.Presentation.State
             await (
                 _achievementUseCase.PublishAchievementContentsAsync(token),
                 _hudRootUseCase.FadeAsync(Fade.Out, token),
+                _rankingUseCase.PublishScoreRankingAsync(token),
                 _tapScreenUseCase.FadeAsync(Fade.In, token)
             );
 

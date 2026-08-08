@@ -90,6 +90,7 @@ namespace BoardTower.Game.Application
         GiveUpComplete = 9,
         Account = 10,
         Achievement = 11,
+        Ranking = 12,
     }
 
     public enum RelicType
