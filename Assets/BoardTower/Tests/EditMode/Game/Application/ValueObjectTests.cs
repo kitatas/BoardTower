@@ -1,3 +1,4 @@
+using System.Linq;
 using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using FastEnumUtility;
@@ -8,6 +9,30 @@ namespace BoardTower.Tests.EditMode.Game.Application
     [TestFixture]
     public sealed class ValueObjectTests
     {
+
+        // ---- ScoreRankingVO ----
+
+        [Test]
+        public void ScoreRankingVO_Constructor_AssignsEntries()
+        {
+            var entries = new[]
+            {
+                new PlayFabRankingEntryVO("id1", 1, "Player1", "1000"),
+                new PlayFabRankingEntryVO("id2", 2, "Player2", "500"),
+            };
+
+            var sut = new ScoreRankingVO(entries);
+
+            Assert.That(sut.entries, Is.EqualTo(entries));
+        }
+
+        [Test]
+        public void ScoreRankingVO_Constructor_WithEmptyEntries_AssignsEmpty()
+        {
+            var sut = new ScoreRankingVO(Enumerable.Empty<PlayFabRankingEntryVO>());
+
+            Assert.That(sut.entries, Is.Empty);
+        }
 
         // ---- AchievementVO ----
 

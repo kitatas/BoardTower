@@ -424,5 +424,54 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.isSuccess, Is.EqualTo(isSuccess));
             Assert.That(sut.isRegistered, Is.EqualTo(isRegistered));
         }
+
+        // ---- PlayFabRankingVO ----
+
+        [Test]
+        public void PlayFabRankingVO_Constructor_AssignsEntries()
+        {
+            var entries = new[] { new PlayFabRankingEntryVO("id1", 1, "Player1", "100") };
+
+            var sut = new PlayFabRankingVO(entries);
+
+            Assert.That(sut.entries, Is.EqualTo(entries));
+        }
+
+        [Test]
+        public void PlayFabRankingVO_Constructor_WithEmptyEntries_AssignsEmpty()
+        {
+            var entries = new PlayFabRankingEntryVO[0];
+
+            var sut = new PlayFabRankingVO(entries);
+
+            Assert.That(sut.entries, Is.Empty);
+        }
+
+        // ---- PlayFabRankingEntryVO ----
+
+        [Test]
+        public void PlayFabRankingEntryVO_Constructor_AssignsAllFields()
+        {
+            var sut = new PlayFabRankingEntryVO("entity-001", 1, "PlayerA", "9999");
+
+            Assert.That(sut.entityId, Is.EqualTo("entity-001"));
+            Assert.That(sut.rank, Is.EqualTo(1));
+            Assert.That(sut.displayName, Is.EqualTo("PlayerA"));
+            Assert.That(sut.score, Is.EqualTo("9999"));
+        }
+
+        [TestCase("id1", 1, "Alpha", "100")]
+        [TestCase("id2", 10, "Beta", "0")]
+        [TestCase("id3", 100, "Gamma", "-1")]
+        public void PlayFabRankingEntryVO_Constructor_WithVariousValues_AssignsCorrectly(
+            string entityId, int rank, string displayName, string score)
+        {
+            var sut = new PlayFabRankingEntryVO(entityId, rank, displayName, score);
+
+            Assert.That(sut.entityId, Is.EqualTo(entityId));
+            Assert.That(sut.rank, Is.EqualTo(rank));
+            Assert.That(sut.displayName, Is.EqualTo(displayName));
+            Assert.That(sut.score, Is.EqualTo(score));
+        }
     }
 }
