@@ -50,6 +50,14 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.exceptionMessage, Is.EqualTo(ExceptionConfig.REBOOT_MESSAGE));
         }
 
+        [Test]
+        public void RebootExceptionVO_Message_ReturnsFormattedString()
+        {
+            var sut = new RebootExceptionVO("test");
+
+            Assert.That(sut.message, Is.EqualTo($"test\n{ExceptionConfig.REBOOT_MESSAGE}"));
+        }
+
         // ---- RetryExceptionVO ----
 
         [Test]
@@ -68,6 +76,14 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.exceptionMessage, Is.EqualTo(ExceptionConfig.RETRY_MESSAGE));
         }
 
+        [Test]
+        public void RetryExceptionVO_Message_ReturnsFormattedString()
+        {
+            var sut = new RetryExceptionVO("test");
+
+            Assert.That(sut.message, Is.EqualTo($"test\n{ExceptionConfig.RETRY_MESSAGE}"));
+        }
+
         // ---- QuitExceptionVO ----
 
         [Test]
@@ -84,6 +100,14 @@ namespace BoardTower.Tests.EditMode.Common.Application
             var sut = new QuitExceptionVO("test");
 
             Assert.That(sut.exceptionMessage, Is.EqualTo(ExceptionConfig.QUIT_MESSAGE));
+        }
+
+        [Test]
+        public void QuitExceptionVO_Message_ReturnsFormattedString()
+        {
+            var sut = new QuitExceptionVO("test");
+
+            Assert.That(sut.message, Is.EqualTo($"test\n{ExceptionConfig.QUIT_MESSAGE}"));
         }
 
         // ---- TransitionVO ----
@@ -379,6 +403,31 @@ namespace BoardTower.Tests.EditMode.Common.Application
             Assert.That(sut.isNewly, Is.EqualTo(isNewly));
         }
 
+        [Test]
+        public void PlayFabUserVO_UpdateProgresses_ReturnsNewInstanceWithUpdatedProgresses()
+        {
+            var displayName = UserDisplayNameVO.Create();
+            var original = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
+            var newProgresses = new[] { new ProgressVO(1, 10) };
+
+            var result = PlayFabUserVO.UpdateProgresses(original, newProgresses);
+
+            Assert.That(result.progresses, Is.EqualTo(newProgresses));
+        }
+
+        [Test]
+        public void PlayFabUserVO_UpdateProgresses_PreservesIsNewlyAndDisplayName()
+        {
+            var displayName = new UserDisplayNameVO("TestUser");
+            var original = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
+            var newProgresses = new[] { new ProgressVO(2, 5) };
+
+            var result = PlayFabUserVO.UpdateProgresses(original, newProgresses);
+
+            Assert.That(result.isNewly, Is.EqualTo(original.isNewly));
+            Assert.That(result.displayName, Is.EqualTo(original.displayName));
+        }
+
         // ---- UserVO ----
 
         [Test]
@@ -423,6 +472,28 @@ namespace BoardTower.Tests.EditMode.Common.Application
 
             Assert.That(sut.isSuccess, Is.EqualTo(isSuccess));
             Assert.That(sut.isRegistered, Is.EqualTo(isRegistered));
+        }
+
+        // ---- ProgressVO ----
+
+        [Test]
+        public void ProgressVO_Constructor_AssignsTypeAndValue()
+        {
+            var sut = new ProgressVO(1, 42);
+
+            Assert.That(sut.type, Is.EqualTo(1));
+            Assert.That(sut.value, Is.EqualTo(42));
+        }
+
+        [TestCase(0, 0)]
+        [TestCase(1, -1)]
+        [TestCase(int.MaxValue, int.MaxValue)]
+        public void ProgressVO_Constructor_WithVariousValues_AssignsCorrectly(int type, int value)
+        {
+            var sut = new ProgressVO(type, value);
+
+            Assert.That(sut.type, Is.EqualTo(type));
+            Assert.That(sut.value, Is.EqualTo(value));
         }
 
         // ---- PlayFabRankingVO ----
