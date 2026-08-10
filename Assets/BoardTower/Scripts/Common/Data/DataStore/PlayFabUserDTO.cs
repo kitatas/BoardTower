@@ -11,7 +11,8 @@ namespace BoardTower.Common.Data.DataStore
         public readonly UserDisplayNameVO displayName;
         public readonly Dictionary<string, UserDataRecord> records;
 
-        public PlayFabUserDTO(LoginResult loginResult, UserDisplayNameVO displayName, Dictionary<string, UserDataRecord> records)
+        public PlayFabUserDTO(LoginResult loginResult, UserDisplayNameVO displayName,
+            Dictionary<string, UserDataRecord> records)
         {
             this.loginResult = loginResult;
             this.displayName = displayName;
@@ -24,6 +25,11 @@ namespace BoardTower.Common.Data.DataStore
 
         private ProgressVO[] progresses => Fetch<ProgressVO[]>(PlayFabConfig.PROGRESS_KEY);
 
-        public PlayFabUserVO ToVO() => new(loginResult.NewlyCreated, displayName, progresses);
+        public PlayFabUserVO ToVO() => new(
+            loginResult.EntityToken.Entity.Id,
+            loginResult.NewlyCreated,
+            displayName,
+            progresses
+        );
     }
 }

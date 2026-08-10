@@ -19,7 +19,7 @@ namespace BoardTower.Common.Data.Entity
         public void SetDisplayName(UserDisplayNameVO userDisplayName)
         {
             var localUser = value.localUser;
-            var playFabUser = new PlayFabUserVO(value.playFabUser.isNewly, userDisplayName, value.playFabUser.progresses);
+            var playFabUser = PlayFabUserVO.UpdateDisplayName(value.playFabUser, userDisplayName);
             var user = new UserVO(localUser, playFabUser);
             Set(user);
         }
