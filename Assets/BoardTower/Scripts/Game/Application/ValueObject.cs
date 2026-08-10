@@ -543,11 +543,27 @@ namespace BoardTower.Game.Application
 
     public sealed class ScoreRankingVO
     {
-        public readonly IEnumerable<PlayFabRankingEntryVO> entries;
+        public readonly IEnumerable<ScoreRankingEntryVO> entries;
 
-        public ScoreRankingVO(IEnumerable<PlayFabRankingEntryVO> entries)
+        public ScoreRankingVO(IEnumerable<ScoreRankingEntryVO> entries)
         {
             this.entries = entries;
+        }
+    }
+
+    public sealed class ScoreRankingEntryVO
+    {
+        public readonly int rank;
+        public readonly string displayName;
+        public readonly string score;
+        public readonly bool isSelf;
+
+        public ScoreRankingEntryVO(int rank, string displayName, string score, bool isSelf)
+        {
+            this.rank = rank;
+            this.displayName = displayName;
+            this.score = score;
+            this.isSelf = isSelf;
         }
     }
 }

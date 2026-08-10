@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Threading;
+using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Repository;
 using BoardTower.Game.Application;
 using BoardTower.Game.Domain.Ports;
@@ -9,11 +11,13 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class RankingUseCase
     {
+        private readonly UserEntity _userEntity;
         private readonly RankingPorts _rankingPorts;
         private readonly PlayFabRepository _playFabRepository;
 
-        public RankingUseCase(RankingPorts rankingPorts, PlayFabRepository playFabRepository)
+        public RankingUseCase(UserEntity userEntity, RankingPorts rankingPorts, PlayFabRepository playFabRepository)
         {
+            _userEntity = userEntity;
             _rankingPorts = rankingPorts;
             _playFabRepository = playFabRepository;
         }
@@ -23,7 +27,10 @@ namespace BoardTower.Game.Domain.UseCase
         public async UniTask PublishScoreRankingAsync(CancellationToken token)
         {
             var ranking = await _playFabRepository.GetScoreRankingAsync(token);
-            await _rankingPorts.PublishScoreRankingAsync(new ScoreRankingVO(ranking.entries), token);
+            var entries = ranking.entries
+                .Select(x => new ScoreRankingEntryVO(x.rank, x.displayName, x.score, _userEntity.IsEqualEntityId(x.entityId)));
+
+            await _rankingPorts.PublishScoreRankingAsync(new ScoreRankingVO(entries), token);
         }
     }
 }

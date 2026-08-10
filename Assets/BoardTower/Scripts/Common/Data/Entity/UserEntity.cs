@@ -36,5 +36,7 @@ namespace BoardTower.Common.Data.Entity
             Set(new UserVO(value.localUser, playFabUser));
             _achievement = null;
         }
+
+        public bool IsEqualEntityId(string id) => value.playFabUser.entityId == id;
     }
 }
