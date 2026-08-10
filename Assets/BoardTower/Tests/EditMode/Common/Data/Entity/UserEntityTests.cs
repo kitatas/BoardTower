@@ -132,20 +132,55 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
             Assert.That(result.value, Is.EqualTo(0));
         }
 
+        [Test]
+        public void IsEqualEntityId_WithMatchingId_ReturnsTrue()
+        {
+            Assert.That(_entity.IsEqualEntityId("entity-001"), Is.True);
+        }
+
+        [Test]
+        public void IsEqualEntityId_WithDifferentId_ReturnsFalse()
+        {
+            Assert.That(_entity.IsEqualEntityId("other-id"), Is.False);
+        }
+
+        [Test]
+        public void UpdateProgress_UpdatesProgresses()
+        {
+            var progresses = new[] { new ProgressVO(1, 10), new ProgressVO(2, 20) };
+
+            _entity.UpdateProgress(progresses);
+
+            Assert.That(_entity.Find(1).value, Is.EqualTo(10));
+            Assert.That(_entity.Find(2).value, Is.EqualTo(20));
+        }
+
+        [Test]
+        public void UpdateProgress_InvalidatesCachedAchievement()
+        {
+            // 一度 Find でキャッシュを構築してから、UpdateProgress で無効化されることを確認
+            _ = _entity.Find(1);
+            var newProgresses = new[] { new ProgressVO(1, 99) };
+
+            _entity.UpdateProgress(newProgresses);
+
+            Assert.That(_entity.Find(1).value, Is.EqualTo(99));
+        }
+
         private static UserVO CreateUserVO(string displayName)
         {
             var localUser = new LocalUserVO("test-id");
             UserDisplayNameVO userDisplayName = displayName != null
                 ? new UserDisplayNameVO(displayName)
                 : UserDisplayNameVO.Create();
-            var playFabUser = new PlayFabUserVO(false, userDisplayName, new ProgressVO[0]);
+            var playFabUser = new PlayFabUserVO("entity-001", false, userDisplayName, new ProgressVO[0]);
             return new UserVO(localUser, playFabUser);
         }
 
         private static UserVO CreateUserVOWithProgresses(ProgressVO[] progresses)
         {
             var localUser = new LocalUserVO("test-id");
-            var playFabUser = new PlayFabUserVO(false, UserDisplayNameVO.Create(), progresses);
+            var playFabUser = new PlayFabUserVO("entity-001", false, UserDisplayNameVO.Create(), progresses);
             return new UserVO(localUser, playFabUser);
         }
     }

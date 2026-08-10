@@ -371,11 +371,21 @@ namespace BoardTower.Tests.EditMode.Common.Application
         // ---- PlayFabUserVO ----
 
         [Test]
+        public void PlayFabUserVO_Constructor_AssignsEntityId()
+        {
+            var displayName = UserDisplayNameVO.Create();
+
+            var sut = new PlayFabUserVO("entity-001", true, displayName, new ProgressVO[0]);
+
+            Assert.That(sut.entityId, Is.EqualTo("entity-001"));
+        }
+
+        [Test]
         public void PlayFabUserVO_Constructor_AssignsIsNewlyAndDisplayName()
         {
             var displayName = new UserDisplayNameVO("TestUser");
 
-            var sut = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
+            var sut = new PlayFabUserVO("entity-001", true, displayName, new ProgressVO[0]);
 
             Assert.That(sut.isNewly, Is.True);
             Assert.That(sut.displayName, Is.EqualTo(displayName));
@@ -387,7 +397,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
             var progresses = new[] { new ProgressVO(1, 3) };
             var displayName = UserDisplayNameVO.Create();
 
-            var sut = new PlayFabUserVO(false, displayName, progresses);
+            var sut = new PlayFabUserVO("entity-001", false, displayName, progresses);
 
             Assert.That(sut.progresses, Is.EqualTo(progresses));
         }
@@ -398,16 +408,41 @@ namespace BoardTower.Tests.EditMode.Common.Application
         {
             var displayName = UserDisplayNameVO.Create();
 
-            var sut = new PlayFabUserVO(isNewly, displayName, new ProgressVO[0]);
+            var sut = new PlayFabUserVO("entity-001", isNewly, displayName, new ProgressVO[0]);
 
             Assert.That(sut.isNewly, Is.EqualTo(isNewly));
+        }
+
+        [Test]
+        public void PlayFabUserVO_UpdateDisplayName_ReturnsNewInstanceWithUpdatedDisplayName()
+        {
+            var original = new PlayFabUserVO("entity-001", true, UserDisplayNameVO.Create(), new ProgressVO[0]);
+            var newName = new UserDisplayNameVO("NewName");
+
+            var result = PlayFabUserVO.UpdateDisplayName(original, newName);
+
+            Assert.That(result.displayName, Is.EqualTo(newName));
+        }
+
+        [Test]
+        public void PlayFabUserVO_UpdateDisplayName_PreservesEntityIdIsNewlyAndProgresses()
+        {
+            var progresses = new[] { new ProgressVO(1, 10) };
+            var original = new PlayFabUserVO("entity-001", true, UserDisplayNameVO.Create(), progresses);
+            var newName = new UserDisplayNameVO("NewName");
+
+            var result = PlayFabUserVO.UpdateDisplayName(original, newName);
+
+            Assert.That(result.entityId, Is.EqualTo(original.entityId));
+            Assert.That(result.isNewly, Is.EqualTo(original.isNewly));
+            Assert.That(result.progresses, Is.EqualTo(original.progresses));
         }
 
         [Test]
         public void PlayFabUserVO_UpdateProgresses_ReturnsNewInstanceWithUpdatedProgresses()
         {
             var displayName = UserDisplayNameVO.Create();
-            var original = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
+            var original = new PlayFabUserVO("entity-001", true, displayName, new ProgressVO[0]);
             var newProgresses = new[] { new ProgressVO(1, 10) };
 
             var result = PlayFabUserVO.UpdateProgresses(original, newProgresses);
@@ -416,14 +451,15 @@ namespace BoardTower.Tests.EditMode.Common.Application
         }
 
         [Test]
-        public void PlayFabUserVO_UpdateProgresses_PreservesIsNewlyAndDisplayName()
+        public void PlayFabUserVO_UpdateProgresses_PreservesEntityIdIsNewlyAndDisplayName()
         {
             var displayName = new UserDisplayNameVO("TestUser");
-            var original = new PlayFabUserVO(true, displayName, new ProgressVO[0]);
+            var original = new PlayFabUserVO("entity-001", true, displayName, new ProgressVO[0]);
             var newProgresses = new[] { new ProgressVO(2, 5) };
 
             var result = PlayFabUserVO.UpdateProgresses(original, newProgresses);
 
+            Assert.That(result.entityId, Is.EqualTo(original.entityId));
             Assert.That(result.isNewly, Is.EqualTo(original.isNewly));
             Assert.That(result.displayName, Is.EqualTo(original.displayName));
         }
@@ -434,7 +470,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
         public void UserVO_Constructor_AssignsLocalUserAndPlayFabUser()
         {
             var localUser = new LocalUserVO("id-001");
-            var playFabUser = new PlayFabUserVO(false, UserDisplayNameVO.Create(), new ProgressVO[0]);
+            var playFabUser = new PlayFabUserVO("entity-001", false, UserDisplayNameVO.Create(), new ProgressVO[0]);
 
             var sut = new UserVO(localUser, playFabUser);
 

@@ -1,5 +1,4 @@
-using System.Linq;
-using BoardTower.Common.Application;
+using BoardTower.Common.Data.Entity;
 using BoardTower.Game.Application;
 using BoardTower.Game.Domain.Ports;
 using BoardTower.Game.Domain.UseCase;
@@ -23,8 +22,7 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             _subscriber = new FakeAsyncSubscriber<ScoreRankingVO>();
             _ports = new RankingPorts(_subscriber, _publisher);
 
-            // PlayFabRepository は外部ネットワーク依存のため null を渡す
-            _useCase = new RankingUseCase(_ports, null);
+            _useCase = new RankingUseCase(new UserEntity(), _ports, null);
         }
 
         [Test]

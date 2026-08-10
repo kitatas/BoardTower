@@ -998,6 +998,33 @@ namespace BoardTower.Tests.EditMode.Game.Application
             Assert.That(sut.value, Is.EqualTo(value));
         }
 
+        // ---- ScoreRankingEntryVO ----
+
+        [Test]
+        public void ScoreRankingEntryVO_Constructor_AssignsAllFields()
+        {
+            var sut = new ScoreRankingEntryVO(1, "PlayerA", "9999", true);
+
+            Assert.That(sut.rank, Is.EqualTo(1));
+            Assert.That(sut.displayName, Is.EqualTo("PlayerA"));
+            Assert.That(sut.score, Is.EqualTo("9999"));
+            Assert.That(sut.isSelf, Is.True);
+        }
+
+        [TestCase(1, "Alpha", "100", true)]
+        [TestCase(10, "Beta", "0", false)]
+        [TestCase(100, "Gamma", "-1", false)]
+        public void ScoreRankingEntryVO_Constructor_WithVariousValues_AssignsCorrectly(
+            int rank, string displayName, string score, bool isSelf)
+        {
+            var sut = new ScoreRankingEntryVO(rank, displayName, score, isSelf);
+
+            Assert.That(sut.rank, Is.EqualTo(rank));
+            Assert.That(sut.displayName, Is.EqualTo(displayName));
+            Assert.That(sut.score, Is.EqualTo(score));
+            Assert.That(sut.isSelf, Is.EqualTo(isSelf));
+        }
+
         // ---- ScoreRankingVO ----
 
         [Test]
@@ -1005,8 +1032,8 @@ namespace BoardTower.Tests.EditMode.Game.Application
         {
             var entries = new[]
             {
-                new PlayFabRankingEntryVO("id1", 1, "Player1", "1000"),
-                new PlayFabRankingEntryVO("id2", 2, "Player2", "500"),
+                new ScoreRankingEntryVO(1, "Player1", "1000", false),
+                new ScoreRankingEntryVO(2, "Player2", "500", true),
             };
 
             var sut = new ScoreRankingVO(entries);
@@ -1017,7 +1044,7 @@ namespace BoardTower.Tests.EditMode.Game.Application
         [Test]
         public void ScoreRankingVO_Constructor_WithEmptyEntries_AssignsEmpty()
         {
-            var sut = new ScoreRankingVO(Enumerable.Empty<PlayFabRankingEntryVO>());
+            var sut = new ScoreRankingVO(Enumerable.Empty<ScoreRankingEntryVO>());
 
             Assert.That(sut.entries, Is.Empty);
         }

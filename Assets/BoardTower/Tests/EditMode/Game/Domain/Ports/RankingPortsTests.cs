@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BoardTower.Common.Application;
 using BoardTower.Game.Application;
 using BoardTower.Game.Domain.Ports;
 using BoardTower.Tests.EditMode.TestHelpers;
@@ -34,7 +33,7 @@ namespace BoardTower.Tests.EditMode.Game.Domain.Ports
         [Test]
         public async Task PublishScoreRankingAsync_CallsPublisherOnce()
         {
-            var vo = new ScoreRankingVO(Enumerable.Empty<PlayFabRankingEntryVO>());
+            var vo = new ScoreRankingVO(Enumerable.Empty<ScoreRankingEntryVO>());
 
             await _ports.PublishScoreRankingAsync(vo, CancellationToken.None).AsTask();
 
@@ -44,7 +43,7 @@ namespace BoardTower.Tests.EditMode.Game.Domain.Ports
         [Test]
         public async Task PublishScoreRankingAsync_PublishesExactVO()
         {
-            var vo = new ScoreRankingVO(Enumerable.Empty<PlayFabRankingEntryVO>());
+            var vo = new ScoreRankingVO(Enumerable.Empty<ScoreRankingEntryVO>());
 
             await _ports.PublishScoreRankingAsync(vo, CancellationToken.None).AsTask();
 
@@ -56,8 +55,8 @@ namespace BoardTower.Tests.EditMode.Game.Domain.Ports
         {
             var entries = new[]
             {
-                new PlayFabRankingEntryVO("id1", 1, "Player1", "1000"),
-                new PlayFabRankingEntryVO("id2", 2, "Player2", "500"),
+                new ScoreRankingEntryVO(1, "Player1", "1000", false),
+                new ScoreRankingEntryVO(2, "Player2", "500", true),
             };
             var vo = new ScoreRankingVO(entries);
 
@@ -69,7 +68,7 @@ namespace BoardTower.Tests.EditMode.Game.Domain.Ports
         [Test]
         public async Task PublishScoreRankingAsync_CalledMultipleTimes_IncrementsCount()
         {
-            var vo = new ScoreRankingVO(Enumerable.Empty<PlayFabRankingEntryVO>());
+            var vo = new ScoreRankingVO(Enumerable.Empty<ScoreRankingEntryVO>());
 
             await _ports.PublishScoreRankingAsync(vo, CancellationToken.None).AsTask();
             await _ports.PublishScoreRankingAsync(vo, CancellationToken.None).AsTask();
