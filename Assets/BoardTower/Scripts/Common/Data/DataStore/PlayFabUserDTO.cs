@@ -26,6 +26,7 @@ namespace BoardTower.Common.Data.DataStore
         private ProgressVO[] progresses => Fetch<ProgressVO[]>(PlayFabConfig.PROGRESS_KEY);
 
         public PlayFabUserVO ToVO() => new(
+            loginResult.PlayFabId,
             loginResult.EntityToken.Entity.Id,
             loginResult.NewlyCreated,
             displayName,

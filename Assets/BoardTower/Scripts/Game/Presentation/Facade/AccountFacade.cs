@@ -20,7 +20,7 @@ namespace BoardTower.Game.Presentation.Facade
         public void Render(UserVO user)
         {
             _displayNameView.Render(user.playFabUser.displayName.value);
-            _uidView.Render(user.localUser.id);
+            _uidView.Render(user.playFabUser.playFabId);
         }
     }
 }

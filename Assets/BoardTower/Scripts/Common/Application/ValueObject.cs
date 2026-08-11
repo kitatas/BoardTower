@@ -236,13 +236,16 @@ namespace BoardTower.Common.Application
 
     public sealed class PlayFabUserVO
     {
+        public readonly string playFabId;
         public readonly string entityId;
         public readonly bool isNewly;
         public readonly UserDisplayNameVO displayName;
         public readonly ProgressVO[] progresses;
 
-        public PlayFabUserVO(string entityId, bool isNewly, UserDisplayNameVO displayName, ProgressVO[] progresses)
+        public PlayFabUserVO(string playFabId, string entityId, bool isNewly, UserDisplayNameVO displayName,
+            ProgressVO[] progresses)
         {
+            this.playFabId = playFabId;
             this.entityId = entityId;
             this.isNewly = isNewly;
             this.displayName = displayName;
@@ -251,12 +254,14 @@ namespace BoardTower.Common.Application
 
         public static PlayFabUserVO UpdateDisplayName(PlayFabUserVO playFabUser, UserDisplayNameVO displayName)
         {
-            return new PlayFabUserVO(playFabUser.entityId, playFabUser.isNewly, displayName, playFabUser.progresses);
+            return new PlayFabUserVO(playFabUser.playFabId, playFabUser.entityId, playFabUser.isNewly,
+                displayName, playFabUser.progresses);
         }
 
         public static PlayFabUserVO UpdateProgresses(PlayFabUserVO playFabUser, ProgressVO[] progresses)
         {
-            return new PlayFabUserVO(playFabUser.entityId, playFabUser.isNewly, playFabUser.displayName, progresses);
+            return new PlayFabUserVO(playFabUser.playFabId, playFabUser.entityId, playFabUser.isNewly,
+                playFabUser.displayName, progresses);
         }
     }
 
