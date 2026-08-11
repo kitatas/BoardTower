@@ -173,14 +173,14 @@ namespace BoardTower.Tests.EditMode.Common.Data.Entity
             UserDisplayNameVO userDisplayName = displayName != null
                 ? new UserDisplayNameVO(displayName)
                 : UserDisplayNameVO.Create();
-            var playFabUser = new PlayFabUserVO("entity-001", false, userDisplayName, new ProgressVO[0]);
+            var playFabUser = new PlayFabUserVO("playfab-001", "entity-001", false, userDisplayName, new ProgressVO[0]);
             return new UserVO(localUser, playFabUser);
         }
 
         private static UserVO CreateUserVOWithProgresses(ProgressVO[] progresses)
         {
             var localUser = new LocalUserVO("test-id");
-            var playFabUser = new PlayFabUserVO("entity-001", false, UserDisplayNameVO.Create(), progresses);
+            var playFabUser = new PlayFabUserVO("playfab-001", "entity-001", false, UserDisplayNameVO.Create(), progresses);
             return new UserVO(localUser, playFabUser);
         }
     }
