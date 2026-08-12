@@ -1,3 +1,7 @@
+---
+apply: always
+---
+
 # Rule: Unit Test Implementation
 
 このファイルはユニットテストを生成する際に従うべきルールを定義します。

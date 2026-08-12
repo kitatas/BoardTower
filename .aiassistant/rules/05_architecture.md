@@ -1,3 +1,7 @@
+---
+apply: always
+---
+
 # Rule: Project Architecture & Dependency
 
 このプロジェクトは以下のアーキテクチャを採用しています。

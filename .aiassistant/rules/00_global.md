@@ -1,3 +1,7 @@
+---
+apply: always
+---
+
 # Rule: Global Implementation
 
 このドキュメントは、プロジェクト全体の共通コーディング標準、Unity/C# のベストプラクティス、および AI が出力すべきフォーマットを定義します。
