@@ -352,4 +352,14 @@ namespace BoardTower.Common.Application
             this.score = score;
         }
     }
+
+    public sealed class GameModeVO
+    {
+        public readonly bool isOnlineMode;
+
+        public GameModeVO(bool isOnlineMode)
+        {
+            this.isOnlineMode = isOnlineMode;
+        }
+    }
 }

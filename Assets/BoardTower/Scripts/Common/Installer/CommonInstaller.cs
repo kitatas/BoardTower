@@ -29,6 +29,7 @@ namespace BoardTower.Common.Installer
             builder.Register<PlayFabTitleData>(Lifetime.Singleton);
 
             // Entity
+            builder.Register<GameModeEntity>(Lifetime.Singleton);
             builder.Register<RetryCountEntity>(Lifetime.Singleton);
             builder.Register<UserEntity>(Lifetime.Singleton);
 
@@ -46,6 +47,7 @@ namespace BoardTower.Common.Installer
             builder.Register<AccountUseCase>(Lifetime.Singleton);
             builder.Register<BgmUseCase>(Lifetime.Singleton);
             builder.Register<ExceptionUseCase>(Lifetime.Singleton);
+            builder.Register<GameModeUseCase>(Lifetime.Singleton);
             builder.Register<LoadingUseCase>(Lifetime.Singleton);
             builder.Register<SceneUseCase>(Lifetime.Singleton);
             builder.Register<SeUseCase>(Lifetime.Singleton);
