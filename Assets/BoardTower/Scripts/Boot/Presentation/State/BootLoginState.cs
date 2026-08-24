@@ -9,13 +9,15 @@ namespace BoardTower.Boot.Presentation.State
 {
     public sealed class BootLoginState : BaseBootState
     {
+        private readonly GameModeUseCase _gameModeUseCase;
         private readonly DisplayNameUseCase _displayNameUseCase;
         private readonly LoadingUseCase _loadingUseCase;
         private readonly LoginUseCase _loginUseCase;
 
-        public BootLoginState(DisplayNameUseCase displayNameUseCase, LoadingUseCase loadingUseCase,
-            LoginUseCase loginUseCase)
+        public BootLoginState(GameModeUseCase gameModeUseCase, DisplayNameUseCase displayNameUseCase,
+            LoadingUseCase loadingUseCase, LoginUseCase loginUseCase)
         {
+            _gameModeUseCase = gameModeUseCase;
             _displayNameUseCase = displayNameUseCase;
             _loadingUseCase = loadingUseCase;
             _loginUseCase = loginUseCase;
@@ -32,6 +34,17 @@ namespace BoardTower.Boot.Presentation.State
         {
             await _loadingUseCase.FadeAsync(Fade.In, token);
 
+            var gameMode = await _gameModeUseCase.JudgeGameMode(token);
+            if (gameMode.isOnlineMode)
+            {
+                await LoginAsync(token);
+            }
+
+            return BootState.Load;
+        }
+
+        private async UniTask LoginAsync(CancellationToken token)
+        {
             var loginResult = await _loginUseCase.LoginAsync(token);
             if (!loginResult.isSuccess) throw new RetryExceptionVO(ExceptionConfig.FAILED_TO_LOGIN);
             if (!loginResult.isRegistered)
@@ -42,10 +55,6 @@ namespace BoardTower.Boot.Presentation.State
                 await _loadingUseCase.FadeAsync(Fade.In, token);
                 await _loginUseCase.RegisterAsync(userDisplayName, token);
             }
-
-            await _loadingUseCase.FadeAsync(Fade.Out, token);
-
-            return BootState.Load;
         }
     }
 }

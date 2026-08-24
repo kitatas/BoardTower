@@ -10,14 +10,16 @@ namespace BoardTower.Game.Presentation.State
 {
     public sealed class GameSendState : BaseGameState
     {
+        private readonly GameModeUseCase _gameModeUseCase;
         private readonly GameModalUseCase _gameModalUseCase;
         private readonly LoadingUseCase _loadingUseCase;
         private readonly RoundClearUseCase _roundClearUseCase;
         private readonly SendUseCase _sendUseCase;
 
-        public GameSendState(GameModalUseCase gameModalUseCase, LoadingUseCase loadingUseCase,
-            RoundClearUseCase roundClearUseCase, SendUseCase sendUseCase)
+        public GameSendState(GameModeUseCase gameModeUseCase, GameModalUseCase gameModalUseCase,
+            LoadingUseCase loadingUseCase, RoundClearUseCase roundClearUseCase, SendUseCase sendUseCase)
         {
+            _gameModeUseCase = gameModeUseCase;
             _gameModalUseCase = gameModalUseCase;
             _loadingUseCase = loadingUseCase;
             _roundClearUseCase = roundClearUseCase;
@@ -27,6 +29,16 @@ namespace BoardTower.Game.Presentation.State
         public override GameState state => GameState.Send;
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
+        {
+            if (_gameModeUseCase.isOnlineMode)
+            {
+                await SendAsync(token);
+            }
+
+            return GameState.Finish;
+        }
+
+        private async UniTask SendAsync(CancellationToken token)
         {
             await _loadingUseCase.FadeAsync(Fade.In, token);
             await (
@@ -40,8 +52,6 @@ namespace BoardTower.Game.Presentation.State
 
             var modal = new GameModalVO(GameModalType.Ranking, Fade.In);
             await _gameModalUseCase.FadeAsync(modal, token);
-
-            return GameState.Finish;
         }
     }
 }

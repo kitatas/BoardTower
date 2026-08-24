@@ -9,6 +9,7 @@ namespace BoardTower.Game.Presentation.State
 {
     public sealed class GameInitState : BaseGameState
     {
+        private readonly GameModeUseCase _gameModeUseCase;
         private readonly BgmUseCase _bgmUseCase;
         private readonly AchievementUseCase _achievementUseCase;
         private readonly ChessmenUseCase _chessmenUseCase;
@@ -19,11 +20,12 @@ namespace BoardTower.Game.Presentation.State
         private readonly ScoreUseCase _scoreUseCase;
         private readonly TapScreenUseCase _tapScreenUseCase;
 
-        public GameInitState(BgmUseCase bgmUseCase, AchievementUseCase achievementUseCase,
-            ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase, PickRelicUseCase pickRelicUseCase,
-            RankingUseCase rankingUseCase,
-            RoundUseCase roundUseCase, ScoreUseCase scoreUseCase, TapScreenUseCase tapScreenUseCase)
+        public GameInitState(GameModeUseCase gameModeUseCase, BgmUseCase bgmUseCase,
+            AchievementUseCase achievementUseCase, ChessmenUseCase chessmenUseCase, HudRootUseCase hudRootUseCase,
+            PickRelicUseCase pickRelicUseCase, RankingUseCase rankingUseCase, RoundUseCase roundUseCase,
+            ScoreUseCase scoreUseCase, TapScreenUseCase tapScreenUseCase)
         {
+            _gameModeUseCase = gameModeUseCase;
             _bgmUseCase = bgmUseCase;
             _achievementUseCase = achievementUseCase;
             _chessmenUseCase = chessmenUseCase;
@@ -49,9 +51,13 @@ namespace BoardTower.Game.Presentation.State
             await (
                 _achievementUseCase.PublishAchievementContentsAsync(token),
                 _hudRootUseCase.FadeAsync(Fade.Out, token),
-                _rankingUseCase.PublishScoreRankingAsync(token),
                 _tapScreenUseCase.FadeAsync(Fade.In, token)
             );
+
+            if (_gameModeUseCase.isOnlineMode)
+            {
+                await _rankingUseCase.PublishScoreRankingAsync(token);
+            }
 
             _roundUseCase.Init();
             _scoreUseCase.Init();

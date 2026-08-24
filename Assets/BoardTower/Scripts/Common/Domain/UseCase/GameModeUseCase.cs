@@ -14,6 +14,8 @@ namespace BoardTower.Common.Domain.UseCase
             _gameModeEntity = gameModeEntity;
         }
 
+        public bool isOnlineMode => _gameModeEntity.value.isOnlineMode;
+
         public async UniTask<GameModeVO> JudgeGameMode(CancellationToken token)
         {
             // UnityEngine.Application.internetReachability はメインスレッドでのみ参照可能なため
