@@ -34,8 +34,8 @@ namespace BoardTower.Boot.Presentation.State
         {
             await _loadingUseCase.FadeAsync(Fade.In, token);
 
-            var gameMode = await _gameModeUseCase.JudgeGameMode(token);
-            if (gameMode.isOnlineMode)
+            await _gameModeUseCase.JudgeGameMode(token);
+            if (_gameModeUseCase.isOnlineMode)
             {
                 await LoginAsync(token);
             }

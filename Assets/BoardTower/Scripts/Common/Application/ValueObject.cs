@@ -355,11 +355,11 @@ namespace BoardTower.Common.Application
 
     public sealed class GameModeVO
     {
-        public readonly bool isOnlineMode;
+        public readonly GameMode mode;
 
-        public GameModeVO(bool isOnlineMode)
+        public GameModeVO(GameMode mode)
         {
-            this.isOnlineMode = isOnlineMode;
+            this.mode = mode;
         }
     }
 }

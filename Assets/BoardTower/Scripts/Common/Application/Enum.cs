@@ -35,4 +35,11 @@ namespace BoardTower.Common.Application
         Decision = 1,
         Cancel = 2,
     }
+
+    public enum GameMode
+    {
+        None = 0,
+        Online = 1,
+        Offline = 2,
+    }
 }

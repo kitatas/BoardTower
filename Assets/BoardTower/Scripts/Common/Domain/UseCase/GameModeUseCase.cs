@@ -14,17 +14,17 @@ namespace BoardTower.Common.Domain.UseCase
             _gameModeEntity = gameModeEntity;
         }
 
-        public bool isOnlineMode => _gameModeEntity.value.isOnlineMode;
+        public bool isOnlineMode => _gameModeEntity.value.mode == GameMode.Online;
 
-        public async UniTask<GameModeVO> JudgeGameMode(CancellationToken token)
+        public async UniTask JudgeGameMode(CancellationToken token)
         {
             // UnityEngine.Application.internetReachability はメインスレッドでのみ参照可能なため
             // UniTask.SwitchToMainThread で保証する
             await UniTask.SwitchToMainThread(token);
 
             var isOnline = UnityEngine.Application.internetReachability != UnityEngine.NetworkReachability.NotReachable;
-            _gameModeEntity.Set(new GameModeVO(isOnline));
-            return _gameModeEntity.value;
+            var mode = isOnline ? GameMode.Online : GameMode.Offline;
+            _gameModeEntity.Set(new GameModeVO(mode));
         }
     }
 }
