@@ -117,6 +117,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<HudRootPresenter>();
                 entryPoints.Add<LotRelicPresenter>();
                 entryPoints.Add<GameModalPresenter>();
+                entryPoints.Add<GameModePresenter>();
                 entryPoints.Add<GameStatePresenter>();
                 entryPoints.Add<GemPresenter>();
                 entryPoints.Add<GemComboPresenter>();
@@ -143,6 +144,7 @@ namespace BoardTower.Game.Installer
             builder.Register<HudRootFacade>(Lifetime.Scoped);
             builder.Register<LotRelicFacade>(Lifetime.Scoped);
             builder.Register<GameModalFacade>(Lifetime.Scoped);
+            builder.Register<GameModeFacade>(Lifetime.Scoped);
             builder.Register<GemFacade>(Lifetime.Scoped);
             builder.Register<GemComboFacade>(Lifetime.Scoped);
             builder.Register<GiveUpFacade>(Lifetime.Scoped);
