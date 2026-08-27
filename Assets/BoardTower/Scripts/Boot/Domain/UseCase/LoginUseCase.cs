@@ -20,6 +20,13 @@ namespace BoardTower.Boot.Domain.UseCase
             _saveRepository = saveRepository;
         }
 
+        public async UniTask InitDummyAsync(CancellationToken token)
+        {
+            var saveData = await _saveRepository.LoadAsync(token);
+            var user = new UserVO(saveData.user, PlayFabUserVO.CreateDummy());
+            _userEntity.Set(user);
+        }
+
         public async UniTask<LoginResultVO> LoginAsync(CancellationToken token)
         {
             var user = await FetchUserAsync(token);

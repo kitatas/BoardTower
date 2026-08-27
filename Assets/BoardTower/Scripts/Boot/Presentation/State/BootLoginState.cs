@@ -39,6 +39,10 @@ namespace BoardTower.Boot.Presentation.State
             {
                 await LoginAsync(token);
             }
+            else
+            {
+                await _loginUseCase.InitDummyAsync(token);
+            }
 
             return BootState.Load;
         }

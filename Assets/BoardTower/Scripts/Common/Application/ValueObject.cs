@@ -252,6 +252,11 @@ namespace BoardTower.Common.Application
             this.progresses = progresses;
         }
 
+        public static PlayFabUserVO CreateDummy()
+        {
+            return new PlayFabUserVO("", "", false, UserDisplayNameVO.Create(), Array.Empty<ProgressVO>());
+        }
+
         public static PlayFabUserVO UpdateDisplayName(PlayFabUserVO playFabUser, UserDisplayNameVO displayName)
         {
             return new PlayFabUserVO(playFabUser.playFabId, playFabUser.entityId, playFabUser.isNewly,
