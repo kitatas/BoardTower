@@ -170,6 +170,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<LotRelicView>();
+            builder.RegisterComponentInHierarchy<GameModeView>();
             builder.RegisterComponentInHierarchy<GemView>();
             builder.RegisterComponentInHierarchy<GemComboView>();
             builder.RegisterComponentInHierarchy<GiveUpView>();

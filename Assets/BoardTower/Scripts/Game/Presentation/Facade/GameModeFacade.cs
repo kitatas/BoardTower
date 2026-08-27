@@ -1,25 +1,25 @@
 using BoardTower.Common.Application;
+using BoardTower.Game.Presentation.View;
 
 namespace BoardTower.Game.Presentation.Facade
 {
     public sealed class GameModeFacade
     {
-        public GameModeFacade()
+        private readonly GameModeView _gameModeView;
+
+        public GameModeFacade(GameModeView gameModeView)
         {
+            _gameModeView = gameModeView;
         }
 
         public void Tween(GameMode mode)
         {
-            switch (mode)
+            _ = mode switch
             {
-                case GameMode.Online:
-                    break;
-                case GameMode.Offline:
-                    // TODO: 専用表示・一部ボタン無効化
-                    break;
-                default:
-                    throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODE);
-            }
+                GameMode.Online => _gameModeView.ShowOnline(GameModeConfig.TWEEN_DURATION),
+                GameMode.Offline => _gameModeView.ShowOffline(GameModeConfig.TWEEN_DURATION),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODE),
+            };
         }
     }
 }

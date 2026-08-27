@@ -115,4 +115,9 @@ namespace BoardTower.Common.Application
         public const string TABLE_NAME = "LocaleTable";
         public const string ACHIEVEMENT_CONTENT_KEY = "Achievement_{0}";
     }
+
+    public sealed class GameModeConfig
+    {
+        public const float TWEEN_DURATION = 0.1f;
+    }
 }
