@@ -7,7 +7,7 @@ namespace BoardTower.Game.Presentation.View
     {
         [SerializeField] private RectTransform footer = default;
 
-        public Tween Show(float duration)
+        public Tween FadeIn(float duration)
         {
             return DOTween.Sequence()
                 .Append(footer
@@ -16,7 +16,7 @@ namespace BoardTower.Game.Presentation.View
                 .SetLink(gameObject);
         }
 
-        public Tween Hide(float duration)
+        public Tween FadeOut(float duration)
         {
             return DOTween.Sequence()
                 .Append(footer

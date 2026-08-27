@@ -1,5 +1,7 @@
+using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Game.Presentation.View;
+using Cysharp.Threading.Tasks;
 
 namespace BoardTower.Game.Presentation.Facade
 {
@@ -12,14 +14,16 @@ namespace BoardTower.Game.Presentation.Facade
             _gameModeView = gameModeView;
         }
 
-        public void Tween(GameMode mode)
+        public UniTask FadeAsync(GameModeTransitionVO gameModeTransition, CancellationToken token)
         {
-            _ = mode switch
+            var tween = gameModeTransition.transition.fade switch
             {
-                GameMode.Online => _gameModeView.ShowOnline(GameModeConfig.TWEEN_DURATION),
-                GameMode.Offline => _gameModeView.ShowOffline(GameModeConfig.TWEEN_DURATION),
-                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODE),
+                Fade.In => _gameModeView.FadeIn(gameModeTransition.gameMode, gameModeTransition.transition.duration),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
             };
+
+            return tween
+                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
         }
     }
 }

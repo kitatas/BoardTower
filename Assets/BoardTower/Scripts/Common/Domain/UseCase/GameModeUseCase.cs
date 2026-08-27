@@ -1,24 +1,24 @@
-using System;
 using System.Threading;
 using BoardTower.Common.Application;
 using BoardTower.Common.Data.Entity;
+using BoardTower.Common.Domain.Ports;
 using Cysharp.Threading.Tasks;
-using R3;
+using MessagePipe;
 
 namespace BoardTower.Common.Domain.UseCase
 {
-    public sealed class GameModeUseCase : IDisposable
+    public sealed class GameModeUseCase
     {
         private readonly GameModeEntity _gameModeEntity;
-        private readonly Subject<GameMode> _gameMode;
+        private readonly GameModePorts _gameModePorts;
 
-        public GameModeUseCase(GameModeEntity gameModeEntity)
+        public GameModeUseCase(GameModeEntity gameModeEntity, GameModePorts gameModePorts)
         {
             _gameModeEntity = gameModeEntity;
-            _gameMode = new Subject<GameMode>();
+            _gameModePorts = gameModePorts;
         }
 
-        public Observable<GameMode> gameMode => _gameMode;
+        public IAsyncSubscriber<GameModeTransitionVO> gameModeTransition => _gameModePorts.gameModeTransitionSubscriber;
         public bool isOnlineMode => _gameModeEntity.value.mode == GameMode.Online;
 
         public async UniTask JudgeGameMode(CancellationToken token)
@@ -32,14 +32,10 @@ namespace BoardTower.Common.Domain.UseCase
             _gameModeEntity.Set(new GameModeVO(mode));
         }
 
-        public void SetUp()
+        public UniTask FadeInAsync(CancellationToken token)
         {
-            _gameMode?.OnNext(_gameModeEntity.value.mode);
-        }
-
-        void IDisposable.Dispose()
-        {
-            _gameMode?.Dispose();
+            var m = GameModeTransitionVO.Create(_gameModeEntity.value.mode, Fade.In);
+            return _gameModePorts.PublishGameModeAsync(m, token);
         }
     }
 }

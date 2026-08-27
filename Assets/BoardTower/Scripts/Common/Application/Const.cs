@@ -118,6 +118,6 @@ namespace BoardTower.Common.Application
 
     public sealed class GameModeConfig
     {
-        public const float TWEEN_DURATION = 0.1f;
+        public const float FADE_DURATION = 0.25f;
     }
 }

@@ -362,4 +362,22 @@ namespace BoardTower.Common.Application
             this.mode = mode;
         }
     }
+
+    public sealed class GameModeTransitionVO
+    {
+        public readonly GameMode gameMode;
+        public readonly TransitionVO transition;
+
+        public GameModeTransitionVO(GameMode gameMode, TransitionVO transition)
+        {
+            this.gameMode = gameMode;
+            this.transition = transition;
+        }
+
+        public static GameModeTransitionVO Create(GameMode mode, Fade fade)
+        {
+            var transition = new TransitionVO(fade, GameModeConfig.FADE_DURATION);
+            return new GameModeTransitionVO(mode, transition);
+        }
+    }
 }

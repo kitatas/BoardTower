@@ -39,9 +39,12 @@ namespace BoardTower.Game.Presentation.State
 
         public override GameState state => GameState.Init;
 
-        public override UniTask InitAsync(CancellationToken token)
+        public override async UniTask InitAsync(CancellationToken token)
         {
-            return _hudRootUseCase.InitAsync(token);
+            await (
+                _gameModeUseCase.FadeInAsync(token),
+                _hudRootUseCase.InitAsync(token)
+            );
         }
 
         public override async UniTask EnterAsync(CancellationToken token)

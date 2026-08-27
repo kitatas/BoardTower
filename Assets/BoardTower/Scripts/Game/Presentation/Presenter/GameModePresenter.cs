@@ -1,6 +1,7 @@
 using System;
 using BoardTower.Common.Domain.UseCase;
 using BoardTower.Game.Presentation.Facade;
+using MessagePipe;
 using R3;
 using VContainer.Unity;
 
@@ -21,8 +22,8 @@ namespace BoardTower.Game.Presentation.Presenter
 
         void IStartable.Start()
         {
-            _gameModeUseCase.gameMode
-                .Subscribe(_gameModeFacade.Tween)
+            _gameModeUseCase.gameModeTransition
+                .Subscribe(_gameModeFacade.FadeAsync)
                 .AddTo(_disposable);
         }
 

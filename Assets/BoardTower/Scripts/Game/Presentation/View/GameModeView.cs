@@ -1,3 +1,4 @@
+using BoardTower.Common.Application;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,17 +8,27 @@ namespace BoardTower.Game.Presentation.View
     {
         [SerializeField] private OfflineModeView offlineModeView = default;
 
-        public Tween ShowOnline(float duration)
+        public Tween FadeIn(GameMode mode, float duration)
+        {
+            return mode switch
+            {
+                GameMode.Online => FadeInOnline(duration),
+                GameMode.Offline => FadeInOffline(duration),
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_GAME_MODE),
+            };
+        }
+
+        private Tween FadeInOnline(float duration)
         {
             return DOTween.Sequence()
-                .Append(offlineModeView.Hide(duration))
+                .Append(offlineModeView.FadeOut(duration))
                 .SetLink(gameObject);
         }
 
-        public Tween ShowOffline(float duration)
+        private Tween FadeInOffline(float duration)
         {
             return DOTween.Sequence()
-                .Append(offlineModeView.Show(duration))
+                .Append(offlineModeView.FadeIn(duration))
                 .SetLink(gameObject);
         }
     }

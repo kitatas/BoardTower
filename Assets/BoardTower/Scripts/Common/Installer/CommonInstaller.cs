@@ -35,6 +35,7 @@ namespace BoardTower.Common.Installer
 
             // Ports
             builder.Register<ExceptionPorts>(Lifetime.Singleton);
+            builder.Register<GameModePorts>(Lifetime.Singleton);
             builder.Register<LoadingPorts>(Lifetime.Singleton);
 
             // Repository
