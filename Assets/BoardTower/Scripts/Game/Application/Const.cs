@@ -98,4 +98,16 @@ namespace BoardTower.Game.Application
 
         public const string SECRET_CONTENT = "???";
     }
+
+    public sealed class OfflineConfig
+    {
+        public static readonly GameModalType[] DEACTIVE_GAME_MODALS =
+        {
+            GameModalType.DeleteConfirm,
+            GameModalType.DeleteComplete,
+            GameModalType.Account,
+            GameModalType.Achievement,
+            GameModalType.Ranking,
+        };
+    }
 }

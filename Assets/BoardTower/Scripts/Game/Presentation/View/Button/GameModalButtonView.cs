@@ -7,5 +7,6 @@ namespace BoardTower.Game.Presentation.View.Button
     public sealed class GameModalButtonView : BaseModalButtonView<GameModalType>
     {
         protected override BaseModalVO<GameModalType> modal => new GameModalVO(modalType, fadeType);
+        public GameModalType type => modal.type;
     }
 }

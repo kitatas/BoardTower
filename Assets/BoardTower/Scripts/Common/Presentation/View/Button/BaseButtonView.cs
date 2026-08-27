@@ -19,5 +19,10 @@ namespace BoardTower.Common.Presentation.View.Button
         {
             isInitialized = true;
         }
+
+        public void SetInteractable(bool value)
+        {
+            button.interactable = value;
+        }
     }
 }
