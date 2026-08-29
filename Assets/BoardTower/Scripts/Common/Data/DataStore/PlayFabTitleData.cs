@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BoardTower.Common.Application;
 using Newtonsoft.Json;
@@ -15,7 +16,7 @@ namespace BoardTower.Common.Data.DataStore
 
         public IList<T> Deserialize<T>(string key)
         {
-            if (_titleData == null) throw new QuitExceptionVO(ExceptionConfig.FAILED_TO_DESERIALIZE_MASTER);
+            if (_titleData == null) return Array.Empty<T>();
 
             return _titleData.TryGetValue(key, out var master)
                 ? JsonConvert.DeserializeObject<T[]>(master)
