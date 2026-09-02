@@ -47,6 +47,7 @@ namespace BoardTower.Boot.Installer
             // Facade
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<DisplayNameFacade>(Lifetime.Scoped);
+            builder.Register<GameModeFacade>(Lifetime.Scoped);
             builder.Register<SplashFacade>(Lifetime.Scoped);
 
             // State
@@ -61,12 +62,14 @@ namespace BoardTower.Boot.Installer
                 entryPoints.Add<BootStatePresenter>();
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<DisplayNamePresenter>();
+                entryPoints.Add<GameModePresenter>();
                 entryPoints.Add<SplashPresenter>();
             });
 
             // View
             builder.RegisterFindObjectsByType<BaseButtonView>();
             builder.RegisterComponentInHierarchy<DisplayNameView>();
+            builder.RegisterComponentInHierarchy<GameModeView>();
             builder.RegisterComponentInHierarchy<SplashView>();
         }
     }
