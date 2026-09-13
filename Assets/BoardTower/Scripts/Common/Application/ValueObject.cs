@@ -379,9 +379,9 @@ namespace BoardTower.Common.Application
             this.transition = transition;
         }
 
-        public static GameModeTransitionVO Create(GameMode mode, Fade fade)
+        public static GameModeTransitionVO Create(GameMode mode, Fade fade, float duration)
         {
-            var transition = new TransitionVO(fade, GameModeConfig.FADE_DURATION);
+            var transition = new TransitionVO(fade, duration);
             return new GameModeTransitionVO(mode, transition);
         }
     }

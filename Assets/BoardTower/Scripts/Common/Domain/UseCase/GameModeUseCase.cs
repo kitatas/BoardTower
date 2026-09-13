@@ -34,7 +34,7 @@ namespace BoardTower.Common.Domain.UseCase
 
         public UniTask FadeInAsync(CancellationToken token)
         {
-            var m = GameModeTransitionVO.Create(_gameModeEntity.value.mode, Fade.In);
+            var m = GameModeTransitionVO.Create(_gameModeEntity.value.mode, Fade.In, GameModeConfig.FADE_DURATION);
             return _gameModePorts.PublishGameModeAsync(m, token);
         }
     }
