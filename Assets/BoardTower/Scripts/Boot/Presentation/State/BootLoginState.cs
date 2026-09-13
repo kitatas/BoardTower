@@ -38,17 +38,12 @@ namespace BoardTower.Boot.Presentation.State
             await _loadingUseCase.FadeAsync(Fade.In, token);
 
             await _gameModeUseCase.JudgeGameMode(token);
-            if (_gameModeUseCase.isOnlineMode)
-            {
-                await LoginAsync(token);
-            }
-            else
-            {
-                await _loginUseCase.InitDummyAsync(token);
 
-                // Offline起動の通知
-                await _gameModeUseCase.FadeInAsync(token);
-            }
+            await (
+                _gameModeUseCase.isOnlineMode
+                    ? LoginAsync(token)
+                    : LoginOfflineAsync(token)
+            );
 
             return BootState.Load;
         }
@@ -65,6 +60,16 @@ namespace BoardTower.Boot.Presentation.State
                 await _loadingUseCase.FadeAsync(Fade.In, token);
                 await _loginUseCase.RegisterAsync(userDisplayName, token);
             }
+        }
+
+        private async UniTask LoginOfflineAsync(CancellationToken token)
+        {
+            await _loadingUseCase.FadeAsync(Fade.Out, token);
+
+            await _loginUseCase.InitDummyAsync(token);
+
+            // Offline起動の通知
+            await _gameModeUseCase.FadeInAsync(token);
         }
     }
 }
