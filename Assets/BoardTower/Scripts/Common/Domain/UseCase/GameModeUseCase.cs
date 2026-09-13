@@ -21,6 +21,13 @@ namespace BoardTower.Common.Domain.UseCase
         public IAsyncSubscriber<GameModeTransitionVO> gameModeTransition => _gameModePorts.gameModeTransitionSubscriber;
         public bool isOnlineMode => _gameModeEntity.value.mode == GameMode.Online;
 
+        public UniTask InitAsync(CancellationToken token)
+        {
+            // NOTE: 初期化前なので、Offline固定に
+            var m = GameModeTransitionVO.Create(GameMode.Offline, Fade.Out, 0.0f);
+            return _gameModePorts.PublishGameModeAsync(m, token);
+        }
+
         public async UniTask JudgeGameMode(CancellationToken token)
         {
             // UnityEngine.Application.internetReachability はメインスレッドでのみ参照可能なため

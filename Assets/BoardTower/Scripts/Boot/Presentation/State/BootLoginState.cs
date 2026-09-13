@@ -25,9 +25,12 @@ namespace BoardTower.Boot.Presentation.State
 
         public override BootState state => BootState.Login;
 
-        public override UniTask InitAsync(CancellationToken token)
+        public override async UniTask InitAsync(CancellationToken token)
         {
-            return _displayNameUseCase.InitAsync(token);
+            await (
+                _gameModeUseCase.InitAsync(token),
+                _displayNameUseCase.InitAsync(token)
+            );
         }
 
         public override async UniTask<BootState> TickAsync(CancellationToken token)
