@@ -60,6 +60,13 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "com.harumak.upalette": {
+      "version": "https://github.com/Haruma-K/uPalette.git?path=/Assets/uPalette",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0d4066bf0212bd00d5adb5f8b9bbad7e2af11853"
+    },
     "com.kitatas.uniex": {
       "version": "https://github.com/kitatas/UniEx.git?path=/Assets/UniEx",
       "depth": 0,
