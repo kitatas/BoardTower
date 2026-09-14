@@ -6,11 +6,13 @@ namespace BoardTower.Game.Presentation.View.Button
 {
     public sealed class MuteButtonView : BaseButtonView
     {
-        [SerializeField] private Image icon = default;
+        [SerializeField] private Image activeIcon = default;
+        [SerializeField] private Image inactiveIcon = default;
 
         public void ActivateMute(bool value)
         {
-            icon.color = value ? Color.lightSlateGray : Color.darkRed;
+            activeIcon.enabled = !value;
+            inactiveIcon.enabled = value;
         }
     }
 }
