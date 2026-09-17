@@ -22,6 +22,7 @@
     "com.unity.timeline": "1.8.12",
     "com.unity.ugui": "2.0.0",
     "jp.hadashikick.vcontainer": "1.18.0",
+    "jp.keijiro.kino.post-processing.eight.universal": "https://github.com/keijiro/KinoEightURP.git?path=Packages/jp.keijiro.kino.post-processing.eight.universal",
     "net.gree.unity-webview": "https://github.com/gree/unity-webview.git?path=/dist/package",
     "org.nuget.fastenum": "1.8.0",
     "org.nuget.messagepack": "3.1.7",
