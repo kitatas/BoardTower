@@ -2,6 +2,7 @@ using BoardTower.Common.Application;
 using BoardTower.Common.Presentation.View.Button;
 using DG.Tweening;
 using R3;
+using UniEx;
 using UnityEngine;
 
 namespace BoardTower.Boot.Presentation.View
@@ -20,10 +21,13 @@ namespace BoardTower.Boot.Presentation.View
             _tween?.Kill(true);
 
             return _tween = DOTween.Sequence()
+                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
                 .Append(canvasGroup
                     .DOFade(1.0f, duration)
-                    .SetEase(Ease.Linear))
-                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
+                    .SetEase(Ease.OutBack))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one, duration)
+                    .SetEase(Ease.OutBack))
                 .SetLink(gameObject);
         }
 
@@ -32,10 +36,13 @@ namespace BoardTower.Boot.Presentation.View
             _tween?.Kill(true);
 
             return _tween = DOTween.Sequence()
-                .AppendCallback(() => canvasGroup.blocksRaycasts = false)
                 .Append(canvasGroup
                     .DOFade(0.0f, duration)
-                    .SetEase(Ease.Linear))
+                    .SetEase(Ease.OutQuart))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one * 0.8f, duration)
+                    .SetEase(Ease.OutQuart))
+                .AppendCallback(() => canvasGroup.blocksRaycasts = false)
                 .SetLink(gameObject);
         }
     }
