@@ -33,6 +33,7 @@ namespace BoardTower.Boot.Installer
             builder.Register<BootStatePorts>(Lifetime.Scoped);
             builder.Register<DisplayNamePorts>(Lifetime.Scoped);
             builder.Register<SplashPorts>(Lifetime.Scoped);
+            builder.Register<UpdatePorts>(Lifetime.Scoped);
 
             // Repository
             builder.Register<SplashRepository>(Lifetime.Scoped);
@@ -43,12 +44,14 @@ namespace BoardTower.Boot.Installer
             builder.Register<LoginUseCase>(Lifetime.Scoped);
             builder.Register<ResourceUseCase>(Lifetime.Scoped);
             builder.Register<SplashUseCase>(Lifetime.Scoped);
+            builder.Register<UpdateUseCase>(Lifetime.Scoped);
 
             // Facade
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<DisplayNameFacade>(Lifetime.Scoped);
             builder.Register<GameModeFacade>(Lifetime.Scoped);
             builder.Register<SplashFacade>(Lifetime.Scoped);
+            builder.Register<UpdateFacade>(Lifetime.Scoped);
 
             // State
             builder.Register<BaseBootState, BootInitState>(Lifetime.Scoped);
@@ -64,6 +67,7 @@ namespace BoardTower.Boot.Installer
                 entryPoints.Add<DisplayNamePresenter>();
                 entryPoints.Add<GameModePresenter>();
                 entryPoints.Add<SplashPresenter>();
+                entryPoints.Add<UpdatePresenter>();
             });
 
             // View
@@ -71,6 +75,7 @@ namespace BoardTower.Boot.Installer
             builder.RegisterComponentInHierarchy<DisplayNameView>();
             builder.RegisterComponentInHierarchy<GameModeView>();
             builder.RegisterComponentInHierarchy<SplashView>();
+            builder.RegisterComponentInHierarchy<UpdateView>();
         }
     }
 }

@@ -51,4 +51,20 @@ namespace BoardTower.Boot.Application
             return new SplashTransitionVO(splash, transition);
         }
     }
+
+    public sealed class UpdateTransitionVO
+    {
+        public readonly TransitionVO transition;
+
+        public UpdateTransitionVO(TransitionVO transition)
+        {
+            this.transition = transition;
+        }
+
+        public static UpdateTransitionVO Create(Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new UpdateTransitionVO(transition);
+        }
+    }
 }
