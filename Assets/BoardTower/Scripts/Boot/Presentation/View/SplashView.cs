@@ -9,7 +9,7 @@ namespace BoardTower.Boot.Presentation.View
 {
     public sealed class SplashView : MonoBehaviour
     {
-        [SerializeField] private Button button = default;
+        [SerializeField] private UnityEngine.UI.Button button = default;
         [SerializeField] private Image copyright = default;
 
         private Tween _tween;
