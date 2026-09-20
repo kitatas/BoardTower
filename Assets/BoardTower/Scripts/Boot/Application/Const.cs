@@ -1,5 +1,10 @@
 namespace BoardTower.Boot.Application
 {
+    public sealed class BootModalConfig
+    {
+        public const float FADE_DURATION = 0.25f;
+    }
+
     public sealed class SplashConfig
     {
         public static readonly SplashType[] TYPES =

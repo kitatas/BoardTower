@@ -9,6 +9,11 @@ namespace BoardTower.Boot.Application
         Login = 4,
     }
 
+    public enum BootModalType
+    {
+        None = 0,
+    }
+
     public enum SplashType
     {
         None = 0,

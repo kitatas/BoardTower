@@ -7,6 +7,8 @@ using BoardTower.Boot.Presentation.Facade;
 using BoardTower.Boot.Presentation.Presenter;
 using BoardTower.Boot.Presentation.State;
 using BoardTower.Boot.Presentation.View;
+using BoardTower.Boot.Presentation.View.Button;
+using BoardTower.Boot.Presentation.View.Modal;
 using BoardTower.Common.Presentation.Facade;
 using BoardTower.Common.Presentation.Presenter;
 using BoardTower.Common.Presentation.View.Button;
@@ -27,9 +29,11 @@ namespace BoardTower.Boot.Installer
             builder.RegisterInstance<SplashTable>(splashTable);
 
             // Entity
+            builder.Register<BootModalEntity>(Lifetime.Scoped);
             builder.Register<BootStateEntity>(Lifetime.Scoped);
 
             // Ports
+            builder.Register<BootModalPorts>(Lifetime.Scoped);
             builder.Register<BootStatePorts>(Lifetime.Scoped);
             builder.Register<DisplayNamePorts>(Lifetime.Scoped);
             builder.Register<SplashPorts>(Lifetime.Scoped);
@@ -41,6 +45,7 @@ namespace BoardTower.Boot.Installer
 
             // UseCase
             builder.Register<AppVersionUseCase>(Lifetime.Scoped);
+            builder.Register<BootModalUseCase>(Lifetime.Scoped);
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
             builder.Register<DisplayNameUseCase>(Lifetime.Scoped);
             builder.Register<LoginUseCase>(Lifetime.Scoped);
@@ -49,6 +54,7 @@ namespace BoardTower.Boot.Installer
             builder.Register<UpdateUseCase>(Lifetime.Scoped);
 
             // Facade
+            builder.Register<BootModalFacade>(Lifetime.Scoped);
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<DisplayNameFacade>(Lifetime.Scoped);
             builder.Register<GameModeFacade>(Lifetime.Scoped);
@@ -64,6 +70,7 @@ namespace BoardTower.Boot.Installer
             // Presenter
             builder.UseEntryPoints(Lifetime.Scoped, entryPoints =>
             {
+                entryPoints.Add<BootModalPresenter>();
                 entryPoints.Add<BootStatePresenter>();
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<DisplayNamePresenter>();
@@ -74,6 +81,8 @@ namespace BoardTower.Boot.Installer
 
             // View
             builder.RegisterFindObjectsByType<BaseButtonView>();
+            builder.RegisterFindObjectsByType<BootModalButtonView>();
+            builder.RegisterFindObjectsByType<BaseBootModalView>();
             builder.RegisterComponentInHierarchy<DisplayNameView>();
             builder.RegisterComponentInHierarchy<GameModeView>();
             builder.RegisterComponentInHierarchy<SplashView>();

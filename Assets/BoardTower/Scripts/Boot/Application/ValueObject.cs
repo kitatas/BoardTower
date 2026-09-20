@@ -3,6 +3,36 @@ using UnityEngine;
 
 namespace BoardTower.Boot.Application
 {
+    public sealed class BootModalVO : BaseModalVO<BootModalType>
+    {
+        public BootModalVO(BootModalType type, Fade fade) : base(type, fade)
+        {
+            if (type is BootModalType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_BOOT_MODAL);
+        }
+    }
+
+    public sealed class BootModalTransitionVO : BaseModalTransitionVO<BootModalType>
+    {
+        public BootModalTransitionVO(BootModalType type, TransitionVO transition) : base(type, transition)
+        {
+            if (type is BootModalType.None)
+                throw new QuitExceptionVO(ExceptionConfig.INVALID_BOOT_MODAL);
+        }
+
+        public static BootModalTransitionVO Create(BootModalType type, Fade fade, float duration)
+        {
+            var transition = new TransitionVO(fade, duration);
+            return new BootModalTransitionVO(type, transition);
+        }
+
+        public static BootModalTransitionVO Create(BootModalVO bootModal, float duration)
+        {
+            var transition = new TransitionVO(bootModal.fade, duration);
+            return new BootModalTransitionVO(bootModal.type, transition);
+        }
+    }
+
     public sealed class DisplayNameTransitionVO
     {
         public readonly TransitionVO transition;
