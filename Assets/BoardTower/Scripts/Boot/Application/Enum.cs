@@ -13,6 +13,7 @@ namespace BoardTower.Boot.Application
     {
         None = 0,
         Update = 1,
+        Name = 2,
     }
 
     public enum SplashType

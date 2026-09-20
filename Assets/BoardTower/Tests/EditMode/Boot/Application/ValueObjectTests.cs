@@ -8,26 +8,6 @@ namespace BoardTower.Tests.EditMode.Boot.Application
     [TestFixture]
     public sealed class ValueObjectTests
     {
-        // ---- DisplayNameTransitionVO ----
-
-        [Test]
-        public void DisplayNameTransitionVO_Constructor_AssignsTransition()
-        {
-            var transition = new TransitionVO(Fade.In, 0.5f);
-            var sut = new DisplayNameTransitionVO(transition);
-            Assert.That(sut.transition, Is.EqualTo(transition));
-        }
-
-        [TestCase(Fade.In, 0.0f)]
-        [TestCase(Fade.Out, 0.5f)]
-        [TestCase(Fade.InOut, 1.0f)]
-        public void DisplayNameTransitionVO_Create_SetsCorrectFadeAndDuration(Fade fade, float duration)
-        {
-            var sut = DisplayNameTransitionVO.Create(fade, duration);
-            Assert.That(sut.transition.fade, Is.EqualTo(fade));
-            Assert.That(sut.transition.duration, Is.EqualTo(duration));
-        }
-
         // ---- SplashVO ----
 
         [Test]

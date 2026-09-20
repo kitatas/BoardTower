@@ -1,34 +1,17 @@
-using System.Threading;
-using BoardTower.Boot.Application;
-using BoardTower.Boot.Presentation.View;
-using BoardTower.Common.Application;
-using Cysharp.Threading.Tasks;
+using BoardTower.Boot.Presentation.View.Modal;
 using R3;
 
 namespace BoardTower.Boot.Presentation.Facade
 {
     public sealed class DisplayNameFacade
     {
-        private readonly DisplayNameView _displayNameView;
+        private readonly DisplayNameModalView _displayNameModalView;
 
-        public DisplayNameFacade(DisplayNameView displayNameView)
+        public DisplayNameFacade(DisplayNameModalView displayNameModalView)
         {
-            _displayNameView = displayNameView;
+            _displayNameModalView = displayNameModalView;
         }
 
-        public Observable<string> OnDecisionDisplayName() => _displayNameView.decisionDisplayName;
-
-        public UniTask FadeAsync(DisplayNameTransitionVO displayNameTransition, CancellationToken token)
-        {
-            var tween = displayNameTransition.transition.fade switch
-            {
-                Fade.In => _displayNameView.FadeIn(displayNameTransition.transition.duration),
-                Fade.Out => _displayNameView.FadeOut(displayNameTransition.transition.duration),
-                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE),
-            };
-
-            return tween
-                .ToUniTask(cancellationToken: token);
-        }
+        public Observable<string> OnDecisionDisplayName() => _displayNameModalView.decisionDisplayName;
     }
 }

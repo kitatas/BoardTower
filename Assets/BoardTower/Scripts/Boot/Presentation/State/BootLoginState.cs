@@ -33,8 +33,7 @@ namespace BoardTower.Boot.Presentation.State
         public override async UniTask InitAsync(CancellationToken token)
         {
             await (
-                _gameModeUseCase.InitAsync(token),
-                _displayNameUseCase.InitAsync(token)
+                _gameModeUseCase.InitAsync(token)
             );
         }
 
@@ -69,7 +68,11 @@ namespace BoardTower.Boot.Presentation.State
             if (!loginResult.isRegistered)
             {
                 await _loadingUseCase.FadeAsync(Fade.Out, token);
-                var userDisplayName = await _displayNameUseCase.DecideDisplayNameAsync(token);
+
+                var modal = new BootModalVO(BootModalType.Name, Fade.In);
+                await _bootModalUseCase.FadeAsync(modal, token);
+
+                var userDisplayName = await _displayNameUseCase.DecideAsync(token);
 
                 await _loadingUseCase.FadeAsync(Fade.In, token);
                 await _loginUseCase.RegisterAsync(userDisplayName, token);

@@ -35,7 +35,6 @@ namespace BoardTower.Boot.Installer
             // Ports
             builder.Register<BootModalPorts>(Lifetime.Scoped);
             builder.Register<BootStatePorts>(Lifetime.Scoped);
-            builder.Register<DisplayNamePorts>(Lifetime.Scoped);
             builder.Register<SplashPorts>(Lifetime.Scoped);
 
             // Repository
@@ -79,7 +78,7 @@ namespace BoardTower.Boot.Installer
             builder.RegisterFindObjectsByType<BaseButtonView>();
             builder.RegisterFindObjectsByType<BootModalButtonView>();
             builder.RegisterFindObjectsByType<BaseBootModalView>();
-            builder.RegisterComponentInHierarchy<DisplayNameView>();
+            builder.RegisterComponentInHierarchy<DisplayNameModalView>();
             builder.RegisterComponentInHierarchy<GameModeView>();
             builder.RegisterComponentInHierarchy<SplashView>();
             builder.RegisterComponentInHierarchy<UpdateView>();
