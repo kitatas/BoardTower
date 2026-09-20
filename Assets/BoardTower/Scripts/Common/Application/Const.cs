@@ -26,6 +26,7 @@ namespace BoardTower.Common.Application
         public const string NOT_FOUND_SE = "NOT_FOUND_SE";
         public const string NOT_FOUND_SOUND_TYPE = "NOT_FOUND_SOUND_TYPE";
         public const string NOT_FOUND_STATE = "NOT_FOUND_STATE";
+        public const string NOT_FOUND_APP_VERSION = "NOT_FOUND_APP_VERSION";
         public const string NOT_FOUND_WEBVIEW = "NOT_FOUND_WEBVIEW";
         public const string INVALID_ACHIEVEMENT = "INVALID_ACHIEVEMENT";
         public const string INVALID_ACHIEVEMENT_RANK = "INVALID_ACHIEVEMENT_RANK";
@@ -108,6 +109,7 @@ namespace BoardTower.Common.Application
         public const string SCORE_KEY = "";
         public const string ACHIEVEMENT_KEY = "";
         public const string PROGRESS_KEY = "";
+        public const string APP_VERSION_KEY = "";
 
         public const int CREATE_UID_RETRY_COUNT = 10;
         public const int DECISION_NAME_RETRY_COUNT = 10;

@@ -36,9 +36,11 @@ namespace BoardTower.Boot.Installer
             builder.Register<UpdatePorts>(Lifetime.Scoped);
 
             // Repository
+            builder.Register<AppVersionRepository>(Lifetime.Scoped);
             builder.Register<SplashRepository>(Lifetime.Scoped);
 
             // UseCase
+            builder.Register<AppVersionUseCase>(Lifetime.Scoped);
             builder.Register<BootStateUseCase>(Lifetime.Scoped);
             builder.Register<DisplayNameUseCase>(Lifetime.Scoped);
             builder.Register<LoginUseCase>(Lifetime.Scoped);

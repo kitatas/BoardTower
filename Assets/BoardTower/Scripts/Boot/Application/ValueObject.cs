@@ -67,4 +67,16 @@ namespace BoardTower.Boot.Application
             return new UpdateTransitionVO(transition);
         }
     }
+
+    public sealed class AppVersionVO
+    {
+        public readonly int major;
+        public readonly int minor;
+
+        public AppVersionVO(int major, int minor)
+        {
+            this.major = major;
+            this.minor = minor;
+        }
+    }
 }
