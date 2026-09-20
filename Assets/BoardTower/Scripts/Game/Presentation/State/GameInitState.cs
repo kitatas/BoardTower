@@ -42,7 +42,7 @@ namespace BoardTower.Game.Presentation.State
         public override async UniTask InitAsync(CancellationToken token)
         {
             await (
-                _gameModeUseCase.FadeInAsync(token),
+                _gameModeUseCase.FadeAsync(Fade.In, token),
                 _hudRootUseCase.InitAsync(token)
             );
         }

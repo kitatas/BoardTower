@@ -21,24 +21,30 @@ namespace BoardTower.Boot.Presentation.Facade
             {
                 Fade.In => FadeInAsync(gameModeTransition, token),
                 Fade.Out => FadeOutAsync(gameModeTransition, token),
+                Fade.InOut => FadeInOutAsync(gameModeTransition, token),
                 _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_FADE)
             });
         }
 
-        public async UniTask FadeInAsync(GameModeTransitionVO gameModeTransition, CancellationToken token)
+        public UniTask FadeInAsync(GameModeTransitionVO gameModeTransition, CancellationToken token)
         {
-            await _gameModeView.FadeIn(gameModeTransition.transition.duration)
+            return _gameModeView.FadeIn(gameModeTransition.transition.duration)
                 .ToUniTask(cancellationToken: token);
-
-            await _gameModeView.decision.FirstAsync(cancellationToken: token);
-
-            await FadeOutAsync(gameModeTransition, token);
         }
 
         public UniTask FadeOutAsync(GameModeTransitionVO gameModeTransition, CancellationToken token)
         {
             return _gameModeView.FadeOut(gameModeTransition.transition.duration)
                 .ToUniTask(cancellationToken: token);
+        }
+
+        public async UniTask FadeInOutAsync(GameModeTransitionVO gameModeTransition, CancellationToken token)
+        {
+            await FadeInAsync(gameModeTransition, token);
+
+            await _gameModeView.decision.FirstAsync(cancellationToken: token);
+
+            await FadeOutAsync(gameModeTransition, token);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace BoardTower.Boot.Presentation.State
             await _loginUseCase.InitDummyAsync(token);
 
             // Offline起動の通知
-            await _gameModeUseCase.FadeInAsync(token);
+            await _gameModeUseCase.FadeAsync(Fade.InOut, token);
 
             return BootState.Load;
         }
