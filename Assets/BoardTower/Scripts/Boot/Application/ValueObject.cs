@@ -82,22 +82,6 @@ namespace BoardTower.Boot.Application
         }
     }
 
-    public sealed class UpdateTransitionVO
-    {
-        public readonly TransitionVO transition;
-
-        public UpdateTransitionVO(TransitionVO transition)
-        {
-            this.transition = transition;
-        }
-
-        public static UpdateTransitionVO Create(Fade fade, float duration)
-        {
-            var transition = new TransitionVO(fade, duration);
-            return new UpdateTransitionVO(transition);
-        }
-    }
-
     public sealed class AppVersionVO
     {
         public readonly int major;

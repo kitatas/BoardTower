@@ -12,6 +12,7 @@ namespace BoardTower.Boot.Application
     public enum BootModalType
     {
         None = 0,
+        Update = 1,
     }
 
     public enum SplashType

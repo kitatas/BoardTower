@@ -10,22 +10,22 @@ namespace BoardTower.Boot.Presentation.State
     public sealed class BootLoginState : BaseBootState
     {
         private readonly AppVersionUseCase _appVersionUseCase;
+        private readonly BootModalUseCase _bootModalUseCase;
         private readonly GameModeUseCase _gameModeUseCase;
         private readonly DisplayNameUseCase _displayNameUseCase;
         private readonly LoadingUseCase _loadingUseCase;
         private readonly LoginUseCase _loginUseCase;
-        private readonly UpdateUseCase _updateUseCase;
 
-        public BootLoginState(AppVersionUseCase appVersionUseCase, GameModeUseCase gameModeUseCase,
-            DisplayNameUseCase displayNameUseCase, LoadingUseCase loadingUseCase, LoginUseCase loginUseCase,
-            UpdateUseCase updateUseCase)
+        public BootLoginState(AppVersionUseCase appVersionUseCase, BootModalUseCase bootModalUseCase,
+            GameModeUseCase gameModeUseCase, DisplayNameUseCase displayNameUseCase, LoadingUseCase loadingUseCase,
+            LoginUseCase loginUseCase)
         {
             _appVersionUseCase = appVersionUseCase;
+            _bootModalUseCase = bootModalUseCase;
             _gameModeUseCase = gameModeUseCase;
             _displayNameUseCase = displayNameUseCase;
             _loadingUseCase = loadingUseCase;
             _loginUseCase = loginUseCase;
-            _updateUseCase = updateUseCase;
         }
 
         public override BootState state => BootState.Login;
@@ -34,8 +34,7 @@ namespace BoardTower.Boot.Presentation.State
         {
             await (
                 _gameModeUseCase.InitAsync(token),
-                _displayNameUseCase.InitAsync(token),
-                _updateUseCase.InitAsync(token)
+                _displayNameUseCase.InitAsync(token)
             );
         }
 
@@ -60,7 +59,10 @@ namespace BoardTower.Boot.Presentation.State
             if (_appVersionUseCase.IsForceUpdate())
             {
                 await _loadingUseCase.FadeAsync(Fade.Out, token);
-                await _updateUseCase.FadeAsync(Fade.In, token);
+
+                var modal = new BootModalVO(BootModalType.Update, Fade.In);
+                await _bootModalUseCase.FadeAsync(modal, token);
+
                 return BootState.None;
             }
 

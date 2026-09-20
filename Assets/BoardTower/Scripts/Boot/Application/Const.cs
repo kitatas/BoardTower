@@ -16,9 +16,4 @@ namespace BoardTower.Boot.Application
         public const float FADE_DURATION = 0.5f;
         public const float DISPLAY_DURATION = 1.0f;
     }
-
-    public sealed class UpdateConfig
-    {
-        public const float FADE_DURATION = 0.5f;
-    }
 }
