@@ -30,6 +30,244 @@ MonoBehaviour:
     m_Localized: Cleared {0} times!!
     m_Metadata:
       m_Items: []
+  - m_Id: 29912692704665600
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992192
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992193
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992194
+    m_Localized: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992195
+    m_Localized: Account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992196
+    m_Localized: Achievement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992197
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992198
+    m_Localized: Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992199
+    m_Localized: Privacy Policy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992200
+    m_Localized: License
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992201
+    m_Localized: Other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29938331503550464
+    m_Localized: Error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992203
+    m_Localized: Warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992204
+    m_Localized: Delete Account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992205
+    m_Localized: Ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186496
+    m_Localized: 'Are you sure you want to delete your account?
+
+      This action
+      cannot be undone.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186497
+    m_Localized: 'Your account has been deleted.
+
+      Restarting.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186498
+    m_Localized: Give Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186499
+    m_Localized: Are you sure you want to give up?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186500
+    m_Localized: Run Abandoned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186501
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186502
+    m_Localized: Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186503
+    m_Localized: SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186504
+    m_Localized: Ply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186505
+    m_Localized: Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186506
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186507
+    m_Localized: Relic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186508
+    m_Localized: Round
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380800
+    m_Localized: "* Enter a name (3\u201325 characters).\n* Names already in use
+      cannot be selected."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380801
+    m_Localized: Notification
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380802
+    m_Localized: 'Launching in offline mode.
+
+      Some features will be restricted.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380803
+    m_Localized: 'The latest version is available.
+
+      Please update the game.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927099501371392
+    m_Localized: Credit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927872595484672
+    m_Localized: Display Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927872599678976
+    m_Localized: Enter Name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012051603456
+    m_Localized: Briarguard Boots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930048
+    m_Localized: Codex of Steady Steps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930049
+    m_Localized: Heavy Knight's Anchor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930050
+    m_Localized: Goldbug Charm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930051
+    m_Localized: Twinheart Chalice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930052
+    m_Localized: Baton of Continuance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930053
+    m_Localized: Halfmoon Pact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930054
+    m_Localized: Triumphant Golden Seal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930055
+    m_Localized: Scales of Goldlaw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930056
+    m_Localized: Banner of Victory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124352
+    m_Localized: Medal of Thorns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124353
+    m_Localized: Nullify spikes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124354
+    m_Localized: Fragile tiles stay intact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124355
+    m_Localized: Ignore conveyors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124356
+    m_Localized: 70% chance for +1 Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124357
+    m_Localized: 70% chance for +1 Heart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124358
+    m_Localized: 70% chance to keep Combo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124359
+    m_Localized: "Moves & Goal \xD70.5, Coin Score \xD72.25"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124360
+    m_Localized: "Extra Coin: Score \xD72.0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124361
+    m_Localized: 'Get Coin: Score +10%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124362
+    m_Localized: 'Clear Round: Score +10%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124363
+    m_Localized: '70% chance: Score +50'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

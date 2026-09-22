@@ -27,6 +27,234 @@ MonoBehaviour:
     m_Key: Achievement_Clear
     m_Metadata:
       m_Items: []
+  - m_Id: 29912692704665600
+    m_Key: Button_Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992192
+    m_Key: Button_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992193
+    m_Key: Menu_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992194
+    m_Key: Menu_Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992195
+    m_Key: Menu_Account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992196
+    m_Key: Menu_Achievement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992197
+    m_Key: Menu_Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992198
+    m_Key: Menu_Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992199
+    m_Key: Menu_Policy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992200
+    m_Key: Menu_License
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927099501371392
+    m_Key: Menu_Credit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992201
+    m_Key: Menu_Other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927872595484672
+    m_Key: Account_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29927872599678976
+    m_Key: Account_Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992203
+    m_Key: Account_Warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992204
+    m_Key: Account_Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692905992205
+    m_Key: Ranking_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186496
+    m_Key: Delete_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186497
+    m_Key: Delete_Complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186498
+    m_Key: GiveUp_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186499
+    m_Key: GiveUp_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186500
+    m_Key: GiveUp_Complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186501
+    m_Key: Sound_Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186502
+    m_Key: Sound_Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186503
+    m_Key: Sound_SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186504
+    m_Key: Hud_Ply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186505
+    m_Key: Hud_Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186506
+    m_Key: Hud_Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186507
+    m_Key: Hud_Relic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692910186508
+    m_Key: Hud_Round
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380800
+    m_Key: Name_Rule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29938331503550464
+    m_Key: Modal_Error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380801
+    m_Key: Modal_Notification
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380802
+    m_Key: Notification_Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29912692914380803
+    m_Key: Notification_Update
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012051603456
+    m_Key: Relic_001_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930048
+    m_Key: Relic_002_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930049
+    m_Key: Relic_003_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930050
+    m_Key: Relic_004_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930051
+    m_Key: Relic_005_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930052
+    m_Key: Relic_006_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930053
+    m_Key: Relic_007_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930054
+    m_Key: Relic_008_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930055
+    m_Key: Relic_009_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012252930056
+    m_Key: Relic_010_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124352
+    m_Key: Relic_011_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124353
+    m_Key: Relic_001_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124354
+    m_Key: Relic_002_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124355
+    m_Key: Relic_003_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124356
+    m_Key: Relic_004_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124357
+    m_Key: Relic_005_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124358
+    m_Key: Relic_006_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124359
+    m_Key: Relic_007_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124360
+    m_Key: Relic_008_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124361
+    m_Key: Relic_009_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124362
+    m_Key: Relic_010_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30384012257124363
+    m_Key: Relic_011_Content
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
