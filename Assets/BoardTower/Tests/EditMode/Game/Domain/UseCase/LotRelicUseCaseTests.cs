@@ -31,8 +31,10 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             _subscriber = new FakeAsyncSubscriber<LotRelicTransitionVO>();
             _ports = new LotRelicPorts(_subscriber, _publisher);
 
+            // LocaleRepository は UnityEngine.Localization 依存のため null を渡す
             // RelicRepository は MasterMemory 依存のため null を渡す
-            _useCase = new LotRelicUseCase(_lotRelicEntity, _pickRelicEntity, _ports, null);
+            // → Lot() は両リポジトリが sealed かつ非 virtual のためユニットテスト不可
+            _useCase = new LotRelicUseCase(_lotRelicEntity, _pickRelicEntity, _ports, null, null);
         }
 
         [TearDown]
