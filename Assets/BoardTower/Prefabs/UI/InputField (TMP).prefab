@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9174322743718873134}
   - component: {fileID: 4762170041842206571}
   - component: {fileID: 8849411999480610268}
+  - component: {fileID: 1206090643406368719}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -66,17 +67,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Enter Name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bd7a2fb33d14f431d97c8de9d8f69068, type: 2}
+  m_sharedMaterial: {fileID: 7194121940077736703, guid: bd7a2fb33d14f431d97c8de9d8f69068, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+    rgba: 4289827446
+  m_fontColor: {r: 0.4627451, g: 0.57254905, b: 0.69411767, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -158,6 +159,21 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1206090643406368719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619792648064624649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e1d633c6a85e040a3eeb66ccca5432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: uPalette::uPalette.Runtime.Core.Synchronizer.Color.GraphicColorSynchronizer
+  _entryId:
+    _value: c43a353b-5f2e-4102-84d9-55dea5b585fb
+  _component: {fileID: 4762170041842206571}
 --- !u!1 &2440239425038839852
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +343,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: bd7a2fb33d14f431d97c8de9d8f69068, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -363,6 +379,7 @@ GameObject:
   - component: {fileID: 3093977773983399163}
   - component: {fileID: 5445613390330525021}
   - component: {fileID: 7510625690021658525}
+  - component: {fileID: 1365058766209272825}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -419,15 +436,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bd7a2fb33d14f431d97c8de9d8f69068, type: 2}
+  m_sharedMaterial: {fileID: 7194121940077736703, guid: bd7a2fb33d14f431d97c8de9d8f69068, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4283707672
+  m_fontColor: {r: 0.09411765, g: 0.19215687, b: 0.32941177, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -489,6 +506,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1365058766209272825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286355867971109288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e1d633c6a85e040a3eeb66ccca5432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: uPalette::uPalette.Runtime.Core.Synchronizer.Color.GraphicColorSynchronizer
+  _entryId:
+    _value: 6519a43a-d558-4178-a986-c3b54e1a9e5e
+  _component: {fileID: 7510625690021658525}
 --- !u!1 &9143041557450035742
 GameObject:
   m_ObjectHideFlags: 0
