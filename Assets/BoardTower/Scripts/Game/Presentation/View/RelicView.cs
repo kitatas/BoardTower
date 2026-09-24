@@ -4,6 +4,7 @@ using Cysharp.Text;
 using DG.Tweening;
 using FastEnumUtility;
 using TMPro;
+using UniEx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -41,21 +42,28 @@ namespace BoardTower.Game.Presentation.View
         public Tween FadeIn(float duration, float delay)
         {
             return DOTween.Sequence()
-                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
                 .Append(canvasGroup
                     .DOFade(1.0f, duration)
-                    .SetEase(Ease.Linear))
+                    .SetEase(Ease.OutBack))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one, duration)
+                    .SetEase(Ease.OutBack))
+                .AppendCallback(() => canvasGroup.blocksRaycasts = true)
                 .SetDelay(delay)
                 .SetLink(gameObject);
         }
 
         public Tween FadeOut(float duration, float delay)
         {
+            canvasGroup.blocksRaycasts = false;
+
             return DOTween.Sequence()
                 .Append(canvasGroup
                     .DOFade(0.0f, duration)
-                    .SetEase(Ease.Linear))
-                .AppendCallback(() => canvasGroup.blocksRaycasts = false)
+                    .SetEase(Ease.OutQuart))
+                .Join(canvasGroup.transform.ToRectTransform()
+                    .DOScale(Vector3.one * 0.8f, duration)
+                    .SetEase(Ease.OutQuart))
                 .SetDelay(delay)
                 .SetLink(gameObject);
         }
