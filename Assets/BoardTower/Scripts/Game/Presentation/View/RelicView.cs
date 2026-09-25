@@ -33,10 +33,14 @@ namespace BoardTower.Game.Presentation.View
 
         public void RenderEmpty()
         {
-            icon.sprite = null;
-            relicName.text = ZString.Format("{0}", "---");
-            content.text = ZString.Format("{0}", "---");
-            uniqLabel.SetActive(false);
+            var path = "Assets/Externals/Sprites/UI/relic.png[relic_0]";
+            this.LoadAsset<Sprite>(path, x =>
+            {
+                icon.sprite = x;
+                relicName.text = ZString.Format("{0}", "---");
+                content.text = ZString.Format("{0}", "---");
+                uniqLabel.SetActive(false);
+            });
         }
 
         public Tween FadeIn(float duration, float delay)

@@ -8,20 +8,23 @@ namespace BoardTower.Game.Presentation.View
 {
     public sealed class PickRelicView : MonoBehaviour
     {
-        [SerializeField] private List<RelicView> relicViews = default;
+        [SerializeField] private List<RelicView> pickViews = default;
+        [SerializeField] private List<RelicView> detailViews = default;
 
         public void Render(PickRelicVO pickRelic)
         {
             var pickRelics = pickRelic.relics.ToArray();
-            for (int i = 0; i < relicViews.Count; i++)
+            for (int i = 0; i < pickViews.Count; i++)
             {
                 if (pickRelics.TryGetValue(i, out var relic))
                 {
-                    relicViews[i].Render(relic);
+                    pickViews[i].Render(relic);
+                    detailViews[i].Render(relic);
                 }
                 else
                 {
-                    relicViews[i].RenderEmpty();
+                    pickViews[i].RenderEmpty();
+                    detailViews[i].RenderEmpty();
                 }
             }
         }
