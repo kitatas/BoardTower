@@ -91,6 +91,7 @@ namespace BoardTower.Game.Application
         Account = 10,
         Achievement = 11,
         Ranking = 12,
+        Relic = 13,
     }
 
     public enum RelicType
