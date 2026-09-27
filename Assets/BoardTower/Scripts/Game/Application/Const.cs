@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace BoardTower.Game.Application
 {
     public sealed class BoardConfig
@@ -95,6 +97,71 @@ namespace BoardTower.Game.Application
             AchievementType.Score,
             AchievementType.Clear,
         };
+
+        public static readonly AchievementEffectVO NORMAL = new(
+            new Color32(0x10, 0x16, 0x1C, 0xFF),
+            new Color32(0x3A, 0x55, 0x6A, 0xFF),
+            new Color32(0xD8, 0xF4, 0xFF, 0xFF),
+            new Color32(0x1A, 0x27, 0x32, 0xFF),
+            new Color32(0xE8, 0xFA, 0xFF, 0xFF),
+            new Color32(0x05, 0x08, 0x0C, 0xFF),
+            1.05f,
+            0.09f,
+            0.10f,
+            0.90f
+        );
+
+        public static readonly AchievementEffectVO BRONZE = new(
+            new Color32(0x45, 0x0D, 0x05, 0xFF),
+            new Color32(0xA8, 0x3A, 0x12, 0xFF),
+            new Color32(0xFF, 0xC8, 0x72, 0xFF),
+            new Color32(0x65, 0x18, 0x08, 0xFF),
+            new Color32(0xFF, 0xE0, 0xA0, 0xFF),
+            new Color32(0x2A, 0x06, 0x02, 0xFF),
+            1.10f,
+            0.10f,
+            0.11f,
+            1.00f
+        );
+
+        public static readonly AchievementEffectVO SILVER = new(
+            new Color32(0x12, 0x2E, 0x48, 0xFF),
+            new Color32(0x55, 0x91, 0xBB, 0xFF),
+            new Color32(0xFF, 0xFF, 0xFF, 0xFF),
+            new Color32(0x2A, 0x52, 0x70, 0xFF),
+            new Color32(0xF0, 0xFC, 0xFF, 0xFF),
+            new Color32(0x06, 0x14, 0x20, 0xFF),
+            1.15f,
+            0.11f,
+            0.12f,
+            1.00f
+        );
+
+        public static readonly AchievementEffectVO GOLD = new(
+            new Color32(0x50, 0x22, 0x00, 0xFF),
+            new Color32(0xD8, 0x78, 0x00, 0xFF),
+            new Color32(0xFF, 0xF8, 0x70, 0xFF),
+            new Color32(0xA5, 0x4A, 0x00, 0xFF),
+            new Color32(0xFF, 0xFF, 0xC0, 0xFF),
+            new Color32(0x30, 0x10, 0x00, 0xFF),
+            1.20f,
+            0.12f,
+            0.13f,
+            1.00f
+        );
+
+        public static readonly AchievementEffectVO PLATINUM = new(
+            new Color32(0x48, 0x8E, 0xB0, 0xFF),
+            new Color32(0xB8, 0xEC, 0xFF, 0xFF),
+            new Color32(0xFF, 0xFF, 0xFF, 0xFF),
+            new Color32(0x78, 0xD8, 0xFF, 0xFF),
+            new Color32(0xFF, 0xFF, 0xFF, 0xFF),
+            new Color32(0x18, 0x4C, 0x68, 0xFF),
+            1.30f,
+            0.14f,
+            0.16f,
+            1.00f
+        );
 
         public const string SECRET_CONTENT = "???";
     }

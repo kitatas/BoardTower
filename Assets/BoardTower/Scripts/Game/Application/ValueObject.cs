@@ -527,6 +527,36 @@ namespace BoardTower.Game.Application
         }
     }
 
+    public sealed class AchievementEffectVO
+    {
+        public readonly Color gradationColor1;
+        public readonly Color gradationColor2;
+        public readonly Color gradationColor3;
+        public readonly Color gradationColor4;
+        public readonly Color edgeColor;
+        public readonly Color shadowColor;
+        public readonly float gradationIntensity;
+        public readonly float edgeWidth;
+        public readonly float edgeShinyWidth;
+        public readonly float edgeShinyRate;
+
+        public AchievementEffectVO(Color gradationColor1, Color gradationColor2, Color gradationColor3,
+            Color gradationColor4, Color edgeColor, Color shadowColor, float gradationIntensity, float edgeWidth,
+            float edgeShinyWidth, float edgeShinyRate)
+        {
+            this.gradationColor1 = gradationColor1;
+            this.gradationColor2 = gradationColor2;
+            this.gradationColor3 = gradationColor3;
+            this.gradationColor4 = gradationColor4;
+            this.edgeColor = edgeColor;
+            this.shadowColor = shadowColor;
+            this.gradationIntensity = gradationIntensity;
+            this.edgeWidth = edgeWidth;
+            this.edgeShinyWidth = edgeShinyWidth;
+            this.edgeShinyRate = edgeShinyRate;
+        }
+    }
+
     public sealed class AchievementContentVO
     {
         public readonly AchievementVO achievement;

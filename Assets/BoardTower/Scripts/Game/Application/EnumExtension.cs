@@ -115,5 +115,18 @@ namespace BoardTower.Game.Application
                 ? (AchievementRankType)self
                 : throw new QuitExceptionVO(ExceptionConfig.INVALID_ACHIEVEMENT_RANK);
         }
+
+        public static AchievementEffectVO ToAchievementEffect(this AchievementRankType self)
+        {
+            return self switch
+            {
+                AchievementRankType.Normal => AchievementConfig.NORMAL,
+                AchievementRankType.Gold => AchievementConfig.GOLD,
+                AchievementRankType.Silver => AchievementConfig.SILVER,
+                AchievementRankType.Bronze => AchievementConfig.BRONZE,
+                AchievementRankType.Platinum => AchievementConfig.PLATINUM,
+                _ => throw new QuitExceptionVO(ExceptionConfig.INVALID_ACHIEVEMENT_RANK),
+            };
+        }
     }
 }
