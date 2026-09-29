@@ -538,11 +538,12 @@ namespace BoardTower.Game.Application
         public readonly float gradationIntensity;
         public readonly float edgeWidth;
         public readonly float edgeShinyWidth;
-        public readonly float edgeShinyRate;
+        public readonly bool edgeShiny;
+        public readonly bool transitionShiny;
 
         public AchievementEffectVO(Color gradationColor1, Color gradationColor2, Color gradationColor3,
             Color gradationColor4, Color edgeColor, Color shadowColor, float gradationIntensity, float edgeWidth,
-            float edgeShinyWidth, float edgeShinyRate)
+            float edgeShinyWidth, bool edgeShiny, bool transitionShiny)
         {
             this.gradationColor1 = gradationColor1;
             this.gradationColor2 = gradationColor2;
@@ -553,7 +554,8 @@ namespace BoardTower.Game.Application
             this.gradationIntensity = gradationIntensity;
             this.edgeWidth = edgeWidth;
             this.edgeShinyWidth = edgeShinyWidth;
-            this.edgeShinyRate = edgeShinyRate;
+            this.edgeShiny = edgeShiny;
+            this.transitionShiny = transitionShiny;
         }
     }
 
