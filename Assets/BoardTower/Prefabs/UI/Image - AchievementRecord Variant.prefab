@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Presentation.View::BoardTower.Game.Presentation.View.AchievementRecordView
   uiEffect: {fileID: 6816866843803761110}
+  icon: {fileID: 762171327192052682}
   content: {fileID: 8186712489665633048}
 --- !u!114 &8029238110810361845
 MonoBehaviour:
@@ -431,6 +432,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6816866843803761110}
   m_SourcePrefab: {fileID: 100100000, guid: b041c0ebbb0374dd8a3b762f5d08f108, type: 3}
+--- !u!114 &762171327192052682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8379459465767373682, guid: b041c0ebbb0374dd8a3b762f5d08f108, type: 3}
+  m_PrefabInstance: {fileID: 9140643907109681336}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199510708646697062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &3879418399315088061 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5407804243016296965, guid: b041c0ebbb0374dd8a3b762f5d08f108, type: 3}
@@ -466,20 +478,20 @@ MonoBehaviour:
   m_TransitionFilter: 0
   m_TransitionRate: 0.5
   m_TransitionReverse: 0
-  m_TransitionTex: {fileID: 0}
+  m_TransitionTex: {fileID: 2800000, guid: 944c3fa29663042a1bdc35546c2eda58, type: 3}
   m_TransitionTexScale: {x: 1, y: 1}
   m_TransitionTexOffset: {x: 0, y: 0}
   m_TransitionTexSpeed: {x: 0, y: 0}
-  m_TransitionRotation: 0
+  m_TransitionRotation: 135
   m_TransitionKeepAspectRatio: 1
-  m_TransitionWidth: 0.2
-  m_TransitionSoftness: 0.2
+  m_TransitionWidth: 0.12
+  m_TransitionSoftness: 0.35
   m_TransitionRange:
     m_Min: 0
     m_Max: 1
-  m_TransitionColorFilter: 6
-  m_TransitionColor: {r: 0, g: 0.5, b: 1, a: 1}
-  m_TransitionColorGlow: 0
+  m_TransitionColorFilter: 2
+  m_TransitionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_TransitionColorGlow: 1
   m_TransitionPatternReverse: 0
   m_TransitionAutoPlaySpeed: 0
   m_TransitionGradient:
@@ -571,8 +583,8 @@ MonoBehaviour:
   m_GradationWrapMode: 0
   m_GradationReverse: 0
   m_AllowToModifyMeshShape: 1
-  m_EdgeMode: 2
-  m_EdgeWidth: 0.08
+  m_EdgeMode: 0
+  m_EdgeWidth: 0.09
   m_EdgeColorFilter: 2
   m_EdgeColor: {r: 1, g: 1, b: 1, a: 1}
   m_EdgeColorGlow: 1
