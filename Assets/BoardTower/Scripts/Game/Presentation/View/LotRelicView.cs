@@ -10,6 +10,7 @@ namespace BoardTower.Game.Presentation.View
 {
     public sealed class LotRelicView : MonoBehaviour
     {
+        [SerializeField] private LotRelicNoticeView lotRelicNoticeView = default;
         [SerializeField] private List<RelicView> relicViews = default;
 
         public void Render(LotRelicVO lotRelic)
@@ -23,6 +24,8 @@ namespace BoardTower.Game.Presentation.View
         public Tween FadeIn(float duration)
         {
             var sequence = DOTween.Sequence();
+            sequence.Join(lotRelicNoticeView.FadeIn(duration));
+
             for (int i = 0; i < relicViews.Count; i++)
             {
                 var delay = duration > 0.0f ? i * RelicConfig.LOT_DELAY_RATE : 0.0f;
@@ -35,6 +38,8 @@ namespace BoardTower.Game.Presentation.View
         public Tween FadeOut(float duration)
         {
             var sequence = DOTween.Sequence();
+            sequence.Join(lotRelicNoticeView.FadeOut(duration));
+
             for (int i = 0; i < relicViews.Count; i++)
             {
                 var delay = duration > 0.0f ? i * RelicConfig.LOT_DELAY_RATE : 0.0f;
