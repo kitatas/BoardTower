@@ -8,8 +8,9 @@ namespace BoardTower.Game.Presentation.View
     {
         private void Awake()
         {
+            var y = transform.localRotation.eulerAngles.y;
             transform
-                .DORotate(new Vector3(0.0f, 360.0f, 0.0f), BoardConfig.EVENT_OBJECT_DURATION, RotateMode.FastBeyond360)
+                .DORotate(new Vector3(0.0f, y + 360.0f, 0.0f), BoardConfig.EVENT_OBJECT_DURATION, RotateMode.FastBeyond360)
                 .SetEase(Ease.InOutCirc)
                 .SetLoops(-1, LoopType.Restart)
                 .SetLink(gameObject);
