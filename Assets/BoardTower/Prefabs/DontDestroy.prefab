@@ -1601,6 +1601,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5300859672504243802, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300859672504243802, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300859672504243802, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.81960785
+      objectReference: {fileID: 0}
     - target: {fileID: 7083904875583240975, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
       propertyPath: m_Alpha
       value: 0
@@ -1617,15 +1629,66 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9124886938498035378, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4889840803357704402}
     - targetCorrespondingSourceObject: {fileID: 1407005302616047013, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3378582169002127497}
+    - targetCorrespondingSourceObject: {fileID: 674489716957368671, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 124919470337933298}
   m_SourcePrefab: {fileID: 100100000, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
 --- !u!224 &2298591433005680395 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3844037050213013255, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
   m_PrefabInstance: {fileID: 3080180594872438796}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2585835004962111827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 674489716957368671, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+  m_PrefabInstance: {fileID: 3080180594872438796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &124919470337933298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585835004962111827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Components.LocalizeStringEvent
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:7bd06ac8a1acd4f0a97660b2a11dcd0e
+    m_TableEntryReference:
+      m_KeyId: 29912692905992192
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4510604070621175158}
+        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &4123133627068935593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1407005302616047013, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
@@ -1645,11 +1708,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: Common.Presentation.View::BoardTower.Common.Presentation.View.Button.CommonButtonView
   button: {fileID: 7622656194001202500}
   seType: 1
+--- !u!114 &4510604070621175158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1451880294576688506, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+  m_PrefabInstance: {fileID: 3080180594872438796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585835004962111827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!225 &5256239653524581123 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 7083904875583240975, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
   m_PrefabInstance: {fileID: 3080180594872438796}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5289119324792775323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7194577296341152407, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+  m_PrefabInstance: {fileID: 3080180594872438796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060969600792313534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &6060969600792313534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9124886938498035378, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
+  m_PrefabInstance: {fileID: 3080180594872438796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4889840803357704402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060969600792313534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Components.LocalizeStringEvent
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:7bd06ac8a1acd4f0a97660b2a11dcd0e
+    m_TableEntryReference:
+      m_KeyId: 29938331503550464
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5289119324792775323}
+        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7622656194001202500 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4861603372776766792, guid: 12e272068b6f3469a96e0ae88e70a13d, type: 3}
@@ -1996,19 +2126,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Color.a
-      value: 0.69803923
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.7882353
       objectReference: {fileID: 0}
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.8862745
       objectReference: {fileID: 0}
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.92941177
       objectReference: {fileID: 0}
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_DrawShape
@@ -2019,40 +2149,8 @@ PrefabInstance:
       value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Rectangle.m_UniformCornerRadius
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key0.b
-      value: 0.078431375
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key0.g
-      value: 0.28627452
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key0.r
-      value: 0.62352943
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key1.b
-      value: 0.21568628
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key1.g
-      value: 0.38039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key1.r
-      value: 0.63529414
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.m_ColorSpace
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664034026462793489, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       propertyPath: m_Name
@@ -2144,13 +2242,47 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7674212190774456409, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8513582575224143417}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6664034026462793489, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7470076797007176015}
   m_SourcePrefab: {fileID: 100100000, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
 --- !u!224 &1787622748061907874 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7674212190774456409, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
   m_PrefabInstance: {fileID: 8236712327818660859}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3329789168524461290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6664034026462793489, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
+  m_PrefabInstance: {fileID: 8236712327818660859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7470076797007176015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329789168524461290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e1d633c6a85e040a3eeb66ccca5432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: uPalette::uPalette.Runtime.Core.Synchronizer.Color.GraphicColorSynchronizer
+  _entryId:
+    _value: 85d3714d-6d5e-4019-b9c4-2ad5a1eea14d
+  _component: {fileID: 3682350477673272375}
+--- !u!114 &3682350477673272375 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4707660219466047436, guid: 23509196748444c75b44f3a2f544fbbe, type: 3}
+  m_PrefabInstance: {fileID: 8236712327818660859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329789168524461290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141109fb25f0083469e71ce8cb3e75c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MPUIKit::MPUIKIT.MPImage
 --- !u!1001 &8259501758520302550
 PrefabInstance:
   m_ObjectHideFlags: 0
