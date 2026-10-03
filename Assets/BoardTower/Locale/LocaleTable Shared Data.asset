@@ -59,6 +59,14 @@ MonoBehaviour:
     m_Key: Menu_Help
     m_Metadata:
       m_Items: []
+  - m_Id: 34322163333849088
+    m_Key: Menu_HowTo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34322163530981376
+    m_Key: Menu_Guide
+    m_Metadata:
+      m_Items: []
   - m_Id: 29912692905992199
     m_Key: Menu_Policy
     m_Metadata:
@@ -73,6 +81,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 29912692905992201
     m_Key: Menu_Other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34362307654967296
+    m_Key: Menu_OtherApps
     m_Metadata:
       m_Items: []
   - m_Id: 29927872595484672
@@ -165,6 +177,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 29912692914380803
     m_Key: Notification_Update
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30790907711184896
+    m_Key: Relic_Uniq
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30800645958131712
+    m_Key: Relic_Notice
     m_Metadata:
       m_Items: []
   - m_Id: 30384012051603456

@@ -268,6 +268,26 @@ MonoBehaviour:
     m_Localized: '70% chance: Score +50'
     m_Metadata:
       m_Items: []
+  - m_Id: 30790907711184896
+    m_Localized: Uniq
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30800645958131712
+    m_Localized: '* Double-tap the relic you want to obtain *'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34322163333849088
+    m_Localized: How To Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34322163530981376
+    m_Localized: Screen Guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34362307654967296
+    m_Localized: OtherApps
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
