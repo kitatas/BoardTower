@@ -42,4 +42,11 @@ namespace BoardTower.Common.Application
         Online = 1,
         Offline = 2,
     }
+
+    public enum UrlType
+    {
+        None = 0,
+        Apps = 1,
+        DeveloperApps = 2,
+    }
 }

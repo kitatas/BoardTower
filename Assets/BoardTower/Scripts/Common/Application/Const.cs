@@ -51,6 +51,7 @@ namespace BoardTower.Common.Application
         public const string INVALID_SPLASH = "INVALID_SPLASH";
         public const string INVALID_SQUARE_EVENT = "INVALID_SQUARE_EVENT";
         public const string INVALID_SQUARE_INDEX = "INVALID_SQUARE_INDEX";
+        public const string INVALID_URL = "INVALID_URL";
     }
 
     public sealed class LoadingConfig
