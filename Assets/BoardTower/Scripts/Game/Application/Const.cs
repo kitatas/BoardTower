@@ -197,4 +197,10 @@ namespace BoardTower.Game.Application
             GameModalType.Ranking,
         };
     }
+
+    public sealed class EventLogConfig
+    {
+        public const string LOCALE_KEY = "EventLog_{0}";
+        public const float DURATION = 0.2f;
+    }
 }

@@ -610,4 +610,16 @@ namespace BoardTower.Game.Application
             this.value = value;
         }
     }
+
+    public sealed class EventLogMessageVO
+    {
+        public readonly string message;
+        public readonly float duration;
+
+        public EventLogMessageVO(string message, float duration)
+        {
+            this.message = message;
+            this.duration = duration;
+        }
+    }
 }
