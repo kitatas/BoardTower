@@ -9,34 +9,45 @@ namespace BoardTower.Game.Presentation.View
     {
         [SerializeField] private TextMeshProUGUI message = default;
 
-        public Tween Show(EventLogMessageVO eventLogMessage)
+        private Tween _tween;
+
+        public Tween Tween(EventLogMessageVO eventLogMessage)
         {
+            _tween?.Kill(true);
+
             var y = message.rectTransform.anchoredPosition.y;
+            return _tween = DOTween.Sequence()
+                .Append(Show(eventLogMessage, y))
+                .AppendInterval(eventLogMessage.duration)
+                .Append(Hide(eventLogMessage, y))
+                .SetLink(gameObject);
+        }
+
+        private Tween Show(EventLogMessageVO eventLogMessage, float y)
+        {
             message.text = eventLogMessage.message;
 
             return DOTween.Sequence()
                 .Append(message
-                    .DOFade(1.0f, eventLogMessage.duration)
+                    .DOFade(1.0f, eventLogMessage.duration / 2.0f)
                     .SetEase(Ease.Linear))
                 .Join(message.rectTransform
-                    .DOAnchorPosY(y + 25.0f, eventLogMessage.duration)
+                    .DOAnchorPosY(y + 25.0f, eventLogMessage.duration / 2.0f)
                     .SetEase(Ease.Linear))
                 .SetLink(gameObject);
         }
 
-        public Tween Hide(EventLogMessageVO eventLogMessage)
+        private Tween Hide(EventLogMessageVO eventLogMessage, float y)
         {
-            var y = message.rectTransform.anchoredPosition.y;
-
             return DOTween.Sequence()
                 .Append(message
-                    .DOFade(0.0f, eventLogMessage.duration)
+                    .DOFade(0.0f, eventLogMessage.duration / 2.0f)
                     .SetEase(Ease.Linear))
                 .Join(message.rectTransform
-                    .DOAnchorPosY(y + 25.0f, eventLogMessage.duration)
+                    .DOAnchorPosY(y + 50.0f, eventLogMessage.duration / 2.0f)
                     .SetEase(Ease.Linear))
                 .Append(message.rectTransform
-                    .DOAnchorPosY(y - 25.0f, 0.0f)
+                    .DOAnchorPosY(y, 0.0f)
                     .SetEase(Ease.Linear))
                 .SetLink(gameObject);
         }

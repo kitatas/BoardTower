@@ -49,7 +49,7 @@ namespace BoardTower.Game.Presentation.State
 
             if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);
 
-            _eventLogUseCase.PublishLogAsync(token).Forget();
+            await _eventLogUseCase.PublishLogAsync(token);
             return _plyUseCase.IsZero() ? GameState.Judge : GameState.Input;
         }
     }

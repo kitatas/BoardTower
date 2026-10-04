@@ -16,11 +16,8 @@ namespace BoardTower.Game.Presentation.Facade
 
         public async UniTask RenderAsync(EventLogMessageVO eventLogMessage, CancellationToken token)
         {
-            await _eventLogView.Show(eventLogMessage)
-                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
-
-            await _eventLogView.Hide(eventLogMessage)
-                .ToUniTask(TweenCancelBehaviour.KillAndCancelAwait, token);
+            await _eventLogView.Tween(eventLogMessage)
+                .ToUniTask(TweenCancelBehaviour.KillWithCompleteCallbackAndCancelAwait, token);
         }
     }
 }

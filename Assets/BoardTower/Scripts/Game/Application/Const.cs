@@ -201,6 +201,6 @@ namespace BoardTower.Game.Application
     public sealed class EventLogConfig
     {
         public const string LOCALE_KEY = "EventLog_{0}";
-        public const float DURATION = 0.2f;
+        public const float DURATION = 0.25f;
     }
 }
