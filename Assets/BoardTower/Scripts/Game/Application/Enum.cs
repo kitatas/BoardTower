@@ -139,4 +139,15 @@ namespace BoardTower.Game.Application
         Gold = 4,
         Platinum = 5,
     }
+
+    public enum EventLogType
+    {
+        None = 0,
+        Ride = 1,
+        Combo = 2,
+        Keep = 3,
+        Gem = 4,
+        Score = 5,
+        Heart = 6,
+    }
 }

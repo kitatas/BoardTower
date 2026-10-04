@@ -598,4 +598,16 @@ namespace BoardTower.Game.Application
             this.isSelf = isSelf;
         }
     }
+
+    public sealed class EventLogVO
+    {
+        public readonly EventLogType type;
+        public readonly int value;
+
+        public EventLogVO(EventLogType type, int value)
+        {
+            this.type = type;
+            this.value = value;
+        }
+    }
 }
