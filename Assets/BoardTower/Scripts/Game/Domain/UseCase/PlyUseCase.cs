@@ -1,4 +1,5 @@
 using System;
+using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.Repository;
 using R3;
@@ -8,14 +9,17 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class PlyUseCase : IDisposable
     {
+        private readonly EventLogEntity _eventLogEntity;
         private readonly PickRelicEntity _pickRelicEntity;
         private readonly PlyEntity _plyEntity;
         private readonly RoundRepository _roundRepository;
         private readonly ReactiveProperty<int> _ply;
         private readonly ReactiveProperty<int> _plyMax;
 
-        public PlyUseCase(PickRelicEntity pickRelicEntity, PlyEntity plyEntity, RoundRepository roundRepository)
+        public PlyUseCase(EventLogEntity eventLogEntity, PickRelicEntity pickRelicEntity, PlyEntity plyEntity,
+            RoundRepository roundRepository)
         {
+            _eventLogEntity = eventLogEntity;
             _pickRelicEntity = pickRelicEntity;
             _plyEntity = plyEntity;
             _roundRepository = roundRepository;
@@ -42,6 +46,8 @@ namespace BoardTower.Game.Domain.UseCase
         {
             _plyEntity.Add(value);
             _ply.Value = _plyEntity.value;
+
+            _eventLogEntity.Add(EventLogType.Heart, value);
         }
 
         public void Decrease()

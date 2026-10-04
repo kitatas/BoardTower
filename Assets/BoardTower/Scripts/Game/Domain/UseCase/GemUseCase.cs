@@ -1,4 +1,5 @@
 using System;
+using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using R3;
 
@@ -6,11 +7,13 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class GemUseCase : IDisposable
     {
+        private readonly EventLogEntity _eventLogEntity;
         private readonly GemEntity _gemEntity;
         private readonly ReactiveProperty<int> _gem;
 
-        public GemUseCase(GemEntity gemEntity)
+        public GemUseCase(EventLogEntity eventLogEntity, GemEntity gemEntity)
         {
+            _eventLogEntity = eventLogEntity;
             _gemEntity = gemEntity;
             _gem = new ReactiveProperty<int>(0);
         }
@@ -27,6 +30,8 @@ namespace BoardTower.Game.Domain.UseCase
         {
             _gemEntity.Add(value);
             _gem.Value = _gemEntity.value;
+
+            _eventLogEntity.Add(EventLogType.Gem, value);
         }
 
         void IDisposable.Dispose()

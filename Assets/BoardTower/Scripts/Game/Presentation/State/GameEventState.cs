@@ -8,16 +8,19 @@ namespace BoardTower.Game.Presentation.State
     public sealed class GameEventState : BaseGameState
     {
         private readonly EventUseCase _eventUseCase;
+        private readonly EventLogUseCase _eventLogUseCase;
         private readonly GemUseCase _gemUseCase;
         private readonly GemComboUseCase _gemComboUseCase;
         private readonly PlyUseCase _plyUseCase;
         private readonly RoundClearUseCase _roundClearUseCase;
         private readonly ScoreUseCase _scoreUseCase;
 
-        public GameEventState(EventUseCase eventUseCase, GemUseCase gemUseCase, GemComboUseCase gemComboUseCase,
-            PlyUseCase plyUseCase, RoundClearUseCase roundClearUseCase, ScoreUseCase scoreUseCase)
+        public GameEventState(EventUseCase eventUseCase, EventLogUseCase eventLogUseCase, GemUseCase gemUseCase,
+            GemComboUseCase gemComboUseCase, PlyUseCase plyUseCase, RoundClearUseCase roundClearUseCase,
+            ScoreUseCase scoreUseCase)
         {
             _eventUseCase = eventUseCase;
+            _eventLogUseCase = eventLogUseCase;
             _gemUseCase = gemUseCase;
             _gemComboUseCase = gemComboUseCase;
             _plyUseCase = plyUseCase;
@@ -46,6 +49,7 @@ namespace BoardTower.Game.Presentation.State
 
             if (result.plyNum > 0) _plyUseCase.Add(result.plyNum);
 
+            _eventLogUseCase.PublishLogAsync(token).Forget();
             return _plyUseCase.IsZero() ? GameState.Judge : GameState.Input;
         }
     }

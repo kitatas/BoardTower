@@ -34,6 +34,7 @@ namespace BoardTower.Game.Installer
             // Entity
             builder.Register<BoardEntity>(Lifetime.Scoped);
             builder.Register<ChessmenEntity>(Lifetime.Scoped);
+            builder.Register<EventLogEntity>(Lifetime.Scoped);
             builder.Register<GameModalEntity>(Lifetime.Scoped);
             builder.Register<GameStateEntity>(Lifetime.Scoped);
             builder.Register<GemEntity>(Lifetime.Scoped);
@@ -50,6 +51,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardPorts>(Lifetime.Scoped);
             builder.Register<ChessmenPorts>(Lifetime.Scoped);
             builder.Register<EventPorts>(Lifetime.Scoped);
+            builder.Register<EventLogPorts>(Lifetime.Scoped);
             builder.Register<FinishPorts>(Lifetime.Scoped);
             builder.Register<HudRootPorts>(Lifetime.Scoped);
             builder.Register<GameModalPorts>(Lifetime.Scoped);
@@ -74,6 +76,7 @@ namespace BoardTower.Game.Installer
             builder.Register<BoardUseCase>(Lifetime.Scoped);
             builder.Register<ChessmenUseCase>(Lifetime.Scoped);
             builder.Register<EventUseCase>(Lifetime.Scoped);
+            builder.Register<EventLogUseCase>(Lifetime.Scoped);
             builder.Register<FinishUseCase>(Lifetime.Scoped);
             builder.Register<HudRootUseCase>(Lifetime.Scoped);
             builder.Register<GameModalUseCase>(Lifetime.Scoped);
@@ -113,6 +116,7 @@ namespace BoardTower.Game.Installer
                 entryPoints.Add<ButtonPresenter>();
                 entryPoints.Add<ChessmenPresenter>();
                 entryPoints.Add<DeletePresenter>();
+                entryPoints.Add<EventLogPresenter>();
                 entryPoints.Add<FinishPresenter>();
                 entryPoints.Add<HudRootPresenter>();
                 entryPoints.Add<LotRelicPresenter>();
@@ -140,6 +144,7 @@ namespace BoardTower.Game.Installer
             builder.Register<ButtonFacade>(Lifetime.Scoped);
             builder.Register<ChessmenFacade>(Lifetime.Scoped);
             builder.Register<DeleteFacade>(Lifetime.Scoped);
+            builder.Register<EventLogFacade>(Lifetime.Scoped);
             builder.Register<FinishFacade>(Lifetime.Scoped);
             builder.Register<HudRootFacade>(Lifetime.Scoped);
             builder.Register<LotRelicFacade>(Lifetime.Scoped);
@@ -167,6 +172,7 @@ namespace BoardTower.Game.Installer
             builder.RegisterComponentInHierarchy<ChessmenView>();
             builder.RegisterComponentInHierarchy<DeleteView>();
             builder.RegisterComponentInHierarchy<DisplayNameView>();
+            builder.RegisterComponentInHierarchy<EventLogView>();
             builder.RegisterComponentInHierarchy<FinishView>();
             builder.RegisterComponentInHierarchy<HudRootView>();
             builder.RegisterComponentInHierarchy<LotRelicView>();

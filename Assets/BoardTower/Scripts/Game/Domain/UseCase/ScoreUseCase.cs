@@ -10,6 +10,7 @@ namespace BoardTower.Game.Domain.UseCase
 {
     public sealed class ScoreUseCase : IDisposable
     {
+        private readonly EventLogEntity _eventLogEntity;
         private readonly GemComboEntity _gemComboEntity;
         private readonly PickRelicEntity _pickRelicEntity;
         private readonly RoundEntity _roundEntity;
@@ -17,9 +18,11 @@ namespace BoardTower.Game.Domain.UseCase
         private readonly ScoreRateRepository _scoreRateRepository;
         private readonly ReactiveProperty<int> _score;
 
-        public ScoreUseCase(GemComboEntity gemComboEntity, PickRelicEntity pickRelicEntity, RoundEntity roundEntity,
-            ScoreEntity scoreEntity, ScoreRateRepository scoreRateRepository)
+        public ScoreUseCase(EventLogEntity eventLogEntity, GemComboEntity gemComboEntity,
+            PickRelicEntity pickRelicEntity, RoundEntity roundEntity, ScoreEntity scoreEntity,
+            ScoreRateRepository scoreRateRepository)
         {
+            _eventLogEntity = eventLogEntity;
             _gemComboEntity = gemComboEntity;
             _pickRelicEntity = pickRelicEntity;
             _roundEntity = roundEntity;
@@ -47,6 +50,8 @@ namespace BoardTower.Game.Domain.UseCase
             if (relicEffect.isPlyHalved) rate *= ScoreConfig.HALVED_RATE;
             if (relicEffect.isRoundClearHalved) rate *= ScoreConfig.HALVED_RATE;
             var value = Mathf.CeilToInt(ScoreConfig.BASE_GEM_VALUE * rate) * gemNum;
+
+            _eventLogEntity.Add(EventLogType.Score, value);
             Add(value);
         }
 
@@ -62,7 +67,12 @@ namespace BoardTower.Game.Domain.UseCase
 
             var relicEffect = _pickRelicEntity.effect;
             var value = ScoreConfig.BASE_RIDE_ON_COLLAPSE_VALUE * relicEffect.rideOnCollapseNum;
-            Add(value);
+
+            if (value > 0)
+            {
+                _eventLogEntity.Add(EventLogType.Ride, value);
+                Add(value);
+            }
         }
 
         public void ApplyRoundClearScore()
