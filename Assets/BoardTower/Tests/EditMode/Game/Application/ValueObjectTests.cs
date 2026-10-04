@@ -1156,5 +1156,49 @@ namespace BoardTower.Tests.EditMode.Game.Application
             Assert.That(sut.achievement.rank, Is.EqualTo(rank));
             Assert.That(sut.achievement.value, Is.EqualTo(value));
         }
+
+        // ---- EventLogVO ----
+
+        [TestCase(EventLogType.Ride, 1)]
+        [TestCase(EventLogType.Combo, 0)]
+        [TestCase(EventLogType.Gem, 5)]
+        [TestCase(EventLogType.Score, 100)]
+        [TestCase(EventLogType.Heart, 3)]
+        public void EventLogVO_Constructor_AssignsTypeAndValue(EventLogType type, int value)
+        {
+            var sut = new EventLogVO(type, value);
+
+            Assert.That(sut.type, Is.EqualTo(type));
+            Assert.That(sut.value, Is.EqualTo(value));
+        }
+
+        // ---- EventLogMessageVO ----
+
+        [Test]
+        public void EventLogMessageVO_Constructor_AssignsMessage()
+        {
+            var sut = new EventLogMessageVO("test message", 1.5f);
+
+            Assert.That(sut.message, Is.EqualTo("test message"));
+        }
+
+        [Test]
+        public void EventLogMessageVO_Constructor_AssignsDuration()
+        {
+            var sut = new EventLogMessageVO("msg", 2.0f);
+
+            Assert.That(sut.duration, Is.EqualTo(2.0f));
+        }
+
+        [TestCase("hello", 0.5f)]
+        [TestCase("", 0.0f)]
+        [TestCase("long message text", 3.0f)]
+        public void EventLogMessageVO_Constructor_WithVariousValues_AssignsCorrectly(string message, float duration)
+        {
+            var sut = new EventLogMessageVO(message, duration);
+
+            Assert.That(sut.message, Is.EqualTo(message));
+            Assert.That(sut.duration, Is.EqualTo(duration));
+        }
     }
 }

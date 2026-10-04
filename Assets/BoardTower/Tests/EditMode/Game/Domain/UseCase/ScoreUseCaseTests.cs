@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.UseCase;
 using NUnit.Framework;
@@ -10,6 +12,7 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
     public sealed class ScoreUseCaseTests
     {
         private ScoreUseCase _useCase;
+        private EventLogEntity _eventLogEntity;
         private GemComboEntity _gemComboEntity;
         private PickRelicEntity _pickRelicEntity;
         private RoundEntity _roundEntity;
@@ -18,13 +21,14 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
         [SetUp]
         public void SetUp()
         {
+            _eventLogEntity = new EventLogEntity();
             _gemComboEntity = new GemComboEntity();
             _pickRelicEntity = new PickRelicEntity();
             _roundEntity = new RoundEntity();
             _scoreEntity = new ScoreEntity();
 
             // ScoreRateRepository は MasterMemory 依存のため null を渡す
-            _useCase = new ScoreUseCase(_gemComboEntity, _pickRelicEntity, _roundEntity, _scoreEntity, null);
+            _useCase = new ScoreUseCase(_eventLogEntity, _gemComboEntity, _pickRelicEntity, _roundEntity, _scoreEntity, null);
         }
 
         [TearDown]
@@ -79,9 +83,19 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             int observed = -1;
             _useCase.score.Subscribe(x => observed = x);
 
-            _useCase.ApplyRideOnSquare(BoardTower.Game.Application.SquareEventType.Gem);
+            _useCase.ApplyRideOnSquare(SquareEventType.Gem);
 
             Assert.That(observed, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ApplyRideOnSquare_WithNonCollapseType_DoesNotLogEvent()
+        {
+            _useCase.Init();
+
+            _useCase.ApplyRideOnSquare(SquareEventType.Gem);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(0));
         }
 
         [Test]

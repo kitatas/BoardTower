@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BoardTower.Game.Application;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.UseCase;
@@ -11,15 +12,17 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
     public sealed class GemComboUseCaseTests
     {
         private GemComboUseCase _useCase;
+        private EventLogEntity _eventLogEntity;
         private GemComboEntity _gemComboEntity;
         private PickRelicEntity _pickRelicEntity;
 
         [SetUp]
         public void SetUp()
         {
+            _eventLogEntity = new EventLogEntity();
             _gemComboEntity = new GemComboEntity();
             _pickRelicEntity = new PickRelicEntity();
-            _useCase = new GemComboUseCase(_gemComboEntity, _pickRelicEntity);
+            _useCase = new GemComboUseCase(_eventLogEntity, _gemComboEntity, _pickRelicEntity);
         }
 
         [TearDown]
@@ -137,6 +140,23 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             _useCase.Apply(SquareEventType.Block);
 
             Assert.That(observed, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Apply_WithGemType_LogsComboEvent()
+        {
+            _useCase.Apply(SquareEventType.Gem);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Apply_WithGemType_CalledTwice_LogsTwoComboEvents()
+        {
+            _useCase.Apply(SquareEventType.Gem);
+            _useCase.Apply(SquareEventType.Gem);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(2));
         }
 
         [Test]

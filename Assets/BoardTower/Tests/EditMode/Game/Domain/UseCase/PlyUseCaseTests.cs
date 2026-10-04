@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.UseCase;
 using NUnit.Framework;
@@ -10,18 +11,20 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
     public sealed class PlyUseCaseTests
     {
         private PlyUseCase _useCase;
+        private EventLogEntity _eventLogEntity;
         private PlyEntity _plyEntity;
         private PickRelicEntity _pickRelicEntity;
 
         [SetUp]
         public void SetUp()
         {
+            _eventLogEntity = new EventLogEntity();
             _plyEntity = new PlyEntity();
             _pickRelicEntity = new PickRelicEntity();
 
             // RoundRepository requires MemoryDatabase, so pass round=0 in tests
             // to bypass repository lookup (round > 0 ? repo.Find(round) : 0)
-            _useCase = new PlyUseCase(_pickRelicEntity, _plyEntity, null);
+            _useCase = new PlyUseCase(_eventLogEntity, _pickRelicEntity, _plyEntity, null);
         }
 
         [TearDown]
@@ -116,6 +119,16 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             _plyEntity.SetUp(5);
 
             Assert.That(_useCase.IsZero(), Is.False);
+        }
+
+        [Test]
+        public void Add_LogsHeartEvent()
+        {
+            _plyEntity.SetUp(5);
+
+            _useCase.Add(2);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(1));
         }
 
         [Test]

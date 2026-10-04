@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BoardTower.Game.Data.Entity;
 using BoardTower.Game.Domain.UseCase;
 using NUnit.Framework;
@@ -10,13 +11,15 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
     public sealed class GemUseCaseTests
     {
         private GemUseCase _useCase;
+        private EventLogEntity _eventLogEntity;
         private GemEntity _gemEntity;
 
         [SetUp]
         public void SetUp()
         {
+            _eventLogEntity = new EventLogEntity();
             _gemEntity = new GemEntity();
-            _useCase = new GemUseCase(_gemEntity);
+            _useCase = new GemUseCase(_eventLogEntity, _gemEntity);
         }
 
         [TearDown]
@@ -102,6 +105,27 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
             int observed = -1;
             _useCase.gem.Subscribe(x => observed = x);
             Assert.That(observed, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Add_LogsGemEvent()
+        {
+            _useCase.SetUp();
+
+            _useCase.Add(3);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Add_CalledMultipleTimes_LogsMultipleGemEvents()
+        {
+            _useCase.SetUp();
+
+            _useCase.Add(1);
+            _useCase.Add(2);
+
+            Assert.That(_eventLogEntity.eventLogs.Count(), Is.EqualTo(2));
         }
 
         [Test]
