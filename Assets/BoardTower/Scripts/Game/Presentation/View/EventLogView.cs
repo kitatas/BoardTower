@@ -7,9 +7,17 @@ namespace BoardTower.Game.Presentation.View
 {
     public sealed class EventLogView : MonoBehaviour
     {
+        [SerializeField] private Camera mainCamera = default;
+        [SerializeField] private Transform target = default;
+        [SerializeField] private RectTransform view = default;
         [SerializeField] private TextMeshProUGUI message = default;
 
         private Tween _tween;
+
+        private void Update()
+        {
+            view.position = mainCamera.WorldToScreenPoint(target.position);
+        }
 
         public Tween Tween(EventLogMessageVO eventLogMessage)
         {
