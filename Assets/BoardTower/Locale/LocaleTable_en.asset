@@ -285,7 +285,137 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 34362307654967296
-    m_Localized: OtherApps
+    m_Localized: Other Apps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277407666176
+    m_Localized: Knight's Pilgrimage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490240
+    m_Localized: Ride +{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490241
+    m_Localized: '{0} Combo'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490242
+    m_Localized: Combo Keep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490243
+    m_Localized: Coin +{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490244
+    m_Localized: Score +{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490245
+    m_Localized: Ply +{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897052422144
+    m_Localized: Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897476046848
+    m_Localized: Basic Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241152
+    m_Localized: "<line-indent=0%>Round Flow</line-indent>\n<line-indent=2%>1. Each
+      round has a Move limit and a Coin goal\n2. Tiles your Knight can move to will
+      be highlighted \u2014 tap to move\n3. Collect enough Coins before your Moves
+      run out to Clear the Round\n4. Fail to reach the Coin goal and it's Game Over\n5.
+      Clear all 7 Rounds to achieve Game Clear</line-indent>\n<line-indent=0%>How
+      the Knight Moves</line-indent>\n<line-indent=2%>The Knight moves in an \"L-shape,\"
+      just like in chess.\nIt cannot move to Spike tiles by default.</line-indent>"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241153
+    m_Localized: Tile Types
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241154
+    m_Localized: '<line-indent=0%>Coin</line-indent>
+
+      <line-indent=2%>Collect
+      1 Coin when landed on. The tile becomes empty.</line-indent>
+
+      <line-indent=0%>Heart</line-indent>
+
+      <line-indent=2%>Recover
+      1 Move when landed on. The tile becomes empty.</line-indent>
+
+      <line-indent=0%>Conveyor
+      Belt</line-indent>
+
+      <line-indent=2%>Automatically moves the Knight in
+      the indicated direction.</line-indent>
+
+      <line-indent=0%>Spike</line-indent>
+
+      <line-indent=2%>Cannot
+      be moved to by default.</line-indent>
+
+      <line-indent=0%>Trap</line-indent>
+
+      <line-indent=2%>Transforms
+      into a Spike tile after the Knight lands on it.</line-indent>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241155
+    m_Localized: Scoring
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241156
+    m_Localized: '<line-indent=0%>Score is added each time you collect a Coin.
+
+      Combo</line-indent>
+
+      <line-indent=2%>Landing
+      on Coin tiles consecutively increases your Combo, boosting your score multiplier.
+
+      Landing
+      on any other tile resets your Combo.</line-indent>
+
+      <line-indent=0%>Round
+      Clear Bonus</line-indent>
+
+      <line-indent=2%>Collecting more Coins than
+      the goal earns bonus score.</line-indent>
+
+      <line-indent=0%>Score multipliers
+      increase as rounds progress</line-indent>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241157
+    m_Localized: Relics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241158
+    m_Localized: "After clearing each round, choose one Relic from three options.\nRelics
+      remain active for the entire run and give you powerful advantages.\nTo select
+      a Relic, tap it twice.\nUnique Relics are special items \u2014 only one can
+      be obtained per run."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241159
+    m_Localized: Ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241160
+    m_Localized: 'Your score is submitted to the online leaderboard at the end of
+      each run.
+
+      Compete with players around the world!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35452377065578496
+    m_Localized: "Move your Knight across an 8\xD78 board, collecting Coins to clear
+      7 Rounds and aim for the highest score!!"
     m_Metadata:
       m_Items: []
   references:

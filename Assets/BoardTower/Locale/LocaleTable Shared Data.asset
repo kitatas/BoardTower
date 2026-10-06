@@ -15,6 +15,10 @@ MonoBehaviour:
   m_TableCollectionName: LocaleTable
   m_TableCollectionNameGuidString: 7bd06ac8a1acd4f0a97660b2a11dcd0e
   m_Entries:
+  - m_Id: 34653277407666176
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
   - m_Id: 9364084150493184
     m_Key: Achievement_Play
     m_Metadata:
@@ -177,6 +181,78 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 29912692914380803
     m_Key: Notification_Update
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490240
+    m_Key: EventLog_Ride
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490241
+    m_Key: EventLog_Combo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490242
+    m_Key: EventLog_Keep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490243
+    m_Key: EventLog_Gem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490244
+    m_Key: EventLog_Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34653277684490245
+    m_Key: EventLog_Heart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897052422144
+    m_Key: HowTo_Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35452377065578496
+    m_Key: HowTo_Core_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897476046848
+    m_Key: HowTo_Rule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241152
+    m_Key: HowTo_Rule_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241153
+    m_Key: HowTo_Tile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241154
+    m_Key: HowTo_Tile_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241155
+    m_Key: HowTo_Scoring
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241156
+    m_Key: HowTo_Scoring_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241157
+    m_Key: HowTo_Relics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241158
+    m_Key: HowTo_Relics_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241159
+    m_Key: HowTo_Ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35123897480241160
+    m_Key: HowTo_Ranking_Description
     m_Metadata:
       m_Items: []
   - m_Id: 30790907711184896
