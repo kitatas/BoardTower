@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BoardTower.Game.Application;
@@ -59,28 +60,59 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
         }
 
         [Test]
-        public void HandleClick_WhenNotInputState_DoesNotEmit()
+        public async Task HandleClick_WhenNotInputState_DoesNotEmit()
         {
             // GameState.None はInputではないため処理されない
             _gameStateEntity.Set(GameState.None);
-            var emitted = false;
-            var clickSquare = new ClickSquareVO(1, 1);
+            SetLastHighlights(new HighlightSquareVO(new SquareVO(1, 1), HighlightSquareType.Movable));
+            using var cts = new CancellationTokenSource();
+            var inputTask = _useCase.InputAsync(cts.Token);
 
-            _useCase.HandleClick(clickSquare);
+            _useCase.HandleClick(new ClickSquareVO(1, 1));
 
-            Assert.That(emitted, Is.False);
+            Assert.That(inputTask.Status, Is.EqualTo(UniTaskStatus.Pending), "Input以外の状態ではクリックが通知されないこと");
+            await CancelAsync(cts, inputTask);
         }
 
         [Test]
-        public void HandleClick_WhenInputStateButNoHighlights_DoesNotEmit()
+        public async Task HandleClick_WhenInputStateButNoHighlights_DoesNotEmit()
         {
             _gameStateEntity.Set(GameState.Input);
-            var emitted = false;
-            var clickSquare = new ClickSquareVO(1, 1);
+            using var cts = new CancellationTokenSource();
+            var inputTask = _useCase.InputAsync(cts.Token);
 
-            _useCase.HandleClick(clickSquare);
+            _useCase.HandleClick(new ClickSquareVO(1, 1));
 
-            Assert.That(emitted, Is.False);
+            Assert.That(inputTask.Status, Is.EqualTo(UniTaskStatus.Pending), "移動可能マスが未設定ならクリックが通知されないこと");
+            await CancelAsync(cts, inputTask);
+        }
+
+        [Test]
+        public async Task HandleClick_WhenClickedOutsideHighlights_DoesNotEmit()
+        {
+            _gameStateEntity.Set(GameState.Input);
+            SetLastHighlights(new HighlightSquareVO(new SquareVO(1, 1), HighlightSquareType.Movable));
+            using var cts = new CancellationTokenSource();
+            var inputTask = _useCase.InputAsync(cts.Token);
+
+            _useCase.HandleClick(new ClickSquareVO(2, 2));
+
+            Assert.That(inputTask.Status, Is.EqualTo(UniTaskStatus.Pending), "移動可能範囲外のクリックが通知されないこと");
+            await CancelAsync(cts, inputTask);
+        }
+
+        [Test]
+        public async Task HandleClick_WhenClickedInsideHighlights_CompletesInputAndMovesChessmen()
+        {
+            _gameStateEntity.Set(GameState.Input);
+            SetLastHighlights(new HighlightSquareVO(new SquareVO(3, 4), HighlightSquareType.Movable));
+            var inputTask = _useCase.InputAsync(CancellationToken.None);
+
+            _useCase.HandleClick(new ClickSquareVO(3, 4));
+            await inputTask.AsTask();
+
+            Assert.That(_chessmenEntity.square.file, Is.EqualTo(3), "クリックしたマスのfileに駒が移動すること");
+            Assert.That(_chessmenEntity.square.rank, Is.EqualTo(4), "クリックしたマスのrankに駒が移動すること");
         }
 
         [Test]
@@ -122,6 +154,27 @@ namespace BoardTower.Tests.EditMode.Game.Domain.UseCase
         public void Dispose_DoesNotThrow()
         {
             Assert.That(() => ((IDisposable)_useCase).Dispose(), Throws.Nothing);
+        }
+
+        // Repository が null のため PublishMovableSquaresAsync を使えず、移動可能マスはリフレクションで設定する
+        private void SetLastHighlights(params HighlightSquareVO[] highlights)
+        {
+            var field = typeof(MovementUseCase)
+                .GetField("_lastHighlights", BindingFlags.NonPublic | BindingFlags.Instance);
+            field.SetValue(_useCase, highlights);
+        }
+
+        private static async Task CancelAsync(CancellationTokenSource cts, UniTask inputTask)
+        {
+            cts.Cancel();
+            try
+            {
+                await inputTask.AsTask();
+            }
+            catch (OperationCanceledException)
+            {
+                // 待機を打ち切るためのキャンセルなので無視する
+            }
         }
     }
 }

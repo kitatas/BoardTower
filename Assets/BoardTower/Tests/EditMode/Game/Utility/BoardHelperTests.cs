@@ -98,5 +98,25 @@ namespace BoardTower.Tests.EditMode.Game.Utility
             Assert.That(BoardHelper.IsOutOfBoard(BoardConfig.MIN_FILE, BoardConfig.MIN_RANK - 1), Is.True);
             Assert.That(BoardHelper.IsOutOfBoard(BoardConfig.MIN_FILE, BoardConfig.MAX_RANK + 1), Is.True);
         }
+
+        // 追加: GetDelay は (file + rank - 1) * DELAY_RATE（対角線上のマスほど同じ遅延になる）
+        [TestCase(0, 1)] // (1,1)
+        [TestCase(1, 2)] // (1,2)
+        [TestCase(8, 2)] // (2,1)
+        [TestCase(9, 3)] // (2,2)
+        [TestCase(63, 15)] // (8,8)
+        public void GetDelay_WithValidIndex_ReturnsFileRankSumScaledByDelayRate(int index, int expectedSteps)
+        {
+            var delay = BoardHelper.GetDelay(index);
+
+            Assert.That(delay, Is.EqualTo(expectedSteps * BoardConfig.DELAY_RATE).Within(1e-5f));
+        }
+
+        [TestCase(-1)]
+        [TestCase(64)]
+        public void GetDelay_WithOutOfRangeIndex_ThrowsQuitExceptionVO(int index)
+        {
+            Assert.That(() => BoardHelper.GetDelay(index), Throws.TypeOf<QuitExceptionVO>());
+        }
     }
 }
