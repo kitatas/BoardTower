@@ -146,11 +146,18 @@ namespace BoardTower.Common.Application
     {
         public readonly T type;
         public readonly AudioClip clip;
+        public readonly string cue;
 
         public AudioVO(T type, AudioClip clip)
         {
             this.type = type;
             this.clip = clip;
+        }
+
+        public AudioVO(T type, string cue)
+        {
+            this.type = type;
+            this.cue = cue;
         }
     }
 
