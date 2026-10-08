@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BoardTower.Common.Presentation.View
 {
-    public sealed class SoundView : MonoBehaviour
+    public sealed class SoundView : MonoBehaviour, ISoundView
     {
         [SerializeField] private AudioSource bgmSource = default;
         [SerializeField] private AudioSource seSource = default;
