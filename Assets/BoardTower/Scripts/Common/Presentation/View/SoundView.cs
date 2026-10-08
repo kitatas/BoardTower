@@ -16,14 +16,38 @@ namespace BoardTower.Common.Presentation.View
 
             if (sound.isMute) return;
 
-            this.Delay(sound.delay, () => bgmSource.Play());
+            if (sound.delay > 0.0f)
+            {
+                this.Delay(sound.delay, PlayBgm);
+            }
+            else
+            {
+                PlayBgm();
+            }
+        }
+
+        private void PlayBgm()
+        {
+            bgmSource.Play();
         }
 
         public void PlaySe(SeSoundVO sound)
         {
             if (sound.isMute) return;
 
-            this.Delay(sound.delay, () => seSource.PlayOneShot(sound.audio.clip));
+            if (sound.delay > 0.0f)
+            {
+                this.Delay(sound.delay, () => PlaySe(sound.audio.clip));
+            }
+            else
+            {
+                PlaySe(sound.audio.clip);
+            }
+        }
+
+        private void PlaySe(AudioClip clip)
+        {
+            seSource.PlayOneShot(clip);
         }
 
         public void SetBgmVolume(float volume)

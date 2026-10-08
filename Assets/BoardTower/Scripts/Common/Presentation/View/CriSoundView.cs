@@ -17,11 +17,20 @@ namespace BoardTower.Common.Presentation.View
 
             if (sound.isMute) return;
 
-            this.Delay(sound.delay, () =>
+            if (sound.delay > 0.0f)
             {
-                if (bgmSource.status is CriAtomSourceBase.Status.Playing) bgmSource.Stop();
-                bgmSource.Play();
-            });
+                this.Delay(sound.delay, PlayBgm);
+            }
+            else
+            {
+                PlayBgm();
+            }
+        }
+
+        private void PlayBgm()
+        {
+            if (bgmSource.status is CriAtomSourceBase.Status.Playing) bgmSource.Stop();
+            bgmSource.Play();
         }
 
         public void PlaySe(SeSoundVO sound)
@@ -30,10 +39,19 @@ namespace BoardTower.Common.Presentation.View
 
             if (sound.isMute) return;
 
-            this.Delay(sound.delay, () =>
+            if (sound.delay > 0.0f)
             {
-                seSource.Play();
-            });
+                this.Delay(sound.delay, PlaySe);
+            }
+            else
+            {
+                PlaySe();
+            }
+        }
+
+        private void PlaySe()
+        {
+            seSource.Play();
         }
 
         public void SetBgmVolume(float volume)
