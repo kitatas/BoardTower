@@ -6,7 +6,7 @@ using BoardTower.Common.Data.DataStore;
 
 namespace BoardTower.Common.Domain.Repository
 {
-    public sealed class SoundRepository
+    public sealed class SoundRepository : ISoundRepository
     {
         private readonly Dictionary<BgmType, BgmAudioVO> _bgmMap;
         private readonly Dictionary<SeType, SeAudioVO> _seMap;
