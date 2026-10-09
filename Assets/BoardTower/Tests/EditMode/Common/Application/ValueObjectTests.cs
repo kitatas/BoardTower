@@ -1,11 +1,29 @@
+using System.Collections.Generic;
 using BoardTower.Common.Application;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace BoardTower.Tests.EditMode.Common.Application
 {
     [TestFixture]
     public sealed class ValueObjectTests
     {
+        private readonly List<AudioClip> _clips = new List<AudioClip>();
+
+        [TearDown]
+        public void TearDown()
+        {
+            foreach (var clip in _clips) Object.DestroyImmediate(clip);
+            _clips.Clear();
+        }
+
+        private AudioClip CreateClip(string name)
+        {
+            var clip = AudioClip.Create(name, 1, 1, 44100, false);
+            _clips.Add(clip);
+            return clip;
+        }
+
         // ---- LoadVO ----
 
         [Test]
@@ -218,13 +236,44 @@ namespace BoardTower.Tests.EditMode.Common.Application
 
         // ---- BgmAudioVO ----
 
+        // 変更: AudioClip / string(cue) のオーバーロードが追加され null リテラルが曖昧になるため、型を明示する
+
         [Test]
-        public void BgmAudioVO_Constructor_AssignsTypeAndClip()
+        public void BgmAudioVO_Constructor_WithClip_AssignsTypeAndClip()
         {
-            var sut = new BgmAudioVO(BgmType.Top, null);
+            var clip = CreateClip("bgm");
+
+            var sut = new BgmAudioVO(BgmType.Top, clip);
 
             Assert.That(sut.type, Is.EqualTo(BgmType.Top));
-            Assert.That(sut.clip, Is.Null);
+            Assert.That(sut.clip, Is.SameAs(clip));
+        }
+
+        [Test]
+        public void BgmAudioVO_Constructor_WithClip_LeavesCueNull()
+        {
+            var clip = CreateClip("bgm");
+
+            var sut = new BgmAudioVO(BgmType.Top, clip);
+
+            Assert.That(sut.cue, Is.Null);
+        }
+
+        [Test]
+        public void BgmAudioVO_Constructor_WithCue_AssignsTypeAndCue()
+        {
+            var sut = new BgmAudioVO(BgmType.Game, "BGM_GAME");
+
+            Assert.That(sut.type, Is.EqualTo(BgmType.Game));
+            Assert.That(sut.cue, Is.EqualTo("BGM_GAME"));
+        }
+
+        [Test]
+        public void BgmAudioVO_Constructor_WithCue_LeavesClipNull()
+        {
+            var sut = new BgmAudioVO(BgmType.Game, "BGM_GAME");
+
+            Assert.That(sut.clip == null, Is.True);
         }
 
         [TestCase(BgmType.None)]
@@ -232,20 +281,66 @@ namespace BoardTower.Tests.EditMode.Common.Application
         [TestCase(BgmType.Game)]
         public void BgmAudioVO_Constructor_WithAllTypes_SetsType(BgmType type)
         {
-            var sut = new BgmAudioVO(type, null);
+            var sut = new BgmAudioVO(type, "cue");
 
             Assert.That(sut.type, Is.EqualTo(type));
+        }
+
+        [Test]
+        public void BgmAudioVO_Constructor_WithNullClip_AssignsNullClipAndNullCue()
+        {
+            var sut = new BgmAudioVO(BgmType.Top, (AudioClip)null);
+
+            Assert.That(sut.clip == null, Is.True);
+            Assert.That(sut.cue, Is.Null);
+        }
+
+        [Test]
+        public void BgmAudioVO_Constructor_WithNullCue_AssignsNullCue()
+        {
+            var sut = new BgmAudioVO(BgmType.Top, (string)null);
+
+            Assert.That(sut.cue, Is.Null);
         }
 
         // ---- SeAudioVO ----
 
         [Test]
-        public void SeAudioVO_Constructor_AssignsTypeAndClip()
+        public void SeAudioVO_Constructor_WithClip_AssignsTypeAndClip()
         {
-            var sut = new SeAudioVO(SeType.Decision, null);
+            var clip = CreateClip("se");
+
+            var sut = new SeAudioVO(SeType.Decision, clip);
 
             Assert.That(sut.type, Is.EqualTo(SeType.Decision));
-            Assert.That(sut.clip, Is.Null);
+            Assert.That(sut.clip, Is.SameAs(clip));
+        }
+
+        [Test]
+        public void SeAudioVO_Constructor_WithClip_LeavesCueNull()
+        {
+            var clip = CreateClip("se");
+
+            var sut = new SeAudioVO(SeType.Decision, clip);
+
+            Assert.That(sut.cue, Is.Null);
+        }
+
+        [Test]
+        public void SeAudioVO_Constructor_WithCue_AssignsTypeAndCue()
+        {
+            var sut = new SeAudioVO(SeType.Cancel, "SE_CANCEL");
+
+            Assert.That(sut.type, Is.EqualTo(SeType.Cancel));
+            Assert.That(sut.cue, Is.EqualTo("SE_CANCEL"));
+        }
+
+        [Test]
+        public void SeAudioVO_Constructor_WithCue_LeavesClipNull()
+        {
+            var sut = new SeAudioVO(SeType.Cancel, "SE_CANCEL");
+
+            Assert.That(sut.clip == null, Is.True);
         }
 
         [TestCase(SeType.None)]
@@ -253,9 +348,26 @@ namespace BoardTower.Tests.EditMode.Common.Application
         [TestCase(SeType.Cancel)]
         public void SeAudioVO_Constructor_WithAllTypes_SetsType(SeType type)
         {
-            var sut = new SeAudioVO(type, null);
+            var sut = new SeAudioVO(type, "cue");
 
             Assert.That(sut.type, Is.EqualTo(type));
+        }
+
+        [Test]
+        public void SeAudioVO_Constructor_WithNullClip_AssignsNullClipAndNullCue()
+        {
+            var sut = new SeAudioVO(SeType.Decision, (AudioClip)null);
+
+            Assert.That(sut.clip == null, Is.True);
+            Assert.That(sut.cue, Is.Null);
+        }
+
+        [Test]
+        public void SeAudioVO_Constructor_WithNullCue_AssignsNullCue()
+        {
+            var sut = new SeAudioVO(SeType.Decision, (string)null);
+
+            Assert.That(sut.cue, Is.Null);
         }
 
         // ---- BgmSoundVO ----
@@ -263,7 +375,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
         [Test]
         public void BgmSoundVO_Constructor_AssignsAudioDelayAndMute()
         {
-            var audio = new BgmAudioVO(BgmType.Top, null);
+            var audio = new BgmAudioVO(BgmType.Top, "BGM_TOP");
 
             var sut = new BgmSoundVO(audio, 0.5f, true);
 
@@ -277,7 +389,7 @@ namespace BoardTower.Tests.EditMode.Common.Application
         [Test]
         public void SeSoundVO_Constructor_AssignsAudioDelayAndMute()
         {
-            var audio = new SeAudioVO(SeType.Decision, null);
+            var audio = new SeAudioVO(SeType.Decision, "SE_DECISION");
 
             var sut = new SeSoundVO(audio, 0.0f, false);
 
