@@ -166,11 +166,19 @@ namespace BoardTower.Common.Application
         public BgmAudioVO(BgmType type, AudioClip clip) : base(type, clip)
         {
         }
+
+        public BgmAudioVO(BgmType type, string cue) : base(type, cue)
+        {
+        }
     }
 
     public sealed class SeAudioVO : AudioVO<SeType>
     {
         public SeAudioVO(SeType type, AudioClip clip) : base(type, clip)
+        {
+        }
+
+        public SeAudioVO(SeType type, string cue) : base(type, cue)
         {
         }
     }
