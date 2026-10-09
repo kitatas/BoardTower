@@ -42,7 +42,7 @@ namespace BoardTower.Common.Installer
             builder.Register<LocaleRepository>(Lifetime.Singleton);
             builder.Register<PlayFabRepository>(Lifetime.Singleton);
             builder.Register<SaveRepository>(Lifetime.Singleton);
-            builder.Register<SoundRepository>(Lifetime.Singleton);
+            builder.Register<SoundRepository>(Lifetime.Singleton).As<ISoundRepository>();
 
             // UseCase
             builder.Register<AccountUseCase>(Lifetime.Singleton);
@@ -71,7 +71,7 @@ namespace BoardTower.Common.Installer
             builder.Register<SeFacade>(Lifetime.Singleton);
 
             // View
-            builder.RegisterFindFirstObjectByType<SoundView>();
+            builder.RegisterFindFirstObjectByType<SoundView>().As<ISoundView>();
             builder.RegisterFindFirstObjectByType<ExceptionView>();
             builder.RegisterFindFirstObjectByType<LoadingView>();
             builder.RegisterFindFirstObjectByType<TapEffectPoolView>();

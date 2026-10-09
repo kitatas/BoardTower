@@ -5,9 +5,9 @@ namespace BoardTower.Common.Presentation.Facade
 {
     public sealed class BgmFacade
     {
-        private readonly SoundView _soundView;
+        private readonly ISoundView _soundView;
 
-        public BgmFacade(SoundView soundView)
+        public BgmFacade(ISoundView soundView)
         {
             _soundView = soundView;
         }

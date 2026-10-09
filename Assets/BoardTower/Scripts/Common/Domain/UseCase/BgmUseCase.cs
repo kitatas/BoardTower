@@ -7,7 +7,7 @@ namespace BoardTower.Common.Domain.UseCase
 {
     public sealed class BgmUseCase : BaseSoundUseCase<BgmType, BgmSoundVO>
     {
-        public BgmUseCase(SaveRepository saveRepository, SoundRepository soundRepository) : base(saveRepository,
+        public BgmUseCase(SaveRepository saveRepository, ISoundRepository soundRepository) : base(saveRepository,
             soundRepository)
         {
         }

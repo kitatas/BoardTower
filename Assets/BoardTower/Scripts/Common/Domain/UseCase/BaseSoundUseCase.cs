@@ -12,7 +12,7 @@ namespace BoardTower.Common.Domain.UseCase
         where TType : Enum where TSoundVO : SoundVO<TType>
     {
         protected readonly SaveRepository _saveRepository;
-        private readonly SoundRepository _soundRepository;
+        private readonly ISoundRepository _soundRepository;
         private readonly Subject<TSoundVO> _play;
         private readonly ReactiveProperty<float> _thisVolume;
         private readonly ReactiveProperty<float> _masterVolume;
@@ -21,7 +21,7 @@ namespace BoardTower.Common.Domain.UseCase
         private readonly ReactiveProperty<bool> _isMasterMute;
         private readonly ReadOnlyReactiveProperty<bool> _isMute;
 
-        public BaseSoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
+        public BaseSoundUseCase(SaveRepository saveRepository, ISoundRepository soundRepository)
         {
             _saveRepository = saveRepository;
             _soundRepository = soundRepository;
