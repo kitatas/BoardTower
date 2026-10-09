@@ -22,6 +22,13 @@ namespace BoardTower.Common.Application
         InOut,
     }
 
+    public enum SoundType
+    {
+        None = 0,
+        Unity = 1,
+        CriWare = 2,
+    }
+
     public enum BgmType
     {
         None = 0,

@@ -1,3 +1,4 @@
+using BoardTower.Common.Application;
 using BoardTower.Common.Data.DataStore;
 using BoardTower.Common.Data.Entity;
 using BoardTower.Common.Domain.Ports;
@@ -16,6 +17,7 @@ namespace BoardTower.Common.Installer
 {
     public sealed class CommonInstaller : LifetimeScope
     {
+        [SerializeField] private SoundType soundType = default;
         [SerializeField] private BgmTable bgmTable = default;
         [SerializeField] private SeTable seTable = default;
 
@@ -24,8 +26,6 @@ namespace BoardTower.Common.Installer
             builder.RegisterMessagePipe();
 
             // DataStore
-            builder.RegisterInstance<BgmTable>(bgmTable);
-            builder.RegisterInstance<SeTable>(seTable);
             builder.Register<PlayFabTitleData>(Lifetime.Singleton);
 
             // Entity
@@ -42,7 +42,6 @@ namespace BoardTower.Common.Installer
             builder.Register<LocaleRepository>(Lifetime.Singleton);
             builder.Register<PlayFabRepository>(Lifetime.Singleton);
             builder.Register<SaveRepository>(Lifetime.Singleton);
-            builder.Register<SoundRepository>(Lifetime.Singleton).As<ISoundRepository>();
 
             // UseCase
             builder.Register<AccountUseCase>(Lifetime.Singleton);
@@ -71,11 +70,31 @@ namespace BoardTower.Common.Installer
             builder.Register<SeFacade>(Lifetime.Singleton);
 
             // View
-            builder.RegisterFindFirstObjectByType<SoundView>().As<ISoundView>();
             builder.RegisterFindFirstObjectByType<ExceptionView>();
             builder.RegisterFindFirstObjectByType<LoadingView>();
             builder.RegisterFindFirstObjectByType<TapEffectPoolView>();
             builder.RegisterFindFirstObjectByType<TransitionView>();
+
+            RegisterSound(builder);
+        }
+
+        private void RegisterSound(IContainerBuilder builder)
+        {
+            switch (soundType)
+            {
+                case SoundType.Unity:
+                    builder.RegisterInstance<BgmTable>(bgmTable);
+                    builder.RegisterInstance<SeTable>(seTable);
+                    builder.Register<SoundRepository>(Lifetime.Singleton).As<ISoundRepository>();
+                    builder.RegisterFindFirstObjectByType<SoundView>().As<ISoundView>();
+                    break;
+                case SoundType.CriWare:
+                    builder.Register<CriSoundRepository>(Lifetime.Singleton).As<ISoundRepository>();
+                    builder.RegisterFindFirstObjectByType<CriSoundView>().As<ISoundView>();
+                    break;
+                default:
+                    throw new QuitExceptionVO(ExceptionConfig.NOT_FOUND_SOUND_TYPE);
+            }
         }
     }
 }
