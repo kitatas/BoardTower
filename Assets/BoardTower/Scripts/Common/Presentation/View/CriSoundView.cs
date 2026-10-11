@@ -1,5 +1,6 @@
 using BoardTower.Common.Application;
 using CriWare;
+using CriWare.Assets;
 using UniEx;
 using UnityEngine;
 
@@ -7,13 +8,15 @@ namespace BoardTower.Common.Presentation.View
 {
     public sealed class CriSoundView : MonoBehaviour, ISoundView
     {
-        [SerializeField] private CriAtomSource bgmSource = default;
-        [SerializeField] private CriAtomSource seSource = default;
+        [SerializeField] private CriAtomSourceForAsset bgmSource = default;
+        [SerializeField] private CriAtomSourceForAsset seSource = default;
+
+        private string _requestBgmCue = string.Empty;
+        private string _currentBgmCue = string.Empty;
 
         public void PlayBgm(BgmSoundVO sound)
         {
-            if (bgmSource.cueName == sound.audio.cue) return;
-            bgmSource.cueName = sound.audio.cue;
+            _requestBgmCue = sound.audio.cue;
 
             if (sound.isMute) return;
 
@@ -29,29 +32,32 @@ namespace BoardTower.Common.Presentation.View
 
         private void PlayBgm()
         {
-            if (bgmSource.status is CriAtomSourceBase.Status.Playing) bgmSource.Stop();
-            bgmSource.Play();
+            if (bgmSource.status is CriAtomSourceBase.Status.Playing)
+            {
+                bgmSource.Stop();
+                bgmSource.Pause(false);
+            }
+            bgmSource.Play(_requestBgmCue);
+            _currentBgmCue = _requestBgmCue;
         }
 
         public void PlaySe(SeSoundVO sound)
         {
-            seSource.cueName = sound.audio.cue;
-
             if (sound.isMute) return;
 
             if (sound.delay > 0.0f)
             {
-                this.Delay(sound.delay, PlaySe);
+                this.Delay(sound.delay, () => PlaySe(sound.audio.cue));
             }
             else
             {
-                PlaySe();
+                PlaySe(sound.audio.cue);
             }
         }
 
-        private void PlaySe()
+        private void PlaySe(string cueName)
         {
-            seSource.Play();
+            seSource.Play(cueName);
         }
 
         public void SetBgmVolume(float volume)
@@ -71,7 +77,14 @@ namespace BoardTower.Common.Presentation.View
 
         public void UnPauseBgm()
         {
-            bgmSource.Pause(false);
+            if (_requestBgmCue == _currentBgmCue)
+            {
+                bgmSource.Pause(false);
+            }
+            else
+            {
+                PlayBgm();
+            }
         }
     }
 }
