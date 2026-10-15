@@ -8,6 +8,8 @@ namespace BoardTower.Game.Presentation.View.Modal
     public sealed class GameModalWebviewView : BaseGameModalView
     {
         [SerializeField] private RectTransform view = default;
+
+#if !UNITY_WEBGL
         private static WebViewObject _webViewObject = null;
 
         protected override void PreFadeIn()
@@ -40,5 +42,6 @@ namespace BoardTower.Game.Presentation.View.Modal
             _webViewObject.SetVisibility(false);
             Destroy(_webViewObject.gameObject);
         }
+#endif
     }
 }
