@@ -1,6 +1,7 @@
 using BoardTower.Game.Application;
 using DG.Tweening;
 using TMPro;
+using UniEx;
 using UnityEngine;
 
 namespace BoardTower.Game.Presentation.View
@@ -16,7 +17,9 @@ namespace BoardTower.Game.Presentation.View
 
         private void Update()
         {
-            view.position = mainCamera.WorldToScreenPoint(target.position);
+            var position = mainCamera.WorldToScreenPoint(target.position);
+            position.ClampY(-960.0f, 960.0f);
+            view.position = position;
         }
 
         public Tween Tween(EventLogMessageVO eventLogMessage)
