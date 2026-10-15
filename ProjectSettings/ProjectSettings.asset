@@ -144,7 +144,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.1
+  bundleVersion: 0.2
   preloadedAssets:
   - {fileID: 11400000, guid: 346a0a34e1048427da6b77a1f2b33e09, type: 2}
   - {fileID: 11400000, guid: cb5ab7eadfd314af1903458eaf40366f, type: 2}
@@ -276,7 +276,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 2
   AndroidAllowedArchitectures: -1
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 0}
+  androidSplashScreen: {fileID: 2800000, guid: 59f5e97c520bd413f9260ebb2c61dd89, type: 3}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidEnableArmv9SecurityFeatures: 0
@@ -302,7 +302,14 @@ PlayerSettings:
   AndroidAppBundleSizeToValidate: 150
   AndroidReportGooglePlayAppDependencies: 1
   androidSymbolsSizeThreshold: 800
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 59f5e97c520bd413f9260ebb2c61dd89, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: iPhone
     m_Icons:
@@ -404,6 +411,66 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Icons:
     - m_Textures: []
+      m_Width: 192
+      m_Height: 192
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 96
+      m_Height: 96
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 36
+      m_Height: 36
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 192
+      m_Height: 192
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 96
+      m_Height: 96
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 36
+      m_Height: 36
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
       m_Width: 432
       m_Height: 432
       m_Kind: 2
@@ -432,66 +499,6 @@ PlayerSettings:
       m_Width: 81
       m_Height: 81
       m_Kind: 2
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 192
-      m_Height: 192
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 144
-      m_Height: 144
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 96
-      m_Height: 96
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 72
-      m_Height: 72
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 48
-      m_Height: 48
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 36
-      m_Height: 36
-      m_Kind: 1
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 192
-      m_Height: 192
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 144
-      m_Height: 144
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 96
-      m_Height: 96
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 72
-      m_Height: 72
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 48
-      m_Height: 48
-      m_Kind: 0
-      m_SubKind: 
-    - m_Textures: []
-      m_Width: 36
-      m_Height: 36
-      m_Kind: 0
       m_SubKind: 
   - m_BuildTarget: tvOS
     m_Icons:
@@ -534,6 +541,9 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_StaticBatching: 1
     m_DynamicBatching: 0
+  - m_BuildTarget: WebGL
+    m_StaticBatching: 0
+    m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
@@ -569,6 +579,9 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 03000000
+  - serializedVersion: 3
+    m_BuildTarget: WebGL
+    m_Formats: 05000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -835,7 +848,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;ES3_TMPRO;ES3_UGUI;UNITASK_DOTWEEN_SUPPORT;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
+    Android: DOTWEEN;DOTWEENPRO;DOTWEEN_TEXTMESHPRO;ES3_TMPRO;ES3_UGUI;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT
     EmbeddedLinux: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
     GameCoreScarlett: DOTWEEN;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
     GameCoreXboxOne: DOTWEEN;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
@@ -848,9 +861,9 @@ PlayerSettings:
     QNX: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
     ReservedCFE: DOTWEEN;DOTWEEN_TEXTMESHPRO
     Server: ES3_TMPRO;ES3_UGUI
-    Standalone: DOTWEEN;DOTWEEN_TEXTMESHPRO;ES3_TMPRO;ES3_UGUI;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT;DOTWEENPRO
+    Standalone: DOTWEEN;DOTWEENPRO;DOTWEEN_TEXTMESHPRO;ES3_TMPRO;ES3_UGUI;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT
     VisionOS: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
-    WebGL: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
+    WebGL: DOTWEEN;DOTWEENPRO;DOTWEEN_TEXTMESHPRO;ES3_TMPRO;ES3_UGUI;UNITASK_DOTWEEN_SUPPORT
     Windows Store Apps: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
     XboxOne: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
     iPhone: DOTWEEN;ES3_TMPRO;ES3_UGUI;DOTWEEN_TEXTMESHPRO;DOTWEENPRO
